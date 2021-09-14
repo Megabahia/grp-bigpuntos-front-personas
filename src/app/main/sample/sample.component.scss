@@ -1,0 +1,11 @@
+@import '@core/scss/angular/libs/swiper.component.scss';
+@import '@core/scss/angular/libs/ratings.component.scss';
+@import '@core/scss/base/pages/page-misc.scss';
+.iso-moneda {
+    background: url(../../../assets/images/moneda.svg) no-repeat;
+    background-size: contain;
+    height: 25px;
+    width: 25px;
+    display: inline-block;
+    vertical-align: middle;
+}
