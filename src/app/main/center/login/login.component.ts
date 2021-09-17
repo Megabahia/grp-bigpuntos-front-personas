@@ -79,7 +79,7 @@ onSubmit() {
 
   // redirect to home page
   setTimeout(() => {
-    this._router.navigate(['/']);
+    this._router.navigate(['/sample']);
   }, 100);
 }
 
