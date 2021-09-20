@@ -33,16 +33,16 @@ export class AuthenticationService {
   /**
    *  Confirms if user is admin
    */
-  get isAdmin() {
-    return this.currentUser && this.currentUserSubject.value.role === Role.Admin;
-  }
+  // get isAdmin() {
+  //   return this.currentUser && this.currentUserSubject.value.role === Role.Admin;
+  // }
 
-  /**
-   *  Confirms if user is client
-   */
-  get isClient() {
-    return this.currentUser && this.currentUserSubject.value.role === Role.Client;
-  }
+  // /**
+  //  *  Confirms if user is client
+  //  */
+  // get isClient() {
+  //   return this.currentUser && this.currentUserSubject.value.role === Role.Client;
+  // }
 
   /**
    * User login
@@ -51,30 +51,31 @@ export class AuthenticationService {
    * @param password
    * @returns user
    */
-  login(email: string, password: string) {
+  login(username: string, password: string) {
     return this._http
-      .post<any>(`${environment.apiUrl}/users/authenticate`, { email, password })
+      .post<any>(`${environment.apiUrl}/central/auth/login/`, { username, password })
       .pipe(
         map(user => {
           // login successful if there's a jwt token in the response
-          if (user && user.token) {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
+          console.log(user);
+          // if (user && user.token) {
+          //   // store user details and jwt token in local storage to keep user logged in between page refreshes
+          //   localStorage.setItem('currentUser', JSON.stringify(user));
 
-            // Display welcome toast!
-            setTimeout(() => {
-              this._toastrService.success(
-                'You have successfully logged in as an ' +
-                  user.role +
-                  ' user to Vuexy. Now you can start to explore. Enjoy! 🎉',
-                '👋 Welcome, ' + user.firstName + '!',
-                { toastClass: 'toast ngx-toastr', closeButton: true }
-              );
-            }, 2500);
+          //   // Display welcome toast!
+          //   setTimeout(() => {
+          //     this._toastrService.success(
+          //       'You have successfully logged in as an ' +
+          //         user.role +
+          //         ' user to Vuexy. Now you can start to explore. Enjoy! 🎉',
+          //       '👋 Welcome, ' + user.firstName + '!',
+          //       { toastClass: 'toast ngx-toastr', closeButton: true }
+          //     );
+          //   }, 2500);
 
-            // notify
-            this.currentUserSubject.next(user);
-          }
+          //   // notify
+          //   this.currentUserSubject.next(user);
+          // }
 
           return user;
         })

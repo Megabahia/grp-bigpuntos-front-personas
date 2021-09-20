@@ -21,6 +21,9 @@ import { SampleModule } from 'app/main/sample/sample.module';
 
 const appRoutes: Routes = [
   {
+    path: '', redirectTo: 'grp', pathMatch: 'full' , 
+  },
+  {
     path: 'pages',
     loadChildren: () => import('./main/pages/pages.module').then(m => m.PagesModule)
   },

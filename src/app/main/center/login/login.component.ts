@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
+import { first, takeUntil } from 'rxjs/operators';
 import { CoreConfigService } from '../../../../@core/services/config.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { AuthenticationService } from '../../../auth/service/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit {
     private _coreConfigService: CoreConfigService,
     private _formBuilder: FormBuilder,
     private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _authenticationService: AuthenticationService
   ) {
     this._unsubscribeAll = new Subject();
 
@@ -76,11 +78,19 @@ export class LoginComponent implements OnInit {
 
     // Login
     this.loading = true;
-
-    // redirect to home page
-    setTimeout(() => {
-      this._router.navigate(['/sample']);
-    }, 100);
+    this._authenticationService
+      .login(this.f.email.value, this.f.password.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this._router.navigate([this.returnUrl]);
+        },
+        error => {
+          this.error = error;
+          console.log(error);
+          this.loading = false;
+        }
+      );
   }
 
   // Lifecycle Hooks

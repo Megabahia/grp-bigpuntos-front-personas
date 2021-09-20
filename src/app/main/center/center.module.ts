@@ -15,6 +15,9 @@ import { RegistroComponent } from './registro/registro.component';
 
 const routes = [
   {
+    path: '', redirectTo: 'login', pathMatch: 'full' 
+  },
+  {
     path: 'login',
     component: LoginComponent,
     data: { animation: 'auth' }

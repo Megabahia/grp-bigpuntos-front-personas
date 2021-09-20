@@ -28,7 +28,7 @@
 
                 <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="error">
                     <div class="alert-body">
-                        <p>{{ error }}</p>
+                        <p>{{ error.error.non_field_errors[0] }}</p>
                     </div>
                 </ngb-alert>
 
