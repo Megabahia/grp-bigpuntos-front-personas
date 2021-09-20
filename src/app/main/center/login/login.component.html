@@ -37,14 +37,14 @@
                         <label class="form-label" for="login-email">Email</label>
                         <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="admin@demo.com" aria-describedby="login-email" autofocus="" tabindex="1" />
                         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                            <div *ngIf="f.email.errors.required">Email is required</div>
-                            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                            <div *ngIf="f.email.errors.required">Correo es requerido</div>
+                            <div *ngIf="f.email.errors.email">Debe ingresar una dirección de correo válida </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="d-flex justify-content-between">
                             <label for="login-password">Contraseña</label
-              ><a routerLink="/pages/authentication/forgot-password-v2"><small>
+              ><a class="text-primary" routerLink="/grp/recuperar-pass" ><small>
                 ¿Olvidaste tu contraseña?</small></a>
             </div>
             <div class="input-group input-group-merge form-password-toggle">
@@ -90,10 +90,10 @@
                 </form>
                 <p class="text-center mt-2">
                     <span>¿Aun no tienes cuenta?</span
-          ><a routerLink="/pages/authentication/register-v2"><span>&nbsp;Regístrate</span></a>
+          ><a class="text-primary" routerLink="/grp/registro"><span>&nbsp;Regístrate</span></a>
                 </p>
                 <div class="divider my-2">
-                    <div class="divider-text">or</div>
+                    <div class="divider-text">o</div>
                 </div>
                 <div class="auth-footer-btn d-flex justify-content-center">
                     <a class="btn btn-facebook" href="javascript:void(0)"><i data-feather="facebook"></i></a

@@ -29,9 +29,8 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/center/center.module').then(m => m.CenterModule)
   },
   {
-    path: '',
-    redirectTo: '/grp/login',
-    pathMatch: 'full'
+    path: 'personas',
+    loadChildren: () => import('./main/personas/personas.module').then(m => m.PersonasModule)
   },
   {
     path: '**',

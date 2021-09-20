@@ -10,6 +10,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CoreTouchspinModule } from '../../../@core/components/core-touchspin/core-touchspin.module';
 import { CoreSidebarModule } from '../../../@core/components/core-sidebar/core-sidebar.module';
+import { RecuperarPassComponent } from './recuperar-pass/recuperar-pass.component';
+import { RegistroComponent } from './registro/registro.component';
 
 const routes = [
   {
@@ -17,10 +19,20 @@ const routes = [
     component: LoginComponent,
     data: { animation: 'auth' }
   },
+  {
+    path: 'registro',
+    component: RegistroComponent,
+    data: { animation: 'auth' }
+  },
+  {
+    path: 'recuperar-pass',
+    component: RecuperarPassComponent,
+    data: { animation: 'auth' } 
+  }
 ];
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent,RecuperarPassComponent, RegistroComponent],
   imports: [
     RouterModule.forChild(routes), 
     ContentHeaderModule, 

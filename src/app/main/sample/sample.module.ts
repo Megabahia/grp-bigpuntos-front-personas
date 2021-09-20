@@ -39,7 +39,6 @@ const routes = [
     CoreTouchspinModule,
     ContentHeaderModule,
     CoreSidebarModule,
-    CoreCommonModule,
     NgbModule,
      ],
   exports: [SampleComponent, HomeComponent]

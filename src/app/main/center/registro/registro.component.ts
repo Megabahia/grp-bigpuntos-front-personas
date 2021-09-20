@@ -1,24 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
-import { CoreConfigService } from '../../../../@core/services/config.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CoreConfigService } from '@core/services/config.service';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-registro',
+  templateUrl: './registro.component.html',
+  styleUrls: ['./registro.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class RegistroComponent implements OnInit {
   //  Public
   public coreConfig: any;
-  public loginForm: FormGroup;
+  public registerForm: FormGroup;
   public loading = false;
   public submitted = false;
   public returnUrl: string;
   public error = '';
   public passwordTextType: boolean;
+  public confirmPasswordTextType: boolean;
+  public passwordSimilar: boolean;
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -56,7 +58,7 @@ export class LoginComponent implements OnInit {
 
   // convenience getter for easy access to form fields
   get f() {
-    return this.loginForm.controls;
+    return this.registerForm.controls;
   }
 
   /**
@@ -65,15 +67,20 @@ export class LoginComponent implements OnInit {
   togglePasswordTextType() {
     this.passwordTextType = !this.passwordTextType;
   }
+  toggleConfirmPasswordTextType() {
+    this.confirmPasswordTextType = !this.confirmPasswordTextType;
+  }
 
   onSubmit() {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.loginForm.invalid) {
+    if (this.registerForm.invalid) {
       return;
     }
-
+    if(!this.passwordSimilar){
+      return;
+    }
     // Login
     this.loading = true;
 
@@ -90,9 +97,10 @@ export class LoginComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
-    this.loginForm = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+    this.registerForm = this._formBuilder.group({
+      correo: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]]
     });
 
     // get return url from route parameters or default to '/'
@@ -102,6 +110,15 @@ export class LoginComponent implements OnInit {
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;
     });
+  }
+
+  compararPassword(){
+    if(this.f.password.value==this.f.confirmPassword.value){
+      this.passwordSimilar = true;
+    }else{
+      this.passwordSimilar = false;
+    }
+    
   }
 
   /**
