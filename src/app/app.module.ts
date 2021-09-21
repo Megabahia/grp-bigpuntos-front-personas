@@ -21,7 +21,7 @@ import { SampleModule } from 'app/main/sample/sample.module';
 
 const appRoutes: Routes = [
   {
-    path: '', redirectTo: 'grp', pathMatch: 'full' , 
+    path: '', redirectTo: 'personas', pathMatch: 'full' , 
   },
   {
     path: 'pages',
