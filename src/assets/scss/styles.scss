@@ -8,3 +8,16 @@ NOTE:
 ------
 PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+.main-menu.menu-light .navigation>li.active>a {
+    background: #152f4f;
+    box-shadow: none;
+}
+
+.navbar-brand {
+    margin-top: 0px !important;
+}
+
+.main-menu .navbar-header {
+    background: #f2d81d;
+}

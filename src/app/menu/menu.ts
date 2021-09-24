@@ -15,7 +15,7 @@ export const menu: CoreMenu[] = [
     title: '¿Qué es super monedas?',
     // translate: 'MENU.SAMPLE',
     type: 'item',
-    icon: 'file',
+    icon: 'info',
     url: 'personas/que-es'
   },
   {
@@ -27,14 +27,14 @@ export const menu: CoreMenu[] = [
     children: [
       {
         id: 'superMonedas',
-        title: 'Super Monedas',
+        title: 'Super monedas',
         // translate: 'MENU.PAGES.SECTION',
         type: 'collapsible',
-        icon: 'file-text',
+        icon: 'dollar-sign',
         children: [
           {
             id: 'misSuperMonedas',
-            title: 'Mis Super Monedas',
+            title: 'Mis super monedas',
             // translate: 'MENU.APPS.EMAIL',
             type: 'item',
             icon: 'circle',
