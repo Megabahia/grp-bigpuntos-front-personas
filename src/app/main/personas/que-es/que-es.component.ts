@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./que-es.component.scss']
 })
 export class QueEsComponent implements OnInit {
+  public videos:Array<any>;
 
   constructor() { }
 

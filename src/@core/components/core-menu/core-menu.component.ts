@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, map } from 'rxjs/operators';
 
 import { CoreMenuService } from '@core/components/core-menu/core-menu.service';
 
@@ -47,11 +47,21 @@ export class CoreMenuComponent implements OnInit {
     // Subscribe to the current menu changes
     this._coreMenuService.onMenuChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(() => {
       this.currentUser = this._coreMenuService.currentUser;
-
+      console.log();
       // Load menu
       this.menu = this._coreMenuService.getCurrentMenu();
 
       this._changeDetectorRef.markForCheck();
     });
+  }
+  encontrarRol(rol){
+    let encontrado = false;
+    rol.map(rol=>{
+     let rolEncontrado =  this.currentUser.roles.find(x => x.nombre === rol);
+      if(rolEncontrado){
+        encontrado = true;
+      }
+    });
+    return encontrado;
   }
 }

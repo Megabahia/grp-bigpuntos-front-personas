@@ -23,13 +23,16 @@ export class NotificationsService {
   /**
    * Get Notifications Data
    */
-  getNotificationsData(): Promise<any[]> {
-    return new Promise((resolve, reject) => {
-      this._httpClient.get('api/notifications-data').subscribe((response: any) => {
-        this.apiData = response;
-        this.onApiDataChange.next(this.apiData);
-        resolve(this.apiData);
-      }, reject);
-    });
+  // getNotificationsData(): Promise<any[]> {
+  //   return new Promise((resolve, reject) => {
+  //     this._httpClient.get('api/notifications-data').subscribe((response: any) => {
+  //       this.apiData = response;
+  //       this.onApiDataChange.next(this.apiData);
+  //       resolve(this.apiData);
+  //     }, reject);
+  //   });
+  // }
+  getNotificationsData(){
+
   }
 }

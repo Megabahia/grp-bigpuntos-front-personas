@@ -46,7 +46,7 @@
                                         </div>
                                         <div class="media-body my-auto">
                                             <h1 class="font-weight-bolder mb-0">$2300</h1>
-                                            <p class="card-text font-small-3 mb-0">Super monedas disponibles</p>
+                                            <p class="text-primary card-text font-small-3 mb-0">Super monedas disponibles</p>
                                         </div>
                                     </div>
                                 </a>
@@ -68,129 +68,18 @@
                             <a href="javascript:void(0)">
                                 <div class="item-heading">
                                     <h5 class="text-truncate mb-0">{{ relatedProduct.name }}</h5>
-                                    <small class="text-body">by {{ relatedProduct.brand }}</small>
+                                    <small class="text-body">{{ relatedProduct.brand }}</small>
                                 </div>
                                 <div class="img-container mx-auto py-75">
                                     <img [src]="relatedProduct.image" class="img-fluid" alt="image" />
                                 </div>
                                 <div class="item-meta">
-                                    <div class="rating rating-sm">
-                                        <ngb-rating [rate]="relatedProduct.rating" [readonly]="true" [max]="5" class="outline-none">
-                                            <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o mr-25" [class.fa-star]="fill === 100"></span
-                                ></ng-template>
-                            </ngb-rating>
-                            </div>
-                            <p class="card-text text-primary mb-0">${{ relatedProduct.price }}</p>
-                        </div>
-                        </a>
-                    </div>
-                    </div>
-                    <!-- Add Arrows -->
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </div>
-            </div>
-        </div>
 
-        <div class="card">
-            <div class="card-body">
-                <div class="mt-2 mb-2 text-center">
-                    <h4>Premios que puedes canjear</h4>
-                </div>
-                <div class="swiper-responsive-breakpoints swiper-container px-4 py-2">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <a href="#" data-target="#product-detail" data-toggle="modal">
-                                <div class="item-heading">
-                                    <h5 class="text-truncate mb-0">Apple Watch Series 6</h5>
-                                    <small class="text-body">Mundo MAC</small>
-                                </div>
-                                <div class="img-container w-50 mx-auto py-75">
-                                    <img src="assets/images/elements/apple-watch.png" class="img-fluid" alt="image" />
-                                </div>
-                                <div class="item-meta">
-                                    <p class="card-text text-secondary small mb-0">Precio normal: $300.00</p>
+                                    <p class="card-text text-secondary small mb-0">Precio normal: ${{ relatedProduct.price }}</p>
                                     <hr/>
                                     <h6 class="mt-1">Precio super monedas:</h6>
                                     <h6 class="mt-1 text-info">
-                                        <div class="iso-moneda"></div>
-                                        100 super monedas + $90.00 </h6>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#" data-target="#product-detail2" data-toggle="modal">
-                                <div class="item-heading">
-                                    <h5 class="text-truncate mb-0">Apple MacBook Pro - Silver</h5>
-                                    <small class="text-body">Think</small>
-                                </div>
-                                <div class="img-container w-50 mx-auto py-50">
-                                    <img src="assets/images/elements/macbook-pro.png" class="img-fluid" alt="image" />
-                                </div>
-                                <div class="item-meta">
-                                    <p class="card-text text-secondary small mb-0">Precio normal: $300.00</p>
-                                    <hr/>
-                                    <h6 class="mt-1">Precio super monedas:</h6>
-                                    <h6 class="mt-1 text-info">
-                                        <div class="iso-moneda"></div>
-                                        100 super monedas + $90.00 </h6>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#" data-target="#product-detail3" data-toggle="modal">
-                                <div class="item-heading">
-                                    <h5 class="text-truncate mb-0">Apple HomePod (Space Grey)</h5>
-                                    <small class="text-body">Think</small>
-                                </div>
-                                <div class="img-container w-50 mx-auto py-75">
-                                    <img src="assets/images/elements/homepod.png" class="img-fluid" alt="image" />
-                                </div>
-                                <div class="item-meta">
-                                    <p class="card-text text-secondary small mb-0">Precio normal: $300.00</p>
-                                    <hr/>
-                                    <h6 class="mt-1">Precio super monedas:</h6>
-                                    <h6 class="mt-1 text-info">
-                                        <div class="iso-moneda"></div>
-                                        100 super monedas + $90.00 </h6>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="javascript:void(0)">
-                                <div class="item-heading">
-                                    <h5 class="text-truncate mb-0">Magic Mouse 2 - Black</h5>
-                                    <small class="text-body">Mundo Mac</small>
-                                </div>
-                                <div class="img-container w-50 mx-auto py-75">
-                                    <img src="assets/images/elements/magic-mouse.png" class="img-fluid" alt="image" />
-                                </div>
-                                <div class="item-meta">
-                                    <p class="card-text text-secondary small mb-0">Precio normal: $300.00</p>
-                                    <hr/>
-                                    <h6 class="mt-1">Precio super monedas:</h6>
-                                    <h6 class="mt-1 text-info">
-                                        <div class="iso-moneda"></div>
-                                        100 super monedas + $90.00 </h6>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="javascript:void(0)">
-                                <div class="item-heading">
-                                    <h5 class="text-truncate mb-0">iPhone 12 Pro</h5>
-                                    <small class="text-body">Mundo Mac</small>
-                                </div>
-                                <div class="img-container w-50 mx-auto py-75">
-                                    <img src="assets/images/elements/iphone-x.png" class="img-fluid" alt="image" />
-                                </div>
-                                <div class="item-meta">
-                                    <p class="card-text text-secondary small mb-0">Precio normal: $300.00</p>
-                                    <hr/>
-                                    <h6 class="mt-1">Precio super monedas:</h6>
-                                    <h6 class="mt-1 text-info">
-                                        <div class="iso-moneda"></div>
-                                        100 super monedas + $90.00 </h6>
+                                        <div class="iso-moneda"> </div> 100 super monedas + $90.00 </h6>
                                 </div>
                             </a>
                         </div>

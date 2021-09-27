@@ -1,14 +1,16 @@
 import { CoreMenu } from '@core/types'
+import { Role } from '../auth/models/role';
 
 export const menu: CoreMenu[] = [
   {
     id: 'inicio',
     title: 'Inicio',
     // translate: 'MENU.HOME',
+    role: [Role.SuperMonedas],
     type: 'item',
     icon: 'home',
     url: 'personas/inicio',
-    
+
   },
   {
     id: 'que-es',
@@ -22,12 +24,15 @@ export const menu: CoreMenu[] = [
     id: 'apps',
     type: 'section',
     title: 'Administración',
+    role: [Role.SuperMonedas],
     // translate: 'MENU.APPS.SECTION',
     icon: 'package',
+
     children: [
       {
         id: 'superMonedas',
         title: 'Super monedas',
+        role: [Role.SuperMonedas],
         // translate: 'MENU.PAGES.SECTION',
         type: 'collapsible',
         icon: 'dollar-sign',

@@ -6,7 +6,7 @@ export class User {
   password: string;
   firstName: string;
   lastName: string;
-  avatar: string;
-  role: Role;
+  persona: JSON;
+  roles: Array<any>;
   token?: string;
 }

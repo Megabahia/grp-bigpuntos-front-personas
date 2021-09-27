@@ -19,17 +19,21 @@ import { SwiperModule } from 'ngx-swiper-wrapper';
 import { FormsModule } from '@angular/forms';
 import { CoreTouchspinModule } from '@core/components/core-touchspin/core-touchspin.module';
 import { CoreSidebarModule } from '@core/components';
+import { AuthGuard } from '../../auth/helpers/auth.guards';
+import { Role } from '../../auth/models/role';
 
 const routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   {
     path: 'inicio',
     component: PrincipalComponent,
+    data: {roles: [Role.SuperMonedas]},
+    canActivate: [AuthGuard]
     // data: { animation: 'auth' }
   },
   {
     path: 'que-es',
-    component: PrincipalComponent,
+    component: QueEsComponent,
     // data: { animation: 'auth' }
   },
   {
