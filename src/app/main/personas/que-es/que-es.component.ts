@@ -6,7 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./que-es.component.scss']
 })
 export class QueEsComponent implements OnInit {
-  public videos:Array<any>;
+  public videos: Array<any> =
+    [
+      {
+        nombre:"",
+        config: {
+          duracion: "12:30" ,
+          url:"https://www.youtube.com/embed/bTqVqk7FSmY"
+        }
+      }
+    ];
 
   constructor() { }
 
