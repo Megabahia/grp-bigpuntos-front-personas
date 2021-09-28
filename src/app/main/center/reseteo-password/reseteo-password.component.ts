@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CoreConfigService } from '@core/services/config.service';
-import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { RecuperarPassService } from './recuperar-pass.service';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { CoreConfigService } from '../../../../@core/services/config.service';
 import { Router } from '@angular/router';
+import { RecuperarPassService } from '../recuperar-pass/recuperar-pass.service';
+import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-recuperar-pass',
-  templateUrl: './recuperar-pass.component.html',
-  styleUrls: ['./recuperar-pass.component.scss']
+  selector: 'app-reseteo-password',
+  templateUrl: './reseteo-password.component.html',
+  styleUrls: ['./reseteo-password.component.scss']
 })
-export class RecuperarPassComponent implements OnInit {
+export class ReseteoPasswordComponent implements OnInit {
   // Public
   public emailVar;
   public coreConfig: any;
@@ -88,13 +88,13 @@ export class RecuperarPassComponent implements OnInit {
     }
     this._recuperarPassService.recuperarPassword(this.f.email.value).subscribe((info) => {
       this.error = null;
-      if(info.status){
+      if (info.status) {
         this._router.navigate(['/grp/login']);
       }
     },
-    (error)=>{
-      this.error = "Ocurrió un error al enviar su correo";
-    });
+      (error) => {
+        this.error = "Ocurrió un error al enviar su correo";
+      });
   }
 
   ngOnDestroy(): void {
@@ -102,5 +102,4 @@ export class RecuperarPassComponent implements OnInit {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
-
 }

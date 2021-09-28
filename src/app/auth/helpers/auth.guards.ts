@@ -20,11 +20,11 @@ export class AuthGuard implements CanActivate {
       let rolEncontrado = false;
 
       currentUser.roles.map(rol => {
-        if (route.data.roles.indexOf(rol.nombre)!= -1) {
+        if (route.data.roles && route.data.roles.indexOf(rol.nombre) != -1) {
           rolEncontrado = true;
         }
       });
-      
+
       if (route.data.roles && !rolEncontrado) {
         // role not authorised so redirect to not-authorized page
         this._router.navigate(['/pages/miscellaneous/not-authorized']);

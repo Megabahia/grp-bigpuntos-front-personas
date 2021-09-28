@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   public error = '';
   public passwordTextType: boolean;
 
+
   // Private
   private _unsubscribeAll: Subject<any>;
 
@@ -54,6 +55,9 @@ export class LoginComponent implements OnInit {
         enableLocalStorage: false
       }
     };
+    if (this._authenticationService.currentUserValue) {
+      this._router.navigate(['/']);
+    }
   }
 
   // convenience getter for easy access to form fields

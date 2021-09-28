@@ -12,6 +12,8 @@ import { CoreTouchspinModule } from '../../../@core/components/core-touchspin/co
 import { CoreSidebarModule } from '../../../@core/components/core-sidebar/core-sidebar.module';
 import { RecuperarPassComponent } from './recuperar-pass/recuperar-pass.component';
 import { RegistroComponent } from './registro/registro.component';
+import { AuthGuard } from '../../auth/helpers/auth.guards';
+import { ReseteoPasswordComponent } from './reseteo-password/reseteo-password.component';
 
 const routes = [
   {
@@ -31,11 +33,16 @@ const routes = [
     path: 'recuperar-pass',
     component: RecuperarPassComponent,
     data: { animation: 'auth' } 
+  },
+  {
+    path: 'recuperar-pass',
+    component: RecuperarPassComponent,
+    data: { animation: 'auth' } 
   }
 ];
 
 @NgModule({
-  declarations: [LoginComponent,RecuperarPassComponent, RegistroComponent],
+  declarations: [LoginComponent,RecuperarPassComponent, RegistroComponent, ReseteoPasswordComponent],
   imports: [
     RouterModule.forChild(routes), 
     ContentHeaderModule, 
