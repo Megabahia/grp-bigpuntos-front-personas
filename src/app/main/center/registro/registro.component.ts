@@ -4,6 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoreConfigService } from '@core/services/config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { RegistroService } from './registro.service';
+import { Role } from '../../../auth/models/role';
+
 
 @Component({
   selector: 'app-registro',
@@ -32,9 +35,11 @@ export class RegistroComponent implements OnInit {
    */
   constructor(
     private _coreConfigService: CoreConfigService,
+    private _registroService:RegistroService,
     private _formBuilder: FormBuilder,
     private _route: ActivatedRoute,
     private _router: Router
+    
   ) {
     this._unsubscribeAll = new Subject();
 
@@ -71,23 +76,37 @@ export class RegistroComponent implements OnInit {
     this.confirmPasswordTextType = !this.confirmPasswordTextType;
   }
 
-  onSubmit() {
+  registrarUsuario() {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.registerForm.invalid) {
+    if (this.registerForm.invalid || !this.passwordSimilar) {
       return;
     }
-    if(!this.passwordSimilar){
-      return;
-    }
-    // Login
-    this.loading = true;
 
+    // Login
+    
+    this._registroService.registrarUsuario(
+      {
+        password: this.f.password.value,
+        roles:Role.SuperMonedas,
+        email: this.f.correo.value,
+        estado: 1
+      }
+    ).subscribe((info) => {
+      this.error = null;
+      this.loading = true;
+      localStorage.setItem('currentUser', JSON.stringify(info));
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 1000);
+    },
+      (error) => {
+        console.log(error);
+        // this.error = error.error.password;
+      });
     // redirect to home page
-    setTimeout(() => {
-      this._router.navigate(['/sample']);
-    }, 100);
+    
   }
 
   // Lifecycle Hooks
@@ -100,7 +119,8 @@ export class RegistroComponent implements OnInit {
     this.registerForm = this._formBuilder.group({
       correo: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      confirmPassword: ['', [Validators.required]]
+      confirmPassword: ['', [Validators.required]],
+      terminos: [false,[Validators.requiredTrue]]
     });
 
     // get return url from route parameters or default to '/'
@@ -118,7 +138,6 @@ export class RegistroComponent implements OnInit {
     }else{
       this.passwordSimilar = false;
     }
-    
   }
 
   /**

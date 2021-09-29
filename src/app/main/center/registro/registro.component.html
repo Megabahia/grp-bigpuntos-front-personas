@@ -32,7 +32,7 @@
                     </div>
                 </ngb-alert>
 
-                <form class="auth-login-form mt-2" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <form class="auth-login-form mt-2" [formGroup]="registerForm" (ngSubmit)="registrarUsuario()">
                     <div class="form-group">
                         <label class="form-label" for="login-correo">Correo</label>
                         <input type="text" formControlName="correo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.correo.errors }" placeholder="admin@demo.com" aria-describedby="login-correo" autofocus="" tabindex="1" />
@@ -82,8 +82,11 @@
                     </div>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" id="remember-me" type="checkbox" tabindex="3" />
+                            <input class="custom-control-input" id="remember-me" formControlName="terminos" type="checkbox" tabindex="3" />
                             <label class="custom-control-label" for="remember-me"><span>Aceptar</span><a class="text-primary" routerLink="/grp/login"><span>&nbsp;términos y condiciones</span></a></label>
+                            <div *ngIf="submitted && f.terminos.errors" class="invalid-feedback" [ngClass]="{ 'd-block': submitted && f.terminos.errors }">
+                                <div *ngIf="f.terminos.errors">Acepte los términos y condiciones para continuar</div>
+                            </div>
                         </div>
                     </div>
                     <button [disabled]="loading" class="btn btn-primary btn-block" tabindex="4" rippleEffect>

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { CoreConfigService } from '../../../../@core/services/config.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { RecuperarPassService } from '../recuperar-pass/recuperar-pass.service';
 import { Subject } from 'rxjs';
+import { ReseteoPasswordService } from './reseteo-password.service';
 
 @Component({
   selector: 'app-reseteo-password',
@@ -19,6 +20,11 @@ export class ReseteoPasswordComponent implements OnInit {
   public submitted = false;
   public data;
   public error;
+  public passwordTextType: boolean;
+  public confirmPasswordTextType: boolean;
+  public passwordSimilar: boolean;
+  public token;
+  public email;
   // Private
   private _unsubscribeAll: Subject<any>;
 
@@ -33,7 +39,9 @@ export class ReseteoPasswordComponent implements OnInit {
     private _coreConfigService: CoreConfigService,
     private _formBuilder: FormBuilder,
     private _router: Router,
-    private _recuperarPassService: RecuperarPassService) {
+    private _reseteoPasswordService: ReseteoPasswordService,
+    private _activatedRoute: ActivatedRoute
+  ) {
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
@@ -65,14 +73,28 @@ export class ReseteoPasswordComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
+
+    this._activatedRoute.queryParams.subscribe(params => {
+      this.token = params.token;
+      this.email = params.email;
+    });
+
     this.forgotPasswordForm = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]]
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]]
     });
 
     // Subscribe to config changes
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;
     });
+  }
+
+  togglePasswordTextType() {
+    this.passwordTextType = !this.passwordTextType;
+  }
+  toggleConfirmPasswordTextType() {
+    this.confirmPasswordTextType = !this.confirmPasswordTextType;
   }
 
   /**
@@ -83,20 +105,33 @@ export class ReseteoPasswordComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.forgotPasswordForm.invalid) {
+    if (this.forgotPasswordForm.invalid || !this.passwordSimilar) {
       return;
     }
-    this._recuperarPassService.recuperarPassword(this.f.email.value).subscribe((info) => {
+    this._reseteoPasswordService.resetearPassword(
+      {
+        password: this.f.password.value,
+        token: this.token,
+        email: this.email
+      }
+    ).subscribe((info) => {
       this.error = null;
       if (info.status) {
-        this._router.navigate(['/grp/login']);
+        this._router.navigate(['/']);
       }
     },
       (error) => {
-        this.error = "Ocurrió un error al enviar su correo";
+        console.log(error);
+        this.error = error.error.password;
       });
   }
-
+  compararPassword() {
+    if (this.f.password.value == this.f.confirmPassword.value) {
+      this.passwordSimilar = true;
+    } else {
+      this.passwordSimilar = false;
+    }
+  }
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();

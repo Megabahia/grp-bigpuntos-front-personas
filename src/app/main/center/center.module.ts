@@ -30,13 +30,13 @@ const routes = [
     data: { animation: 'auth' }
   },
   {
-    path: 'recuperar-pass',
+    path: 'recuperarPass',
     component: RecuperarPassComponent,
     data: { animation: 'auth' } 
   },
   {
-    path: 'recuperar-pass',
-    component: RecuperarPassComponent,
+    path: 'reseteoPassword',
+    component: ReseteoPasswordComponent,
     data: { animation: 'auth' } 
   }
 ];

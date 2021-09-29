@@ -24,13 +24,33 @@ export class AuthGuard implements CanActivate {
           rolEncontrado = true;
         }
       });
+  
+      // switch (Number(currentUser.estado)) {
+      //   case 1: {
+      //     this._router.navigate(['/personas/bienvenido']);
+      //     break;
+      //   }
+      //   case 2: {
+      //     this._router.navigate(['/grp/login'], { queryParams: { returnUrl: state.url } });
+      //     break;
+      //   }
+      //   case 3: {
+      //     this._router.navigate(['/grp/login'], { queryParams: { returnUrl: state.url } });
+      //     break;
+      //   }
+      //   case 4: {
+      //     this._router.navigate(['/grp/login'], { queryParams: { returnUrl: state.url } });
+      //     break;
+      //   }
+      //   default: {
+          if (route.data.roles && !rolEncontrado) {
+            // role not authorised so redirect to not-authorized page
+            this._router.navigate(['/pages/miscellaneous/not-authorized']);
+            return false;
+          }
+      //   }
 
-      if (route.data.roles && !rolEncontrado) {
-        // role not authorised so redirect to not-authorized page
-        this._router.navigate(['/pages/miscellaneous/not-authorized']);
-        return false;
-      }
-
+      // }
       // authorised so return true
       return true;
     }

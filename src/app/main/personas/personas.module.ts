@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BienvenidoComponent } from './supermonedas/bienvenido/bienvenido.component';
 import { CompletarPerfilComponent } from './supermonedas/completar-perfil/completar-perfil.component';
 import { FelicidadesRegistroComponent } from './supermonedas/felicidades-registro/felicidades-registro.component';
 import { PrincipalComponent } from './principal/principal.component';
@@ -21,19 +20,22 @@ import { CoreTouchspinModule } from '@core/components/core-touchspin/core-touchs
 import { CoreSidebarModule } from '@core/components';
 import { AuthGuard } from '../../auth/helpers/auth.guards';
 import { Role } from '../../auth/models/role';
+import { BienvenidoComponent } from './bienvenido/bienvenido.component';
 
 const routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   {
     path: 'inicio',
     component: PrincipalComponent,
-    data: {roles: [Role.SuperMonedas]},
+    data: { roles: [Role.SuperMonedas] },
     canActivate: [AuthGuard]
     // data: { animation: 'auth' }
   },
   {
     path: 'que-es',
     component: QueEsComponent,
+    data: { roles: [Role.SuperMonedas] },
+    canActivate: [AuthGuard]
     // data: { animation: 'auth' }
   },
   {
@@ -43,34 +45,54 @@ const routes = [
       {
         path: 'mis-monedas',
         component: MisMonedasComponent,
+        data: { roles: [Role.SuperMonedas] },
+        canActivate: [AuthGuard]
         // data: { animation: 'auth' }
       },
       {
         path: 'mis-facturas',
         component: MisFacturasComponent,
+        data: { roles: [Role.SuperMonedas] },
+        canActivate: [AuthGuard]
         // data: { animation: 'auth' }
       },
       {
         path: 'mis-calificaciones',
         component: MisCalificacionesComponent,
+        data: { roles: [Role.SuperMonedas] },
+        canActivate: [AuthGuard]
         // data: { animation: 'auth' }
       },
       {
         path: 'mis-calificaciones',
         component: MisCalificacionesComponent,
+        data: { roles: [Role.SuperMonedas] },
+        canActivate: [AuthGuard]
         // data: { animation: 'auth' }
       },
       {
         path: 'compartir-publicaciones',
         component: CompartirPublicacionesComponent,
+        data: { roles: [Role.SuperMonedas] },
+        canActivate: [AuthGuard]
         // data: { animation: 'auth' }
       },
       {
         path: 'monedas-otorgadas',
         component: MonedasOtorgadasComponent,
+        data: { roles: [Role.SuperMonedas] },
+        canActivate: [AuthGuard]
         // data: { animation: 'auth' }
       },
     ]
+  },
+  {
+    path: 'bienvenido',
+    component: BienvenidoComponent,
+    data: { activacion: 1 },
+    canActivate: [AuthGuard]
+
+    // data: { animation: 'auth' }
   },
 
 ];
