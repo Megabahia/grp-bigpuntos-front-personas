@@ -8,9 +8,10 @@ import { environment } from 'environments/environment';
 export class BienvenidoService {
 
   constructor(private _httpClient: HttpClient) { }
-  obtenerProductos(email) {
-    return this._httpClient.post<any>(`${environment.apiUrl}/central/auth/password_reset/`,
-      { email }
+
+  cambioDeEstado(datos) {
+    return this._httpClient.post<any>(`${environment.apiUrl}/central/usuarios/update/${datos.id}`,
+      { estado: datos.estado }
     );
   }
 }

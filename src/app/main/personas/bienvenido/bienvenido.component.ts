@@ -6,6 +6,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CoreConfigService } from '../../../../@core/services/config.service';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { BienvenidoService } from './bienvenido.service';
+import { CoreMenuService } from '../../../../@core/components/core-menu/core-menu.service';
 
 @Component({
   selector: 'app-bienvenido',
@@ -134,7 +136,9 @@ export class BienvenidoComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _route: ActivatedRoute,
     private _router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private _bienvenidoService: BienvenidoService,
+    private _coreMenuService: CoreMenuService
   ) {
     this._unsubscribeAll = new Subject();
 
@@ -168,21 +172,24 @@ export class BienvenidoComponent implements OnInit {
     this.passwordTextType = !this.passwordTextType;
   }
 
-  onSubmit() {
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      return;
-    }
-
+  completarPerfil() {
+    let usuario = this._coreMenuService.currentUser;
+    this._bienvenidoService.cambioDeEstado(
+      {
+        estado:"2",
+        id:usuario.id
+      }
+    ).subscribe((info) => {
+      console.log(info);
+      // setTimeout(() => {
+      //   this._router.navigate(['/']);
+      // }, 100);
+    })
     // Login
     this.loading = true;
 
     // redirect to home page
-    setTimeout(() => {
-      this._router.navigate(['/']);
-    }, 100);
+
   }
 
   // Lifecycle Hooks
@@ -192,10 +199,6 @@ export class BienvenidoComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
-    this.loginForm = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-    });
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
