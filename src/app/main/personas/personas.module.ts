@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CompletarPerfilComponent } from './supermonedas/completar-perfil/completar-perfil.component';
+import { CompletarPerfilComponent } from './completar-perfil/completar-perfil.component';
 import { FelicidadesRegistroComponent } from './supermonedas/felicidades-registro/felicidades-registro.component';
 import { PrincipalComponent } from './principal/principal.component';
 import { QueEsComponent } from './que-es/que-es.component';
@@ -90,6 +90,14 @@ const routes = [
     path: 'bienvenido',
     component: BienvenidoComponent,
     data: { activacion: 1 },
+    canActivate: [AuthGuard]
+
+    // data: { animation: 'auth' }
+  },
+  {
+    path: 'completarPerfil',
+    component: CompletarPerfilComponent,
+    data: { activacion: 2 },
     canActivate: [AuthGuard]
 
     // data: { animation: 'auth' }

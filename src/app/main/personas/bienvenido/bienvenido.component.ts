@@ -23,105 +23,36 @@ export class BienvenidoComponent implements OnInit {
   public returnUrl: string;
   public error = '';
   public passwordTextType: boolean;
-  public swiperResponsive: SwiperConfigInterface = {
-    slidesPerView: 3,
-    spaceBetween: 50,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev'
-    },
-    breakpoints: {
-      1024: {
-        slidesPerView: 3,
-        spaceBetween: 40
-      },
-      768: {
-        slidesPerView: 2,
-        spaceBetween: 30
-      },
-      640: {
-        slidesPerView: 1,
-        spaceBetween: 20
-      },
-      320: {
-        slidesPerView: 1,
-        spaceBetween: 10
-      }
-    }
-  };
-  relatedProducts = [
-    {
-      id: 3,
-      name: 'Willful Smart Watch for Men Women 2020,',
-      slug: 'willful-smart-watch-for-men-women-2020-3',
-      description:
-        'Are you looking for a smart watch, which can not only easily keep tracking of your steps, calories, heart rate and sleep quality, but also keep you informed of incoming calls.',
-      brand: 'Willful',
-      price: 29.99,
-      image: 'assets/images/pages/eCommerce/25.png',
-      hasFreeShipping: true,
-      rating: 5
-    },
-    {
-      id: 4,
-      name: 'Ronyes Unisex College Bag Bookbags for Women',
-      slug: 'ronyes-unisex-college-bag-bookbags-for-women-4',
-      description:
-        'Made of high quality water-resistant material, padded and adjustable shoulder straps, external USB with built-in charging cable offers a convenient charging',
-      brand: 'Ronyes',
-      price: 23.99,
-      image: 'assets/images/pages/eCommerce/24.png',
-      hasFreeShipping: true,
-      rating: 2
-    },
-    {
-      id: 5,
-      name: 'Toshiba Canvio Advance 2TB Portable External Hard Drive',
-      slug: 'toshiba-canvio-advance-2-tb-portable-external-hard-drive-5',
-      description: 'Up to 3TB of storage capacity to store your growing files and content',
-      brand: 'Toshiba',
-      price: 69.99,
-      image: 'assets/images/pages/eCommerce/23.png',
-      hasFreeShipping: true,
-      rating: 2
-    },
-    {
-      id: 6,
-      name: 'Tile Pro - High Performance Bluetooth Tracker',
-      slug: 'tile-pro-high-performance-bluetooth-tracker-6',
-      description:
-        'FIND KEYS, BAGS & MORE -- Pro is our high-performance finder ideal for keys, backpacks, luggage or any other items you want to keep track of. The easy-to-use finder and free app work with iOS and Android.',
-      brand: 'Tile',
-      price: 29.99,
-      image: 'assets/images/pages/eCommerce/22.png',
-      hasFreeShipping: false,
-      rating: 4
-    },
-    {
-      id: 7,
-      name: 'Bugani M90 Portable Bluetooth Speaker',
-      slug: 'bugani-m90-portable-bluetooth-speaker-7',
-      description:
-        'Bluetooth Speakers-The M90 Bluetooth speaker uses the latest Bluetooth 5.0 technology and the latest Bluetooth ATS chip, Connecting over Bluetooth in seconds to iPhone, iPad, Smart-phones, Tablets, Windows, and other Bluetooth devices.',
-      brand: 'Bugani',
-      price: 56.0,
-      image: 'assets/images/pages/eCommerce/21.png',
-      hasFreeShipping: false,
-      rating: 3
-    },
-    {
-      id: 8,
-      name: 'PlayStation 4 Console',
-      slug: 'play-station-4-console-8',
-      description:
-        'All the greatest, games, TV, music and more. Connect with your friends to broadcast and celebrate your epic moments at the press of the Share button to Twitch, YouTube, Facebook and Twitter.',
-      brand: 'Sony',
-      price: 339.95,
-      image: 'assets/images/pages/eCommerce/20.png',
-      hasFreeShipping: false,
-      rating: 4
-    }
-  ];
+  productosPromocion;
+  public swiperResponsive: SwiperConfigInterface;
+  producto;
+  // public swiperResponsive: SwiperConfigInterface = {
+  //   slidesPerView: 3,
+  //   spaceBetween: 50,
+  //   navigation: {
+  //     nextEl: '.swiper-button-next',
+  //     prevEl: '.swiper-button-prev'
+  //   },
+  //   breakpoints: {
+  //     1024: {
+  //       slidesPerView: 3,
+  //       spaceBetween: 40
+  //     },
+  //     768: {
+  //       slidesPerView: 2,
+  //       spaceBetween: 30
+  //     },
+  //     640: {
+  //       slidesPerView: 1,
+  //       spaceBetween: 20
+  //     },
+  //     320: {
+  //       slidesPerView: 1,
+  //       spaceBetween: 10
+  //     }
+  //   }
+  // };
+
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -176,21 +107,58 @@ export class BienvenidoComponent implements OnInit {
     let usuario = this._coreMenuService.currentUser;
     this._bienvenidoService.cambioDeEstado(
       {
-        estado:"2",
-        id:usuario.id
+        estado: "2",
+        id: usuario.id
       }
     ).subscribe((info) => {
-      console.log(info);
-      // setTimeout(() => {
-      //   this._router.navigate(['/']);
-      // }, 100);
-    })
+      usuario.estado = "2";
+      localStorage.setItem('currentUser', JSON.stringify(usuario));
+      setTimeout(() => {
+        this._router.navigate(['/']);
+      }, 100);
+    });
     // Login
     this.loading = true;
 
     // redirect to home page
+  }
+  obtenerProductos() {
+    let subsObtenerProductos = this._bienvenidoService.obtenerProductos(
+      {
+        tipo: "presentacion",
+      }
+    ).subscribe((valor) => {
+      this.productosPromocion = valor.info;
+      this.swiperResponsive = {
+        slidesPerView: 3,
+        spaceBetween: 50,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
+        breakpoints: {
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 40
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 30
+          },
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 20
+          },
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10
+          }
+        }
+      };
+    });
 
   }
+
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
@@ -199,7 +167,7 @@ export class BienvenidoComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
-
+    this.obtenerProductos();
     // get return url from route parameters or default to '/'
     this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
 
@@ -207,6 +175,7 @@ export class BienvenidoComponent implements OnInit {
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;
     });
+
   }
 
   /**
@@ -217,10 +186,16 @@ export class BienvenidoComponent implements OnInit {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
-  modalOpenVC(modalVC) {
-    this.modalService.open(modalVC, {
-      centered: true
+  modalOpenVC(modalVC, id) {
+    let subsObtenerProducto = this._bienvenidoService.obtenerProducto(id).subscribe((valor) => {
+      this.producto = valor;
+      this.modalService.open(modalVC, {
+        centered: true,
+        size: 'lg'
+      });
     });
+
+
   }
 
 }

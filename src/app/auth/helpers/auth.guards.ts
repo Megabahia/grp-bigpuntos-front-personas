@@ -40,16 +40,18 @@ export class AuthGuard implements CanActivate {
           return true;
         }
         case 2: {
-          this._router.navigate(['/grp/login'], { queryParams: { returnUrl: state.url } });
+          if (!activacion) {
+            this._router.navigate(['/personas/completarPerfil']);
+          }
           return true;
         }
         case 3: {
-          this._router.navigate(['/grp/login'], { queryParams: { returnUrl: state.url } });
-          return true;
+          // this._router.navigate(['/grp/login'], { queryParams: { returnUrl: state.url } });
+          // return true;
         }
         case 4: {
-          this._router.navigate(['/grp/login'], { queryParams: { returnUrl: state.url } });
-          return true;
+          // this._router.navigate(['/grp/login'], { queryParams: { returnUrl: state.url } });
+          // return true;
         }
       }
       if (route.data.roles && !rolEncontrado) {

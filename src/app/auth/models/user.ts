@@ -9,5 +9,5 @@ export class User {
   persona: JSON;
   roles: Array<any>;
   token?: string;
-  estado: number;
+  estado: string;
 }

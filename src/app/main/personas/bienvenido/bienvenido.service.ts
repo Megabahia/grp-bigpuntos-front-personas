@@ -14,4 +14,14 @@ export class BienvenidoService {
       { estado: datos.estado }
     );
   }
+  obtenerProductos(tipo) {
+    return this._httpClient.post<any>(`${environment.apiUrl}/central/productos/list/`,
+      tipo
+    );
+  }
+  obtenerProducto(id) {
+    return this._httpClient.get<any>(`${environment.apiUrl}/central/productos/listOne/${id}`,
+      
+    );
+  }
 }

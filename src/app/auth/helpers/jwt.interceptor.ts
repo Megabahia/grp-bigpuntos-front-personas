@@ -11,7 +11,7 @@ export class JwtInterceptor implements HttpInterceptor {
    *
    * @param {AuthenticationService} _authenticationService
    */
-  constructor(private _authenticationService: AuthenticationService) {}
+  constructor(private _authenticationService: AuthenticationService) { }
 
   /**
    * Add auth header with jwt if user is logged in and request is to api url
@@ -29,7 +29,6 @@ export class JwtInterceptor implements HttpInterceptor {
         }
       });
     }
-
     return next.handle(request);
   }
 }

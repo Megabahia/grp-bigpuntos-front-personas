@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import 'hammerjs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -19,10 +19,12 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 import { AuthGuard } from './auth/helpers/auth.guards';
+import { JwtInterceptor } from './auth/helpers/jwt.interceptor';
+import { ErrorInterceptor } from './auth/helpers/error.interceptor';
 
 const appRoutes: Routes = [
   {
-    path: '', redirectTo: 'personas', pathMatch: 'full' , 
+    path: '', redirectTo: 'personas', pathMatch: 'full',
   },
   {
     path: 'pages',
@@ -35,7 +37,7 @@ const appRoutes: Routes = [
   {
     path: 'personas',
     loadChildren: () => import('./main/personas/personas.module').then(m => m.PersonasModule),
-    
+
   },
   {
     path: '**',
@@ -70,7 +72,10 @@ const appRoutes: Routes = [
     LayoutModule,
     SampleModule
   ],
-
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
