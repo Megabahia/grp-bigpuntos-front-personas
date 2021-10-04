@@ -4,10 +4,10 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CoreConfigService } from '../../../../@core/services/config.service';
+import { CoreConfigService } from '../../../../../@core/services/config.service';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { BienvenidoService } from './bienvenido.service';
-import { CoreMenuService } from '../../../../@core/components/core-menu/core-menu.service';
+import { CoreMenuService } from '../../../../../@core/components/core-menu/core-menu.service';
 
 @Component({
   selector: 'app-bienvenido',

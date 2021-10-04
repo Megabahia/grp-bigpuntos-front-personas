@@ -474,6 +474,7 @@ export class CoreSidebarComponent implements OnInit, OnDestroy {
 
     // Collapse the sidebar back
     this.expanded = false;
+    this.collapsed = true; // Set the menu collapsed while collapsed temp.
 
     // Change detector
     this._changeDetectorRef.markForCheck();
@@ -490,6 +491,7 @@ export class CoreSidebarComponent implements OnInit, OnDestroy {
 
     // Expanded the sidebar temporarily
     this.expanded = true;
+    this.collapsed = true; // Set the menu collapsed while collapsed temp.
 
     // Change detector
     this._changeDetectorRef.markForCheck();

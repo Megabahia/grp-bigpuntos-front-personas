@@ -20,7 +20,12 @@ export class LoginComponent implements OnInit {
   public returnUrl: string;
   public error = '';
   public passwordTextType: boolean;
-
+  public startDateOptions = {
+    altInput: true,
+    mode: 'single',
+    altInputClass: 'form-control flat-picker flatpickr-input invoice-edit-input',
+    enableTime: true
+  };
 
   // Private
   private _unsubscribeAll: Subject<any>;

@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CompletarPerfilComponent } from './completar-perfil/completar-perfil.component';
-import { FelicidadesRegistroComponent } from './supermonedas/felicidades-registro/felicidades-registro.component';
-import { PrincipalComponent } from './principal/principal.component';
-import { QueEsComponent } from './que-es/que-es.component';
-import { MisMonedasComponent } from './supermonedas/mis-monedas/mis-monedas.component';
-import { MisFacturasComponent } from './supermonedas/mis-facturas/mis-facturas.component';
-import { MisCalificacionesComponent } from './supermonedas/mis-calificaciones/mis-calificaciones.component';
-import { CompartirPublicacionesComponent } from './supermonedas/compartir-publicaciones/compartir-publicaciones.component';
-import { MonedasOtorgadasComponent } from './supermonedas/monedas-otorgadas/monedas-otorgadas.component';
+import { CompletarPerfilComponent } from './vistas/completar-perfil/completar-perfil.component';
+import { FelicidadesRegistroComponent } from './vistas/supermonedas/felicidades-registro/felicidades-registro.component';
+import { PrincipalComponent } from './vistas/principal/principal.component';
+import { QueEsComponent } from './vistas/que-es/que-es.component';
+import { MisMonedasComponent } from './vistas/supermonedas/mis-monedas/mis-monedas.component';
+import { MisFacturasComponent } from './vistas/supermonedas/mis-facturas/mis-facturas.component';
+import { MisCalificacionesComponent } from './vistas/supermonedas/mis-calificaciones/mis-calificaciones.component';
+import { CompartirPublicacionesComponent } from './vistas/supermonedas/compartir-publicaciones/compartir-publicaciones.component';
+import { MonedasOtorgadasComponent } from './vistas/supermonedas/monedas-otorgadas/monedas-otorgadas.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CoreCommonModule } from '@core/common.module';
 import { RouterModule } from '@angular/router';
@@ -20,7 +20,9 @@ import { CoreTouchspinModule } from '@core/components/core-touchspin/core-touchs
 import { CoreSidebarModule } from '@core/components';
 import { AuthGuard } from '../../auth/helpers/auth.guards';
 import { Role } from '../../auth/models/role';
-import { BienvenidoComponent } from './bienvenido/bienvenido.component';
+import { BienvenidoComponent } from './vistas/bienvenido/bienvenido.component';
+import { Ng2FlatpickrModule } from 'ng2-flatpickr';
+import { CardSnippetModule } from '../../../@core/components/card-snippet/card-snippet.module';
 
 const routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -97,7 +99,7 @@ const routes = [
   {
     path: 'completarPerfil',
     component: CompletarPerfilComponent,
-    data: { activacion: 2 },
+    data: { activacion: 2, animation: 'flatpickr' },
     canActivate: [AuthGuard]
 
     // data: { animation: 'auth' }
@@ -127,6 +129,8 @@ const routes = [
     CoreTouchspinModule,
     CoreSidebarModule,
     NgbModule,
+    Ng2FlatpickrModule,
+    CardSnippetModule
   ],
   exports: [
     BienvenidoComponent,

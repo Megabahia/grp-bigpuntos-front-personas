@@ -10,4 +10,5 @@ export class User {
   roles: Array<any>;
   token?: string;
   estado: string;
+  tokenExpiracion: string;
 }

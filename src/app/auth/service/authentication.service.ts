@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'environments/environment';
 import { User, Role } from 'app/auth/models';
 import { ToastrService } from 'ngx-toastr';
+import moment from 'moment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -59,8 +60,8 @@ export class AuthenticationService {
           // login successful if there's a jwt token in the response
           if (user && user.token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
+            user.tokenExpiracion = Date.now() + (Number(user.tokenExpiracion) * 1000);
             localStorage.setItem('currentUser', JSON.stringify(user));
-
             // Display welcome toast!
             setTimeout(() => {
               this._toastrService.success(

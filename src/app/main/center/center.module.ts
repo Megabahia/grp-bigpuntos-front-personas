@@ -14,6 +14,7 @@ import { RecuperarPassComponent } from './recuperar-pass/recuperar-pass.componen
 import { RegistroComponent } from './registro/registro.component';
 import { AuthGuard } from '../../auth/helpers/auth.guards';
 import { ReseteoPasswordComponent } from './reseteo-password/reseteo-password.component';
+import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 
 const routes = [
   {
@@ -53,6 +54,7 @@ const routes = [
     CoreTouchspinModule,
     CoreSidebarModule,
     NgbModule,
+    Ng2FlatpickrModule
   ]
 })
 export class CenterModule { }
