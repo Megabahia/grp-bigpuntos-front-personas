@@ -35,6 +35,7 @@ export class CompletarPerfilComponent implements OnInit {
     altFormat: 'Y-n-j',
     altInputClass: 'form-control flat-picker flatpickr-input invoice-edit-input',
   };
+  public codigo;
   public fecha;
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -49,7 +50,7 @@ export class CompletarPerfilComponent implements OnInit {
     private _coreMenuService: CoreMenuService,
     private _completarPerfilService: CompletarPerfilService,
     private _formBuilder: FormBuilder,
-
+    private modalService: NgbModal
   ) {
     this.informacion = {
       apellidos: "",
@@ -93,9 +94,7 @@ export class CompletarPerfilComponent implements OnInit {
   ngOnInit(): void {
 
     this.usuario = this._coreMenuService.currentUser;
-    if (this.usuario.estado == "3") {
 
-    }
     this.registerForm = this._formBuilder.group({
       identificacion: ['', [Validators.required]],
       nombres: ['', Validators.required],
@@ -122,6 +121,11 @@ export class CompletarPerfilComponent implements OnInit {
         whatsapp: info.whatsapp,
       });
     });
+  }
+  ngAfterViewInit(): void {
+    if (this.usuario.estado == "3") {
+      this.modalWhatsapp(this.whatsapp);
+    }
   }
 
   subirImagen(event: any) {
@@ -166,10 +170,19 @@ export class CompletarPerfilComponent implements OnInit {
     this._completarPerfilService.guardarInformacion(this.informacion).subscribe(info => {
       this.usuario.estado = "3";
       localStorage.setItem('currentUser', JSON.stringify(this.usuario));
+      this.modalWhatsapp(this.whatsapp);
     });
   }
-  modalWhatsapp() {
-    
+  modalWhatsapp(modalVC) {
+    this.modalService.open(modalVC);
+  }
+  validarWhatsapp() {
+    this._completarPerfilService.validarWhatsapp({
+      user_id: this.usuario.id,
+      codigo: this.codigo
+    }).subscribe(info => {
+      console.log(info);
+    });
   }
   /**
    * On destroy
