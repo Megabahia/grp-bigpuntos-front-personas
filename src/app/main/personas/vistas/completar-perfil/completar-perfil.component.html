@@ -27,7 +27,7 @@
                                     </div>
                                     <!-- profile title -->
                                     <div class="profile-title ml-3">
-                                        <h2>Edgar Flores</h2>
+                                        <h2>{{f.nombres.value}} {{f.apellidos.value}}</h2>
                                         <div class="col-12 d-flex px-0">
                                             <label class="btn btn-info btn-sm mr-75 waves-effect waves-float waves-light" for="change-picture">
                                             <span class="d-none d-sm-block">Cambiar foto</span>
@@ -104,7 +104,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="fechaNacimiento">Fecha de nacimiento</label>
-                                                <ng2-flatpickr formControlName="fechaNacimiento" [config]="startDateOptions" name="startDate" #startDatePicker required [ngClass]="{ 'is-invalid': submitted && f.fechaNacimiento.errors }"></ng2-flatpickr>
+                                                <ng2-flatpickr [setDate]="fecha" formControlName="fechaNacimiento" [config]="startDateOptions" [ngClass]="{ 'is-invalid': submitted && f.fechaNacimiento.errors }" (input)="calcularEdad()"></ng2-flatpickr>
                                                 <div *ngIf="submitted && f.fechaNacimiento.errors" class="invalid-feedback">
                                                     <div *ngIf="f.fechaNacimiento.errors.required">Fecha es requerida</div>
                                                 </div>
@@ -160,3 +160,21 @@
     </div>
 </div>
 <!-- / Error page-->
+
+<ng-template #whatsapp let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Mensaje</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+        <p class="text-primary font-weight-bold">Ingresa el código que hemos enviado a tu número de WhatsApp y valida tu cuenta</p>
+        <div class="form-group">
+            <input class="form-control" type="text">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="felicidades.html" class="btn btn-primary">Validar</a>
+    </div>
+</ng-template>

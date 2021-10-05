@@ -37,7 +37,7 @@ export class AuthGuard implements CanActivate {
 
 
       if (route.data.activacion) {
-        if (route.data.activacion == Number(currentUser.estado)) {
+        if (route.data.activacion.indexOf(Number(currentUser.estado)) != -1) {
           activacion = true;
         }
       }
@@ -55,8 +55,10 @@ export class AuthGuard implements CanActivate {
           return true;
         }
         case 3: {
-          // this._router.navigate(['/grp/login'], { queryParams: { returnUrl: state.url } });
-          // return true;
+          if (!activacion) {
+            this._router.navigate(['/personas/completarPerfil']);
+          }
+          return true;
         }
         case 4: {
           // this._router.navigate(['/grp/login'], { queryParams: { returnUrl: state.url } });

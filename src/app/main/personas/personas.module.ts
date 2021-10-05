@@ -91,7 +91,7 @@ const routes = [
   {
     path: 'bienvenido',
     component: BienvenidoComponent,
-    data: { activacion: 1 },
+    data: { activacion: [1] },
     canActivate: [AuthGuard]
 
     // data: { animation: 'auth' }
@@ -99,7 +99,7 @@ const routes = [
   {
     path: 'completarPerfil',
     component: CompletarPerfilComponent,
-    data: { activacion: 2, animation: 'flatpickr' },
+    data: { activacion: [2,3], animation: 'flatpickr' },
     canActivate: [AuthGuard]
 
     // data: { animation: 'auth' }
