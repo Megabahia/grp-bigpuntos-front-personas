@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CompletarPerfilComponent } from './vistas/completar-perfil/completar-perfil.component';
-import { FelicidadesRegistroComponent } from './vistas/supermonedas/felicidades-registro/felicidades-registro.component';
+import { FelicidadesRegistroComponent } from './vistas/felicidades-registro/felicidades-registro.component';
 import { PrincipalComponent } from './vistas/principal/principal.component';
 import { QueEsComponent } from './vistas/que-es/que-es.component';
 import { MisMonedasComponent } from './vistas/supermonedas/mis-monedas/mis-monedas.component';
@@ -100,6 +100,14 @@ const routes = [
     path: 'completarPerfil',
     component: CompletarPerfilComponent,
     data: { activacion: [2,3], animation: 'flatpickr' },
+    canActivate: [AuthGuard]
+
+    // data: { animation: 'auth' }
+  },
+  {
+    path: 'felicidadesRegistro',
+    component: FelicidadesRegistroComponent,
+    data: { activacion: [4] },
     canActivate: [AuthGuard]
 
     // data: { animation: 'auth' }

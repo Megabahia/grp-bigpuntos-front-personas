@@ -21,7 +21,7 @@ import { User } from '../../../../auth/models/user';
 export class CompletarPerfilComponent implements OnInit {
   @ViewChild('startDatePicker') startDatePicker;
   @ViewChild('whatsapp') whatsapp;
-
+  public error;
   public informacion: CompletarPerfil;
   public coreConfig: any;
   public imagen;
@@ -49,6 +49,7 @@ export class CompletarPerfilComponent implements OnInit {
     private _coreConfigService: CoreConfigService,
     private _coreMenuService: CoreMenuService,
     private _completarPerfilService: CompletarPerfilService,
+    private _router: Router,
     private _formBuilder: FormBuilder,
     private modalService: NgbModal
   ) {
@@ -181,7 +182,16 @@ export class CompletarPerfilComponent implements OnInit {
       user_id: this.usuario.id,
       codigo: this.codigo
     }).subscribe(info => {
-      console.log(info);
+      if (info.message) {
+        this.usuario.estado = "4";
+        localStorage.setItem('currentUser', JSON.stringify(this.usuario));
+        this.modalService.dismissAll();
+        setTimeout(() => {
+          this._router.navigate(['/']);
+        }, 100);
+      }
+    }, error => {
+      this.error = "Hay un fallo al tratar de verificar su código, intentelo nuevamente"
     });
   }
   /**
