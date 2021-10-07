@@ -49,6 +49,7 @@ export class CompletarPerfilComponent implements OnInit {
     private _coreConfigService: CoreConfigService,
     private _coreMenuService: CoreMenuService,
     private _completarPerfilService: CompletarPerfilService,
+    private _bienvenidoService: BienvenidoService,
     private _router: Router,
     private _formBuilder: FormBuilder,
     private modalService: NgbModal
@@ -168,10 +169,19 @@ export class CompletarPerfilComponent implements OnInit {
     this.informacion.nombres = this.f.nombres.value;
     this.informacion.whatsapp = this.f.whatsapp.value;
     this.informacion.user_id = this.usuario.id;
+
     this._completarPerfilService.guardarInformacion(this.informacion).subscribe(info => {
-      this.usuario.estado = "3";
-      localStorage.setItem('currentUser', JSON.stringify(this.usuario));
-      this.modalWhatsapp(this.whatsapp);
+      this._bienvenidoService.cambioDeEstado(
+        {
+          estado: "3",
+          id: this.usuario.id
+        }
+      ).subscribe(infoCambio => {
+        this.usuario.estado = "3";
+        this.usuario.persona = info;
+        localStorage.setItem('currentUser', JSON.stringify(this.usuario));
+        this.modalWhatsapp(this.whatsapp);
+      });
     });
   }
   modalWhatsapp(modalVC) {
@@ -183,12 +193,20 @@ export class CompletarPerfilComponent implements OnInit {
       codigo: this.codigo
     }).subscribe(info => {
       if (info.message) {
-        this.usuario.estado = "4";
-        localStorage.setItem('currentUser', JSON.stringify(this.usuario));
-        this.modalService.dismissAll();
-        setTimeout(() => {
-          this._router.navigate(['/']);
-        }, 100);
+        this._bienvenidoService.cambioDeEstado(
+          {
+            estado: "4",
+            id: this.usuario.id
+          }
+        ).subscribe(infoCambio => {
+          this.usuario.estado = "4";
+          localStorage.setItem('currentUser', JSON.stringify(this.usuario));
+          this.modalService.dismissAll();
+          setTimeout(() => {
+            this._router.navigate(['/']);
+          }, 100);
+        });
+
       }
     }, error => {
       this.error = "Hay un fallo al tratar de verificar su código, intentelo nuevamente"

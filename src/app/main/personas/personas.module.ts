@@ -23,6 +23,7 @@ import { Role } from '../../auth/models/role';
 import { BienvenidoComponent } from './vistas/bienvenido/bienvenido.component';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { CardSnippetModule } from '../../../@core/components/card-snippet/card-snippet.module';
+import { PerfilUsuarioComponent } from '../center/perfil-usuario/perfil-usuario.component';
 
 const routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -99,7 +100,7 @@ const routes = [
   {
     path: 'completarPerfil',
     component: CompletarPerfilComponent,
-    data: { activacion: [2,3], animation: 'flatpickr' },
+    data: { activacion: [2, 3], animation: 'flatpickr' },
     canActivate: [AuthGuard]
 
     // data: { animation: 'auth' }
@@ -112,6 +113,7 @@ const routes = [
 
     // data: { animation: 'auth' }
   },
+ 
 
 ];
 
@@ -126,7 +128,8 @@ const routes = [
     MisFacturasComponent,
     MisCalificacionesComponent,
     CompartirPublicacionesComponent,
-    MonedasOtorgadasComponent],
+    MonedasOtorgadasComponent,
+    PerfilUsuarioComponent],
   imports: [
     CoreCommonModule,
     RouterModule.forChild(routes),

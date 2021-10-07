@@ -15,10 +15,12 @@ import { RegistroComponent } from './registro/registro.component';
 import { AuthGuard } from '../../auth/helpers/auth.guards';
 import { ReseteoPasswordComponent } from './reseteo-password/reseteo-password.component';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
+import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
+import { Role } from 'app/auth/models';
 
 const routes = [
   {
-    path: '', redirectTo: 'login', pathMatch: 'full' 
+    path: '', redirectTo: 'login', pathMatch: 'full'
   },
   {
     path: 'login',
@@ -33,22 +35,28 @@ const routes = [
   {
     path: 'recuperarPass',
     component: RecuperarPassComponent,
-    data: { animation: 'auth' } 
+    data: { animation: 'auth' }
   },
   {
     path: 'reseteoPassword',
     component: ReseteoPasswordComponent,
-    data: { animation: 'auth' } 
+    data: { animation: 'auth' }
+  },
+  {
+    path: 'perfil',
+    component: PerfilUsuarioComponent,
+    data: { roles: [Role.SuperMonedas, Role.Autonomo, Role.Empleado] },
+    canActivate: [AuthGuard]
   }
 ];
 
 @NgModule({
-  declarations: [LoginComponent,RecuperarPassComponent, RegistroComponent, ReseteoPasswordComponent],
+  declarations: [LoginComponent, RecuperarPassComponent, RegistroComponent, ReseteoPasswordComponent],
   imports: [
-    RouterModule.forChild(routes), 
-    ContentHeaderModule, 
-    TranslateModule, 
-    CoreCommonModule, 
+    RouterModule.forChild(routes),
+    ContentHeaderModule,
+    TranslateModule,
+    CoreCommonModule,
     SwiperModule,
     FormsModule,
     CoreTouchspinModule,
