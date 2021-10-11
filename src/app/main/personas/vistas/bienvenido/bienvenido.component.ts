@@ -177,15 +177,6 @@ export class BienvenidoComponent implements OnInit {
     });
 
   }
-
-  /**
-   * On destroy
-   */
-  ngOnDestroy(): void {
-    // Unsubscribe from all subscriptions
-    this._unsubscribeAll.next();
-    this._unsubscribeAll.complete();
-  }
   modalOpenVC(modalVC, id) {
     let subsObtenerProducto = this._bienvenidoService.obtenerProducto(id).subscribe((valor) => {
       this.producto = valor;
@@ -194,8 +185,15 @@ export class BienvenidoComponent implements OnInit {
         size: 'lg'
       });
     });
-
-
   }
+  /**
+   * On destroy
+   */
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
+  }
+
 
 }

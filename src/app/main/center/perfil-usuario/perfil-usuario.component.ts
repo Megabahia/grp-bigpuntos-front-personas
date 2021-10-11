@@ -6,6 +6,8 @@ import { CoreMenuService } from '../../../../@core/components/core-menu/core-men
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { InformacionBasica } from '../../personas/models/persona';
 import { DatePipe } from '@angular/common';
+import moment from 'moment';
+import { FlatpickrOptions } from 'ng2-flatpickr';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -21,6 +23,13 @@ export class PerfilUsuarioComponent implements OnInit {
   public informacionBasica: InformacionBasica;
   public persona;
   public imagen;
+  public fecha;
+  public startDateOptions: FlatpickrOptions = {
+    altInput: true,
+    mode: 'single',
+    altFormat: 'Y-n-j',
+    altInputClass: 'form-control flat-picker flatpickr-input invoice-edit-input',
+  };
   // Private
   private _unsubscribeAll: Subject<any>;
   constructor(
@@ -29,10 +38,26 @@ export class PerfilUsuarioComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private datePipe: DatePipe,
   ) {
+    this.informacionBasica = {
+      ciudad: "",
+      edad: 0,
+      emailAdicional: "",
+      facebook: "",
+      fechaNacimiento: "",
+      genero: "",
+      instagram: "",
+      tiktok: "",
+      twitter: "",
+      whatsapp: "",
+      youtube: "",
+      user_id: ""
+    }
     this._unsubscribeAll = new Subject();
 
   }
-
+  get f() {
+    return this.personaForm.controls;
+  }
   ngOnInit(): void {
     this.personaForm = this._formBuilder.group({
       created_at: ['',],
@@ -57,6 +82,7 @@ export class PerfilUsuarioComponent implements OnInit {
       this.imagen = info.imagen;
       info.created_at = this.transformarFecha(info.created_at);
       info.fechaNacimiento = this.transformarFecha(info.fechaNacimiento);
+      this.fecha = this.transformarFecha(info.fechaNacimiento);
       this.personaForm.patchValue(
         info,
       );
@@ -67,8 +93,20 @@ export class PerfilUsuarioComponent implements OnInit {
     return nuevaFecha;
   }
   guardarInformacion() {
-    this.informacionBasica = this.personaForm.value;
-    console.log(this.personaForm.value);
+    this.informacionBasica = { ...this.personaForm.value, fechaNacimiento: this.informacionBasica.fechaNacimiento };
+    this.informacionBasica.user_id = this.usuario.id;
+
+    this._perfilUsuarioService.guardarInformacion(this.informacionBasica).subscribe(info => {
+      this.usuario.persona = info;
+      localStorage.setItem("currentUser", JSON.stringify(this.usuario));
+    });
+  }
+  calcularEdad() {
+    this.informacionBasica.edad = moment().diff(this.f.fechaNacimiento.value[0], 'years');
+    this.informacionBasica.fechaNacimiento = moment(this.f.fechaNacimiento.value[0]).format('YYYY-MM-DD');
+    this.personaForm.patchValue({
+      edad: this.informacionBasica.edad
+    });
   }
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions

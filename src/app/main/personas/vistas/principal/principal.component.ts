@@ -1,5 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { CoreMenuService } from '@core/components/core-menu/core-menu.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { User } from 'app/auth/models';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { Subject } from 'rxjs';
+import { PrincipalService } from './principal.service';
 
 @Component({
   selector: 'app-principal',
@@ -9,69 +14,96 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
   host: { class: 'ecommerce-application' }
 })
 export class PrincipalComponent implements OnInit {
+  @ViewChild('DetalleProducto') DetalleProducto;
+  @ViewChild('CanjearProducto') CanjearProducto;
+
   // public
   public contentHeader: object;
-  public product;
   public wishlist;
   public cartList;
-  public relatedProducts =
-    [
-      {
-        id: 3,
-        name: 'Apple Watch Series 6',
-        slug: 'willful-smart-watch-for-men-women-2020-3',
-        description:
-          'Are you looking for a smart watch, which can not only easily keep tracking of your steps, calories, heart rate and sleep quality, but also keep you informed of incoming calls.',
-        brand: 'Mundo MAC',
-        price: 29.99,
-        image: 'assets/images/pages/eCommerce/25.png',
-        hasFreeShipping: true,
-        rating: 5
-      },
-      {
-        id: 7,
-        name: 'Bugani M90 Portable Bluetooth Speaker',
-        slug: 'bugani-m90-portable-bluetooth-speaker-7',
-        description:
-          'Bluetooth Speakers-The M90 Bluetooth speaker uses the latest Bluetooth 5.0 technology and the latest Bluetooth ATS chip, Connecting over Bluetooth in seconds to iPhone, iPad, Smart-phones, Tablets, Windows, and other Bluetooth devices.',
-        brand: 'Bugani',
-        price: 56.0,
-        image: 'assets/images/pages/eCommerce/21.png',
-        hasFreeShipping: false,
-        rating: 3
-      }
-    ]
+  public relatedProducts;
+  public productos;
+  public producto;
+  private _unsubscribeAll: Subject<any>;
 
-  public swiperResponsive: SwiperConfigInterface = {
-    slidesPerView: 3,
-    spaceBetween: 50,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev'
-    },
-    breakpoints: {
-      1024: {
-        slidesPerView: 3,
-        spaceBetween: 40
-      },
-      768: {
-        slidesPerView: 3,
-        spaceBetween: 30
-      },
-      640: {
-        slidesPerView: 2,
-        spaceBetween: 20
-      },
-      320: {
-        slidesPerView: 1,
-        spaceBetween: 10
-      }
+  public swiperResponsive: SwiperConfigInterface;
+
+  public cantidadMonedas;
+  public usuario: User;
+
+  constructor(
+    private _principalService: PrincipalService,
+    private _coreMenuService: CoreMenuService,
+    private modalService: NgbModal,
+  ) {
+    this._unsubscribeAll = new Subject();
+    this.usuario = this._coreMenuService.currentUser;
+    this.productos = {
+      cont: 0,
+      info: []
+
     }
-  };
-
-  constructor() { }
-
-  ngOnInit(): void {
   }
 
+  ngOnInit(): void {
+    this._principalService.obtenerCantidadMonedas(this.usuario.id).subscribe(info => {
+      this.cantidadMonedas = info.saldo;
+    });
+    this._principalService.obtenerProductosMostrar(
+      {
+        tipo: "premios"
+      }
+    ).subscribe(info => {
+      this.productos = info;
+      this.swiperResponsive = {
+        slidesPerView: 3,
+        spaceBetween: 50,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
+        breakpoints: {
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 40
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 30
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20
+          },
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10
+          }
+        }
+      };
+    });
+  }
+  obtenerProducto(id) {
+    this._principalService.obtenerProducto(id).subscribe(info => {
+      this.producto = info;
+      this.modalService.open(this.DetalleProducto, {
+        centered: true,
+        size: 'lg'
+      });
+    })
+  }
+
+  comprarProducto() {
+    this.modalService.dismissAll();
+    this.modalService.open(this.CanjearProducto, {
+      centered: true,
+      size: 'lg'
+    });
+  }
+
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
+  }
 }

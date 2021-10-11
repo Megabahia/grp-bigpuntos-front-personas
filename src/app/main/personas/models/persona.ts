@@ -10,7 +10,7 @@ export class CompletarPerfil {
 }
 export class InformacionBasica {
     genero: string;
-    fecha: string;
+    fechaNacimiento: string;
     edad: number;
     ciudad: string;
     emailAdicional: string;
@@ -20,4 +20,5 @@ export class InformacionBasica {
     twitter: string;
     tiktok: string;
     youtube: string;
+    user_id: string;
 }

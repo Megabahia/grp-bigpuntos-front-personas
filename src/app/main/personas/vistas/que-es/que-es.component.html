@@ -14,18 +14,19 @@
             </div>
         </div>
     </div>
-    <div class="content-body">
+    <div class="checkout-items">
         <!-- users list start -->
         <section id="media-player-wrapper">
             <div class="row">
                 <!-- VIDEO -->
-                <div class="col-12">
+                <div class="col-6" *ngFor="let video of videos; let i =index">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Video</h4>
+                            <h4 class="card-title">{{video.nombre}}</h4>
                             <div class="video-player" id="plyr-video-player">
-                                <iframe src="https://www.youtube.com/embed/bTqVqk7FSmY" allowfullscreen allow="autoplay"></iframe>
+                                <iframe [src]="obtenerURL(i)" allowfullscreen allow="autoplay"></iframe>
                             </div>
+                            <p><strong>Descripción: </strong>{{video.descripcion}}</p>
                         </div>
                     </div>
                 </div>
@@ -35,4 +36,5 @@
         </section>
         <!-- users list ends -->
     </div>
+
 </div>

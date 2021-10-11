@@ -13,6 +13,6 @@ export class PerfilUsuarioService {
     return this._httpClient.get<any>(`${environment.apiUrl}/personas/personas/listOne/${id}`,);
   }
   guardarInformacion(datos) {
-    return this._httpClient.get<any>(`${environment.apiUrl}/personas/personas/update/${datos.id}`, datos);
+    return this._httpClient.post<any>(`${environment.apiUrl}/personas/personas/update/${datos.user_id}`, datos);
   }
 }

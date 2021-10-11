@@ -118,7 +118,8 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="username">Fecha de nacimiento</label>
-                                                <input formControlName="fechaNacimiento" type="text" value="27/02/1992" id="fp-default" class="form-control flatpickr-basic" placeholder="escojer fecha" />
+                                                <ng2-flatpickr [setDate]="fecha" formControlName="fechaNacimiento" [config]="startDateOptions" (input)="calcularEdad()"></ng2-flatpickr>
+
                                             </div>
                                         </div>
     
