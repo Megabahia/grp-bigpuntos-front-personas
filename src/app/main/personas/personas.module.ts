@@ -24,7 +24,8 @@ import { BienvenidoComponent } from './vistas/bienvenido/bienvenido.component';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { CardSnippetModule } from '../../../@core/components/card-snippet/card-snippet.module';
 import { PerfilUsuarioComponent } from '../center/perfil-usuario/perfil-usuario.component';
-
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 const routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   {
@@ -113,7 +114,7 @@ const routes = [
 
     // data: { animation: 'auth' }
   },
- 
+
 
 ];
 
@@ -141,7 +142,9 @@ const routes = [
     CoreSidebarModule,
     NgbModule,
     Ng2FlatpickrModule,
-    CardSnippetModule
+    CardSnippetModule,
+    ShareIconsModule,
+    ShareButtonsModule
   ],
   exports: [
     BienvenidoComponent,
