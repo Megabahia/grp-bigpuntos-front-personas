@@ -96,7 +96,8 @@ export class LoginComponent implements OnInit {
           this._router.navigate([this.returnUrl]);
         },
         error => {
-          this.error = error;
+        
+          this.error = "Fallo en la autenticación, vuelva a intentarlo";
           this.loading = false;
         }
       );

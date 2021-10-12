@@ -102,8 +102,9 @@
                                         {{factura.estado}}</div>
                                 </td>
                                 <td>
-                                    <a href="#" class="avatar bg-primary mr-1" data-target="#calificar"
-                                        data-toggle="modal" *ngIf="factura.estado != 'Calificado'">
+                                    <a class="avatar bg-primary mr-1" data-target="#calificar" data-toggle="modal"
+                                        *ngIf="factura.estado != 'Calificado'"
+                                        (click)="toggleSidebar('calificar',factura._id)">
                                         <div class="avatar-content" data-toggle="tooltip" data-placement="bottom"
                                             title="Calificar">
                                             <i data-feather='star'></i>
@@ -232,7 +233,7 @@
         <!-- users list ends -->
     </div>
 </div>
-<core-sidebar class="modal modal-slide-in sidebar-todo-modal fade" name="factura-normal" overlayClass="modal-backdrop">
+<core-sidebar class="modal modal-slide-in sidebar-todo-modal fade" name="calificar" overlayClass="modal-backdrop">
     <div class="slideout-content">
         <!-- Modal to add new user starts-->
         <div class="modalsd modal-slide-in sdfade new-user-modal" id="modals-slide-in">
@@ -240,7 +241,7 @@
                 <form class="add-new-user modal-content pt-0" (ngSubmit)="(newUserForm.form.valid)"
                     #newUserForm="ngForm">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                        (click)="toggleSidebar('factura-normal')">
+                        (click)="toggleSidebar('calificar',0)">
                         ×
                     </button>
                     <div class="modal-header mb-1">
@@ -248,41 +249,68 @@
                     </div>
                     <div class="modal-body flex-grow-1">
                         <div class="form-group">
-                            <label>Nombre del local:</label>
+                            <label>Nombre de la tienda</label>
                             <input class="form-control" type="text">
                         </div>
                         <div class="form-group">
-                            <label>Ciudad del local:</label>
+                            <label>Ciudad de la tienda</label>
                             <input class="form-control" type="text">
                         </div>
                         <div class="form-group">
-                            <label>Fecha de compra:</label>
-                            <input class="form-control flatpickr-basic flatpickr-input" type="text">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Monto:</label>
-                            <input class="form-control" type="text">
-                        </div>
-                        <div class="form-group">
-                            <label>Categoría de producto:</label>
+                            <label>Categoría</label>
                             <select class="form-control select2">
                                 <option>- Seleccione -</option>
-                                <option>Alimentos</option>
-                                <option>Tecnología</option>
-                                <option>Automotriz</option>
-                                <option>Ropa</option>
+                                <option>Electrónica</option>
                                 <option>Hogar</option>
+                                <option>Automotriz</option>
+                                <option>Alimentos</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="customFile1">Adjuntar foto de factura</label>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile1" required />
-                                <label class="custom-file-label" for="customFile1">Escojer</label>
+                            <div class="row align-items-end">
+                                <div class="col-md-6">
+                                    <label>Monto</label>
+                                    <input class="form-control" type="text">
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-sm btn-success" type="button" data-target="#previsualizar"
+                                        data-toggle="modal">Previsualizar
+                                        factura</button>
+                                </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary mr-1" data-toggle="modal" data-target="#exito"
+                        <div class="form-group">
+                            <label>¿Cómo le pareció la atención en el local?</label>
+                            <select class="form-control">
+                                <option>- Seleccione -</option>
+                                <option>Excelente</option>
+                                <option>Buena</option>
+                                <option>Mala</option>
+                                <option>Pésima</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Calificación</label>
+                            <select class="form-control">
+                                <option>- Seleccione -</option>
+                                <option>01</option>
+                                <option>02</option>
+                                <option>03</option>
+                                <option>04</option>
+                                <option>05</option>
+                                <option>06</option>
+                                <option>07</option>
+                                <option>08</option>
+                                <option>09</option>
+                                <option>10</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Observaciones:</label>
+                            <textarea class="form-control" rows="3" placeholder="Escribir..."></textarea>
+                        </div>
+                        <button class="btn btn-primary mr-1" data-toggle="modal" data-target="#mensaje"
                             data-dismiss="modal" aria-label="Close">Guardar</button>
                         <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
                     </div>

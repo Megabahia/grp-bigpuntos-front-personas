@@ -12,4 +12,8 @@ export class CompartirPublicacionesService {
   obtenerPublicaciones(datos) {
     return this._httpClient.post<any>(`${environment.apiUrl}/central/publicaciones/list/`, datos);
   }
+  guardarPublicacion(datos){
+    return this._httpClient.post<any>(`${environment.apiUrl}/central/publicaciones/compartir/`, datos);
+
+  }
 }

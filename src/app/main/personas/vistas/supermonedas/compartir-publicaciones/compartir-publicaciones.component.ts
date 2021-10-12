@@ -40,7 +40,7 @@ export class CompartirPublicacionesComponent implements OnInit {
 
   obtenerListaPublicaciones() {
     this._compartirPublicacionesService.obtenerPublicaciones({
-      page: this.page - 1, page_size: this.page_size, user_id: this.usuario.id
+      user_id: this.usuario.id
     }).subscribe(info => {
       this.publicaciones = info.info;
       this.collectionSize = info.cont;
@@ -55,7 +55,12 @@ export class CompartirPublicacionesComponent implements OnInit {
     return nuevaFecha;
   }
   compartirPublicacion(id) {
-    console.log(id);
+    this._compartirPublicacionesService.guardarPublicacion({
+      user: this.usuario.id,
+      publicacion: id
+    }).subscribe(info => {
+      this.obtenerListaPublicaciones();
+    });
   }
 
   ngOnDestroy(): void {

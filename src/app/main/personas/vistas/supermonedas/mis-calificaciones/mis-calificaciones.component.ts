@@ -9,7 +9,7 @@ import { MisFacturasService } from '../mis-facturas/mis-facturas.service';
   selector: 'app-mis-calificaciones',
   templateUrl: './mis-calificaciones.component.html',
   styleUrls: ['./mis-calificaciones.component.scss'],
-  providers:[DatePipe]
+  providers: [DatePipe]
 })
 export class MisCalificacionesComponent implements OnInit {
   @ViewChild(NgbPagination) paginator: NgbPagination;
@@ -38,7 +38,8 @@ export class MisCalificacionesComponent implements OnInit {
     this.obtenerListaFacturas();
   }
 
-  toggleSidebar(name): void {
+  toggleSidebar(name, id): void {
+    console.log(id);
     this._coreSidebarService.getSidebarRegistry(name).toggleOpen();
   }
 

@@ -6,9 +6,9 @@
                     <h2 class="content-header-title float-left mb-0">Monedas otorgadas por compras en establecimentos afiliados</h2>
                     <div class="breadcrumb-wrapper">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Inicio</a>
+                            <li class="breadcrumb-item"><a class="text-primary" href="index.html">Inicio</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="mis-premios.html">Monedas otorgadas</a>
+                            <li class="breadcrumb-item"><a class="text-primary" href="mis-premios.html">Monedas otorgadas</a>
                             </li>
                         </ol>
                     </div>
@@ -18,16 +18,16 @@
     </div>
     <div class="content-body">
         <!-- users list start -->
-        <section class="app-user-list">
+        <section class="user-list">
             <div class="card">
                 <div class="card-body">
                     <h4 class="text-primary d-block">Aquí tienes el resumen de tus compras en establecimientos afiliados a Super Monedas, por cada compra en establecimientos afiliados recibes 10 super monedas.</h4>
                     <hr/>
                     <h6 class="text-info">Tiendas afiliadas</h6>
                     <div class="text-center">
-                        <img src="app-assets/images/tienda1.png" width="500">
-                        <img src="app-assets/images/tienda2.png" width="500">
-                        <img src="app-assets/images/tienda3.png" width="500">
+                        <img src="assets/images/tienda1.png" width="500">
+                        <img src="assets/images/tienda2.png" width="500">
+                        <img src="assets/images/tienda3.png" width="500">
                     </div>
                 </div>
             </div>
@@ -43,59 +43,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr *ngFor="let moneda of monedas">
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <div class="avatar rounded">
                                             <div class="avatar-content">
-                                                <img src="app-assets/images/icons/toolbox.svg" alt="Toolbar svg" />
+                                                <img src="assets/images/icons/toolbox.svg" alt="Toolbar svg" />
                                             </div>
                                         </div>
                                         <div>
-                                            <div class="font-weight-bolder">Mundo MAC</div>
+                                            <div class="font-weight-bolder">{{moneda.empresa}}</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td>Acumulación</td>
-                                <td>25-06-2021</td>
+                                <td>{{moneda.tipo}}</td>
+                                <td>{{transformarFecha(moneda.created_at)}}</td>
                                 <td>
-                                    <div class="iso-moneda"></div> 90</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar rounded">
-                                            <div class="avatar-content">
-                                                <img src="app-assets/images/icons/parachute.svg" alt="Parachute svg" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="font-weight-bolder">KFC</div>
-                                        </div>
-                                    </div>
+                                    <div class="iso-moneda"></div> {{moneda.saldo}}
                                 </td>
-                                <td>Acumulación</td>
-                                <td>25-06-2021</td>
-                                <td>
-                                    <div class="iso-moneda"></div> 60</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar rounded">
-                                            <div class="avatar-content">
-                                                <img src="app-assets/images/icons/brush.svg" alt="Brush svg" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="font-weight-bolder">Ferrisariato</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Acumulación</td>
-                                <td>25-06-2021</td>
-                                <td>
-                                    <div class="iso-moneda"></div> 30</td>
                             </tr>
                         </tbody>
                     </table>
@@ -117,7 +82,7 @@
                                                         <small class="text-body d-block">by Apple</small>
                                                     </div>
                                                     <div class="img-container w-50 mx-auto py-50">
-                                                        <img src="app-assets/images/elements/apple-watch.png" class="img-fluid" alt="image" />
+                                                        <img src="assets/images/elements/apple-watch.png" class="img-fluid" alt="image" />
                                                     </div>
                                                     <hr/>
                                                     <div class="item-meta">
@@ -157,7 +122,7 @@
                                                         <small class="text-body d-block">8 presas + 1 Pop Corn mediano + 2 papas fritas grandes + 6 cinnabon bites + 1 gaseosa de 1L</small>
                                                     </div>
                                                     <div class="img-container w-50 mx-auto py-50">
-                                                        <img src="app-assets/images/kfc.png" class="img-fluid" alt="image" />
+                                                        <img src="assets/images/kfc.png" class="img-fluid" alt="image" />
                                                     </div>
                                                     <hr/>
                                                     <div class="item-meta">
@@ -195,7 +160,7 @@
                                                         <h6 class="text-truncate mb-0 text-info">Camiseta Básica Estampada H&O Trybu</h6>
                                                     </div>
                                                     <div class="img-container w-50 mx-auto py-50">
-                                                        <img src="app-assets/images/camiseta.jpeg" class="img-fluid" alt="image" />
+                                                        <img src="assets/images/camiseta.jpeg" class="img-fluid" alt="image" />
                                                     </div>
                                                     <hr/>
                                                     <div class="item-meta">
@@ -220,7 +185,8 @@
 
 
                 </div>
-
+                <ngb-pagination #paginator [collectionSize]="collectionSize" [(page)]="page" [(pageSize)]="page_size"
+                [maxSize]="5" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
             </div>
             <!-- list section end -->
         </section>
