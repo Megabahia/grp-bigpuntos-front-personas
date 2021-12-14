@@ -27,7 +27,6 @@ export const menu: CoreMenu[] = [
     role: [Role.SuperMonedas],
     // translate: 'MENU.APPS.SECTION',
     icon: 'package',
-
     children: [
       {
         id: 'superMonedas',
