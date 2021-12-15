@@ -26,6 +26,7 @@ import { CardSnippetModule } from '../../../@core/components/card-snippet/card-s
 import { PerfilUsuarioComponent } from '../center/perfil-usuario/perfil-usuario.component';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+import { PagarConSuperMonedasComponent } from './vistas/supermonedas/pagar-con-supermonedas/pagar-con-supermonedas.component';
 const routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   {
@@ -88,6 +89,13 @@ const routes = [
         canActivate: [AuthGuard]
         // data: { animation: 'auth' }
       },
+      {
+        path: 'pagar-con-supermonedas',
+        component: PagarConSuperMonedasComponent,
+        data: { roles: [Role.SuperMonedas] },
+        canActivate: [AuthGuard]
+        // data: { animation: 'auth' }
+      },
     ]
   },
   {
@@ -130,7 +138,8 @@ const routes = [
     MisCalificacionesComponent,
     CompartirPublicacionesComponent,
     MonedasOtorgadasComponent,
-    PerfilUsuarioComponent],
+    PerfilUsuarioComponent,
+    PagarConSuperMonedasComponent],
   imports: [
     CoreCommonModule,
     RouterModule.forChild(routes),
@@ -156,6 +165,7 @@ const routes = [
     MisFacturasComponent,
     MisCalificacionesComponent,
     CompartirPublicacionesComponent,
-    MonedasOtorgadasComponent]
+    MonedasOtorgadasComponent,
+    PagarConSuperMonedasComponent]
 })
 export class PersonasModule { }

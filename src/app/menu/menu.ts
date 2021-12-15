@@ -75,6 +75,14 @@ export const menu: CoreMenu[] = [
             type: 'item',
             icon: 'circle',
             url: 'personas/supermonedas/monedas-otorgadas'
+          },
+          {
+            id: 'pagarSupermonedas',
+            title: 'Pagar con super monedas',
+            // translate: 'MENU.APPS.EMAIL',
+            type: 'item',
+            icon: 'circle',
+            url: 'personas/supermonedas/pagar-con-supermonedas'
           }
         ]
       },
