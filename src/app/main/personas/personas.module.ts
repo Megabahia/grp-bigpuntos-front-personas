@@ -27,6 +27,7 @@ import { PerfilUsuarioComponent } from '../center/perfil-usuario/perfil-usuario.
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { PagarConSuperMonedasComponent } from './vistas/supermonedas/pagar-con-supermonedas/pagar-con-supermonedas.component';
+import { NgxBarcodeModule } from 'ngx-barcode';
 const routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   {
@@ -153,7 +154,8 @@ const routes = [
     Ng2FlatpickrModule,
     CardSnippetModule,
     ShareIconsModule,
-    ShareButtonsModule
+    ShareButtonsModule,
+    NgxBarcodeModule
   ],
   exports: [
     BienvenidoComponent,

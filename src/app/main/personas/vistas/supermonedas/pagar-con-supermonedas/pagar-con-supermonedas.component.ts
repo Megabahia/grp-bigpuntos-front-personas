@@ -61,7 +61,7 @@ export class PagarConSuperMonedasComponent implements OnInit {
   incializarPagoMonto() {
     return {
       id: "",
-      codigoCobro: "",
+      codigoCobro: 0,
       monto: "",
       user_id: this.usuario.id,
       empresa_id: ""
@@ -83,7 +83,7 @@ export class PagarConSuperMonedasComponent implements OnInit {
     this._coreSidebarService.getSidebarRegistry(name).toggleOpen();
   }
   enviarMonto() {
-    let timestamp = moment().valueOf();
+    this.pagoMonto.codigoCobro = moment().valueOf();
     this.abrirModalLg(this.comprobanteCompraSuperMonedasMdl);
   }
   obtenerListaEmpresa() {

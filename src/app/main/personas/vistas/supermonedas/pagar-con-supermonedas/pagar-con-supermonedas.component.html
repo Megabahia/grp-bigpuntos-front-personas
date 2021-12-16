@@ -151,7 +151,10 @@
                     <img src="app-assets/images/barras.jpeg" width="180">
                     <br><br>
                     <small class="d-block">Código QR de canje</small>
-                    <img src="app-assets/images/qr.png" width="180" class="mb-2">
+                    <h1>
+                        {{title}}
+                    </h1>
+                    <ngx-barcode [bc-value]="pagoMonto.codigoCobro" [bc-display-value]="true"></ngx-barcode>
                 </div>
                 <div class="text-center">
                     <button class="btn btn-primary" type="button">Imprimir</button>
