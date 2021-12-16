@@ -27,7 +27,7 @@
                         <input type="text" class="form-control form-control-sm" placeholder="Nombre de la empresa" [(ngModel)]="nombreComercial">
                     </div>
                     <div class="col-md-2">
-                        <a class="btn btn-primary">
+                        <a class="btn btn-primary" (click)="obtenerListaEmpresa()">
                             <i data-feather='search'></i>
                         </a>
                     </div>
@@ -44,7 +44,7 @@
                 <div class="row m-75">
                     <div class="col-lg-12 col-xl-6">
                         <label>Mostrar</label>
-                        <select class="form-control-sm">
+                        <select class="form-control-sm" [(ngModel)]="page_size" (change)="obtenerListaEmpresa()">
                       <option value="10">10</option>
                       <option value="25">25</option>
                       <option value="50">50</option>
@@ -62,11 +62,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Coral</td>
-                            <td><img src="app-assets/images/coral.jpg" width="60"></td>
+                        <tr *ngFor="let empresa of listaEmpresas">
+                            <td>{{empresa.nombreComercial}}</td>
+                            <td><img src="assets/images/coral.jpg" width="60"></td>
                             <td>
-                                <a href="javascript:void(0)" class="avatar bg-primary mr-1" (click)="toggleSidebar('guardarCompraSupermonedas','')">
+                                <a href="javascript:void(0)" class="avatar bg-primary mr-1" (click)="toggleSidebar('guardarCompraSupermonedas',empresa._id)">
                                     <div class="avatar-content" data-toggle="tooltip" data-placement="bottom" title="Comprar con super monedas">
                                         <i data-feather='dollar-sign'></i>
                                     </div>
@@ -76,6 +76,7 @@
                     </tbody>
                 </table>
             </div>
+            <ngb-pagination #paginator [collectionSize]="collectionSize" [(page)]="page" [(pageSize)]="page_size" [maxSize]="5" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
         </div>
     </div>
 </div>
@@ -99,7 +100,7 @@
                         </div>
                         <div class="form-group">
                             <label>Monto</label>
-                            <input class="form-control" name="monto" formControlName="monto" type="text" [(ngModel)]="monto">
+                            <input class="form-control" name="monto" formControlName="monto" type="text" [(ngModel)]="pagoMonto.monto">
                             <div *ngIf="cobrarSuperMonedasSubmitted && cobSupForm.monto.errors" class="invalid-feedback" style="display: block;">
                                 <div *ngIf="cobSupForm.monto.errors.required">Monto es requerido
                                 </div>

@@ -9,7 +9,7 @@ export class PagarConSuperMonedasService {
 
   constructor(private _httpClient: HttpClient) { }
 
-  obtenerListaMonedas(datos) {
-    return this._httpClient.post<any>(`${environment.apiUrl}/core/monedas/list/otorgadas/`, datos);
+  obtenerListaEmpresa(datos) {
+    return this._httpClient.post<any>(`${environment.apiUrl}/corp/empresas/list/`, datos);
   }
 }

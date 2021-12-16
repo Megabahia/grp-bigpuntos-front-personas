@@ -7,6 +7,8 @@ import { Subject } from 'rxjs';
 import { PagarConSuperMonedasService } from './pagar-con-supermonedas.service';
 import { CoreSidebarService } from '../../../../../../@core/components/core-sidebar/core-sidebar.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PagoMonto } from '../../../models/supermonedas';
+import moment from 'moment';
 
 @Component({
   selector: 'app-pagar-con-supermonedas',
@@ -32,6 +34,8 @@ export class PagarConSuperMonedasComponent implements OnInit {
   public nombreTienda;
   public monto;
   public nombreComercial;
+  public listaEmpresas;
+  public pagoMonto: PagoMonto;
   constructor(
     private _monedasOtorgadasService: PagarConSuperMonedasService,
     private _coreMenuService: CoreMenuService,
@@ -43,7 +47,7 @@ export class PagarConSuperMonedasComponent implements OnInit {
   ) {
     this._unsubscribeAll = new Subject();
     this.usuario = this._coreMenuService.currentUser;
-
+    this.pagoMonto = this.incializarPagoMonto();
   }
   get cobSupForm() {
     return this.compraSuperMonedasForm.controls;
@@ -54,30 +58,45 @@ export class PagarConSuperMonedasComponent implements OnInit {
     }
     );
   }
+  incializarPagoMonto() {
+    return {
+      id: "",
+      codigoCobro: "",
+      monto: "",
+      user_id: this.usuario.id,
+      empresa_id: ""
+    };
+  }
   ngAfterViewInit() {
     this.iniciarPaginador();
-    this.obtenerListaMonedas();
+    this.obtenerListaEmpresa();
   }
   buscarEmpresa() {
 
   }
   toggleSidebar(name, id): void {
+    this.pagoMonto.empresa_id = id;
+    let empresa = this.listaEmpresas.filter(x => x._id == id);
+    if (empresa.length) {
+      this.nombreTienda = empresa[0].nombreComercial;
+    }
     this._coreSidebarService.getSidebarRegistry(name).toggleOpen();
   }
   enviarMonto() {
+    let timestamp = moment().valueOf();
     this.abrirModalLg(this.comprobanteCompraSuperMonedasMdl);
   }
-  obtenerListaMonedas() {
-    this._monedasOtorgadasService.obtenerListaMonedas({
-      page: this.page - 1, page_size: this.page_size, user_id: this.usuario.id
+  obtenerListaEmpresa() {
+    this._monedasOtorgadasService.obtenerListaEmpresa({
+      page: this.page - 1, page_size: this.page_size, nombreComercial: this.nombreComercial
     }).subscribe(info => {
-      this.monedas = info.info;
+      this.listaEmpresas = info.info;
       this.collectionSize = info.cont;
     });
   }
   iniciarPaginador() {
     this.paginator.pageChange.subscribe(() => {
-      this.obtenerListaMonedas();
+      this.obtenerListaEmpresa();
     });
   }
 
@@ -86,7 +105,7 @@ export class PagarConSuperMonedasComponent implements OnInit {
     return nuevaFecha;
   }
   abrirModalLg(modal) {
-    this._modalService.open(modal,{
+    this._modalService.open(modal, {
       size: "lg"
     });
   }
