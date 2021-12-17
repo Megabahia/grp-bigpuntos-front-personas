@@ -28,6 +28,7 @@ import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { PagarConSuperMonedasComponent } from './vistas/supermonedas/pagar-con-supermonedas/pagar-con-supermonedas.component';
 import { NgxBarcodeModule } from 'ngx-barcode';
+import { QRCodeModule } from 'angularx-qrcode';
 const routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   {
@@ -155,7 +156,8 @@ const routes = [
     CardSnippetModule,
     ShareIconsModule,
     ShareButtonsModule,
-    NgxBarcodeModule
+    NgxBarcodeModule,
+    QRCodeModule
   ],
   exports: [
     BienvenidoComponent,

@@ -12,4 +12,7 @@ export class PagarConSuperMonedasService {
   obtenerListaEmpresa(datos) {
     return this._httpClient.post<any>(`${environment.apiUrl}/corp/empresas/list/`, datos);
   }
+  pagarConSuperMonedas(datos){
+    return this._httpClient.post<any>(`${environment.apiUrl}/corp/pagos/create/`, datos);
+  }
 }

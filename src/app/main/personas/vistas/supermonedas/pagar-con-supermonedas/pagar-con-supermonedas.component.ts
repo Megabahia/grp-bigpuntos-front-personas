@@ -20,6 +20,7 @@ import moment from 'moment';
 export class PagarConSuperMonedasComponent implements OnInit {
   @ViewChild(NgbPagination) paginator: NgbPagination;
   @ViewChild('comprobanteCompraSuperMonedasMdl') comprobanteCompraSuperMonedasMdl;
+  @ViewChild('mensajeModal') mensajeModal;
   public page = 1;
   public page_size: any = 10;
   public maxSize;
@@ -36,8 +37,9 @@ export class PagarConSuperMonedasComponent implements OnInit {
   public nombreComercial;
   public listaEmpresas;
   public pagoMonto: PagoMonto;
+  public mensaje = "";
   constructor(
-    private _monedasOtorgadasService: PagarConSuperMonedasService,
+    private _pagarConSuperMonedasService: PagarConSuperMonedasService,
     private _coreMenuService: CoreMenuService,
     private _coreSidebarService: CoreSidebarService,
     private datePipe: DatePipe,
@@ -61,7 +63,7 @@ export class PagarConSuperMonedasComponent implements OnInit {
   incializarPagoMonto() {
     return {
       id: "",
-      codigoCobro: 0,
+      codigoCobro: "",
       monto: "",
       user_id: this.usuario.id,
       empresa_id: ""
@@ -83,11 +85,25 @@ export class PagarConSuperMonedasComponent implements OnInit {
     this._coreSidebarService.getSidebarRegistry(name).toggleOpen();
   }
   enviarMonto() {
-    this.pagoMonto.codigoCobro = moment().valueOf();
+    this.cobrarSuperMonedasSubmitted = true;
+
+    // stop here if form is invalid
+    if (this.compraSuperMonedasForm.invalid) {
+      return;
+    }
+    this.pagoMonto.codigoCobro = this.pagoMonto.user_id + "-" + moment().valueOf().toString();
+
+    this.cargandoCompraSupermonedas = true;
+    this._pagarConSuperMonedasService.pagarConSuperMonedas(this.pagoMonto).subscribe((info) => {
+      this.cargandoCompraSupermonedas = false;
+    },(error)=>{
+      this.mensaje = "Ha ocurrido un error en el pago"
+      this.abrirModal(this.mensajeModal);
+    });
     this.abrirModalLg(this.comprobanteCompraSuperMonedasMdl);
   }
   obtenerListaEmpresa() {
-    this._monedasOtorgadasService.obtenerListaEmpresa({
+    this._pagarConSuperMonedasService.obtenerListaEmpresa({
       page: this.page - 1, page_size: this.page_size, nombreComercial: this.nombreComercial
     }).subscribe(info => {
       this.listaEmpresas = info.info;

@@ -138,7 +138,7 @@
                             <h6 class="mt-1">Monto super monedas:</h6>
                             <h6 class="mt-1 text-info">
                                 <div class="iso-moneda"></div>
-                                100 super monedas (equivalente a: $40.00) </h6>
+                                super monedas (equivalente a: ${{pagoMonto.monto}}) </h6>
                         </div>
                     </div>
                 </div>
@@ -148,13 +148,12 @@
 
                 <hr/>
                 <div class="text-center">
-                    <img src="app-assets/images/barras.jpeg" width="180">
+                    <div>
+                        <ngx-barcode [bc-value]="pagoMonto.codigoCobro" [bc-width]="0.75" [bc-element-type]="img"></ngx-barcode>
+                    </div>
                     <br><br>
                     <small class="d-block">Código QR de canje</small>
-                    <h1>
-                        {{title}}
-                    </h1>
-                    <ngx-barcode [bc-value]="pagoMonto.codigoCobro" [bc-display-value]="true"></ngx-barcode>
+                    <qrcode [qrdata]="pagoMonto.codigoCobro" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
                 </div>
                 <div class="text-center">
                     <button class="btn btn-primary" type="button">Imprimir</button>
@@ -164,5 +163,19 @@
         </div>
     </div>
     <div class="modal-footer">
+    </div>
+</ng-template>
+<ng-template #mensajeModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Mensaje</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+        <div [innerHTML]="mensaje"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="cerrarModal()">Cerrar</button>
     </div>
 </ng-template>

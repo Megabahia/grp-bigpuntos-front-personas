@@ -1,6 +1,6 @@
 export class PagoMonto {
     id:string;
-    codigoCobro: number;
+    codigoCobro: string;
     monto: string;
     user_id: string;
     empresa_id: string;
