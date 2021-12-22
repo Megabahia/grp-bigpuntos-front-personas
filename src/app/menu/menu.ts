@@ -86,7 +86,34 @@ export const menu: CoreMenu[] = [
           }
         ]
       },
+      {
+        id: 'creditosAutonomos',
+        title: 'Créditos para Autónomos',
+        role: [Role.SuperMonedas],
+        // translate: 'MENU.PAGES.SECTION',
+        type: 'collapsible',
+        icon: 'credit-card',
+        children: [
+          {
+            id: 'solicitarCreditoAut',
+            title: 'Solicitar crédito',
+            // translate: 'MENU.APPS.EMAIL',
+            type: 'item',
+            icon: 'circle',
+            url: 'personas/creditos-autonomos/solicitar-credito'
+          },
+          {
+            id: 'estadoCreditosAut',
+            title: 'Estado de mis créditos',
+            // translate: 'MENU.APPS.EMAIL',
+            type: 'item',
+            icon: 'circle',
+            url: 'personas/supermonedas/mis-facturas'
+          }
+        ]
+      }
 
     ]
   },
+
 ]

@@ -29,6 +29,10 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { PagarConSuperMonedasComponent } from './vistas/supermonedas/pagar-con-supermonedas/pagar-con-supermonedas.component';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { QRCodeModule } from 'angularx-qrcode';
+import { CreditosAutonomosComponent } from './vistas/creditos-autonomos/creditos-autonomos.component';
+import { VideoExplicativoAutComponent } from './vistas/creditos-autonomos/video-explicativo/video-explicativo.component';
+import { PerfilPersonaAutComponent } from './vistas/creditos-autonomos/perfil-persona/perfil-persona.component';
+import { EstablecimientosComercialesAutComponent } from './vistas/creditos-autonomos/establecimientos-comerciales/establecimientos-comerciales.component';
 const routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   {
@@ -98,7 +102,20 @@ const routes = [
         canActivate: [AuthGuard]
         // data: { animation: 'auth' }
       },
-    ]
+    ],
+
+  },
+  {
+    path: 'creditos-autonomos',
+    children: [
+      { path: '', redirectTo: 'solicitar-credito', pathMatch: 'full' },
+      {
+        path: 'solicitar-credito',
+        component: CreditosAutonomosComponent,
+        data: { roles: [Role.SuperMonedas] },
+        canActivate: [AuthGuard]
+        // data: { animation: 'auth' }
+      },]
   },
   {
     path: 'bienvenido',
@@ -141,7 +158,11 @@ const routes = [
     CompartirPublicacionesComponent,
     MonedasOtorgadasComponent,
     PerfilUsuarioComponent,
-    PagarConSuperMonedasComponent],
+    PagarConSuperMonedasComponent,
+    CreditosAutonomosComponent,
+    VideoExplicativoAutComponent,
+    PerfilPersonaAutComponent,
+    EstablecimientosComercialesAutComponent],
   imports: [
     CoreCommonModule,
     RouterModule.forChild(routes),
@@ -170,6 +191,10 @@ const routes = [
     MisCalificacionesComponent,
     CompartirPublicacionesComponent,
     MonedasOtorgadasComponent,
-    PagarConSuperMonedasComponent]
+    PagarConSuperMonedasComponent,
+    CreditosAutonomosComponent,
+    VideoExplicativoAutComponent,
+    PerfilPersonaAutComponent,
+    EstablecimientosComercialesAutComponent]
 })
 export class PersonasModule { }
