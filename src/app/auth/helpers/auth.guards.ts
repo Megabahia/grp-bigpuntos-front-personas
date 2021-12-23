@@ -15,12 +15,12 @@ export class AuthGuard implements CanActivate {
 
   // canActivate
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const currentUser = this._authenticationService.currentUserValue;
+    const grpPersonasUser = this._authenticationService.grpPersonasUserValue;
     let activacion = false;
-    if (currentUser) {
+    if (grpPersonasUser) {
       // check if route is restricted by role
       let rolEncontrado = false;
-      let expiracionToken = Number(currentUser.tokenExpiracion);
+      let expiracionToken = Number(grpPersonasUser.tokenExpiracion);
       let fechaActual = Date.now();
       if (expiracionToken - fechaActual <= 0) {
         this._authenticationService.logout();
@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate {
 
       // console.log(fechaActual.diff());
 
-      currentUser.roles.map(rol => {
+      grpPersonasUser.roles.map(rol => {
         if (route.data.roles && route.data.roles.indexOf(rol.nombre) != -1) {
           rolEncontrado = true;
         }
@@ -37,11 +37,11 @@ export class AuthGuard implements CanActivate {
 
 
       if (route.data.activacion) {
-        if (route.data.activacion.indexOf(Number(currentUser.estado)) != -1) {
+        if (route.data.activacion.indexOf(Number(grpPersonasUser.estado)) != -1) {
           activacion = true;
         }
       }
-      switch (Number(currentUser.estado)) {
+      switch (Number(grpPersonasUser.estado)) {
         case 1: {
           if (!activacion) {
             this._router.navigate(['/personas/bienvenido']);

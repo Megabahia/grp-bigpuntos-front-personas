@@ -33,6 +33,10 @@ import { CreditosAutonomosComponent } from './vistas/creditos-autonomos/creditos
 import { VideoExplicativoAutComponent } from './vistas/creditos-autonomos/video-explicativo/video-explicativo.component';
 import { PerfilPersonaAutComponent } from './vistas/creditos-autonomos/perfil-persona/perfil-persona.component';
 import { EstablecimientosComercialesAutComponent } from './vistas/creditos-autonomos/establecimientos-comerciales/establecimientos-comerciales.component';
+import { EstablecimientoSeleccionadoAutComponent } from './vistas/creditos-autonomos/establecimiento-seleccionado/establecimiento-seleccionado.component';
+import { RucPersonaAutComponent } from './vistas/creditos-autonomos/ruc-persona/ruc-persona.component';
+import { ResultadosCreditoAutComponent } from './vistas/creditos-autonomos/resultados-credito/resultados-credito.component';
+import { MensajeResultadoAutComponent } from './vistas/creditos-autonomos/mensaje-resultado/mensaje-resultado.component';
 const routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   {
@@ -162,7 +166,11 @@ const routes = [
     CreditosAutonomosComponent,
     VideoExplicativoAutComponent,
     PerfilPersonaAutComponent,
-    EstablecimientosComercialesAutComponent],
+    EstablecimientosComercialesAutComponent,
+    EstablecimientoSeleccionadoAutComponent,
+    RucPersonaAutComponent,
+    ResultadosCreditoAutComponent,
+    MensajeResultadoAutComponent],
   imports: [
     CoreCommonModule,
     RouterModule.forChild(routes),
@@ -195,6 +203,10 @@ const routes = [
     CreditosAutonomosComponent,
     VideoExplicativoAutComponent,
     PerfilPersonaAutComponent,
-    EstablecimientosComercialesAutComponent]
+    EstablecimientosComercialesAutComponent,
+    EstablecimientoSeleccionadoAutComponent,
+    RucPersonaAutComponent,
+    ResultadosCreditoAutComponent,
+    MensajeResultadoAutComponent]
 })
 export class PersonasModule { }

@@ -11,10 +11,10 @@ import moment from 'moment';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   //public
-  public currentUser: Observable<User>;
+  public grpPersonasUser: Observable<User>;
 
   //private
-  private currentUserSubject: BehaviorSubject<User>;
+  private grpPersonasUserSubject: BehaviorSubject<User>;
 
   /**
    *
@@ -22,27 +22,27 @@ export class AuthenticationService {
    * @param {ToastrService} _toastrService
    */
   constructor(private _http: HttpClient, private _toastrService: ToastrService) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.currentUserSubject.asObservable();
+    this.grpPersonasUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('grpPersonasUser')));
+    this.grpPersonasUser = this.grpPersonasUserSubject.asObservable();
   }
 
-  // getter: currentUserValue
-  public get currentUserValue(): User {
-    return this.currentUserSubject.value;
+  // getter: grpPersonasUserValue
+  public get grpPersonasUserValue(): User {
+    return this.grpPersonasUserSubject.value;
   }
 
   /**
    *  Confirms if user is admin
    */
   // get isAdmin() {
-  //   return this.currentUser && this.currentUserSubject.value.role === Role.Admin;
+  //   return this.grpPersonasUser && this.grpPersonasUserSubject.value.role === Role.Admin;
   // }
 
   // /**
   //  *  Confirms if user is client
   //  */
   // get isClient() {
-  //   return this.currentUser && this.currentUserSubject.value.role === Role.Client;
+  //   return this.grpPersonasUser && this.grpPersonasUserSubject.value.role === Role.Client;
   // }
 
   /**
@@ -61,7 +61,7 @@ export class AuthenticationService {
           if (user && user.token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             user.tokenExpiracion = Date.now() + (Number(user.tokenExpiracion) * 1000);
-            localStorage.setItem('currentUser', JSON.stringify(user));
+            localStorage.setItem('grpPersonasUser', JSON.stringify(user));
             // Display welcome toast!
             setTimeout(() => {
               this._toastrService.success(
@@ -74,7 +74,7 @@ export class AuthenticationService {
             }, 2500);
 
             // notify
-            this.currentUserSubject.next(user);
+            this.grpPersonasUserSubject.next(user);
           }
 
           return user;
@@ -88,8 +88,8 @@ export class AuthenticationService {
    */
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem('grpPersonasUser');
     // notify
-    this.currentUserSubject.next(null);
+    this.grpPersonasUserSubject.next(null);
   }
 }

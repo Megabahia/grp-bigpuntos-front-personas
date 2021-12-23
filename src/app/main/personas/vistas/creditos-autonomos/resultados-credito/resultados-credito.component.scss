@@ -1,8 +1,6 @@
 @import '@core/scss/base/bootstrap-extended/include'; // Bootstrap includes
-// @import '@core/scss/base/pages/page-auth.scss';
-// @import '@core/scss/base/pages/page-profile.scss';
-@import '@core/scss/base/pages/app-ecommerce-details.scss';
-@import '@core/scss/angular/libs/swiper.component.scss';
+@import '@core/scss/base/pages/page-auth.scss';
+@import '@core/scss/base/pages/page-profile.scss';
 #user-profile .profile-header .profile-img-container {
     position: absolute;
     bottom: 13px;

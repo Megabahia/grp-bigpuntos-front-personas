@@ -48,7 +48,7 @@ export class PagarConSuperMonedasComponent implements OnInit {
 
   ) {
     this._unsubscribeAll = new Subject();
-    this.usuario = this._coreMenuService.currentUser;
+    this.usuario = this._coreMenuService.grpPersonasUser;
     this.pagoMonto = this.incializarPagoMonto();
   }
   get cobSupForm() {

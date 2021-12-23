@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,18 +8,14 @@ import { FlatpickrOptions } from 'ng2-flatpickr';
 import moment from 'moment';
 import { CoreConfigService } from '../../../../../../@core/services/config.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 @Component({
-  selector: 'app-establecimientos-comerciales-aut',
-  templateUrl: './establecimientos-comerciales.component.html',
-  styleUrls: ['./establecimientos-comerciales.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  host: { class: 'ecommerce-application' }
+  selector: 'app-establecimiento-seleccionado-aut',
+  templateUrl: './establecimiento-seleccionado.component.html',
+  styleUrls: ['./establecimiento-seleccionado.component.scss']
 })
-export class EstablecimientosComercialesAutComponent implements OnInit {
+export class EstablecimientoSeleccionadoAutComponent implements OnInit {
   @Output() estado = new EventEmitter<number>();
-  @Output() establecimiento = new EventEmitter<string>();
   @ViewChild('startDatePicker') startDatePicker;
   @ViewChild('whatsapp') whatsapp;
   public error;
@@ -29,9 +25,6 @@ export class EstablecimientosComercialesAutComponent implements OnInit {
   public registerForm: FormGroup;
   public loading = false;
   public submitted = false;
-  public productos;
-  public swiperResponsive: SwiperConfigInterface;
-
   // public usuario: User;
   public startDateOptions: FlatpickrOptions = {
     altInput: true,
@@ -63,42 +56,18 @@ export class EstablecimientosComercialesAutComponent implements OnInit {
     this.video = {
       url: "https://www.youtube.com/embed/aK52RxV2XuI"
     };
-    this.productos={
-      info:[
-        {
-          nombre:"Coral",
-          categoria:"Super mercados",
-          imagen:"algo3"
-        }
-      ]
-    }
+    // this.informacion = {
+    //   apellidos: "",
+    //   user_id: "",
+    //   edad: 0,
+    //   fechaNacimiento: "",
+    //   genero: "",
+    //   identificacion: "",
+    //   nombres: "",
+    //   whatsapp: ""
+    // }
     this._unsubscribeAll = new Subject();
-    this.swiperResponsive = {
-      slidesPerView: 3,
-      spaceBetween: 50,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-      },
-      breakpoints: {
-        1024: {
-          slidesPerView: 3,
-          spaceBetween: 40
-        },
-        768: {
-          slidesPerView: 3,
-          spaceBetween: 30
-        },
-        640: {
-          slidesPerView: 2,
-          spaceBetween: 20
-        },
-        320: {
-          slidesPerView: 1,
-          spaceBetween: 10
-        }
-      }
-    };
+
     // Configure the layout
   }
 
@@ -147,10 +116,7 @@ export class EstablecimientosComercialesAutComponent implements OnInit {
     //   this.modalWhatsapp(this.whatsapp);
     // }
   }
-  async continuar(id) {
-    await this.establecimiento.emit(id);
-    await this.estado.emit(4);
-  }
+
   subirImagen(event: any) {
     if (event.target.files && event.target.files[0]) {
       let nuevaImagen = event.target.files[0];
@@ -168,10 +134,10 @@ export class EstablecimientosComercialesAutComponent implements OnInit {
       // });
     }
   }
-  obtenerURL(){
+  obtenerURL() {
     return this.sanitizer.bypassSecurityTrustResourceUrl(this.video.url);
   }
-    calcularEdad() {
+  calcularEdad() {
     // this.informacion.edad = moment().diff(this.f.fechaNacimiento.value[0], 'years');
     // this.informacion.fechaNacimiento = moment(this.f.fechaNacimiento.value[0]).format('YYYY-MM-DD');
     // this.registerForm.patchValue({
@@ -210,6 +176,9 @@ export class EstablecimientosComercialesAutComponent implements OnInit {
   }
   modalWhatsapp(modalVC) {
     this.modalService.open(modalVC);
+  }
+  continuar() {
+    this.estado.emit(5);
   }
   validarWhatsapp() {
     // this._creditosAutonomosService.validarWhatsapp({

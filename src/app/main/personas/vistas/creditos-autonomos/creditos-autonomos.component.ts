@@ -80,7 +80,7 @@ export class CreditosAutonomosComponent implements OnInit {
    */
   ngOnInit(): void {
 
-    this.usuario = this._coreMenuService.currentUser;
+    this.usuario = this._coreMenuService.grpPersonasUser;
 
     this.registerForm = this._formBuilder.group({
       identificacion: ['', [Validators.required]],
@@ -97,7 +97,6 @@ export class CreditosAutonomosComponent implements OnInit {
     });
     this._creditosAutonomosService.obtenerInformacion(this.usuario.id).subscribe(info => {
       this.fecha = info.fechaNacimiento;
-      this.imagen = info.imagen;
       this.registerForm.patchValue({
         identificacion: info.identificacion,
         nombres: info.nombres,
@@ -126,8 +125,7 @@ export class CreditosAutonomosComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       let imagen = new FormData();
       imagen.append('imagen', nuevaImagen, nuevaImagen.name);
-      this._creditosAutonomosService.subirImagenRegistro(this.usuario.id, imagen).subscribe((info) => {
-      });
+
     }
   }
   calcularEdad() {
@@ -162,7 +160,7 @@ export class CreditosAutonomosComponent implements OnInit {
       ).subscribe(infoCambio => {
         this.usuario.estado = "3";
         this.usuario.persona = info;
-        localStorage.setItem('currentUser', JSON.stringify(this.usuario));
+        localStorage.setItem('grpPersonasUser', JSON.stringify(this.usuario));
       });
     });
   }
@@ -170,34 +168,13 @@ export class CreditosAutonomosComponent implements OnInit {
     this.proceso = value;
     console.log(this.proceso);
   }
+  obtenerEstablecimiento(value){
+    console.log(value);
+  }
   abrirModal(modal) {
     this.modalService.open(modal);
   }
-  validarWhatsapp() {
-    this._creditosAutonomosService.validarWhatsapp({
-      user_id: this.usuario.id,
-      codigo: this.codigo
-    }).subscribe(info => {
-      if (info.message) {
-        this._bienvenidoService.cambioDeEstado(
-          {
-            estado: "4",
-            id: this.usuario.id
-          }
-        ).subscribe(infoCambio => {
-          this.usuario.estado = "4";
-          localStorage.setItem('currentUser', JSON.stringify(this.usuario));
-          this.modalService.dismissAll();
-          setTimeout(() => {
-            this._router.navigate(['/']);
-          }, 100);
-        });
 
-      }
-    }, error => {
-      this.error = "Hay un fallo al tratar de verificar su código, intentelo nuevamente"
-    });
-  }
   /**
    * On destroy
    */

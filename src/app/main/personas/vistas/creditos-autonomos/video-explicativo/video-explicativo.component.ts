@@ -85,7 +85,7 @@ export class VideoExplicativoAutComponent implements OnInit {
    */
   ngOnInit(): void {
 
-    // this.usuario = this._coreMenuService.currentUser;
+    // this.usuario = this._coreMenuService.grpPersonasUser;
 
     this.registerForm = this._formBuilder.group({
       identificacion: ['', [Validators.required]],
@@ -172,7 +172,7 @@ export class VideoExplicativoAutComponent implements OnInit {
     //   ).subscribe(infoCambio => {
     //     this.usuario.estado = "3";
     //     this.usuario.persona = info;
-    //     localStorage.setItem('currentUser', JSON.stringify(this.usuario));
+    //     localStorage.setItem('grpPersonasUser', JSON.stringify(this.usuario));
     //     this.modalWhatsapp(this.whatsapp);
     //   });
     // });
@@ -193,7 +193,7 @@ export class VideoExplicativoAutComponent implements OnInit {
     //       }
     //     ).subscribe(infoCambio => {
     //       this.usuario.estado = "4";
-    //       localStorage.setItem('currentUser', JSON.stringify(this.usuario));
+    //       localStorage.setItem('grpPersonasUser', JSON.stringify(this.usuario));
     //       this.modalService.dismissAll();
     //       setTimeout(() => {
     //         this._router.navigate(['/']);
