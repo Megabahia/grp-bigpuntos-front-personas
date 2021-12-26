@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,11 +10,15 @@ import { CoreConfigService } from '../../../../../../@core/services/config.servi
 import { DomSanitizer } from '@angular/platform-browser';
 import { CreditosAutonomosService } from '../creditos-autonomos.service';
 import { CoreMenuService } from '../../../../../../@core/components/core-menu/core-menu.service';
+import { DatePipe } from '@angular/common';
+import { InformacionCompleta } from 'app/main/personas/models/persona';
 
 @Component({
   selector: 'app-perfil-persona-aut',
   templateUrl: './perfil-persona.component.html',
-  styleUrls: ['./perfil-persona.component.scss']
+  styleUrls: ['./perfil-persona.component.scss'],
+  providers: [DatePipe]
+
 })
 export class PerfilPersonaAutComponent implements OnInit {
   @Output() estado = new EventEmitter<number>();
@@ -24,12 +28,15 @@ export class PerfilPersonaAutComponent implements OnInit {
   // public informacion: CompletarPerfil;
   public coreConfig: any;
   public imagen;
-  public registerForm: FormGroup;
+  public personaForm: FormGroup;
+  public datosContactoForm: FormGroup;
   public loading = false;
-  public submitted = false;
+  public submittedPersona = false;
   public usuario;
+  public informacionBasica: InformacionCompleta;
   // public usuario: User;
   public startDateOptions: FlatpickrOptions = {
+    defaultDate: 'today',
     altInput: true,
     mode: 'single',
     altFormat: 'Y-n-j',
@@ -54,10 +61,14 @@ export class PerfilPersonaAutComponent implements OnInit {
     // private _bienvenidoService: BienvenidoService,
     private _router: Router,
     private _formBuilder: FormBuilder,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private datePipe: DatePipe,
+    private changeDetector: ChangeDetectorRef,
   ) {
+    this.informacionBasica = this.inicializarInformacion();
+
     this.usuario = this._coreMenuService.grpPersonasUser;
-  
+
     this.video = {
       url: "https://www.youtube.com/embed/aK52RxV2XuI"
     };
@@ -72,14 +83,43 @@ export class PerfilPersonaAutComponent implements OnInit {
     //   whatsapp: ""
     // }
     this._unsubscribeAll = new Subject();
-
     // Configure the layout
   }
-
+  inicializarInformacion() {
+    return {
+      created_at: "",
+      identificacion: "",
+      nombres: "",
+      apellidos: "",
+      genero: "",
+      direccion: "",
+      fechaNacimiento: "",
+      edad: 0,
+      ciudad: "",
+      provincia: "",
+      pais: "",
+      email:"",
+      emailAdicional: "",
+      telefono:"",
+      whatsapp: "",
+      facebook: "",
+      instagram: "",
+      twitter: "",
+      tiktok: "",
+      youtube: "",
+    }
+  }
+  transformarFecha(fecha) {
+    let nuevaFecha = this.datePipe.transform(fecha, 'yyyy-MM-dd');
+    return nuevaFecha;
+  }
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
-  get f() {
-    return this.registerForm.controls;
+  get persForm() {
+    return this.personaForm.controls;
+  }
+  get datosContForm() {
+    return this.datosContactoForm.controls;
   }
 
   /**
@@ -88,14 +128,23 @@ export class PerfilPersonaAutComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this.registerForm = this._formBuilder.group({
-      identificacion: ['', [Validators.required]],
+    this.personaForm = this._formBuilder.group({
+      created_at: ['', [Validators.required]],
+      identificacion: ['', Validators.required],
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],
       genero: ['', Validators.required],
-      fechaNacimiento: ['string', Validators.required],
-      edad: ['', Validators.required],
-      whatsapp: ['', Validators.required],
+      fechaNacimiento: ['', Validators.required],
+      edad: [0, Validators.required],
+    });
+    this.datosContactoForm = this._formBuilder.group({
+      pais: ['', [Validators.required]],
+      provincia: ['', [Validators.required]],
+      ciudad: ['', [Validators.required]],
+      direccion: ['', [Validators.required]],
+      correo: ['', [Validators.required]],
+      celular: ['', [Validators.required]],
+      whatsapp: ['', [Validators.required]],
     });
     // Subscribe to config changes
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
@@ -104,9 +153,12 @@ export class PerfilPersonaAutComponent implements OnInit {
 
   }
   ngAfterViewInit(): void {
-    this._creditosAutonomosService.obtenerInformacion(this.usuario.id).subscribe((info)=>{
-      console.log(info);
-    }); 
+    this._creditosAutonomosService.obtenerInformacion(this.usuario.id).subscribe((info) => {
+      // console.log(info);
+    });
+    this.fecha = this.transformarFecha(new Date());
+    this.changeDetector.detectChanges();
+
   }
 
   obtenerURL() {
@@ -115,17 +167,29 @@ export class PerfilPersonaAutComponent implements OnInit {
 
   guardarRegistro() {
 
-    this.submitted = true;
-    // stop here if form is invalid
-    if (this.registerForm.invalid) {
-      return;
-    }
+
+  }
+  calcularEdad() {
+    // this.informacionBasica.edad = moment().diff(this.persForm.fechaNacimiento.value[0], 'years');
+    // this.informacionBasica.fechaNacimiento = moment(this.persForm.fechaNacimiento.value[0]).format('YYYY-MM-DD');
+    // this.personaForm.patchValue({
+    //   edad: this.informacionBasica.edad
+    // });
   }
   modalWhatsapp(modalVC) {
     this.modalService.open(modalVC);
   }
   continuar() {
-    this.estado.emit(3);
+    this.submittedPersona = true;
+    // stop here if form is invalid
+    console.log(this.datosContactoForm);
+    if (this.datosContactoForm.invalid) {
+      return;
+    }
+    if (this.personaForm.invalid) {
+      return;
+    }
+    // this.estado.emit(3);
   }
   validarWhatsapp() {
 
