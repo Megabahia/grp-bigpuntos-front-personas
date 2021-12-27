@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +8,9 @@ import { FlatpickrOptions } from 'ng2-flatpickr';
 import moment from 'moment';
 import { CoreConfigService } from '../../../../../../@core/services/config.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CreditosAutonomosService } from '../creditos-autonomos.service';
+import { EmpresaInformacion } from 'app/main/personas/models/empresa';
+
 
 @Component({
   selector: 'app-establecimiento-seleccionado-aut',
@@ -16,15 +19,21 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class EstablecimientoSeleccionadoAutComponent implements OnInit {
   @Output() estado = new EventEmitter<number>();
+  @Output() valores = new EventEmitter<Object>();
+  @Input() idEmpresa;
   @ViewChild('startDatePicker') startDatePicker;
   @ViewChild('whatsapp') whatsapp;
   public error;
   // public informacion: CompletarPerfil;
   public coreConfig: any;
   public imagen;
-  public registerForm: FormGroup;
+  public solicitarForm: FormGroup;
   public loading = false;
-  public submitted = false;
+  public submittedSolicitar = false;
+  public empresa: EmpresaInformacion;
+  public monto;
+  public plazo;
+  public aceptarTerminos = false;
   // public usuario: User;
   public startDateOptions: FlatpickrOptions = {
     altInput: true,
@@ -45,9 +54,9 @@ export class EstablecimientoSeleccionadoAutComponent implements OnInit {
   constructor(
     private _coreConfigService: CoreConfigService,
     private sanitizer: DomSanitizer,
+    private _creditosAutonomosService: CreditosAutonomosService,
 
     // private _coreMenuService: CoreMenuService,
-    // private _creditosAutonomosService: CreditosAutonomosService,
     // private _bienvenidoService: BienvenidoService,
     private _router: Router,
     private _formBuilder: FormBuilder,
@@ -56,16 +65,7 @@ export class EstablecimientoSeleccionadoAutComponent implements OnInit {
     this.video = {
       url: "https://www.youtube.com/embed/aK52RxV2XuI"
     };
-    // this.informacion = {
-    //   apellidos: "",
-    //   user_id: "",
-    //   edad: 0,
-    //   fechaNacimiento: "",
-    //   genero: "",
-    //   identificacion: "",
-    //   nombres: "",
-    //   whatsapp: ""
-    // }
+    this.empresa = this.inicializarEmpresa();
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
@@ -73,48 +73,48 @@ export class EstablecimientoSeleccionadoAutComponent implements OnInit {
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
-  get f() {
-    return this.registerForm.controls;
+  get soliForm() {
+    return this.solicitarForm.controls;
   }
 
   /**
    * On init
    */
+  inicializarEmpresa(): EmpresaInformacion {
+    return {
+      _id: "",
+      ciudad: "",
+      correo: "",
+      direccion: "",
+      nombreComercial: "",
+      nombreEmpresa: "",
+      pais: "",
+      provincia: "",
+      ruc: "",
+      telefono1: "",
+      telefono2: "",
+      tipoCategoria: "",
+      tipoEmpresa: ""
+    };
+  }
   ngOnInit(): void {
 
     // this.usuario = this._coreMenuService.grpPersonasUser;
 
-    this.registerForm = this._formBuilder.group({
-      identificacion: ['', [Validators.required]],
-      nombres: ['', Validators.required],
-      apellidos: ['', Validators.required],
-      genero: ['', Validators.required],
-      fechaNacimiento: ['string', Validators.required],
-      edad: ['', Validators.required],
-      whatsapp: ['', Validators.required],
+    this.solicitarForm = this._formBuilder.group({
+      monto: [0, [Validators.required]],
+      plazo: ['', [Validators.required]],
     });
     // Subscribe to config changes
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;
     });
-    // this._creditosAutonomosService.obtenerInformacion(this.usuario.id).subscribe(info => {
-    //   this.fecha = info.fechaNacimiento;
-    //   this.imagen = info.imagen;
-    //   this.registerForm.patchValue({
-    //     identificacion: info.identificacion,
-    //     nombres: info.nombres,
-    //     apellidos: info.apellidos,
-    //     genero: info.genero,
-    //     // fechaNacimiento: [info.fechaNacimiento],
-    //     edad: info.edad,
-    //     whatsapp: info.whatsapp,
-    //   });
-    // });
   }
   ngAfterViewInit(): void {
-    // if (this.usuario.estado == "3") {
-    //   this.modalWhatsapp(this.whatsapp);
-    // }
+    this._creditosAutonomosService.obtenerEmpresa(this.idEmpresa)
+      .subscribe((info) => {
+        this.empresa = info;
+      });
   }
 
   subirImagen(event: any) {
@@ -140,15 +140,15 @@ export class EstablecimientoSeleccionadoAutComponent implements OnInit {
   calcularEdad() {
     // this.informacion.edad = moment().diff(this.f.fechaNacimiento.value[0], 'years');
     // this.informacion.fechaNacimiento = moment(this.f.fechaNacimiento.value[0]).format('YYYY-MM-DD');
-    // this.registerForm.patchValue({
+    // this.solicitarForm.patchValue({
     //   edad: this.informacion.edad
     // });
   }
   guardarRegistro() {
 
-    this.submitted = true;
+    this.submittedSolicitar = true;
     // stop here if form is invalid
-    if (this.registerForm.invalid) {
+    if (this.solicitarForm.invalid) {
       return;
     }
     // this.informacion.apellidos = this.f.apellidos.value;
@@ -177,7 +177,16 @@ export class EstablecimientoSeleccionadoAutComponent implements OnInit {
   modalWhatsapp(modalVC) {
     this.modalService.open(modalVC);
   }
-  continuar() {
+  async continuar() {
+    this.submittedSolicitar = true;
+    if(this.solicitarForm.invalid || !this.aceptarTerminos){
+      return;
+    }
+    await this.valores.emit({
+      monto: this.monto,
+      plazo: this.plazo,
+      aceptaTerminos: this.aceptarTerminos,
+    });
     this.estado.emit(5);
   }
   validarWhatsapp() {

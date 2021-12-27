@@ -30,17 +30,43 @@ export class InformacionCompleta {
     genero: string;
     fechaNacimiento: string;
     edad: number;
-    direccion : string;
+    direccion: string;
     ciudad: string;
     provincia: string;
     pais: string;
-    email:string;
+    email: string;
     emailAdicional: string;
-    telefono:string;
+    telefono: string;
     whatsapp: string;
     facebook: string;
     instagram: string;
     twitter: string;
     tiktok: string;
     youtube: string;
+}
+export class SolicitarCredito {
+    _id: string;
+    numero: string;
+    monto: number;
+    plazo: number;
+    aceptaTerminos: boolean;
+    estado: string;
+    user_id: string;
+    empresaComercial_id: string;
+    empresaIfis_id: string;
+}
+export class RucPersona {
+    actividadComercial: string;
+    antiguedadRuc: number;
+    ciudad: string;
+    gastoMensual: number;
+    identificacion: string;
+    nombreComercial: string;
+    pais: string;
+    provincia: string;
+    razonSocial: string;
+    ruc: string;
+    user_id: string;
+    ventaMensual: number;
+    _id: string;
 }

@@ -8,6 +8,9 @@ import { FlatpickrOptions } from 'ng2-flatpickr';
 import moment from 'moment';
 import { CoreConfigService } from '../../../../../../@core/services/config.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CreditosAutonomosService } from '../creditos-autonomos.service';
+import { CoreMenuService } from '@core/components/core-menu/core-menu.service';
+import { RucPersona } from 'app/main/personas/models/persona';
 
 @Component({
   selector: 'app-ruc-persona-aut',
@@ -25,6 +28,8 @@ export class RucPersonaAutComponent implements OnInit {
   public registerForm: FormGroup;
   public loading = false;
   public submitted = false;
+  public usuario;
+  public rucPersona:RucPersona;
   // public usuario: User;
   public startDateOptions: FlatpickrOptions = {
     altInput: true,
@@ -45,17 +50,20 @@ export class RucPersonaAutComponent implements OnInit {
   constructor(
     private _coreConfigService: CoreConfigService,
     private sanitizer: DomSanitizer,
+    private _creditosAutonomosService: CreditosAutonomosService,
 
-    // private _coreMenuService: CoreMenuService,
+    private _coreMenuService: CoreMenuService,
     // private _creditosAutonomosService: CreditosAutonomosService,
     // private _bienvenidoService: BienvenidoService,
     private _router: Router,
     private _formBuilder: FormBuilder,
     private modalService: NgbModal
   ) {
+    this.usuario = this._coreMenuService.grpPersonasUser;
     this.video = {
       url: "https://www.youtube.com/embed/aK52RxV2XuI"
     };
+    this.rucPersona = this.inicializarRucPersona();
     // this.informacion = {
     //   apellidos: "",
     //   user_id: "",
@@ -76,7 +84,23 @@ export class RucPersonaAutComponent implements OnInit {
   get f() {
     return this.registerForm.controls;
   }
-
+  inicializarRucPersona():RucPersona{
+    return {
+      _id:"",
+      actividadComercial:"",
+      antiguedadRuc:0,
+      ciudad:"",
+      gastoMensual:0,
+      identificacion:"",
+      nombreComercial:"",
+      pais:"",
+      provincia:"",
+      razonSocial:"",
+      ruc:"",
+      user_id:"",
+      ventaMensual:0
+    }
+  }
   /**
    * On init
    */
@@ -97,24 +121,15 @@ export class RucPersonaAutComponent implements OnInit {
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;
     });
-    // this._creditosAutonomosService.obtenerInformacion(this.usuario.id).subscribe(info => {
-    //   this.fecha = info.fechaNacimiento;
-    //   this.imagen = info.imagen;
-    //   this.registerForm.patchValue({
-    //     identificacion: info.identificacion,
-    //     nombres: info.nombres,
-    //     apellidos: info.apellidos,
-    //     genero: info.genero,
-    //     // fechaNacimiento: [info.fechaNacimiento],
-    //     edad: info.edad,
-    //     whatsapp: info.whatsapp,
-    //   });
-    // });
+
   }
   ngAfterViewInit(): void {
-    // if (this.usuario.estado == "3") {
-    //   this.modalWhatsapp(this.whatsapp);
-    // }
+    this._creditosAutonomosService.obtenerDatosRuc(
+      this.usuario.id
+    )
+    .subscribe((info)=>{
+      console.log(info);
+    });
   }
 
   subirImagen(event: any) {

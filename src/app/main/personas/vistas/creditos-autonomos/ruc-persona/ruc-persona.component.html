@@ -23,7 +23,7 @@
                             <div class="card-header border-bottom mb-2 bg-light">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h5 class="text-info">Los datos de RUC deben corresponder a la persona que solicita el préstamo con la siguiente cédula de identidad: <b>1819372389</b></h5>
+                                        <h5 class="text-info">Los datos de RUC deben corresponder a la persona que solicita el préstamo con la siguiente cédula de identidad: <b>{{rucPersona.identificacion}}</b></h5>
                                     </div>
                                 </div>
                             </div>
@@ -32,38 +32,33 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="username">Número de cédula</label>
-                                            <input type="text" class="form-control" value="1819372389" disabled>
+                                            <input type="text" class="form-control" value="{{rucPersona.identificacion}}" disabled>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="username">RUC</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" [(ngModel)]="rucPersona.ruc">
                                         </div>
                                     </div>
-
-
-
-
-
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="username">Nombre comercial</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" [(ngModel)]="rucPersona.nombreComercial">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="username">Razón social</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" [(ngModel)]="rucPersona.razonSocial">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="username">País</label>
-                                            <select class="form-control select2">
+                                            <select class="form-control select2" [(ngModel)]="rucPersona.pais">
                                                <option>- Seleccione - </option>
                                                <option>Ecuador</option>
                                                <option>Perú</option>
@@ -78,7 +73,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="username">Provincia</label>
-                                            <select class="form-control select2">
+                                            <select class="form-control select2" [(ngModel)]="rucPersona.provincia">
                                                <option>- Seleccione - </option>
                                                <option>Pichincha</option>
                                                <option>Guayas</option>
@@ -91,7 +86,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="username">Ciudad</label>
-                                            <select class="form-control select2">
+                                            <select class="form-control select2" [(ngModel)]="rucPersona.ciudad">
                                                <option>- Seleccione - </option>
                                                <option>Quito</option>
                                                <option>Cuenca</option>
@@ -102,14 +97,14 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="username">Años de antigueadad de RUC</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" [(ngModel)]="rucPersona.antiguedadRuc">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="username">Actividad comercial</label>
-                                            <select class="form-control select2">
+                                            <select class="form-control select2" [(ngModel)]="rucPersona.actividadComercial">
                                                <option>- Seleccione - </option>
                                                <option>Option</option>
                                                <option>Option</option>
@@ -127,14 +122,14 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="username">Monto de ventas mensual</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" [(ngModel)]="rucPersona.ventaMensual">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="username">Gastos mensual</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" [(ngModel)]="rucPersona.gastoMensual">
                                         </div>
                                     </div>
 

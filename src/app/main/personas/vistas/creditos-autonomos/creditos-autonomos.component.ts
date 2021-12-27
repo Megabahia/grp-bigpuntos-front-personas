@@ -9,7 +9,7 @@ import { CreditosAutonomosService } from './creditos-autonomos.service';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { CoreConfigService } from '../../../../../@core/services/config.service';
 import { CoreMenuService } from '../../../../../@core/components/core-menu/core-menu.service';
-import { CompletarPerfil } from '../../models/persona';
+import { CompletarPerfil, SolicitarCredito } from '../../models/persona';
 import moment from 'moment';
 import { User } from '../../../../auth/models/user';
 
@@ -29,7 +29,9 @@ export class CreditosAutonomosComponent implements OnInit {
   public loading = false;
   public submitted = false;
   public usuario: User;
+  public idEmpresa = "";
   public proceso = 1;
+  public solicitarCredito: SolicitarCredito;
   public startDateOptions: FlatpickrOptions = {
     altInput: true,
     mode: 'single',
@@ -65,10 +67,24 @@ export class CreditosAutonomosComponent implements OnInit {
       nombres: "",
       whatsapp: ""
     }
+    this.solicitarCredito = this.inicialidarSolicitudCredito();
     this._unsubscribeAll = new Subject();
 
   }
 
+  inicialidarSolicitudCredito(): SolicitarCredito {
+    return {
+      _id: "",
+      aceptaTerminos: false,
+      empresaComercial_id: "",
+      empresaIfis_id: "",
+      estado: "",
+      monto: 0,
+      numero: "",
+      plazo: 0,
+      user_id: ""
+    }
+  }
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
   get f() {
@@ -166,9 +182,15 @@ export class CreditosAutonomosComponent implements OnInit {
   }
   continuar(value) {
     this.proceso = value;
-    console.log(this.proceso);
   }
-  obtenerEstablecimiento(value){
+  obtenerEstablecimiento(value) {
+    this.solicitarCredito.empresaComercial_id = value;
+    this.idEmpresa = value;
+  }
+  obtenerMonto(value) {
+    this.solicitarCredito.plazo = value.plazo;
+    this.solicitarCredito.monto = value.monto;
+    this.solicitarCredito.aceptaTerminos = value.aceptaTerminos;
     console.log(value);
   }
   abrirModal(modal) {

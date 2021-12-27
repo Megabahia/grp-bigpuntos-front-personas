@@ -9,6 +9,7 @@ import moment from 'moment';
 import { CoreConfigService } from '../../../../../../@core/services/config.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { CreditosAutonomosService } from '../creditos-autonomos.service';
 
 @Component({
   selector: 'app-establecimientos-comerciales-aut',
@@ -29,6 +30,8 @@ export class EstablecimientosComercialesAutComponent implements OnInit {
   public registerForm: FormGroup;
   public loading = false;
   public submitted = false;
+  public ciudad ="";
+  public tipoCategoria ="";
   public productos;
   public swiperResponsive: SwiperConfigInterface;
 
@@ -52,6 +55,7 @@ export class EstablecimientosComercialesAutComponent implements OnInit {
   constructor(
     private _coreConfigService: CoreConfigService,
     private sanitizer: DomSanitizer,
+    private _creditosAutonomosService: CreditosAutonomosService,
 
     // private _coreMenuService: CoreMenuService,
     // private _creditosAutonomosService: CreditosAutonomosService,
@@ -63,12 +67,12 @@ export class EstablecimientosComercialesAutComponent implements OnInit {
     this.video = {
       url: "https://www.youtube.com/embed/aK52RxV2XuI"
     };
-    this.productos={
-      info:[
+    this.productos = {
+      info: [
         {
-          nombre:"Coral",
-          categoria:"Super mercados",
-          imagen:"algo3"
+          nombre: "Coral",
+          categoria: "Super mercados",
+          imagen: "algo3"
         }
       ]
     }
@@ -128,24 +132,15 @@ export class EstablecimientosComercialesAutComponent implements OnInit {
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;
     });
-    // this._creditosAutonomosService.obtenerInformacion(this.usuario.id).subscribe(info => {
-    //   this.fecha = info.fechaNacimiento;
-    //   this.imagen = info.imagen;
-    //   this.registerForm.patchValue({
-    //     identificacion: info.identificacion,
-    //     nombres: info.nombres,
-    //     apellidos: info.apellidos,
-    //     genero: info.genero,
-    //     // fechaNacimiento: [info.fechaNacimiento],
-    //     edad: info.edad,
-    //     whatsapp: info.whatsapp,
-    //   });
-    // });
+
   }
   ngAfterViewInit(): void {
-    // if (this.usuario.estado == "3") {
-    //   this.modalWhatsapp(this.whatsapp);
-    // }
+    this._creditosAutonomosService.obtenerListaEmpresasComerciales({
+      ciudad: this.ciudad,
+      tipoCategoria: this.tipoCategoria
+    }).subscribe((info) => {
+      console.log(info); 
+    });
   }
   async continuar(id) {
     await this.establecimiento.emit(id);
@@ -168,10 +163,10 @@ export class EstablecimientosComercialesAutComponent implements OnInit {
       // });
     }
   }
-  obtenerURL(){
+  obtenerURL() {
     return this.sanitizer.bypassSecurityTrustResourceUrl(this.video.url);
   }
-    calcularEdad() {
+  calcularEdad() {
     // this.informacion.edad = moment().diff(this.f.fechaNacimiento.value[0], 'years');
     // this.informacion.fechaNacimiento = moment(this.f.fechaNacimiento.value[0]).format('YYYY-MM-DD');
     // this.registerForm.patchValue({

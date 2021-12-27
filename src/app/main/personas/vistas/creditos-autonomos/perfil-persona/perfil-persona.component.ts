@@ -98,9 +98,9 @@ export class PerfilPersonaAutComponent implements OnInit {
       ciudad: "",
       provincia: "",
       pais: "",
-      email:"",
+      email: "",
       emailAdicional: "",
-      telefono:"",
+      telefono: "",
       whatsapp: "",
       facebook: "",
       instagram: "",
@@ -129,7 +129,6 @@ export class PerfilPersonaAutComponent implements OnInit {
 
 
     this.personaForm = this._formBuilder.group({
-      created_at: ['', [Validators.required]],
       identificacion: ['', Validators.required],
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],
@@ -155,9 +154,12 @@ export class PerfilPersonaAutComponent implements OnInit {
   ngAfterViewInit(): void {
     this._creditosAutonomosService.obtenerInformacion(this.usuario.id).subscribe((info) => {
       // console.log(info);
+      this.informacionBasica = info;
+      this.informacionBasica.created_at = this.transformarFecha(info.created_at);
+      this.fecha = this.transformarFecha(info.fechaNacimiento);
+      this.changeDetector.detectChanges();
     });
-    this.fecha = this.transformarFecha(new Date());
-    this.changeDetector.detectChanges();
+
 
   }
 
@@ -170,11 +172,8 @@ export class PerfilPersonaAutComponent implements OnInit {
 
   }
   calcularEdad() {
-    // this.informacionBasica.edad = moment().diff(this.persForm.fechaNacimiento.value[0], 'years');
-    // this.informacionBasica.fechaNacimiento = moment(this.persForm.fechaNacimiento.value[0]).format('YYYY-MM-DD');
-    // this.personaForm.patchValue({
-    //   edad: this.informacionBasica.edad
-    // });
+    this.informacionBasica.edad = moment().diff(this.persForm.fechaNacimiento.value[0], 'years');
+    this.informacionBasica.fechaNacimiento = moment(this.persForm.fechaNacimiento.value[0]).format('YYYY-MM-DD');
   }
   modalWhatsapp(modalVC) {
     this.modalService.open(modalVC);
@@ -182,14 +181,17 @@ export class PerfilPersonaAutComponent implements OnInit {
   continuar() {
     this.submittedPersona = true;
     // stop here if form is invalid
-    console.log(this.datosContactoForm);
     if (this.datosContactoForm.invalid) {
       return;
     }
     if (this.personaForm.invalid) {
       return;
     }
-    // this.estado.emit(3);
+    
+    this._creditosAutonomosService.guardarInformacion({ ...this.informacionBasica, user_id: this.usuario.id, imagen: [] })
+      .subscribe((info) => {
+    this.estado.emit(3);
+      });
   }
   validarWhatsapp() {
 
@@ -203,3 +205,4 @@ export class PerfilPersonaAutComponent implements OnInit {
     this._unsubscribeAll.complete();
   }
 }
+
