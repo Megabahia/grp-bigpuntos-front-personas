@@ -12,6 +12,7 @@ import { CreditosAutonomosService } from '../creditos-autonomos.service';
 import { CoreMenuService } from '../../../../../../@core/components/core-menu/core-menu.service';
 import { DatePipe } from '@angular/common';
 import { InformacionCompleta } from 'app/main/personas/models/persona';
+import { ParametrizacionesService } from '../../../servicios/parametrizaciones.service';
 
 @Component({
   selector: 'app-perfil-persona-aut',
@@ -34,6 +35,10 @@ export class PerfilPersonaAutComponent implements OnInit {
   public submittedPersona = false;
   public usuario;
   public informacionBasica: InformacionCompleta;
+  public paisOpciones;
+  public provinciaOpciones;
+  public ciudadOpciones;
+  public tipoGeneroOpciones;
   // public usuario: User;
   public startDateOptions: FlatpickrOptions = {
     defaultDate: 'today',
@@ -55,6 +60,7 @@ export class PerfilPersonaAutComponent implements OnInit {
   constructor(
     private _coreConfigService: CoreConfigService,
     private sanitizer: DomSanitizer,
+    private paramService: ParametrizacionesService,
 
     private _coreMenuService: CoreMenuService,
     private _creditosAutonomosService: CreditosAutonomosService,
@@ -158,18 +164,37 @@ export class PerfilPersonaAutComponent implements OnInit {
       this.informacionBasica.created_at = this.transformarFecha(info.created_at);
       this.fecha = this.transformarFecha(info.fechaNacimiento);
       this.changeDetector.detectChanges();
+      this.obtenerPaisOpciones();
+      this.obtenerProvinciaOpciones();
+      this.obtenerCiudadOpciones();
     });
-
+    this.obtenerGeneroOpciones();
+    
 
   }
 
   obtenerURL() {
     return this.sanitizer.bypassSecurityTrustResourceUrl(this.video.url);
   }
-
-  guardarRegistro() {
-
-
+  obtenerPaisOpciones() {
+    this.paramService.obtenerListaPadres("PAIS").subscribe((info) => {
+      this.paisOpciones = info;
+    });
+  }
+  obtenerGeneroOpciones() {
+    this.paramService.obtenerListaPadres("GENERO").subscribe((info) => {
+      this.tipoGeneroOpciones = info;
+    });
+  }
+  obtenerProvinciaOpciones() {
+    this.paramService.obtenerListaHijos(this.informacionBasica.pais, "PAIS").subscribe((info) => {
+      this.provinciaOpciones = info;
+    });
+  }
+  obtenerCiudadOpciones() {
+    this.paramService.obtenerListaHijos(this.informacionBasica.provincia, "PROVINCIA").subscribe((info) => {
+      this.ciudadOpciones = info;
+    });
   }
   calcularEdad() {
     this.informacionBasica.edad = moment().diff(this.persForm.fechaNacimiento.value[0], 'years');

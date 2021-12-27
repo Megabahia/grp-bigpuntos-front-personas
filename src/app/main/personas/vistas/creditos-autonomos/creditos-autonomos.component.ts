@@ -75,12 +75,11 @@ export class CreditosAutonomosComponent implements OnInit {
   inicialidarSolicitudCredito(): SolicitarCredito {
     return {
       _id: "",
-      aceptaTerminos: false,
+      aceptaTerminos: 0,
       empresaComercial_id: "",
       empresaIfis_id: "",
       estado: "",
       monto: 0,
-      numero: "",
       plazo: 0,
       user_id: ""
     }
@@ -125,7 +124,7 @@ export class CreditosAutonomosComponent implements OnInit {
     });
   }
   ngAfterViewInit(): void {
-
+    this.solicitarCredito.user_id = this.usuario.id;
   }
 
   subirImagen(event: any) {
@@ -181,7 +180,17 @@ export class CreditosAutonomosComponent implements OnInit {
     });
   }
   continuar(value) {
-    this.proceso = value;
+    if (value == 7) {
+      this._creditosAutonomosService.crearCredito(this.solicitarCredito).subscribe((info) => {
+        this.proceso = value;
+      });
+    } else {
+      this.proceso = value;
+    }
+  }
+  obtenerIdIfi(value) {
+    console.log(value);
+    this.solicitarCredito.empresaIfis_id = value;
   }
   obtenerEstablecimiento(value) {
     this.solicitarCredito.empresaComercial_id = value;
@@ -190,8 +199,7 @@ export class CreditosAutonomosComponent implements OnInit {
   obtenerMonto(value) {
     this.solicitarCredito.plazo = value.plazo;
     this.solicitarCredito.monto = value.monto;
-    this.solicitarCredito.aceptaTerminos = value.aceptaTerminos;
-    console.log(value);
+    this.solicitarCredito.aceptaTerminos = value.aceptaTerminos ? 1:0;
   }
   abrirModal(modal) {
     this.modalService.open(modal);

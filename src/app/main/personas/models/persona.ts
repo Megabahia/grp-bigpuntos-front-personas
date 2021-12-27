@@ -46,10 +46,9 @@ export class InformacionCompleta {
 }
 export class SolicitarCredito {
     _id: string;
-    numero: string;
     monto: number;
     plazo: number;
-    aceptaTerminos: boolean;
+    aceptaTerminos: number;
     estado: string;
     user_id: string;
     empresaComercial_id: string;

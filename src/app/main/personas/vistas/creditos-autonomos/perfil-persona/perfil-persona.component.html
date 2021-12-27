@@ -63,10 +63,10 @@
                                             <div class="form-group">
                                                 <label for="username">Género</label>
                                                 <select formControlName="genero" class="form-control" id="status" [(ngModel)]="informacionBasica.genero">
-                                                 <option value="">- Seleccionar - </option>
-                                                 <option>Hombre</option>
-                                                 <option>Mujer</option>
-                                                 <option>No especificado</option>
+                                                    <option value="">- Seleccione -</option>
+                                                    <option *ngFor="let generoOp of tipoGeneroOpciones" value="{{generoOp.valor}}">
+                                                        {{generoOp.nombre}}</option>
+                    
                                              </select>
                                                 <div *ngIf="submittedPersona && persForm.genero.errors" class="invalid-feedback" style="display: block;">
                                                     <div *ngIf="persForm.genero.errors.required">Género es requerido</div>
@@ -105,13 +105,9 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="username">País</label>
-                                                <select class="form-control select2" formControlName="pais" [(ngModel)]="informacionBasica.pais">
-                                               <option value="">- Seleccione -</option>
-                                               <option>Ecuador</option>
-                                               <option>Perú</option>
-                                               <option>Colombia</option>
-                                               <option>Chile</option>
-                                               <option>Venezuela</option>
+                                                <select class="form-control select2" formControlName="pais" [(ngModel)]="informacionBasica.pais" (change)="obtenerProvinciaOpciones()">
+                                                    <option value="">- Seleccione -</option>
+                                                    <option *ngFor="let paisOp of paisOpciones" value="{{paisOp.nombre}}">{{paisOp.nombre}}</option>
                                              </select>
                                                 <div *ngIf="submittedPersona && datosContForm.pais.errors" class="invalid-feedback" style="display: block;">
                                                     <div *ngIf="datosContForm.pais.errors.required">País es requerido</div>
@@ -122,13 +118,10 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="username">Provincia</label>
-                                                <select class="form-control select2" formControlName="provincia" [(ngModel)]="informacionBasica.provincia">
-                                               <option value="">- Seleccione -</option>
-                                               <option>Pichincha</option>
-                                               <option>Guayas</option>
-                                               <option>Carchi</option>
-                                               <option>Tunguragua</option>
-                                               <option>Cotopaxi</option>
+                                                <select class="form-control select2" formControlName="provincia" [(ngModel)]="informacionBasica.provincia" (change)="obtenerCiudadOpciones() ">
+                                                    <option value="">- Seleccione -</option>
+                                                    <option *ngFor="let provinciaOp of provinciaOpciones" value="{{provinciaOp.nombre}}">{{provinciaOp.nombre}}</option>
+                    
                                              </select>
                                                 <div *ngIf="submittedPersona && datosContForm.provincia.errors" class="invalid-feedback" style="display: block;">
                                                     <div *ngIf="datosContForm.provincia.errors.required">Provincia es requerido</div>
@@ -139,12 +132,9 @@
                                             <div class="form-group">
                                                 <label for="username">Ciudad</label>
                                                 <select class="form-control select2" formControlName="ciudad" [(ngModel)]="informacionBasica.ciudad">
-                                               <option value="">- Seleccione -</option>
-                                               <option>Quito</option>
-                                               <option>Guayaquil</option>
-                                               <option>Cuenca</option>
-                                               <option>Ambato</option>
-                                               <option>Manta</option>
+                                                    <option value="">- Seleccione -</option>
+                                                    <option *ngFor="let ciudadOp of ciudadOpciones" value="{{ciudadOp.nombre}}">{{ciudadOp.nombre}}</option>
+                    
                                              </select>
                                                 <div *ngIf="submittedPersona && datosContForm.ciudad.errors" class="invalid-feedback" style="display: block;">
                                                     <div *ngIf="datosContForm.ciudad.errors.required">Ciudad es requerido</div>

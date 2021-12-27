@@ -8,6 +8,7 @@ import { FlatpickrOptions } from 'ng2-flatpickr';
 import moment from 'moment';
 import { CoreConfigService } from '../../../../../../@core/services/config.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CoreMenuService } from '../../../../../../@core/components/core-menu/core-menu.service';
 
 @Component({
   selector: 'app-mensaje-resultado-aut',
@@ -25,6 +26,7 @@ export class MensajeResultadoAutComponent implements OnInit {
   public registerForm: FormGroup;
   public loading = false;
   public submitted = false;
+  public usuario;
   // public usuario: User;
   public startDateOptions: FlatpickrOptions = {
     altInput: true,
@@ -46,7 +48,7 @@ export class MensajeResultadoAutComponent implements OnInit {
     private _coreConfigService: CoreConfigService,
     private sanitizer: DomSanitizer,
 
-    // private _coreMenuService: CoreMenuService,
+    private _coreMenuService: CoreMenuService,
     // private _creditosAutonomosService: CreditosAutonomosService,
     // private _bienvenidoService: BienvenidoService,
     private _router: Router,
@@ -56,16 +58,7 @@ export class MensajeResultadoAutComponent implements OnInit {
     this.video = {
       url: "https://www.youtube.com/embed/aK52RxV2XuI"
     };
-    // this.informacion = {
-    //   apellidos: "",
-    //   user_id: "",
-    //   edad: 0,
-    //   fechaNacimiento: "",
-    //   genero: "",
-    //   identificacion: "",
-    //   nombres: "",
-    //   whatsapp: ""
-    // }
+    this.usuario = this._coreMenuService.grpPersonasUser;
     this._unsubscribeAll = new Subject();
 
     // Configure the layout

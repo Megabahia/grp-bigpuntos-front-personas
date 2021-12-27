@@ -11,6 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { CreditosAutonomosService } from '../creditos-autonomos.service';
 import { CoreMenuService } from '@core/components/core-menu/core-menu.service';
 import { RucPersona } from 'app/main/personas/models/persona';
+import { ParametrizacionesService } from '../../../servicios/parametrizaciones.service';
 
 @Component({
   selector: 'app-ruc-persona-aut',
@@ -25,11 +26,15 @@ export class RucPersonaAutComponent implements OnInit {
   // public informacion: CompletarPerfil;
   public coreConfig: any;
   public imagen;
-  public registerForm: FormGroup;
+  public rucPersonaForm: FormGroup;
   public loading = false;
-  public submitted = false;
+  public submittedRuc = false;
   public usuario;
-  public rucPersona:RucPersona;
+  public paisOpciones;
+  public provinciaOpciones;
+  public ciudadOpciones;
+  public categoriaEmpresaOpciones;
+  public rucPersona: RucPersona;
   // public usuario: User;
   public startDateOptions: FlatpickrOptions = {
     altInput: true,
@@ -51,6 +56,7 @@ export class RucPersonaAutComponent implements OnInit {
     private _coreConfigService: CoreConfigService,
     private sanitizer: DomSanitizer,
     private _creditosAutonomosService: CreditosAutonomosService,
+    private paramService: ParametrizacionesService,
 
     private _coreMenuService: CoreMenuService,
     // private _creditosAutonomosService: CreditosAutonomosService,
@@ -81,24 +87,24 @@ export class RucPersonaAutComponent implements OnInit {
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
-  get f() {
-    return this.registerForm.controls;
+  get rucPersForm() {
+    return this.rucPersonaForm.controls;
   }
-  inicializarRucPersona():RucPersona{
+  inicializarRucPersona(): RucPersona {
     return {
-      _id:"",
-      actividadComercial:"",
-      antiguedadRuc:0,
-      ciudad:"",
-      gastoMensual:0,
-      identificacion:"",
-      nombreComercial:"",
-      pais:"",
-      provincia:"",
-      razonSocial:"",
-      ruc:"",
-      user_id:"",
-      ventaMensual:0
+      _id: "",
+      actividadComercial: "",
+      antiguedadRuc: 0,
+      ciudad: "",
+      gastoMensual: 0,
+      identificacion: "",
+      nombreComercial: "",
+      pais: "",
+      provincia: "",
+      razonSocial: "",
+      ruc: "",
+      user_id: "",
+      ventaMensual: 0
     }
   }
   /**
@@ -108,14 +114,18 @@ export class RucPersonaAutComponent implements OnInit {
 
     // this.usuario = this._coreMenuService.grpPersonasUser;
 
-    this.registerForm = this._formBuilder.group({
-      identificacion: ['', [Validators.required]],
-      nombres: ['', Validators.required],
-      apellidos: ['', Validators.required],
-      genero: ['', Validators.required],
-      fechaNacimiento: ['string', Validators.required],
-      edad: ['', Validators.required],
-      whatsapp: ['', Validators.required],
+    this.rucPersonaForm = this._formBuilder.group({
+      ruc: ['', [Validators.required]],
+      nombreComercial: ['', [Validators.required]],
+      razonSocial: ['', [Validators.required]],
+      pais: ['', [Validators.required]],
+      provincia: ['', [Validators.required]],
+      ciudad: ['', [Validators.required]],
+      anioAntiguedad: ['', [Validators.required]],
+      actividadComercial: ['', [Validators.required]],
+      monto: ['', [Validators.required]],
+      gastos: ['', [Validators.required]],
+
     });
     // Subscribe to config changes
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
@@ -127,11 +137,35 @@ export class RucPersonaAutComponent implements OnInit {
     this._creditosAutonomosService.obtenerDatosRuc(
       this.usuario.id
     )
-    .subscribe((info)=>{
-      console.log(info);
-    });
+      .subscribe((info) => {
+        this.rucPersona = info;
+        this.obtenerPaisOpciones();
+        this.obtenerProvinciaOpciones();
+        this.obtenerCiudadOpciones();
+      });
+    this.obtenerCategoriaEmpresaOpciones();
   }
 
+  obtenerPaisOpciones() {
+    this.paramService.obtenerListaPadres("PAIS").subscribe((info) => {
+      this.paisOpciones = info;
+    });
+  }
+  obtenerProvinciaOpciones() {
+    this.paramService.obtenerListaHijos(this.rucPersona.pais, "PAIS").subscribe((info) => {
+      this.provinciaOpciones = info;
+    });
+  }
+  obtenerCiudadOpciones() {
+    this.paramService.obtenerListaHijos(this.rucPersona.provincia, "PROVINCIA").subscribe((info) => {
+      this.ciudadOpciones = info;
+    });
+  }
+  obtenerCategoriaEmpresaOpciones() {
+    this.paramService.obtenerListaPadres("CATEGORIA_EMPRESA").subscribe((info) => {
+      this.categoriaEmpresaOpciones = info;
+    });
+  }
   subirImagen(event: any) {
     if (event.target.files && event.target.files[0]) {
       let nuevaImagen = event.target.files[0];
@@ -155,17 +189,13 @@ export class RucPersonaAutComponent implements OnInit {
   calcularEdad() {
     // this.informacion.edad = moment().diff(this.f.fechaNacimiento.value[0], 'years');
     // this.informacion.fechaNacimiento = moment(this.f.fechaNacimiento.value[0]).format('YYYY-MM-DD');
-    // this.registerForm.patchValue({
+    // this.rucPersonaForm.patchValue({
     //   edad: this.informacion.edad
     // });
   }
   guardarRegistro() {
 
-    this.submitted = true;
-    // stop here if form is invalid
-    if (this.registerForm.invalid) {
-      return;
-    }
+
     // this.informacion.apellidos = this.f.apellidos.value;
     // this.informacion.edad = this.f.edad.value;
     // // this.informacion.fechaNacimiento = this.f.fechaNacimiento.value;;
@@ -193,7 +223,15 @@ export class RucPersonaAutComponent implements OnInit {
     this.modalService.open(modalVC);
   }
   continuar() {
-    this.estado.emit(6);
+    this.submittedRuc = true;
+    // stop here if form is invalid
+    if (this.rucPersonaForm.invalid) {
+      return;
+    }
+    this.rucPersona.user_id = this.usuario.id;
+    this._creditosAutonomosService.actualizarDatosRuc(this.rucPersona).subscribe((info) => {
+      this.estado.emit(6);
+    });
   }
   validarWhatsapp() {
     // this._creditosAutonomosService.validarWhatsapp({

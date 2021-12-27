@@ -20,95 +20,30 @@
                 <div class="card-header border-bottom row justify-content-center">
                     <h4 class="text-info col-md-12 text-center">Filtrar establecimientos</h4>
                     <div class="col-md-3">
-                        <select class="form-control select2">
-                        <option>- Ciudad -</option>
-                        <option>Quito</option>
-                        <option>Guayaquil</option>
-                        <option>Ambato</option>
-                        <option>Cuenca</option>
-                        <option>Loja</option>
-                      </select>
+                        <input type="text" class="form-control" [(ngModel)]="ciudad">
                     </div>
                     <div class="col-md-3">
-                        <select class="form-control select2">
-                        <option>- Categoría -</option>
-                        <option>Ferreteria</option>
-                        <option>Hogar</option>
-                        <option>Alimentos</option>
-                        <option>Automotriz</option>
-                        <option>Educación</option>
-                      </select>
+                        <input type="text" class="form-control" [(ngModel)]="tipoCategoria">
+                    </div>
+                    <div class="col-md-3">
+                        <a class="btn btn-primary" (click)="obtenerListaEmpresasComerciales()">
+                            <i data-feather='search'></i>
+                        </a>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="swiper-responsive-breakpoints swiper-container px-4 py-2" [swiper]="swiperResponsive">
                         <div class="swiper-wrapper">
-                            <!-- <div class="swiper-slide" *ngFor="let producto of productos.info">
-                                <a (click)="obtenerProducto(producto._id)">
-                                    <div class="item-heading">
-                                        <h5 class="text-truncate mb-0">{{ producto.nombre }}</h5>
-                                        <small class="text-body">{{ producto.categoria }}</small>
-                                    </div>
-                                    <div class="img-container mx-auto py-75">
-                                        <img width="100px" [src]="producto.imagen" class="img-fluid" alt="image" />
-
-                                    </div>
-                                </a>
-                            </div> -->
-                            <div class="swiper-slide">
+                            <div class="swiper-slide" *ngFor="let establecimiento of listaEstablecimientos">
                                 <div class="item-heading">
-                                    <h5 class="text-truncate mb-0">Coral</h5>
-                                    <small class="text-body">Supermercados</small>
+                                    <h5 class="text-truncate mb-0">{{establecimiento.nombreComercial}}</h5>
+                                    <small class="text-body">{{establecimiento.tipoCategoria}}</small>
                                 </div>
                                 <div class="img-container w-50 mx-auto py-75">
-                                    <img src="app-assets/images/coral.jpg" class="img-fluid" alt="image" />
+                                    <img src="assets/images/coral.jpg" class="img-fluid" alt="image" />
                                 </div>
                                 <a href="index-tienda.html" target="_blank">Ver productos</a>
-                                <a href="javascript:void(0)" class="btn btn-sm btn-primary mt-2" (click)="continuar('61b384e7ccb87453d08213f9')">Seleccionar establecimiento</a>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-heading">
-                                    <h5 class="text-truncate mb-0">Santa María</h5>
-                                    <small class="text-body">Supermercados</small>
-                                </div>
-                                <div class="img-container w-50 mx-auto py-75">
-                                    <img src="app-assets/images/santam.jpg" class="img-fluid" alt="image" />
-                                </div>
-                                <a href="index-tienda.html" target="_blank">Ver productos</a>
-                                <a href="creditos-autonomo2.html" class="btn btn-sm btn-primary mt-2">Seleccionar establecimiento</a>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-heading">
-                                    <h5 class="text-truncate mb-0">Megamaxi</h5>
-                                    <small class="text-body">Supermercados</small>
-                                </div>
-                                <div class="img-container w-50 mx-auto py-75">
-                                    <img src="app-assets/images/mega.jpg" class="img-fluid" alt="image" />
-                                </div>
-                                <a href="index-tienda.html" target="_blank">Ver productos</a>
-                                <a href="creditos-autonomo2.html" class="btn btn-sm btn-primary mt-2">Seleccionar establecimiento</a>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-heading">
-                                    <h5 class="text-truncate mb-0">Megamaxi</h5>
-                                    <small class="text-body">Supermercados</small>
-                                </div>
-                                <div class="img-container w-50 mx-auto py-75">
-                                    <img src="app-assets/images/mega.jpg" class="img-fluid" alt="image" />
-                                </div>
-                                <a href="index-tienda.html" target="_blank">Ver productos</a>
-                                <a href="creditos-autonomo2.html" class="btn btn-sm btn-primary mt-2">Seleccionar establecimiento</a>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-heading">
-                                    <h5 class="text-truncate mb-0">Megamaxi</h5>
-                                    <small class="text-body">Supermercados</small>
-                                </div>
-                                <div class="img-container w-50 mx-auto py-75">
-                                    <img src="app-assets/images/mega.jpg" class="img-fluid" alt="image" />
-                                </div>
-                                <a href="index-tienda.html" target="_blank">Ver productos</a>
-                                <a href="creditos-autonomo2.html" class="btn btn-sm btn-primary mt-2">Seleccionar establecimiento</a>
+                                <a href="javascript:void(0)" class="btn btn-sm btn-primary mt-2" (click)="continuar(establecimiento._id)">Seleccionar establecimiento</a>
                             </div>
 
                         </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { FlatpickrOptions } from 'ng2-flatpickr';
 import moment from 'moment';
 import { CoreConfigService } from '../../../../../../@core/services/config.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CreditosAutonomosService } from '../creditos-autonomos.service';
 
 @Component({
   selector: 'app-resultados-credito-aut',
@@ -16,6 +17,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class ResultadosCreditoAutComponent implements OnInit {
   @Output() estado = new EventEmitter<number>();
+  @Output() idIfi = new EventEmitter<string>();
+  @Input() monto;
+
   @ViewChild('startDatePicker') startDatePicker;
   @ViewChild('whatsapp') whatsapp;
   public error;
@@ -25,6 +29,7 @@ export class ResultadosCreditoAutComponent implements OnInit {
   public registerForm: FormGroup;
   public loading = false;
   public submitted = false;
+  public listaIfis;
   // public usuario: User;
   public startDateOptions: FlatpickrOptions = {
     altInput: true,
@@ -45,9 +50,9 @@ export class ResultadosCreditoAutComponent implements OnInit {
   constructor(
     private _coreConfigService: CoreConfigService,
     private sanitizer: DomSanitizer,
+    private _creditosAutonomosService: CreditosAutonomosService,
 
     // private _coreMenuService: CoreMenuService,
-    // private _creditosAutonomosService: CreditosAutonomosService,
     // private _bienvenidoService: BienvenidoService,
     private _router: Router,
     private _formBuilder: FormBuilder,
@@ -97,24 +102,12 @@ export class ResultadosCreditoAutComponent implements OnInit {
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;
     });
-    // this._creditosAutonomosService.obtenerInformacion(this.usuario.id).subscribe(info => {
-    //   this.fecha = info.fechaNacimiento;
-    //   this.imagen = info.imagen;
-    //   this.registerForm.patchValue({
-    //     identificacion: info.identificacion,
-    //     nombres: info.nombres,
-    //     apellidos: info.apellidos,
-    //     genero: info.genero,
-    //     // fechaNacimiento: [info.fechaNacimiento],
-    //     edad: info.edad,
-    //     whatsapp: info.whatsapp,
-    //   });
-    // });
+
   }
   ngAfterViewInit(): void {
-    // if (this.usuario.estado == "3") {
-    //   this.modalWhatsapp(this.whatsapp);
-    // }
+    this._creditosAutonomosService.obtenerListaEmpresasIfis({}).subscribe((info) => {
+      this.listaIfis = info.info;
+    });
   }
 
   subirImagen(event: any) {
@@ -177,8 +170,9 @@ export class ResultadosCreditoAutComponent implements OnInit {
   modalWhatsapp(modalVC) {
     this.modalService.open(modalVC);
   }
-  continuar() {
-    this.estado.emit(7.);
+  async continuar(id) {
+    await this.idIfi.emit(id);
+    await this.estado.emit(7);
   }
   validarWhatsapp() {
     // this._creditosAutonomosService.validarWhatsapp({

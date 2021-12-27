@@ -30,11 +30,11 @@ export class EstablecimientosComercialesAutComponent implements OnInit {
   public registerForm: FormGroup;
   public loading = false;
   public submitted = false;
-  public ciudad ="";
-  public tipoCategoria ="";
+  public ciudad = "";
+  public tipoCategoria = "";
   public productos;
   public swiperResponsive: SwiperConfigInterface;
-
+  public listaEstablecimientos;
   // public usuario: User;
   public startDateOptions: FlatpickrOptions = {
     altInput: true,
@@ -134,12 +134,44 @@ export class EstablecimientosComercialesAutComponent implements OnInit {
     });
 
   }
+  inicializarSlider() {
+    return {
+      slidesPerView: 3,
+      spaceBetween: 50,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      },
+      breakpoints: {
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 40
+        },
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 30
+        },
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 20
+        },
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 10
+        }
+      }
+    };
+  }
   ngAfterViewInit(): void {
+    this.obtenerListaEmpresasComerciales();
+  }
+  obtenerListaEmpresasComerciales(){
     this._creditosAutonomosService.obtenerListaEmpresasComerciales({
       ciudad: this.ciudad,
       tipoCategoria: this.tipoCategoria
     }).subscribe((info) => {
-      console.log(info); 
+      this.listaEstablecimientos = info.info;
+      this.swiperResponsive = this.inicializarSlider();
     });
   }
   async continuar(id) {
