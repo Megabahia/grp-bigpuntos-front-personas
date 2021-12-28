@@ -29,12 +29,9 @@
                             <div class="form-group">
                                 <label>Plazo (meses):</label>
                                 <select class="form-control form-control-sm" formControlName="plazo" [(ngModel)]="plazo">
-                    <option>- Seleccione -</option>
-                    <option>1</option>
-                    <option>3</option>
-                    <option>6</option>
-                    <option>12</option>
-                    <option>24</option>
+                                    <option value="">- Seleccione -</option>
+                                    <option *ngFor="let plazo of plazos.plazos" value="{{plazo}}">{{plazo}}</option>
+        
                   </select>
                                 <div *ngIf="submittedSolicitar && soliForm.plazo.errors" class="invalid-feedback" style="display: block;">
                                     <div *ngIf="soliForm.plazo.errors.required">Plazo es requerido</div>

@@ -20,10 +20,17 @@
                 <div class="card-header border-bottom row justify-content-center">
                     <h4 class="text-info col-md-12 text-center">Filtrar establecimientos</h4>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" [(ngModel)]="ciudad">
+                        <select class="form-control select2" [(ngModel)]="ciudad">
+                            <option value="">- Seleccione -</option>
+                            <option *ngFor="let ciudadOp of ciudadOpciones" value="{{ciudadOp.nombre}}">{{ciudadOp.nombre}}</option>
+                     </select>
                     </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" [(ngModel)]="tipoCategoria">
+                        <select class="form-control select2" [(ngModel)]="tipoCategoria">
+                            <option value="">- Seleccione -</option>
+                            <option *ngFor="let categoriaEmpresaOp of categoriaEmpresaOpciones" value="{{categoriaEmpresaOp.nombre}}">{{categoriaEmpresaOp.nombre}}</option>
+
+                     </select>
                     </div>
                     <div class="col-md-3">
                         <a class="btn btn-primary" (click)="obtenerListaEmpresasComerciales()">

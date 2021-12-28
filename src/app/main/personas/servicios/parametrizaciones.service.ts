@@ -31,5 +31,8 @@ export class ParametrizacionesService {
   }  
   actualizarParametro(datos){
     return this._httpClient.post<any>(`${environment.apiUrl}/central/param/update/${datos._id}`,datos);
+  }
+  obtenerParametroNombreTipo(nombre,tipo){
+    return this._httpClient.post<any>(`${environment.apiUrl}/central/param/list/listOne`,{nombre,tipo});
   }  
 }

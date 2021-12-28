@@ -10,6 +10,7 @@ import { CoreConfigService } from '../../../../../../@core/services/config.servi
 import { DomSanitizer } from '@angular/platform-browser';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { CreditosAutonomosService } from '../creditos-autonomos.service';
+import { ParametrizacionesService } from '../../../servicios/parametrizaciones.service';
 
 @Component({
   selector: 'app-establecimientos-comerciales-aut',
@@ -33,8 +34,10 @@ export class EstablecimientosComercialesAutComponent implements OnInit {
   public ciudad = "";
   public tipoCategoria = "";
   public productos;
+  public ciudadOpciones;
   public swiperResponsive: SwiperConfigInterface;
   public listaEstablecimientos;
+  public categoriaEmpresaOpciones;
   // public usuario: User;
   public startDateOptions: FlatpickrOptions = {
     altInput: true,
@@ -56,6 +59,7 @@ export class EstablecimientosComercialesAutComponent implements OnInit {
     private _coreConfigService: CoreConfigService,
     private sanitizer: DomSanitizer,
     private _creditosAutonomosService: CreditosAutonomosService,
+    private paramService: ParametrizacionesService,
 
     // private _coreMenuService: CoreMenuService,
     // private _creditosAutonomosService: CreditosAutonomosService,
@@ -164,6 +168,8 @@ export class EstablecimientosComercialesAutComponent implements OnInit {
   }
   ngAfterViewInit(): void {
     this.obtenerListaEmpresasComerciales();
+    this.obtenerCiudadesOpciones();
+    this.obtenerCategoriaEmpresaOpciones()
   }
   obtenerListaEmpresasComerciales(){
     this._creditosAutonomosService.obtenerListaEmpresasComerciales({
@@ -172,6 +178,16 @@ export class EstablecimientosComercialesAutComponent implements OnInit {
     }).subscribe((info) => {
       this.listaEstablecimientos = info.info;
       this.swiperResponsive = this.inicializarSlider();
+    });
+  }
+  obtenerCiudadesOpciones() {
+    this.paramService.obtenerListaPadres("CIUDAD").subscribe((info) => {
+      this.ciudadOpciones = info;
+    });
+  }
+  obtenerCategoriaEmpresaOpciones() {
+    this.paramService.obtenerListaPadres("CATEGORIA_EMPRESA").subscribe((info) => {
+      this.categoriaEmpresaOpciones = info;
     });
   }
   async continuar(id) {

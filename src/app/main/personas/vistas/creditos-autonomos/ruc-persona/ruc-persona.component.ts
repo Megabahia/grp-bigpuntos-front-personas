@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -57,7 +57,7 @@ export class RucPersonaAutComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private _creditosAutonomosService: CreditosAutonomosService,
     private paramService: ParametrizacionesService,
-
+    private ref: ChangeDetectorRef,
     private _coreMenuService: CoreMenuService,
     // private _creditosAutonomosService: CreditosAutonomosService,
     // private _bienvenidoService: BienvenidoService,
@@ -143,6 +143,8 @@ export class RucPersonaAutComponent implements OnInit {
         this.obtenerProvinciaOpciones();
         this.obtenerCiudadOpciones();
       });
+      this.rucPersona.identificacion = this.usuario.persona.identificacion;
+      this.ref.detectChanges();
     this.obtenerCategoriaEmpresaOpciones();
   }
 

@@ -10,6 +10,7 @@ import { CoreConfigService } from '../../../../../../@core/services/config.servi
 import { DomSanitizer } from '@angular/platform-browser';
 import { CreditosAutonomosService } from '../creditos-autonomos.service';
 import { EmpresaInformacion } from 'app/main/personas/models/empresa';
+import { ParametrizacionesService } from '../../../servicios/parametrizaciones.service';
 
 
 @Component({
@@ -31,8 +32,11 @@ export class EstablecimientoSeleccionadoAutComponent implements OnInit {
   public loading = false;
   public submittedSolicitar = false;
   public empresa: EmpresaInformacion;
+  public plazos = {
+    plazos: []
+  };
   public monto;
-  public plazo;
+  public plazo = "";
   public aceptarTerminos = false;
   // public usuario: User;
   public startDateOptions: FlatpickrOptions = {
@@ -55,6 +59,7 @@ export class EstablecimientoSeleccionadoAutComponent implements OnInit {
     private _coreConfigService: CoreConfigService,
     private sanitizer: DomSanitizer,
     private _creditosAutonomosService: CreditosAutonomosService,
+    private paramService: ParametrizacionesService,
 
     // private _coreMenuService: CoreMenuService,
     // private _bienvenidoService: BienvenidoService,
@@ -115,8 +120,15 @@ export class EstablecimientoSeleccionadoAutComponent implements OnInit {
       .subscribe((info) => {
         this.empresa = info;
       });
+    this.obtenerCategoriaEmpresaOpciones();
   }
-
+  obtenerCategoriaEmpresaOpciones() {
+    this.paramService.obtenerParametroNombreTipo("Plazos", "CREDITOS").subscribe((info) => {
+      if (info.config) {
+        this.plazos = JSON.parse(JSON.parse(JSON.stringify(info.config)));
+      }
+    });
+  }
   subirImagen(event: any) {
     if (event.target.files && event.target.files[0]) {
       let nuevaImagen = event.target.files[0];
@@ -179,7 +191,7 @@ export class EstablecimientoSeleccionadoAutComponent implements OnInit {
   }
   async continuar() {
     this.submittedSolicitar = true;
-    if(this.solicitarForm.invalid || !this.aceptarTerminos){
+    if (this.solicitarForm.invalid || !this.aceptarTerminos) {
       return;
     }
     await this.valores.emit({

@@ -32,6 +32,6 @@ export class CreditosAutonomosService {
   }
   crearCredito(datos){
     return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoPersonas/create/`, datos);
-
   }
+
 }
