@@ -111,6 +111,24 @@ export const menu: CoreMenu[] = [
             url: 'personas/supermonedas/mis-facturas'
           }
         ]
+      },
+      {
+        id: 'creditosPreAprobados',
+        title: 'Créditos Pre Aprobados',
+        role: [Role.SuperMonedas],
+        // translate: 'MENU.PAGES.SECTION',
+        type: 'collapsible',
+        icon: 'credit-card',
+        children: [
+          {
+            id: 'listadoCreditosPre',
+            title: 'Listado de créditos Pre Aprobados',
+            // translate: 'MENU.APPS.EMAIL',
+            type: 'item',
+            icon: 'circle',
+            url: 'personas/creditos-pre-aprobados/listado'
+          }
+        ]
       }
 
     ]
