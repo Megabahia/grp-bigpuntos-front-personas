@@ -113,6 +113,24 @@ export const menu: CoreMenu[] = [
         ]
       },
       {
+        id: 'creditosEmpleado',
+        title: 'Créditos para Empleado',
+        role: [Role.SuperMonedas],
+        // translate: 'MENU.PAGES.SECTION',
+        type: 'collapsible',
+        icon: 'credit-card',
+        children: [
+          {
+            id: 'creditosPreEmp',
+            title: 'Créditos preaprobados',
+            // translate: 'MENU.APPS.EMAIL',
+            type: 'item',
+            icon: 'circle',
+            url: 'personas/creditos-empleados/creditos-pre-aprobados'
+          }
+        ]
+      },
+      {
         id: 'creditosPreAprobados',
         title: 'Créditos Pre Aprobados',
         role: [Role.SuperMonedas],

@@ -38,6 +38,7 @@ import { RucPersonaAutComponent } from './vistas/creditos-autonomos/ruc-persona/
 import { ResultadosCreditoAutComponent } from './vistas/creditos-autonomos/resultados-credito/resultados-credito.component';
 import { MensajeResultadoAutComponent } from './vistas/creditos-autonomos/mensaje-resultado/mensaje-resultado.component';
 import { ListadoCreditosPreAprobadosComponent } from './vistas/creditos-pre-aprobados/litado-creditos-pre-aprobados/listado-creditos-pre-aprobados.component';
+import { CreditosPreAprobadosEmpComponent } from './vistas/creditos-empleados/creditos-pre-aprobados/creditos-pre-aprobados-emp.component';
 const routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   {
@@ -123,6 +124,18 @@ const routes = [
       },]
   },
   {
+    path: 'creditos-empleados',
+    children: [
+      { path: '', redirectTo: 'creditos-pre-aprobados', pathMatch: 'full' },
+      {
+        path: 'creditos-pre-aprobados',
+        component: CreditosPreAprobadosEmpComponent,
+        data: { roles: [Role.SuperMonedas] },
+        canActivate: [AuthGuard]
+        // data: { animation: 'auth' }
+      },]
+  },
+  {
     path: 'creditos-pre-aprobados',
     children: [
       { path: '', redirectTo: 'listado', pathMatch: 'full' },
@@ -184,7 +197,8 @@ const routes = [
     RucPersonaAutComponent,
     ResultadosCreditoAutComponent,
     MensajeResultadoAutComponent,
-    ListadoCreditosPreAprobadosComponent],
+    ListadoCreditosPreAprobadosComponent,
+    CreditosPreAprobadosEmpComponent],
   imports: [
     CoreCommonModule,
     RouterModule.forChild(routes),
@@ -222,6 +236,7 @@ const routes = [
     RucPersonaAutComponent,
     ResultadosCreditoAutComponent,
     MensajeResultadoAutComponent,
-    ListadoCreditosPreAprobadosComponent]
+    ListadoCreditosPreAprobadosComponent,
+    CreditosPreAprobadosEmpComponent]
 })
 export class PersonasModule { }

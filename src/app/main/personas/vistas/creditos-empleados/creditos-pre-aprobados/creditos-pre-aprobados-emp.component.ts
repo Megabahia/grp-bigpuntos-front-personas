@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { BienvenidoService } from '../../bienvenido/bienvenido.service';
 import { takeUntil } from 'rxjs/operators';
-import { CreditosPreAprobadosService } from '../creditos-pre-aprobados.service';
+import { CreditosPreAprobadosService } from '../creditos-empleados.service';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { CoreConfigService } from '../../../../../../@core/services/config.service';
 import { CoreMenuService } from '../../../../../../@core/components/core-menu/core-menu.service';
@@ -17,13 +17,13 @@ import { DatePipe } from '@angular/common';
 import { ParametrizacionesService } from '../../../servicios/parametrizaciones.service';
 
 @Component({
-  selector: 'app-listado-creditos-pre-aprobados',
-  templateUrl: './listado-creditos-pre-aprobados.component.html',
-  styleUrls: ['./listado-creditos-pre-aprobados.component.scss'],
+  selector: 'app-creditos-pre-aprobados-emp',
+  templateUrl: './creditos-pre-aprobados-emp.component.html',
+  styleUrls: ['./creditos-pre-aprobados-emp.component.scss'],
   providers: [DatePipe]
 
 })
-export class ListadoCreditosPreAprobadosComponent implements OnInit {
+export class CreditosPreAprobadosEmpComponent implements OnInit {
   @ViewChild('establecimientoSeleccionadoMdl') establecimientoSeleccionadoMdl;
   @ViewChild('datosContactoMdl') datosContactoMdl;
   @ViewChild('startDatePicker') startDatePicker;
