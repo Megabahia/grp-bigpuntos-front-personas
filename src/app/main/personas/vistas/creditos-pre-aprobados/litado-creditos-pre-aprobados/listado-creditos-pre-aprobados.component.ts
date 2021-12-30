@@ -226,6 +226,7 @@ export class ListadoCreditosPreAprobadosComponent implements OnInit {
     this._creditosPreAprobadosService.obtenerListaCreditos({
       page: this.page - 1,
       page_size: this.page_size,
+      tipoPersona: "SuperMonedas",
       user_id: this.usuario.id
     }).subscribe((info) => {
       this.listaCreditos = info.info;
@@ -264,7 +265,7 @@ export class ListadoCreditosPreAprobadosComponent implements OnInit {
     this._creditosAutonomosService.guardarInformacion({ ...this.informacionBasica, user_id: this.usuario.id, imagen: [] })
       .subscribe((info) => {
         this._creditosPreAprobadosService.actualizarCredito({
-          id:this.idCredito,
+          id: this.idCredito,
           estado: "Confirmado",
           empresa_financiera: this.idEmpresaFinanciera,
           empresa_comercial: this.idEmpresaComercial
@@ -278,7 +279,7 @@ export class ListadoCreditosPreAprobadosComponent implements OnInit {
     this.idEmpresaFinanciera = empresa;
     this._creditosPreAprobadosService.obtenerListaConvenios({ empresa }).subscribe((info) => {
       this.listaConvenios = info.info;
-      
+
     });
     this.abrirModalLg(this.establecimientoSeleccionadoMdl);
   }
