@@ -16,6 +16,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class RegistroComponent implements OnInit {
   @ViewChild('mensajeModal') mensajeModal;
+  @ViewChild('mensajeConfirmModal') mensajeConfirmModal;
   //  Public
   public coreConfig: any;
   public registerForm: FormGroup;
@@ -23,6 +24,7 @@ export class RegistroComponent implements OnInit {
   public submitted = false;
   public returnUrl: string;
   public mensaje: string;
+  public mensajeConfirm = "";
   public error = '';
   public passwordTextType: boolean;
   public confirmPasswordTextType: boolean;
@@ -108,9 +110,8 @@ export class RegistroComponent implements OnInit {
         this.error = null;
         this.loading = true;
         localStorage.setItem('grpPersonasUser', JSON.stringify(info));
-        setTimeout(() => {
-          window.location.href = '/';
-        }, 1000);
+        this.mensajeConfirm = "Revise el correo para terminar con el registro";
+        this.abrirModal(this.mensajeConfirmModal);
       }
 
     },
@@ -123,6 +124,11 @@ export class RegistroComponent implements OnInit {
 
   }
 
+  redirigir() {
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 1000);
+  }
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
 
