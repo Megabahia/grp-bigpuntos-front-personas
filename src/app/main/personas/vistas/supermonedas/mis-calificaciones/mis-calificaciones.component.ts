@@ -4,6 +4,7 @@ import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.s
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { MisFacturasService } from '../mis-facturas/mis-facturas.service';
+import { CoreMenuService } from '../../../../../../@core/components/core-menu/core-menu.service';
 
 @Component({
   selector: 'app-mis-calificaciones',
@@ -18,12 +19,14 @@ export class MisCalificacionesComponent implements OnInit {
   public maxSize;
   public collectionSize;
   public facturas;
+  public usuario;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private _misFacturasService: MisFacturasService,
     private datePipe: DatePipe,
     private _coreSidebarService: CoreSidebarService,
+    private _coreMenuService: CoreMenuService,
 
   ) {
     this._unsubscribeAll = new Subject();
@@ -31,6 +34,8 @@ export class MisCalificacionesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.usuario = this._coreMenuService.grpPersonasUser;
+
   }
   ngAfterViewInit() {
     this.iniciarPaginador();
@@ -45,7 +50,7 @@ export class MisCalificacionesComponent implements OnInit {
 
   obtenerListaFacturas() {
     this._misFacturasService.obtenerFacturas({
-      page: this.page - 1, page_size: this.page_size
+      page: this.page - 1, page_size: this.page_size, user_id: this.usuario.id
     }).subscribe(info => {
       this.facturas = info.info;
       this.collectionSize = info.cont;
