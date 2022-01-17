@@ -21,10 +21,13 @@ import { User } from '../../../../auth/models/user';
 export class CompletarPerfilComponent implements OnInit {
   @ViewChild('startDatePicker') startDatePicker;
   @ViewChild('whatsapp') whatsapp;
+  @ViewChild('mensajeModal') mensajeModal;
+
   public error;
   public informacion: CompletarPerfil;
   public coreConfig: any;
   public imagen;
+  public mensaje = "";
   public registerForm: FormGroup;
   public loading = false;
   public submitted = false;
@@ -52,7 +55,7 @@ export class CompletarPerfilComponent implements OnInit {
     private _bienvenidoService: BienvenidoService,
     private _router: Router,
     private _formBuilder: FormBuilder,
-    private modalService: NgbModal
+    private modalService: NgbModal,
   ) {
     this.informacion = {
       apellidos: "",
@@ -104,7 +107,7 @@ export class CompletarPerfilComponent implements OnInit {
       genero: ['', Validators.required],
       fechaNacimiento: ['string', Validators.required],
       edad: ['', Validators.required],
-      whatsapp: ['', Validators.required],
+      whatsapp: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern("^[0-9]*$")]],
     });
     // Subscribe to config changes
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
@@ -134,17 +137,24 @@ export class CompletarPerfilComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       let nuevaImagen = event.target.files[0];
 
-      let reader = new FileReader();
 
-      reader.onload = (event: any) => {
-        this.imagen = event.target.result;
-      };
-
-      reader.readAsDataURL(event.target.files[0]);
       let imagen = new FormData();
       imagen.append('imagen', nuevaImagen, nuevaImagen.name);
       this._completarPerfilService.subirImagenRegistro(this.usuario.id, imagen).subscribe((info) => {
-      });
+        let reader = new FileReader();
+
+        reader.onload = (event: any) => {
+          this.imagen = event.target.result;
+        };
+
+        reader.readAsDataURL(event.target.files[0]);
+        this.mensaje = "Imagen actualizada con éxito";
+        this.abrirModal(this.mensajeModal);
+      },
+        (error) => {
+          this.mensaje = "Ha ocurrido un error al actualizar su imagen";
+          this.abrirModal(this.mensajeModal);
+        });
     }
   }
   calcularEdad() {
@@ -155,6 +165,7 @@ export class CompletarPerfilComponent implements OnInit {
     });
   }
   guardarRegistro() {
+    let wppAux = "";
 
     this.submitted = true;
     // stop here if form is invalid
@@ -168,8 +179,9 @@ export class CompletarPerfilComponent implements OnInit {
     this.informacion.identificacion = this.f.identificacion.value;
     this.informacion.nombres = this.f.nombres.value;
     this.informacion.whatsapp = this.f.whatsapp.value;
+    wppAux += "+593" + this.f.whatsapp.value.substring(1, 10);
+    this.informacion.whatsapp = wppAux;
     this.informacion.user_id = this.usuario.id;
-
     this._completarPerfilService.guardarInformacion(this.informacion).subscribe(info => {
       this._bienvenidoService.cambioDeEstado(
         {
@@ -186,6 +198,25 @@ export class CompletarPerfilComponent implements OnInit {
   }
   modalWhatsapp(modalVC) {
     this.modalService.open(modalVC);
+  }
+  omitirContinuar() {
+    let usuario = this._coreMenuService.grpPersonasUser;
+    this._bienvenidoService.cambioDeEstado(
+      {
+        estado: "6",
+        id: usuario.id
+      }
+    ).subscribe((info) => {
+      usuario.estado = "6";
+      localStorage.setItem('grpPersonasUser', JSON.stringify(usuario));
+      setTimeout(() => {
+        this._router.navigate(['/']);
+      }, 100);
+    });
+    // Login
+    this.loading = true;
+
+    // redirect to home page
   }
   validarWhatsapp() {
     this._completarPerfilService.validarWhatsapp({
@@ -211,6 +242,12 @@ export class CompletarPerfilComponent implements OnInit {
     }, error => {
       this.error = "Hay un fallo al tratar de verificar su código, intentelo nuevamente"
     });
+  }
+  abrirModal(modal) {
+    this.modalService.open(modal);
+  }
+  cerrarModal() {
+    this.modalService.dismissAll();
   }
   /**
    * On destroy

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -8,6 +8,8 @@ import { CoreConfigService } from '../../../../../@core/services/config.service'
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { BienvenidoService } from './bienvenido.service';
 import { CoreMenuService } from '../../../../../@core/components/core-menu/core-menu.service';
+import { ParametrizacionesService } from '../../servicios/parametrizaciones.service';
+import { GanarSuperMoneda } from '../../models/supermonedas';
 
 @Component({
   selector: 'app-bienvenido',
@@ -15,13 +17,19 @@ import { CoreMenuService } from '../../../../../@core/components/core-menu/core-
   styleUrls: ['./bienvenido.component.scss']
 })
 export class BienvenidoComponent implements OnInit {
+  @ViewChild('mensajeModal') mensajeModal;
+
   //  Public
   public coreConfig: any;
   public loginForm: FormGroup;
   public loading = false;
   public submitted = false;
   public returnUrl: string;
+  public ganarMonedas;
+  public usuario;
+  public superMonedas: GanarSuperMoneda;
   public error = '';
+  public mensaje = '';
   public passwordTextType: boolean;
   productosPromocion;
   public swiperResponsive: SwiperConfigInterface;
@@ -69,10 +77,13 @@ export class BienvenidoComponent implements OnInit {
     private _router: Router,
     private modalService: NgbModal,
     private _bienvenidoService: BienvenidoService,
-    private _coreMenuService: CoreMenuService
+    private _coreMenuService: CoreMenuService,
+    private paramService: ParametrizacionesService,
   ) {
-    this._unsubscribeAll = new Subject();
+    this.usuario = this._coreMenuService.grpPersonasUser;
 
+    this._unsubscribeAll = new Subject();
+    this.superMonedas = this.inicializarSuperMoneda();
     // Configure the layout
     this._coreConfigService.config = {
       layout: {
@@ -95,7 +106,14 @@ export class BienvenidoComponent implements OnInit {
   get f() {
     return this.loginForm.controls;
   }
-
+  inicializarSuperMoneda(): GanarSuperMoneda {
+    return {
+      credito: 0,
+      descripcion: "",
+      tipo: "Credito",
+      user_id: this.usuario.id
+    }
+  }
   /**
    * Toggle password
    */
@@ -105,18 +123,26 @@ export class BienvenidoComponent implements OnInit {
 
   completarPerfil() {
     let usuario = this._coreMenuService.grpPersonasUser;
-    this._bienvenidoService.cambioDeEstado(
-      {
-        estado: "2",
-        id: usuario.id
-      }
-    ).subscribe((info) => {
-      usuario.estado = "2";
-      localStorage.setItem('grpPersonasUser', JSON.stringify(usuario));
-      setTimeout(() => {
-        this._router.navigate(['/']);
-      }, 100);
+    this._bienvenidoService.guardarSuperMonedas(this.superMonedas).subscribe((info) => {
+      this._bienvenidoService.cambioDeEstado(
+        {
+          estado: "2",
+          id: usuario.id
+        }
+      ).subscribe((info) => {
+        usuario.estado = "2";
+        localStorage.setItem('grpPersonasUser', JSON.stringify(usuario));
+
+        setTimeout(() => {
+          this._router.navigate(['/']);
+        }, 100);
+      },(error)=>{
+        this.mensaje = "Ha ocurrido un error";
+        this.abrirModal(this.mensajeModal);
+      });
+
     });
+
     // Login
     this.loading = true;
 
@@ -135,7 +161,11 @@ export class BienvenidoComponent implements OnInit {
       setTimeout(() => {
         this._router.navigate(['/']);
       }, 100);
-    });
+    },
+      (error) => {
+        this.mensaje = "Ha ocurrido un error al actualizar su imagen";
+        this.abrirModal(this.mensajeModal);
+      });
     // Login
     this.loading = true;
 
@@ -194,7 +224,11 @@ export class BienvenidoComponent implements OnInit {
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;
     });
-
+    this.paramService.obtenerParametroNombreTipo("monedas_bienvenida", "GANAR_SUPERMONEDAS").subscribe((info) => {
+      this.ganarMonedas = info;
+      this.superMonedas.credito = this.ganarMonedas.valor;
+      this.superMonedas.descripcion = "Gana" + this.ganarMonedas.valor + "supermonedas por bienvenida";
+    });
   }
   modalOpenVC(modalVC, id) {
     let subsObtenerProducto = this._bienvenidoService.obtenerProducto(id).subscribe((valor) => {
@@ -204,6 +238,12 @@ export class BienvenidoComponent implements OnInit {
         size: 'lg'
       });
     });
+  }
+  abrirModal(modal) {
+    this.modalService.open(modal);
+  }
+  cerrarModal() {
+    this.modalService.dismissAll();
   }
   /**
    * On destroy
