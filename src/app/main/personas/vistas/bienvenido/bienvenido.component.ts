@@ -122,6 +122,25 @@ export class BienvenidoComponent implements OnInit {
 
     // redirect to home page
   }
+  omitirContinuar() {
+    let usuario = this._coreMenuService.grpPersonasUser;
+    this._bienvenidoService.cambioDeEstado(
+      {
+        estado: "6",
+        id: usuario.id
+      }
+    ).subscribe((info) => {
+      usuario.estado = "6";
+      localStorage.setItem('grpPersonasUser', JSON.stringify(usuario));
+      setTimeout(() => {
+        this._router.navigate(['/']);
+      }, 100);
+    });
+    // Login
+    this.loading = true;
+
+    // redirect to home page
+  }
   obtenerProductos() {
     let subsObtenerProductos = this._bienvenidoService.obtenerProductos(
       {

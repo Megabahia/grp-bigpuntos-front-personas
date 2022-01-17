@@ -14,6 +14,7 @@ import { CoreCommonModule } from '@core/common.module';
 import { CoreSidebarModule, CoreThemeCustomizerModule } from '@core/components';
 
 import { coreConfig } from 'app/app-config';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
@@ -67,7 +68,6 @@ const appRoutes: Routes = [
     CoreCommonModule,
     CoreSidebarModule,
     CoreThemeCustomizerModule,
-
     // App modules
     LayoutModule,
     SampleModule

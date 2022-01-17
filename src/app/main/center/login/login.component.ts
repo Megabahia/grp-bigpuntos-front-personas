@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { first, takeUntil } from 'rxjs/operators';
 import { CoreConfigService } from '../../../../@core/services/config.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AuthenticationService } from '../../../auth/service/authentication.service';
+import { ReCaptchaV3Service } from 'ngx-captcha';
 
 @Component({
   selector: 'app-login',
@@ -13,11 +14,15 @@ import { AuthenticationService } from '../../../auth/service/authentication.serv
 })
 export class LoginComponent implements OnInit {
   //  Public
+  @ViewChild('captchaElem') captchaElem
+
   public coreConfig: any;
   public loginForm: FormGroup;
   public loading = false;
   public submitted = false;
   public returnUrl: string;
+  public captcha: boolean;
+  public siteKey: string;
   public error = '';
   public passwordTextType: boolean;
   public startDateOptions = {
@@ -42,6 +47,8 @@ export class LoginComponent implements OnInit {
     private _router: Router,
     private _authenticationService: AuthenticationService
   ) {
+    this.siteKey = "6Lf8RtUaAAAAAJ-X1OdWM1yk80S_U4dF_A3nNMc1";
+    this.captcha = false;
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
@@ -81,7 +88,7 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.loginForm.invalid) {
+    if (this.loginForm.invalid || !this.captcha) {
       return;
     }
 
@@ -123,7 +130,9 @@ export class LoginComponent implements OnInit {
       this.coreConfig = config;
     });
   }
-
+  captchaValidado(evento) {
+    this.captcha = true;
+  }
   /**
    * On destroy
    */

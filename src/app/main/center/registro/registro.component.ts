@@ -91,7 +91,8 @@ export class RegistroComponent implements OnInit {
         password: this.f.password.value,
         roles:Role.SuperMonedas,
         email: this.f.correo.value,
-        estado: 1
+        estado: 1,
+        tipoUsuario:'core'
       }
     ).subscribe((info) => {
       this.error = null;
