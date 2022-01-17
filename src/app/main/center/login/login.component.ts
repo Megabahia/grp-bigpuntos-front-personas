@@ -108,7 +108,8 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this._router.navigate([this.returnUrl]);
+          // this._router.navigate([this.returnUrl]);
+          this._router.navigate(['/']);
         },
         error => {
 
@@ -189,7 +190,8 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this._router.navigate([this.returnUrl]);
+          // this._router.navigate([this.returnUrl]);
+          this._router.navigate(['/']);
         },
         error => {
           this.error = "Fallo en la autenticación, vuelva a intentarlo";
@@ -205,7 +207,10 @@ export class LoginComponent implements OnInit {
    */
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
-    this.logginSubs.unsubscribe();
+    if (this.logginSubs) {
+      this.logginSubs.unsubscribe();
+    }
+
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }

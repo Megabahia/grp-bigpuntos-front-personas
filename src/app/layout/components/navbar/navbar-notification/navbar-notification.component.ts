@@ -33,7 +33,7 @@ export class NavbarNotificationComponent implements OnInit {
     private _notificationsService: NotificationsService,
     private _coreMenuService: CoreMenuService
   ) {
-    this.estado = this._coreMenuService.grpPersonasUser.estado;
+    this.estado = this._coreMenuService.grpPersonasUser.estado ? this._coreMenuService.grpPersonasUser.estado : 0;
   }
 
   // Lifecycle Hooks
