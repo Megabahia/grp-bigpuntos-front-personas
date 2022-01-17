@@ -110,7 +110,7 @@ export class RegistroComponent implements OnInit {
         this.error = null;
         this.loading = true;
         localStorage.setItem('grpPersonasUser', JSON.stringify(info));
-        this.mensajeConfirm = "Revise el correo para terminar con el registro";
+        this.mensajeConfirm = "Registro completo, haga click en continuar para ir al portal de inicio de sesión";
         this.abrirModal(this.mensajeConfirmModal);
       }
 
