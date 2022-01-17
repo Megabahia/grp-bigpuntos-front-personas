@@ -3,9 +3,12 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { first, takeUntil } from 'rxjs/operators';
 import { CoreConfigService } from '../../../../@core/services/config.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../auth/service/authentication.service';
 import { ReCaptchaV3Service } from 'ngx-captcha';
+import { FacebookLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
+import { RegistroService } from '../registro/registro.service';
+import { Role } from 'app/auth/models';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +28,9 @@ export class LoginComponent implements OnInit {
   public siteKey: string;
   public error = '';
   public passwordTextType: boolean;
+  private socialUser: SocialUser;
+  private isLoggedin: boolean = null;
+  private logginSubs: Subscription;
   public startDateOptions = {
     altInput: true,
     mode: 'single',
@@ -45,7 +51,10 @@ export class LoginComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _authenticationService: AuthenticationService
+    private _authenticationService: AuthenticationService,
+    private socialAuthService: SocialAuthService,
+    private _registroService: RegistroService,
+
   ) {
     this.siteKey = "6Lf8RtUaAAAAAJ-X1OdWM1yk80S_U4dF_A3nNMc1";
     this.captcha = false;
@@ -99,17 +108,29 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          console.log(this.returnUrl);
           this._router.navigate([this.returnUrl]);
         },
         error => {
-        
+
           this.error = "Fallo en la autenticación, vuelva a intentarlo";
           this.loading = false;
         }
       );
   }
+  async loginWithFacebook() {
+    await this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
 
+    this.logginSubs = await this.socialAuthService.authState.subscribe((user) => {
+      this.socialUser = user;
+      this.isLoggedin = (user != null);
+      this.loginForm.patchValue({
+        email: user.email,
+        password: user.id
+      });
+      this.logginSocial();
+
+    });
+  }
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
 
@@ -129,6 +150,52 @@ export class LoginComponent implements OnInit {
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;
     });
+
+
+  }
+  logginSocial() {
+    this._registroService.registrarUsuario(
+      {
+        password: this.f.password.value,
+        roles: Role.SuperMonedas,
+        email: this.f.email.value,
+        estado: 1,
+        tipoUsuario: 'core'
+      }
+    ).subscribe((info) => {
+      if (info.email == "Ya existe usuarios con este email.") {
+        this.login();
+
+      } else {
+        this.error = null;
+        this.loading = true;
+        localStorage.setItem('grpPersonasUser', JSON.stringify(info));
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 1000);
+      }
+
+    },
+      (error) => {
+        this.login();
+
+        // this.error = error.error.password;
+      });
+
+  }
+  login() {
+    this._authenticationService
+      .login(this.f.email.value, this.f.password.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this._router.navigate([this.returnUrl]);
+        },
+        error => {
+          this.error = "Fallo en la autenticación, vuelva a intentarlo";
+
+        }
+      );
   }
   captchaValidado(evento) {
     this.captcha = true;
@@ -138,6 +205,7 @@ export class LoginComponent implements OnInit {
    */
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
+    this.logginSubs.unsubscribe();
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }

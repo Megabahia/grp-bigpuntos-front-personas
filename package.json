@@ -49,6 +49,7 @@
     "angular-in-memory-web-api": "0.11.0",
     "angular-shepherd": "11.0.0",
     "angularx-qrcode": "^11.0.0",
+    "angularx-social-login": "^3.5.4",
     "animate.css": "4.1.1",
     "apexcharts": "3.23.0",
     "bootstrap": "4.5.3",
