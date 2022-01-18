@@ -12,6 +12,8 @@ import { CoreMenuService } from '../../../../../@core/components/core-menu/core-
 import { CompletarPerfil } from '../../models/persona';
 import moment from 'moment';
 import { User } from '../../../../auth/models/user';
+import { GanarSuperMoneda } from '../../models/supermonedas';
+import { ParametrizacionesService } from '../../servicios/parametrizaciones.service';
 
 @Component({
   selector: 'app-completar-perfil',
@@ -27,6 +29,8 @@ export class CompletarPerfilComponent implements OnInit {
   public informacion: CompletarPerfil;
   public coreConfig: any;
   public imagen;
+  public superMonedas: GanarSuperMoneda;
+  public ganarMonedas;
   public mensaje = "";
   public registerForm: FormGroup;
   public loading = false;
@@ -56,7 +60,12 @@ export class CompletarPerfilComponent implements OnInit {
     private _router: Router,
     private _formBuilder: FormBuilder,
     private modalService: NgbModal,
+    private paramService: ParametrizacionesService,
+
   ) {
+    this.usuario = this._coreMenuService.grpPersonasUser;
+    this.superMonedas = this.inicializarSuperMoneda();
+
     this.informacion = {
       apellidos: "",
       user_id: "",
@@ -92,13 +101,19 @@ export class CompletarPerfilComponent implements OnInit {
   get f() {
     return this.registerForm.controls;
   }
-
+  inicializarSuperMoneda(): GanarSuperMoneda {
+    return {
+      credito: 0,
+      descripcion: "",
+      tipo: "Credito",
+      user_id: this.usuario.id
+    }
+  }
   /**
    * On init
    */
   ngOnInit(): void {
 
-    this.usuario = this._coreMenuService.grpPersonasUser;
 
     this.registerForm = this._formBuilder.group({
       identificacion: ['', [Validators.required]],
@@ -123,8 +138,13 @@ export class CompletarPerfilComponent implements OnInit {
         genero: info.genero,
         // fechaNacimiento: [info.fechaNacimiento],
         edad: info.edad,
-        whatsapp: info.whatsapp,
+        whatsapp: info.whatsapp.replace("+593", 0)
       });
+    });
+    this.paramService.obtenerParametroNombreTipo("monedas_registro", "GANAR_SUPERMONEDAS").subscribe((info) => {
+      this.ganarMonedas = info;
+      this.superMonedas.credito = this.ganarMonedas.valor;
+      this.superMonedas.descripcion = "Gana " + this.ganarMonedas.valor + " supermonedas por completar perfil";
     });
   }
   ngAfterViewInit(): void {
@@ -182,19 +202,34 @@ export class CompletarPerfilComponent implements OnInit {
     wppAux += "+593" + this.f.whatsapp.value.substring(1, 10);
     this.informacion.whatsapp = wppAux;
     this.informacion.user_id = this.usuario.id;
-    this._completarPerfilService.guardarInformacion(this.informacion).subscribe(info => {
-      this._bienvenidoService.cambioDeEstado(
-        {
-          estado: "3",
-          id: this.usuario.id
-        }
-      ).subscribe(infoCambio => {
-        this.usuario.estado = "3";
-        this.usuario.persona = info;
-        localStorage.setItem('grpPersonasUser', JSON.stringify(this.usuario));
-        this.modalWhatsapp(this.whatsapp);
+    this._bienvenidoService.guardarSuperMonedas(this.superMonedas).subscribe((infoSM) => {
+      this._completarPerfilService.guardarInformacion(this.informacion).subscribe(info => {
+        this._bienvenidoService.cambioDeEstado(
+          {
+            estado: "3",
+            id: this.usuario.id
+          }
+        ).subscribe(infoCambio => {
+          this.usuario.estado = "3";
+          this.usuario.persona = info;
+          localStorage.setItem('grpPersonasUser', JSON.stringify(this.usuario));
+          this.modalWhatsapp(this.whatsapp);
+        },
+          (error) => {
+            this.mensaje = "Ha ocurrido un error ";
+            this.abrirModal(this.mensajeModal);
+          });
+      },
+        (error) => {
+          this.mensaje = "Ha ocurrido un error al guardar la información";
+          this.abrirModal(this.mensajeModal);
+        });
+    },
+      (error) => {
+        this.mensaje = "Ha ocurrido un error";
+        this.abrirModal(this.mensajeModal);
       });
-    });
+
   }
   modalWhatsapp(modalVC) {
     this.modalService.open(modalVC);
