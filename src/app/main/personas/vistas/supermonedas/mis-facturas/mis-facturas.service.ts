@@ -12,4 +12,7 @@ export class MisFacturasService {
   obtenerFacturas(datos) {
     return this._httpClient.post<any>(`${environment.apiUrl}/central/facturas/list/`, datos);
   }
+  subirFactura(datos) {
+    return this._httpClient.post<any>(`${environment.apiUrl}/central/facturas/subir/factura/`, datos);
+  }
 }
