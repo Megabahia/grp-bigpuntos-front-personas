@@ -124,8 +124,13 @@ export class MisFacturasComponent implements OnInit {
       this._misFacturasService.subirFactura(this.archivoFacElec).subscribe((info) => {
         this.obtenerListaFacturas();
         this.toggleSidebar("factura-electronica");
-        this.mensaje = "Factura cargada con éxito";
-        this.abrirModal(this.mensajeModal);
+
+        this._bienvenidoService.guardarSuperMonedas(this.superMonedasElec).subscribe((infoSM) => {
+
+          this.mensaje = "Factura cargada con éxito, ud ha ganado " + this.ganarMonedasFacElec.valor + " super monedas";
+          this.abrirModal(this.mensajeModal);
+        });
+
       },
         (error) => {
           this.mensaje = "Ha ocurrido un error al cargar su factura";
