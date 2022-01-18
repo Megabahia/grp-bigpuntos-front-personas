@@ -6,6 +6,8 @@ import { User } from 'app/auth/models';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BienvenidoService } from '../bienvenido/bienvenido.service';
+import { ParametrizacionesService } from '../../servicios/parametrizaciones.service';
+import { GanarSuperMoneda } from '../../models/supermonedas';
 
 @Component({
   selector: 'app-felicidades-registro',
@@ -15,7 +17,8 @@ import { BienvenidoService } from '../bienvenido/bienvenido.service';
 export class FelicidadesRegistroComponent implements OnInit {
   public usuario: User;
   public coreConfig: any;
-
+  public superMonedas: GanarSuperMoneda;
+  public ganarMonedas;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
@@ -23,8 +26,13 @@ export class FelicidadesRegistroComponent implements OnInit {
     private _bienvenidoService: BienvenidoService,
     private _coreMenuService: CoreMenuService,
     private _router: Router,
+    private paramService: ParametrizacionesService,
 
   ) {
+    this.usuario = this._coreMenuService.grpPersonasUser;
+
+    this.superMonedas = this.inicializarSuperMoneda();
+
     this._unsubscribeAll = new Subject();
 
     this._coreConfigService.config = {
@@ -43,11 +51,23 @@ export class FelicidadesRegistroComponent implements OnInit {
       }
     };
   }
-
+  inicializarSuperMoneda(): GanarSuperMoneda {
+    return {
+      credito: 0,
+      descripcion: "",
+      tipo: "Credito",
+      user_id: this.usuario.id
+    }
+  }
   ngOnInit(): void {
     this.usuario = this._coreMenuService.grpPersonasUser;
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;
+    });
+    this.paramService.obtenerParametroNombreTipo("monedas_registro", "GANAR_SUPERMONEDAS").subscribe((info) => {
+      this.ganarMonedas = info;
+      this.superMonedas.credito = this.ganarMonedas.valor;
+      this.superMonedas.descripcion = "Gana " + this.ganarMonedas.valor + " supermonedas por completar perfil";
     });
   }
 
