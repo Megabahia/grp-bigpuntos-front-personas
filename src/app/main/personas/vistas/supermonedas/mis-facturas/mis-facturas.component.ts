@@ -6,8 +6,10 @@ import { Subject } from 'rxjs';
 import { MisFacturasService } from './mis-facturas.service';
 import { CoreMenuService } from '../../../../../../@core/components/core-menu/core-menu.service';
 import { ParametrizacionesService } from '../../../servicios/parametrizaciones.service';
-import { GanarSuperMoneda } from '../../../models/supermonedas';
+import { GanarSuperMoneda, FacturaFisica } from '../../../models/supermonedas';
 import { BienvenidoService } from '../../bienvenido/bienvenido.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FlatpickrOptions } from 'ng2-flatpickr';
 
 @Component({
   selector: 'app-mis-facturas',
@@ -29,15 +31,28 @@ export class MisFacturasComponent implements OnInit {
   public mensaje = "";
   public ganarMonedasFacElec;
   public ganarMonedasFacFisi;
+  public submittedFactura = false;
   public superMonedasElec: GanarSuperMoneda;
   public superMonedasFisi: GanarSuperMoneda;
   public nombreFacElec = "";
   public nombreFacFisi = "";
+  public facFisiForm: FormGroup;
   public archivoFacElec = new FormData();
   public archivoFacFisi = new FormData();
+  public facturaFisica: FacturaFisica;
   public facturas;
+  public paisOpciones;
+  public provinciaOpciones;
+  public ciudadOpciones;
+  public fecha;
   private _unsubscribeAll: Subject<any>;
-
+  public startDateOptions: FlatpickrOptions = {
+    defaultDate: 'today',
+    altInput: true,
+    mode: 'single',
+    altFormat: 'Y-n-j',
+    altInputClass: 'form-control flat-picker flatpickr-input invoice-edit-input',
+  };
   constructor(
     private _misFacturasService: MisFacturasService,
     private datePipe: DatePipe,
@@ -46,6 +61,7 @@ export class MisFacturasComponent implements OnInit {
     private paramService: ParametrizacionesService,
     private _bienvenidoService: BienvenidoService,
     private modalService: NgbModal,
+    private _formBuilder: FormBuilder,
 
 
   ) {
@@ -53,7 +69,7 @@ export class MisFacturasComponent implements OnInit {
 
     this.superMonedasElec = this.inicializarSuperMoneda();
     this.superMonedasFisi = this.inicializarSuperMoneda();
-
+    this.facturaFisica = this.inicializarFacturaFisica();
     this._unsubscribeAll = new Subject();
 
   }
@@ -66,9 +82,59 @@ export class MisFacturasComponent implements OnInit {
       empresa_id: this.empresaId
     }
   }
+  inicializarFacturaFisica(): FacturaFisica {
+    return {
+      _id: "",
+      atencion: "",
+      calificacion: "",
+      categoria: "",
+      ciudad: "",
+      fechaEmision: "",
+      importeTotal: 0,
+      numeroFactura: "",
+      observaciones: "",
+      pais: "",
+      provincia: "",
+      razonSocial: "",
+      urlArchivo: "",
+      urlFoto: "",
+      user_id: this.usuario.id
+    }
+  }
+  get FFForm() {
+    return this.facFisiForm.controls;
+  }
+  obtenerPaisOpciones() {
+    this.paramService.obtenerListaPadres("PAIS").subscribe((info) => {
+      this.paisOpciones = info;
+    });
+  }
+  obtenerProvinciaOpciones() {
+    this.paramService.obtenerListaHijos(this.facturaFisica.pais, "PAIS").subscribe((info) => {
+      this.provinciaOpciones = info;
+    });
+  }
+  obtenerCiudadOpciones() {
+    this.paramService.obtenerListaHijos(this.facturaFisica.provincia, "PROVINCIA").subscribe((info) => {
+      this.ciudadOpciones = info;
+    });
+  }
   ngOnInit(): void {
+    this.facFisiForm = this._formBuilder.group({
+      razonSocial: ['', [Validators.required]],
+      pais: ['', [Validators.required]],
+      provincia: ['', [Validators.required]],
+      ciudad: ['', [Validators.required]],
+      fechaEmision: ['', [Validators.required]],
+      monto: [0, [Validators.required]],
+      categoria: ['', [Validators.required]],
+      urlFoto: ['', [Validators.required]],
+    });
     this.obtenerEmpresaId();
-
+    this.obtenerPaisOpciones();
+    this.obtenerProvinciaOpciones();
+    this.obtenerCiudadOpciones();
+    
     this.usuario = this._coreMenuService.grpPersonasUser;
     this.paramService.obtenerParametroNombreTipo("monedas_facturas_elec", "GANAR_SUPERMONEDAS").subscribe((info) => {
       this.ganarMonedasFacElec = info;

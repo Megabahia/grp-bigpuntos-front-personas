@@ -158,7 +158,7 @@
         <!-- Modal to add new user starts-->
         <div class="modalsd modal-slide-in sdfade new-user-modal" id="modals-slide-in">
             <div class="modal-dialog">
-                <form class="add-new-user modal-content pt-0" (ngSubmit)="(newUserForm.form.valid)" #newUserForm="ngForm">
+                <form class="add-new-user modal-content pt-0" [formGroup]="facFisiForm">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="toggleSidebar('factura-normal')">
                         ×
                     </button>
@@ -168,24 +168,53 @@
                     <div class="modal-body flex-grow-1">
                         <div class="form-group">
                             <label>Nombre del local:</label>
-                            <input class="form-control" type="text">
+                            <input class="form-control" type="text" formControlName="razonSocial" [(ngModel)]="facturaFisica.razonSocial">
                         </div>
                         <div class="form-group">
-                            <label>Ciudad del local:</label>
-                            <input class="form-control" type="text">
+                            <label for="username">País del local</label>
+                            <select class="form-control select2" formControlName="pais" [(ngModel)]="facturaFisica.pais" (change)="obtenerProvinciaOpciones()">
+                                <option value="">- Seleccione -</option>
+                                <option *ngFor="let paisOp of paisOpciones" value="{{paisOp.nombre}}">{{paisOp.nombre}}</option>
+                         </select>
+                            <div *ngIf="submittedFactura && FFForm.pais.errors" class="invalid-feedback" style="display: block;">
+                                <div *ngIf="FFForm.pais.errors.required">País es requerido</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Provincia del local</label>
+                            <select class="form-control select2" formControlName="provincia" [(ngModel)]="facturaFisica.provincia" (change)="obtenerCiudadOpciones() ">
+                                <option value="">- Seleccione -</option>
+                                <option *ngFor="let provinciaOp of provinciaOpciones" value="{{provinciaOp.nombre}}">{{provinciaOp.nombre}}</option>
+
+                         </select>
+                            <div *ngIf="submittedFactura && FFForm.provincia.errors" class="invalid-feedback" style="display: block;">
+                                <div *ngIf="FFForm.provincia.errors.required">Provincia es requerido</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Ciudad del local</label>
+                            <select class="form-control select2" formControlName="ciudad" [(ngModel)]="facturaFisica.ciudad">
+                                <option value="">- Seleccione -</option>
+                                <option *ngFor="let ciudadOp of ciudadOpciones" value="{{ciudadOp.nombre}}">{{ciudadOp.nombre}}</option>
+
+                         </select>
+                            <div *ngIf="submittedFactura && FFForm.ciudad.errors" class="invalid-feedback" style="display: block;">
+                                <div *ngIf="FFForm.ciudad.errors.required">Ciudad es requerido</div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Fecha de compra:</label>
-                            <input class="form-control flatpickr-basic flatpickr-input" type="text">
+                            <ng2-flatpickr [setDate]="fecha" formControlName="fechaEmision" [config]="startDateOptions"></ng2-flatpickr>
+
                         </div>
 
                         <div class="form-group">
                             <label>Monto:</label>
-                            <input class="form-control" type="text">
+                            <input class="form-control" type="text" formControlName="monto">
                         </div>
                         <div class="form-group">
                             <label>Categoría de producto:</label>
-                            <select class="form-control select2">
+                            <select class="form-control select2" formControlName="categoria">
                                 <option>- Seleccione -</option>
                                 <option>Alimentos</option>
                                 <option>Tecnología</option>
@@ -197,7 +226,7 @@
                         <div class="form-group">
                             <label for="customFile1">Adjuntar foto de factura</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile1" required />
+                                <input type="file" class="custom-file-input" id="customFile1" required formControlName="urlFoto" />
                                 <label class="custom-file-label" for="customFile1">Escojer</label>
                             </div>
                         </div>

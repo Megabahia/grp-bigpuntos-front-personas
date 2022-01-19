@@ -14,3 +14,21 @@ export class GanarSuperMoneda {
     descripcion: string;
     empresa_id: string;
 }
+
+export class FacturaFisica {
+    _id: string;
+    numeroFactura: string;
+    razonSocial: string
+    pais: string;
+    provincia: string;
+    ciudad: string;
+    fechaEmision: string;
+    importeTotal: number;
+    categoria: string;
+    urlFoto: string;
+    urlArchivo: string;
+    user_id: string;
+    atencion: string;
+    calificacion: string;
+    observaciones: string;
+}
