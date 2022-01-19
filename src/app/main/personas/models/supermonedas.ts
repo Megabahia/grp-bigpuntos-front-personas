@@ -12,5 +12,5 @@ export class GanarSuperMoneda {
     tipo: string;
     credito: number;
     descripcion: string;
-
+    empresa_id: string;
 }

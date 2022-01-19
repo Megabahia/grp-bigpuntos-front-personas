@@ -116,83 +116,6 @@
                 </div>
                 <ngb-pagination #paginator [collectionSize]="collectionSize" [(page)]="page" [(pageSize)]="page_size" [maxSize]="5" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
                 <!-- Modal to add new user starts-->
-                <div class="modal modal-slide-in new-user-modal fade" id="modals-slide-in">
-                    <div class="modal-dialog">
-                        <div class="modal-content pt-0">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-                            <div class="modal-header mb-1">
-                                <h5 class="modal-title" id="exampleModalLabel">Nueva factura</h5>
-                            </div>
-                            <div class="modal-body flex-grow-1">
-
-                                <div class="form-group">
-                                    <label for="customFile1">Adjuntar archivos (PDF y XML)</label>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile1" required (change)="cargarFacturaElec($event)" />
-                                        <label class="custom-file-label" for="customFile1">{{nombreFacElec ? nombreFacElec:'Escojer'}}</label>
-                                    </div>
-                                </div>
-
-
-
-
-                                <button class="btn btn-primary mr-1" data-toggle="modal" data-target="#exito" data-dismiss="modal" aria-label="Close">Guardar</button>
-                                <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal modal-slide-in new-user-modal fade" id="modals-slide-in2">
-                    <div class="modal-dialog">
-                        <div class="modal-content pt-0">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-                            <div class="modal-header mb-1">
-                                <h5 class="modal-title" id="exampleModalLabel">Nueva factura física</h5>
-                            </div>
-                            <div class="modal-body flex-grow-1">
-                                <div class="form-group">
-                                    <label>Nombre del local:</label>
-                                    <input class="form-control" type="text">
-                                </div>
-                                <div class="form-group">
-                                    <label>Ciudad del local:</label>
-                                    <input class="form-control" type="text">
-                                </div>
-                                <div class="form-group">
-                                    <label>Fecha de compra:</label>
-                                    <input class="form-control flatpickr-basic flatpickr-input" type="text">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Monto:</label>
-                                    <input class="form-control" type="text">
-                                </div>
-                                <div class="form-group">
-                                    <label>Categoría de producto:</label>
-                                    <select class="form-control select2">
-                                        <option>- Seleccione -</option>
-                                        <option>Alimentos</option>
-                                        <option>Tecnología</option>
-                                        <option>Automotriz</option>
-                                        <option>Ropa</option>
-                                        <option>Hogar</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="customFile1">Adjuntar foto de factura</label>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile1" required />
-                                        <label class="custom-file-label" for="customFile1">Escojer</label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary mr-1" data-toggle="modal" data-target="#exito" data-dismiss="modal" aria-label="Close">Guardar</button>
-                                <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Modal to add new user Ends-->
             </div>
             <!-- list section end -->
@@ -220,7 +143,7 @@
                                 <label class="custom-file-label" for="customFile1">{{nombreFacElec ? nombreFacElec:'Escojer'}}</label>
                             </div>
                         </div>
-                        <button class="btn btn-primary mr-1" data-toggle="modal" data-target="#exito" data-dismiss="modal" aria-label="Close" (click)="subirFacturaElec()">Guardar</button>
+                        <button class="btn btn-primary mr-1" data-toggle="modal" data-target="#exito" data-dismiss="modal" aria-label="Close" (click)="subirFacturaElec()" [disabled]="loading"> <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Guardar</button>
                         <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
                     </div>
                 </form>

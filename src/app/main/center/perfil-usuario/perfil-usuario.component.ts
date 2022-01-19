@@ -29,6 +29,7 @@ export class PerfilUsuarioComponent implements OnInit {
   public mensaje = "";
   public imagenTemp;
   public fecha;
+  public validado = false;
   public startDateOptions: FlatpickrOptions = {
     altInput: true,
     mode: 'single',
@@ -87,6 +88,9 @@ export class PerfilUsuarioComponent implements OnInit {
     this.usuario = this._coreMenuService.grpPersonasUser;
     this._perfilUsuarioService.obtenerInformacion(this.usuario.id).subscribe(info => {
       this.imagen = info.imagen;
+      if (info.identificacion) {
+        this.validado = true;
+      }
       info.created_at = this.transformarFecha(info.created_at);
       info.fechaNacimiento = this.transformarFecha(info.fechaNacimiento);
       this.fecha = this.transformarFecha(info.fechaNacimiento);
@@ -100,15 +104,20 @@ export class PerfilUsuarioComponent implements OnInit {
     return nuevaFecha;
   }
   guardarInformacion() {
-    this.informacionBasica = { ...this.personaForm.value, fechaNacimiento: this.informacionBasica.fechaNacimiento };
-    this.informacionBasica.user_id = this.usuario.id;
+    if (this.validado) {
+      this.informacionBasica = { ...this.personaForm.value, fechaNacimiento: this.informacionBasica.fechaNacimiento };
+      this.informacionBasica.user_id = this.usuario.id;
 
-    this._perfilUsuarioService.guardarInformacion(this.informacionBasica).subscribe(info => {
-      this.usuario.persona = info;
-      localStorage.setItem("grpPersonasUser", JSON.stringify(this.usuario));
-      this.mensaje = "Información guardada correctamente"
+      this._perfilUsuarioService.guardarInformacion(this.informacionBasica).subscribe(info => {
+        this.usuario.persona = info;
+        localStorage.setItem("grpPersonasUser", JSON.stringify(this.usuario));
+        this.mensaje = "Información guardada correctamente"
+        this.abrirModal(this.mensajeModal);
+      });
+    } else {
+      this.mensaje = "Es necesario validar el usuario";
       this.abrirModal(this.mensajeModal);
-    });
+    }
   }
   calcularEdad() {
     this.informacionBasica.edad = moment().diff(this.f.fechaNacimiento.value[0], 'years');

@@ -27,6 +27,7 @@ export class BienvenidoComponent implements OnInit {
   public returnUrl: string;
   public ganarMonedas;
   public usuario;
+  public empresaId = "";
   public superMonedas: GanarSuperMoneda;
   public error = '';
   public mensaje = '';
@@ -111,7 +112,8 @@ export class BienvenidoComponent implements OnInit {
       credito: 0,
       descripcion: "",
       tipo: "Credito",
-      user_id: this.usuario.id
+      user_id: this.usuario.id,
+      empresa_id: this.empresaId
     }
   }
   /**
@@ -136,7 +138,7 @@ export class BienvenidoComponent implements OnInit {
         setTimeout(() => {
           this._router.navigate(['/']);
         }, 100);
-      },(error)=>{
+      }, (error) => {
         this.mensaje = "Ha ocurrido un error";
         this.abrirModal(this.mensajeModal);
       });
@@ -217,6 +219,7 @@ export class BienvenidoComponent implements OnInit {
    */
   ngOnInit(): void {
     this.obtenerProductos();
+    this.obtenerEmpresaId();
     // get return url from route parameters or default to '/'
     this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
 
@@ -224,10 +227,21 @@ export class BienvenidoComponent implements OnInit {
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;
     });
+
     this.paramService.obtenerParametroNombreTipo("monedas_bienvenida", "GANAR_SUPERMONEDAS").subscribe((info) => {
       this.ganarMonedas = info;
       this.superMonedas.credito = this.ganarMonedas.valor;
       this.superMonedas.descripcion = "Gana " + this.ganarMonedas.valor + " supermonedas por bienvenida";
+    });
+  }
+  obtenerEmpresaId() {
+    this._bienvenidoService.obtenerEmpresa({
+      nombreComercial: "Global Red Pyme"
+    }).subscribe((info) => {
+      this.superMonedas.empresa_id = info._id;
+    }, (error) => {
+      this.mensaje = "Ha ocurrido un error al actualizar su imagen";
+      this.abrirModal(this.mensajeModal);
     });
   }
   modalOpenVC(modalVC, id) {

@@ -24,6 +24,7 @@ export class CompletarPerfilComponent implements OnInit {
   @ViewChild('startDatePicker') startDatePicker;
   @ViewChild('whatsapp') whatsapp;
   @ViewChild('mensajeModal') mensajeModal;
+  public empresaId = "";
 
   public error;
   public informacion: CompletarPerfil;
@@ -106,14 +107,15 @@ export class CompletarPerfilComponent implements OnInit {
       credito: 0,
       descripcion: "",
       tipo: "Credito",
-      user_id: this.usuario.id
+      user_id: this.usuario.id,
+      empresa_id: this.empresaId
     }
   }
   /**
    * On init
    */
   ngOnInit(): void {
-
+    this.obtenerEmpresaId();
 
     this.registerForm = this._formBuilder.group({
       identificacion: ['', [Validators.required]],
@@ -138,13 +140,23 @@ export class CompletarPerfilComponent implements OnInit {
         genero: info.genero,
         // fechaNacimiento: [info.fechaNacimiento],
         edad: info.edad,
-        whatsapp: info.whatsapp.replace("+593", 0)
+        whatsapp: info.whatsapp ? info.whatsapp.replace("+593", 0) : 0
       });
     });
     this.paramService.obtenerParametroNombreTipo("monedas_registro", "GANAR_SUPERMONEDAS").subscribe((info) => {
       this.ganarMonedas = info;
       this.superMonedas.credito = this.ganarMonedas.valor;
       this.superMonedas.descripcion = "Gana " + this.ganarMonedas.valor + " supermonedas por completar perfil";
+    });
+  }
+  obtenerEmpresaId() {
+    this._bienvenidoService.obtenerEmpresa({
+      nombreComercial: "Global Red Pyme"
+    }).subscribe((info) => {
+      this.superMonedas.empresa_id = info._id;
+    }, (error) => {
+      this.mensaje = "Ha ocurrido un error al actualizar su imagen";
+      this.abrirModal(this.mensajeModal);
     });
   }
   ngAfterViewInit(): void {

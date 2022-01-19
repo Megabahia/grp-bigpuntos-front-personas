@@ -24,6 +24,8 @@ export class MisFacturasComponent implements OnInit {
   public maxSize;
   public collectionSize;
   public usuario;
+  public empresaId;
+  public loading = false;
   public mensaje = "";
   public ganarMonedasFacElec;
   public ganarMonedasFacFisi;
@@ -60,10 +62,13 @@ export class MisFacturasComponent implements OnInit {
       credito: 0,
       descripcion: "",
       tipo: "Credito",
-      user_id: this.usuario.id
+      user_id: this.usuario.id,
+      empresa_id: this.empresaId
     }
   }
   ngOnInit(): void {
+    this.obtenerEmpresaId();
+
     this.usuario = this._coreMenuService.grpPersonasUser;
     this.paramService.obtenerParametroNombreTipo("monedas_facturas_elec", "GANAR_SUPERMONEDAS").subscribe((info) => {
       this.ganarMonedasFacElec = info;
@@ -74,6 +79,17 @@ export class MisFacturasComponent implements OnInit {
       this.ganarMonedasFacFisi = info;
       this.superMonedasFisi.credito = this.ganarMonedasFacFisi.valor;
       this.superMonedasFisi.descripcion = "Gana " + this.ganarMonedasFacFisi.valor + " supermonedas por subir factura física";
+    });
+  }
+  obtenerEmpresaId() {
+    this._bienvenidoService.obtenerEmpresa({
+      nombreComercial: "Global Red Pyme"
+    }).subscribe((info) => {
+      this.superMonedasElec.empresa_id = info._id;
+      this.superMonedasFisi.empresa_id = info._id;
+    }, (error) => {
+      this.mensaje = "Ha ocurrido un error al actualizar su imagen";
+      this.abrirModal(this.mensajeModal);
     });
   }
   ngAfterViewInit() {
@@ -120,12 +136,14 @@ export class MisFacturasComponent implements OnInit {
   }
   subirFacturaElec() {
     if (this.nombreFacElec) {
+      this.loading = true;
       this.archivoFacElec.append('user_id', this.usuario.id);
       this._misFacturasService.subirFactura(this.archivoFacElec).subscribe((info) => {
         this.obtenerListaFacturas();
         this.toggleSidebar("factura-electronica");
 
         this._bienvenidoService.guardarSuperMonedas(this.superMonedasElec).subscribe((infoSM) => {
+          this.loading = false;
 
           this.mensaje = "Factura cargada con éxito, ud ha ganado " + this.ganarMonedasFacElec.valor + " super monedas";
           this.abrirModal(this.mensajeModal);

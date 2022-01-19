@@ -91,7 +91,8 @@ export class RegistroComponent implements OnInit {
     }
 
     // Login
-
+    this.error = null;
+    this.loading = true;
     this._registroService.registrarUsuario(
       {
         password: this.f.password.value,
@@ -103,12 +104,13 @@ export class RegistroComponent implements OnInit {
     ).subscribe((info) => {
 
       if (info.email == "Ya existe usuarios con este email.") {
-
+        this.error = null;
+        this.loading = false;
         this.mensaje = info.email;
         this.abrirModal(this.mensajeModal);
       } else {
         this.error = null;
-        this.loading = true;
+        this.loading = false;
         localStorage.setItem('grpPersonasUser', JSON.stringify(info));
         this.mensajeConfirm = "Registro completo, haga click en continuar para ir al portal de inicio de sesión";
         this.abrirModal(this.mensajeConfirmModal);
@@ -116,6 +118,8 @@ export class RegistroComponent implements OnInit {
 
     },
       (error) => {
+        this.error = null;
+        this.loading = false;
         this.mensaje = "Ha ocurrido un error en su registro";
         this.abrirModal(this.mensajeModal);
         // this.error = error.error.password;
