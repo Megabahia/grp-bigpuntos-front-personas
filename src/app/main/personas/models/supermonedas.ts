@@ -32,3 +32,18 @@ export class FacturaFisica {
     calificacion: string;
     observaciones: string;
 }
+export class FacturaFisicaCalificaciones {
+    _id: string;
+    razonSocial: string;
+    pais: string;
+    provincia: string;
+    ciudad: string;
+    importeTotal: number;
+    categoria: string;
+    urlFoto: string;
+    urlArchivo: string;
+    user_id: string;
+    atencion: string;
+    calificacion: string;
+    observaciones: string;
+}

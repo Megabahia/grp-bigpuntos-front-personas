@@ -108,7 +108,7 @@
                                 <td>{{factura.numeroFactura}}</td>
 
                                 <td>
-                                    <a class="text-primary" href="{{factura.urlArchivo}}">{{visualizarNombreArchivo(factura.urlArchivo)}}</a>
+                                    <a class="text-primary" href="{{factura.urlArchivo}}">{{factura.urlArchivo ? visualizarNombreArchivo(factura.urlArchivo): (factura.urlFoto ? visualizarNombreArchivo(factura.urlFoto):'') }}</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -169,6 +169,9 @@
                         <div class="form-group">
                             <label>Nombre del local:</label>
                             <input class="form-control" type="text" formControlName="razonSocial" [(ngModel)]="facturaFisica.razonSocial">
+                            <div *ngIf="submittedFactura && FFForm.razonSocial.errors" class="invalid-feedback" style="display: block;">
+                                <div *ngIf="FFForm.razonSocial.errors.required">Razón social es requerido</div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="username">País del local</label>
@@ -204,33 +207,41 @@
                         </div>
                         <div class="form-group">
                             <label>Fecha de compra:</label>
-                            <ng2-flatpickr [setDate]="fecha" formControlName="fechaEmision" [config]="startDateOptions"></ng2-flatpickr>
-
+                            <ng2-flatpickr [setDate]="fecha" formControlName="fechaEmision" [config]="startDateOptions" (input)="obtenerFechaEmision()"></ng2-flatpickr>
+                            <div *ngIf="submittedFactura && FFForm.fechaEmision.errors" class="invalid-feedback" style="display: block;">
+                                <div *ngIf="FFForm.fechaEmision.errors.required">Fecha de compra es requerido</div>
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label>Monto:</label>
-                            <input class="form-control" type="text" formControlName="monto">
+                            <input class="form-control" type="text" formControlName="importeTotal" [(ngModel)]="facturaFisica.importeTotal">
+                            <div *ngIf="submittedFactura && FFForm.importeTotal.errors" class="invalid-feedback" style="display: block;">
+                                <div *ngIf="FFForm.importeTotal.errors.required">Monto es requerido</div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Categoría de producto:</label>
-                            <select class="form-control select2" formControlName="categoria">
-                                <option>- Seleccione -</option>
-                                <option>Alimentos</option>
-                                <option>Tecnología</option>
-                                <option>Automotriz</option>
-                                <option>Ropa</option>
-                                <option>Hogar</option>
+                            <select class="form-control select2" formControlName="categoria" [(ngModel)]="facturaFisica.categoria">
+                                <option value="">- Seleccione -</option>
+                                <option *ngFor="let categoriaEmpresaOp of categoriaEmpresaOpciones" value="{{categoriaEmpresaOp.nombre}}">{{categoriaEmpresaOp.nombre}}</option>
+    
                             </select>
+                            <div *ngIf="submittedFactura && FFForm.categoria.errors" class="invalid-feedback" style="display: block;">
+                                <div *ngIf="FFForm.categoria.errors.required">Categoría es requerido</div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="customFile1">Adjuntar foto de factura</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile1" required formControlName="urlFoto" />
-                                <label class="custom-file-label" for="customFile1">Escojer</label>
+                                <input type="file" class="custom-file-input" id="customFile1" required formControlName="urlFoto" [(ngModel)]="facturaFisica.urlFoto" (change)="subirImagen($event)" accept="image/png, image/jpeg, image/jpg" />
+                                <label class="custom-file-label" for="customFile1">{{archivoFacturaFisica}}</label>
+                                <div *ngIf="submittedFactura && FFForm.urlFoto.errors" class="invalid-feedback" style="display: block;">
+                                    <div *ngIf="FFForm.urlFoto.errors.required">Archivo es requerido</div>
+                                </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary mr-1" data-toggle="modal" data-target="#exito" data-dismiss="modal" aria-label="Close">Guardar</button>
+                        <button class="btn btn-primary mr-1" data-toggle="modal" data-target="#exito" data-dismiss="modal" aria-label="Close" (click)="guardarFacturaFisica()" [disabled]="loading"> <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Guardar</button>
                         <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
                     </div>
                 </form>

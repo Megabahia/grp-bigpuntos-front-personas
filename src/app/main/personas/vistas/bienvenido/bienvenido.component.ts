@@ -26,9 +26,9 @@ export class BienvenidoComponent implements OnInit {
   public submitted = false;
   public returnUrl: string;
   public ganarMonedas;
+  public superMonedas: GanarSuperMoneda;
   public usuario;
   public empresaId = "";
-  public superMonedas: GanarSuperMoneda;
   public error = '';
   public mensaje = '';
   public passwordTextType: boolean;

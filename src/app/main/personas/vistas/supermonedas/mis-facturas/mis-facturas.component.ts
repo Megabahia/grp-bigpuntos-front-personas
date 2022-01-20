@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 import { NgbPagination, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
@@ -10,6 +10,7 @@ import { GanarSuperMoneda, FacturaFisica } from '../../../models/supermonedas';
 import { BienvenidoService } from '../../bienvenido/bienvenido.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FlatpickrOptions } from 'ng2-flatpickr';
+import moment from 'moment';
 
 @Component({
   selector: 'app-mis-facturas',
@@ -36,10 +37,12 @@ export class MisFacturasComponent implements OnInit {
   public superMonedasFisi: GanarSuperMoneda;
   public nombreFacElec = "";
   public nombreFacFisi = "";
+  public categoriaEmpresaOpciones;
   public facFisiForm: FormGroup;
   public archivoFacElec = new FormData();
-  public archivoFacFisi = new FormData();
+  public facFisiFormData = new FormData();
   public facturaFisica: FacturaFisica;
+  public archivoFacturaFisica;
   public facturas;
   public paisOpciones;
   public provinciaOpciones;
@@ -62,8 +65,7 @@ export class MisFacturasComponent implements OnInit {
     private _bienvenidoService: BienvenidoService,
     private modalService: NgbModal,
     private _formBuilder: FormBuilder,
-
-
+    private cdRef: ChangeDetectorRef
   ) {
     this.usuario = this._coreMenuService.grpPersonasUser;
 
@@ -98,7 +100,8 @@ export class MisFacturasComponent implements OnInit {
       razonSocial: "",
       urlArchivo: "",
       urlFoto: "",
-      user_id: this.usuario.id
+      user_id: this.usuario.id,
+
     }
   }
   get FFForm() {
@@ -120,13 +123,14 @@ export class MisFacturasComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+
     this.facFisiForm = this._formBuilder.group({
       razonSocial: ['', [Validators.required]],
       pais: ['', [Validators.required]],
       provincia: ['', [Validators.required]],
       ciudad: ['', [Validators.required]],
       fechaEmision: ['', [Validators.required]],
-      monto: [0, [Validators.required]],
+      importeTotal: [0, [Validators.required]],
       categoria: ['', [Validators.required]],
       urlFoto: ['', [Validators.required]],
     });
@@ -134,7 +138,9 @@ export class MisFacturasComponent implements OnInit {
     this.obtenerPaisOpciones();
     this.obtenerProvinciaOpciones();
     this.obtenerCiudadOpciones();
-    
+    this.obtenerCategoriaEmpresaOpciones();
+    this.fecha = this.transformarFecha(new Date());
+
     this.usuario = this._coreMenuService.grpPersonasUser;
     this.paramService.obtenerParametroNombreTipo("monedas_facturas_elec", "GANAR_SUPERMONEDAS").subscribe((info) => {
       this.ganarMonedasFacElec = info;
@@ -146,6 +152,10 @@ export class MisFacturasComponent implements OnInit {
       this.superMonedasFisi.credito = this.ganarMonedasFacFisi.valor;
       this.superMonedasFisi.descripcion = "Gana " + this.ganarMonedasFacFisi.valor + " supermonedas por subir factura física";
     });
+    this.cdRef.detectChanges();
+  }
+  obtenerFechaEmision() {
+    this.facturaFisica.fechaEmision = moment(this.FFForm.fechaEmision.value[0]).format('YYYY-MM-DD');
   }
   obtenerEmpresaId() {
     this._bienvenidoService.obtenerEmpresa({
@@ -160,16 +170,24 @@ export class MisFacturasComponent implements OnInit {
   }
   ngAfterViewInit() {
     this.iniciarPaginador();
-
     this.obtenerListaFacturas();
+    // this.cdRef.detectChanges();
   }
 
   toggleSidebar(name): void {
     if (name == "factura-electronica") {
       this.nombreFacElec = "";
       this.archivoFacElec = new FormData();
+    } else {
+      this.facFisiFormData = new FormData();
+
     }
     this._coreSidebarService.getSidebarRegistry(name).toggleOpen();
+  }
+  obtenerCategoriaEmpresaOpciones() {
+    this.paramService.obtenerListaPadres("CATEGORIA_EMPRESA").subscribe((info) => {
+      this.categoriaEmpresaOpciones = info;
+    });
   }
   subirFacturaElectronica() {
     this._bienvenidoService.guardarSuperMonedas(this.superMonedasElec).subscribe((infoSM) => {
@@ -194,17 +212,22 @@ export class MisFacturasComponent implements OnInit {
 
       this.archivoFacElec = new FormData();
       this.archivoFacElec.append('urlArchivo', archivo, Date.now() + "_" + archivo.name);
-
     }
   }
   visualizarNombreArchivo(nombre) {
-    return nombre.replace('https://globalredpymes.s3.amazonaws.com/CENTRAL/archivosFacturas/', '');
+    let stringArchivos = 'https://globalredpymes.s3.amazonaws.com/CENTRAL/archivosFacturas/';
+    let stringImagenes = 'https://globalredpymes.s3.amazonaws.com/CENTRAL/imgFacturas/';
+    if (nombre.includes(stringArchivos)) {
+      return nombre.replace('https://globalredpymes.s3.amazonaws.com/CENTRAL/archivosFacturas/', '');
+    } else if (nombre.includes(stringImagenes)) {
+      return nombre.replace('https://globalredpymes.s3.amazonaws.com/CENTRAL/imgFacturas/', '');
+    }
   }
   subirFacturaElec() {
     if (this.nombreFacElec) {
       this.loading = true;
       this.archivoFacElec.append('user_id', this.usuario.id);
-      this._misFacturasService.subirFactura(this.archivoFacElec).subscribe((info) => {
+      this._misFacturasService.subirFacturaElec(this.archivoFacElec).subscribe((info) => {
         this.obtenerListaFacturas();
         this.toggleSidebar("factura-electronica");
 
@@ -229,6 +252,49 @@ export class MisFacturasComponent implements OnInit {
     this.paginator.pageChange.subscribe(() => {
       this.obtenerListaFacturas();
     });
+  }
+  guardarFacturaFisica() {
+    this.submittedFactura = true;
+    if (this.facFisiForm.invalid) {
+      return
+    }
+    let facturaFisicaValores = Object.values(this.facturaFisica);
+    let facturaFisicaLlaves = Object.keys(this.facturaFisica);
+    facturaFisicaLlaves.map((llaves, index) => {
+      if (facturaFisicaValores[index]) {
+        if (llaves != 'urlFoto') {
+          this.facFisiFormData.append(llaves, facturaFisicaValores[index]);
+        }
+      }
+    });
+    this.loading = true;
+    this._misFacturasService.subirFacturaFisi(this.facFisiFormData).subscribe((info) => {
+      this.loading = false;
+
+      this.obtenerListaFacturas();
+      this.toggleSidebar("factura-normal");
+
+      this._bienvenidoService.guardarSuperMonedas(this.superMonedasFisi).subscribe((infoSM) => {
+        this.loading = false;
+
+        this.mensaje = "Factura cargada con éxito, ud ha ganado " + this.ganarMonedasFacFisi.valor + " super monedas";
+        this.abrirModal(this.mensajeModal);
+      });
+
+    },
+      (error) => {
+        this.mensaje = "Ha ocurrido un error al cargar su factura";
+        this.abrirModal(this.mensajeModal);
+      });
+  }
+  async subirImagen(event) {
+
+    if (event.target.files && event.target.files[0]) {
+      let imagen = event.target.files[0];
+      this.archivoFacturaFisica = imagen.name;
+      this.facFisiFormData.delete('urlFoto');
+      this.facFisiFormData.append('urlFoto', imagen, imagen.name);
+    }
   }
   abrirModal(modal) {
     this.modalService.open(modal);

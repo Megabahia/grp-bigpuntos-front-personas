@@ -12,7 +12,16 @@ export class MisFacturasService {
   obtenerFacturas(datos) {
     return this._httpClient.post<any>(`${environment.apiUrl}/central/facturas/list/`, datos);
   }
-  subirFactura(datos) {
+  subirFacturaElec(datos) {
     return this._httpClient.post<any>(`${environment.apiUrl}/central/facturas/subir/factura/`, datos);
+  }
+  subirFacturaFisi(datos) {
+    return this._httpClient.post<any>(`${environment.apiUrl}/central/facturas/create/`, datos);
+  }
+  actualizarFactura(datos) {
+    return this._httpClient.post<any>(`${environment.apiUrl}/central/facturas/update/${datos._id}`, datos);
+  }
+  obtenerFactura(id) {
+    return this._httpClient.get<any>(`${environment.apiUrl}/central/facturas/listOne/${id}`,);
   }
 }
