@@ -108,7 +108,7 @@
                                 <td>{{factura.numeroFactura}}</td>
 
                                 <td>
-                                    <a class="text-primary" href="{{factura.urlArchivo}}">{{factura.urlArchivo ? visualizarNombreArchivo(factura.urlArchivo): (factura.urlFoto ? visualizarNombreArchivo(factura.urlFoto):'') }}</a>
+                                    <a class="text-primary" href="{{factura.urlArchivo ? factura.urlArchivo: (factura.urlFoto ? factura.urlFoto:'')}}">{{factura.urlArchivo ? visualizarNombreArchivo(factura.urlArchivo): (factura.urlFoto ? visualizarNombreArchivo(factura.urlFoto):'') }}</a>
                                 </td>
                             </tr>
                         </tbody>

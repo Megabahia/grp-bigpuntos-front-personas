@@ -40,10 +40,9 @@ export class FacturaFisicaCalificaciones {
     ciudad: string;
     importeTotal: number;
     categoria: string;
-    urlFoto: string;
-    urlArchivo: string;
     user_id: string;
     atencion: string;
     calificacion: string;
     observaciones: string;
+    estado:string;
 }

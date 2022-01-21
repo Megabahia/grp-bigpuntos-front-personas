@@ -36,6 +36,7 @@ export class MisCalificacionesComponent implements OnInit {
   public paisOpciones;
   public provinciaOpciones;
   public ciudadOpciones;
+  public imagen;
   public categoriaEmpresaOpciones;
 
   private _unsubscribeAll: Subject<any>;
@@ -138,20 +139,23 @@ export class MisCalificacionesComponent implements OnInit {
       pais: "",
       provincia: "",
       razonSocial: "",
-      urlArchivo: "",
-      urlFoto: "",
       user_id: this.usuario.id,
+      estado: "Calificado"
     }
   }
   get FFForm() {
     return this.facFisiForm.controls;
   }
   toggleSidebar(name, id): void {
-    this._misFacturasService.obtenerFactura(id).subscribe((info) => {
-      this.facturaFisica = info;
-      this.obtenerProvinciaOpciones();
-      this.obtenerCiudadOpciones();
-    });
+    if (id) {
+      this._misFacturasService.obtenerFactura(id).subscribe((info) => {
+        this.facturaFisica = info;
+        this.imagen = info.urlFoto ? info.urlFoto : (info.urlArchivo ? info.urlArchivo : '');
+        this.obtenerProvinciaOpciones();
+        this.obtenerCiudadOpciones();
+      });
+    }
+
     this._coreSidebarService.getSidebarRegistry(name).toggleOpen();
   }
 
@@ -179,11 +183,12 @@ export class MisCalificacionesComponent implements OnInit {
     }
 
     this.loading = true;
+    this.facturaFisica.estado = "Calificado";
     this._misFacturasService.actualizarFactura(this.facturaFisica).subscribe((info) => {
       this.loading = false;
 
       this.obtenerListaFacturas();
-      this.toggleSidebar('', '');
+      this.toggleSidebar('calificar', '');
 
       this._bienvenidoService.guardarSuperMonedas(this.superMonedas).subscribe((infoSM) => {
         this.loading = false;
