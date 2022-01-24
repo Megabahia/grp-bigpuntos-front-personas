@@ -22,7 +22,8 @@
         <section class="app-user-list">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="text-primary d-block">Califica aquí tus compras, por cada compra que califiques reciben {{ganarMonedas ? ganarMonedas.valor:0}} super monedas.</h4>
+                    <h4 class="text-primary d-block">Califica aquí tus compras, por cada compra que califiques reciben
+                        {{ganarMonedas ? ganarMonedas.valor:0}} super monedas.</h4>
                 </div>
             </div>
             <div class="card">
@@ -37,7 +38,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i data-feather='calendar'></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm flatpickr-range flatpickr-input" placeholder="- Rango de fechas">
+                                    <input type="text"
+                                        class="form-control form-control-sm flatpickr-range flatpickr-input"
+                                        placeholder="- Rango de fechas">
                                 </div>
                             </div>
                         </div>
@@ -54,11 +57,11 @@
                     <div class="col-lg-12 col-xl-6">
                         <label>Mostrar</label>
                         <select class="form-control-sm">
-                                <option value="10">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
 
                     </div>
                 </div>
@@ -91,16 +94,24 @@
                                 <td>{{factura.numeroFactura}}</td>
 
                                 <td>
-                                    <a class="text-primary" href="{{factura.urlArchivo}}">{{factura.urlArchivo ? visualizarNombreArchivo(factura.urlArchivo): (factura.urlFoto ? visualizarNombreArchivo(factura.urlFoto):'') }}</a>
+                                    <a class="text-primary" target="_blank"
+                                        href="{{factura.urlArchivo ? factura.urlArchivo: (factura.urlFoto ? factura.urlFoto:'')}}">{{factura.urlArchivo
+                                        ?
+                                        visualizarNombreArchivo(factura.urlArchivo): (factura.urlFoto ?
+                                        visualizarNombreArchivo(factura.urlFoto):'') }}</a>
 
                                 </td>
                                 <td>
-                                    <div class="badge {{factura.estado == 'Calificado' ? 'badge-secondary':'badge-warning'}}">
+                                    <div
+                                        class="badge {{factura.estado == 'Calificado' ? 'badge-secondary':'badge-warning'}}">
                                         {{factura.estado}}</div>
                                 </td>
                                 <td>
-                                    <a class="avatar bg-primary mr-1" data-target="#calificar" data-toggle="modal" *ngIf="factura.estado != 'Calificado'" (click)="toggleSidebar('calificar',factura._id)">
-                                        <div class="avatar-content" data-toggle="tooltip" data-placement="bottom" title="Calificar">
+                                    <a class="avatar bg-primary mr-1" data-target="#calificar" data-toggle="modal"
+                                        *ngIf="factura.estado != 'Calificado'"
+                                        (click)="toggleSidebar('calificar',factura._id)">
+                                        <div class="avatar-content" data-toggle="tooltip" data-placement="bottom"
+                                            title="Calificar">
                                             <i data-feather='star'></i>
                                         </div>
                                     </a>
@@ -110,7 +121,8 @@
                     </table>
                 </div>
                 <!-- Modal to add new user starts-->
-                <ngb-pagination #paginator [collectionSize]="collectionSize" [(page)]="page" [(pageSize)]="page_size" [maxSize]="5" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+                <ngb-pagination #paginator [collectionSize]="collectionSize" [(page)]="page" [(pageSize)]="page_size"
+                    [maxSize]="5" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
                 <div class="modal modal-slide-in new-user-modal fade" id="calificar">
                     <div class="modal-dialog">
                         <div class="modal-content pt-0">
@@ -139,8 +151,10 @@
 
 
 
-                                <button class="btn btn-primary mr-1" data-toggle="modal" data-target="#exito" data-dismiss="modal" aria-label="Close">Guardar</button>
-                                <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                                <button class="btn btn-primary mr-1" data-toggle="modal" data-target="#exito"
+                                    data-dismiss="modal" aria-label="Close">Guardar</button>
+                                <button type="reset" class="btn btn-outline-secondary"
+                                    data-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
                     </div>
@@ -166,51 +180,65 @@
                     <div class="modal-body flex-grow-1">
                         <div class="form-group">
                             <label>Nombre del local:</label>
-                            <input class="form-control" type="text" formControlName="razonSocial" [(ngModel)]="facturaFisica.razonSocial">
-                            <div *ngIf="submittedFactura && FFForm.razonSocial.errors" class="invalid-feedback" style="display: block;">
+                            <input class="form-control" type="text" formControlName="razonSocial"
+                                [(ngModel)]="facturaFisica.razonSocial">
+                            <div *ngIf="submittedFactura && FFForm.razonSocial.errors" class="invalid-feedback"
+                                style="display: block;">
                                 <div *ngIf="FFForm.razonSocial.errors.required">Razón social es requerido</div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="username">País del local</label>
-                            <select class="form-control select2" formControlName="pais" [(ngModel)]="facturaFisica.pais" (change)="obtenerProvinciaOpciones()">
-                            <option value="">- Seleccione -</option>
-                            <option *ngFor="let paisOp of paisOpciones" value="{{paisOp.nombre}}">{{paisOp.nombre}}</option>
-                     </select>
-                            <div *ngIf="submittedFactura && FFForm.pais.errors" class="invalid-feedback" style="display: block;">
+                            <select class="form-control select2" formControlName="pais" [(ngModel)]="facturaFisica.pais"
+                                (change)="obtenerProvinciaOpciones()">
+                                <option value="">- Seleccione -</option>
+                                <option *ngFor="let paisOp of paisOpciones" value="{{paisOp.nombre}}">{{paisOp.nombre}}
+                                </option>
+                            </select>
+                            <div *ngIf="submittedFactura && FFForm.pais.errors" class="invalid-feedback"
+                                style="display: block;">
                                 <div *ngIf="FFForm.pais.errors.required">País es requerido</div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="username">Provincia del local</label>
-                            <select class="form-control select2" formControlName="provincia" [(ngModel)]="facturaFisica.provincia" (change)="obtenerCiudadOpciones() ">
-                            <option value="">- Seleccione -</option>
-                            <option *ngFor="let provinciaOp of provinciaOpciones" value="{{provinciaOp.nombre}}">{{provinciaOp.nombre}}</option>
+                            <select class="form-control select2" formControlName="provincia"
+                                [(ngModel)]="facturaFisica.provincia" (change)="obtenerCiudadOpciones() ">
+                                <option value="">- Seleccione -</option>
+                                <option *ngFor="let provinciaOp of provinciaOpciones" value="{{provinciaOp.nombre}}">
+                                    {{provinciaOp.nombre}}</option>
 
-                     </select>
-                            <div *ngIf="submittedFactura && FFForm.provincia.errors" class="invalid-feedback" style="display: block;">
+                            </select>
+                            <div *ngIf="submittedFactura && FFForm.provincia.errors" class="invalid-feedback"
+                                style="display: block;">
                                 <div *ngIf="FFForm.provincia.errors.required">Provincia es requerido</div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="username">Ciudad del local</label>
-                            <select class="form-control select2" formControlName="ciudad" [(ngModel)]="facturaFisica.ciudad">
-                            <option value="">- Seleccione -</option>
-                            <option *ngFor="let ciudadOp of ciudadOpciones" value="{{ciudadOp.nombre}}">{{ciudadOp.nombre}}</option>
+                            <select class="form-control select2" formControlName="ciudad"
+                                [(ngModel)]="facturaFisica.ciudad">
+                                <option value="">- Seleccione -</option>
+                                <option *ngFor="let ciudadOp of ciudadOpciones" value="{{ciudadOp.nombre}}">
+                                    {{ciudadOp.nombre}}</option>
 
-                     </select>
-                            <div *ngIf="submittedFactura && FFForm.ciudad.errors" class="invalid-feedback" style="display: block;">
+                            </select>
+                            <div *ngIf="submittedFactura && FFForm.ciudad.errors" class="invalid-feedback"
+                                style="display: block;">
                                 <div *ngIf="FFForm.ciudad.errors.required">Ciudad es requerido</div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Categoría de producto:</label>
-                            <select class="form-control select2" formControlName="categoria" [(ngModel)]="facturaFisica.categoria">
-                            <option value="">- Seleccione -</option>
-                            <option *ngFor="let categoriaEmpresaOp of categoriaEmpresaOpciones" value="{{categoriaEmpresaOp.nombre}}">{{categoriaEmpresaOp.nombre}}</option>
+                            <select class="form-control select2" formControlName="categoria"
+                                [(ngModel)]="facturaFisica.categoria">
+                                <option value="">- Seleccione -</option>
+                                <option *ngFor="let categoriaEmpresaOp of categoriaEmpresaOpciones"
+                                    value="{{categoriaEmpresaOp.nombre}}">{{categoriaEmpresaOp.nombre}}</option>
 
-                        </select>
-                            <div *ngIf="submittedFactura && FFForm.categoria.errors" class="invalid-feedback" style="display: block;">
+                            </select>
+                            <div *ngIf="submittedFactura && FFForm.categoria.errors" class="invalid-feedback"
+                                style="display: block;">
                                 <div *ngIf="FFForm.categoria.errors.required">Categoría es requerido</div>
                             </div>
                         </div>
@@ -218,58 +246,70 @@
                             <div class="row align-items-end">
                                 <div class="col-md-6">
                                     <label>Monto:</label>
-                                    <input class="form-control" type="text" formControlName="importeTotal" [(ngModel)]="facturaFisica.importeTotal">
-                                    <div *ngIf="submittedFactura && FFForm.importeTotal.errors" class="invalid-feedback" style="display: block;">
+                                    <input class="form-control" type="text" formControlName="importeTotal"
+                                        [(ngModel)]="facturaFisica.importeTotal">
+                                    <div *ngIf="submittedFactura && FFForm.importeTotal.errors" class="invalid-feedback"
+                                        style="display: block;">
                                         <div *ngIf="FFForm.importeTotal.errors.required">Monto es requerido</div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <button class="btn btn-sm btn-success" type="button" data-target="#previsualizar" data-toggle="modal">Previsualizar
-                                    factura</button>
+                                    <a class="btn btn-sm btn-success" type="button" target="_blank" data-toggle="modal"
+                                        [href]="imagen">Previsualizar
+                                        factura</a>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>¿Cómo le pareció la atención en el local?</label>
-                            <select class="form-control" formControlName="atencion" [(ngModel)]="facturaFisica.atencion">
-                            <option value="">- Seleccione -</option>
-                            <option>Excelente</option>
-                            <option>Buena</option>
-                            <option>Mala</option>
-                            <option>Pésima</option>
-                        </select>
-                            <div *ngIf="submittedFactura && FFForm.atencion.errors" class="invalid-feedback" style="display: block;">
+                            <select class="form-control" formControlName="atencion"
+                                [(ngModel)]="facturaFisica.atencion">
+                                <option value="">- Seleccione -</option>
+                                <option>Excelente</option>
+                                <option>Buena</option>
+                                <option>Mala</option>
+                                <option>Pésima</option>
+                            </select>
+                            <div *ngIf="submittedFactura && FFForm.atencion.errors" class="invalid-feedback"
+                                style="display: block;">
                                 <div *ngIf="FFForm.atencion.errors.required">Atención es requerida</div>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>Calificación</label>
-                            <select class="form-control" formControlName="calificacion" [(ngModel)]="facturaFisica.calificacion">
-                            <option value="">- Seleccione -</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>
-                        </select>
-                            <div *ngIf="submittedFactura && FFForm.calificacion.errors" class="invalid-feedback" style="display: block;">
+                            <select class="form-control" formControlName="calificacion"
+                                [(ngModel)]="facturaFisica.calificacion">
+                                <option value="">- Seleccione -</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </select>
+                            <div *ngIf="submittedFactura && FFForm.calificacion.errors" class="invalid-feedback"
+                                style="display: block;">
                                 <div *ngIf="FFForm.calificacion.errors.required">Calificación es requerida</div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Observaciones:</label>
-                            <textarea class="form-control" rows="3" placeholder="Escribir..." formControlName="observaciones" [(ngModel)]="facturaFisica.observaciones"></textarea>
-                            <div *ngIf="submittedFactura && FFForm.observaciones.errors" class="invalid-feedback" style="display: block;">
+                            <textarea class="form-control" rows="3" placeholder="Escribir..."
+                                formControlName="observaciones" [(ngModel)]="facturaFisica.observaciones"></textarea>
+                            <div *ngIf="submittedFactura && FFForm.observaciones.errors" class="invalid-feedback"
+                                style="display: block;">
                                 <div *ngIf="FFForm.observaciones.errors.required">Observaciones es requeridas</div>
                             </div>
                         </div>
-                        <button class="btn btn-primary mr-1" data-toggle="modal" data-target="#mensaje" data-dismiss="modal" aria-label="Close" (click)="guardarFacturaFisica()">Guardar</button>
+                        <button class="btn btn-primary mr-1" data-toggle="modal" data-target="#mensaje"
+                            data-dismiss="modal" aria-label="Close" (click)="guardarFacturaFisica()"
+                            [disabled]="loading"> <span *ngIf="loading"
+                                class="spinner-border spinner-border-sm mr-1"></span>Guardar</button>
                         <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
                     </div>
                 </form>
