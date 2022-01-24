@@ -91,7 +91,7 @@ export class MisFacturasComponent implements OnInit {
       calificacion: "",
       categoria: "",
       ciudad: "",
-      fechaEmision: "",
+      fechaEmision: this.transformarFecha(new Date()),
       importeTotal: 0,
       numeroFactura: "",
       observaciones: "",
@@ -101,7 +101,6 @@ export class MisFacturasComponent implements OnInit {
       urlArchivo: "",
       urlFoto: "",
       user_id: this.usuario.id,
-
     }
   }
   get FFForm() {
@@ -180,7 +179,8 @@ export class MisFacturasComponent implements OnInit {
       this.archivoFacElec = new FormData();
     } else {
       this.facFisiFormData = new FormData();
-
+      this.facturaFisica = this.inicializarFacturaFisica();
+      this.archivoFacturaFisica = "";
     }
     this._coreSidebarService.getSidebarRegistry(name).toggleOpen();
   }
@@ -236,14 +236,22 @@ export class MisFacturasComponent implements OnInit {
 
           this.mensaje = "Factura cargada con éxito, ud ha ganado " + this.ganarMonedasFacElec.valor + " super monedas";
           this.abrirModal(this.mensajeModal);
-        });
+        },
+          (error) => {
+            this.loading = false;
+
+          });
 
       },
         (error) => {
+          this.loading = false;
+
           this.mensaje = "Ha ocurrido un error al cargar su factura";
           this.abrirModal(this.mensajeModal);
         });
     } else {
+      this.loading = false;
+
       this.mensaje = "Es necesario cargar un archivo tipo PDF o XML";
       this.abrirModal(this.mensajeModal);
     }
@@ -283,6 +291,7 @@ export class MisFacturasComponent implements OnInit {
 
     },
       (error) => {
+        this.loading = false;
         this.mensaje = "Ha ocurrido un error al cargar su factura";
         this.abrirModal(this.mensajeModal);
       });
