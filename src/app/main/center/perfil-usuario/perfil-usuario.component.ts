@@ -9,6 +9,8 @@ import { DatePipe } from '@angular/common';
 import moment from 'moment';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BienvenidoService } from '../../personas/vistas/bienvenido/bienvenido.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -44,6 +46,8 @@ export class PerfilUsuarioComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private datePipe: DatePipe,
     private _modalService: NgbModal,
+    private _bienvenidoService: BienvenidoService,
+    private _router: Router,
 
   ) {
     this.informacionBasica = {
@@ -102,6 +106,24 @@ export class PerfilUsuarioComponent implements OnInit {
   transformarFecha(fecha) {
     let nuevaFecha = this.datePipe.transform(fecha, 'yyyy-MM-dd');
     return nuevaFecha;
+  }
+  omitirContinuar() {
+    let usuario = this._coreMenuService.grpPersonasUser;
+    this._bienvenidoService.cambioDeEstado(
+      {
+        estado: "6",
+        id: usuario.id
+      }
+    ).subscribe((info) => {
+      usuario.estado = "6";
+      localStorage.setItem('grpPersonasUser', JSON.stringify(usuario));
+      setTimeout(() => {
+        this._router.navigate(['/']);
+      }, 100);
+    });
+
+
+    // redirect to home page
   }
   guardarInformacion() {
     if (this.validado) {

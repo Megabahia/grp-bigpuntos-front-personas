@@ -240,10 +240,14 @@ export class MisFacturasComponent implements OnInit {
 
       },
         (error) => {
+          this.loading = false;
+
           this.mensaje = "Ha ocurrido un error al cargar su factura";
           this.abrirModal(this.mensajeModal);
         });
     } else {
+      this.loading = false;
+
       this.mensaje = "Es necesario cargar un archivo tipo PDF o XML";
       this.abrirModal(this.mensajeModal);
     }
@@ -279,10 +283,16 @@ export class MisFacturasComponent implements OnInit {
 
         this.mensaje = "Factura cargada con éxito, ud ha ganado " + this.ganarMonedasFacFisi.valor + " super monedas";
         this.abrirModal(this.mensajeModal);
+      }, (error) => {
+        this.loading = false;
+        this.mensaje = "Ha ocurrido un error al cargar su factura";
+        this.abrirModal(this.mensajeModal);
       });
 
     },
       (error) => {
+        this.loading = false;
+
         this.mensaje = "Ha ocurrido un error al cargar su factura";
         this.abrirModal(this.mensajeModal);
       });
