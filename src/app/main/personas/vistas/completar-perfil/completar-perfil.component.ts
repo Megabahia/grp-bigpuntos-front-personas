@@ -124,7 +124,7 @@ export class CompletarPerfilComponent implements OnInit {
       genero: ['', Validators.required],
       fechaNacimiento: ['string', Validators.required],
       edad: ['', Validators.required],
-      whatsapp: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern("^[0-9]*$")]],
+      whatsapp: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern("^[0-9]*$"), Validators.min(1)]],
     });
     // Subscribe to config changes
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
@@ -214,33 +214,29 @@ export class CompletarPerfilComponent implements OnInit {
     wppAux += "+593" + this.f.whatsapp.value.substring(1, 10);
     this.informacion.whatsapp = wppAux;
     this.informacion.user_id = this.usuario.id;
-    this._bienvenidoService.guardarSuperMonedas(this.superMonedas).subscribe((infoSM) => {
-      this._completarPerfilService.guardarInformacion(this.informacion).subscribe(info => {
-        this._bienvenidoService.cambioDeEstado(
-          {
-            estado: "3",
-            id: this.usuario.id
-          }
-        ).subscribe(infoCambio => {
-          this.usuario.estado = "3";
-          this.usuario.persona = info;
-          localStorage.setItem('grpPersonasUser', JSON.stringify(this.usuario));
-          this.modalWhatsapp(this.whatsapp);
-        },
-          (error) => {
-            this.mensaje = "Ha ocurrido un error ";
-            this.abrirModal(this.mensajeModal);
-          });
+
+    this._completarPerfilService.guardarInformacion(this.informacion).subscribe(info => {
+      this._bienvenidoService.cambioDeEstado(
+        {
+          estado: "3",
+          id: this.usuario.id
+        }
+      ).subscribe(infoCambio => {
+        this.usuario.estado = "3";
+        this.usuario.persona = info;
+        localStorage.setItem('grpPersonasUser', JSON.stringify(this.usuario));
+        this.modalWhatsapp(this.whatsapp);
       },
         (error) => {
-          this.mensaje = "Ha ocurrido un error al guardar la información";
+          this.mensaje = "Ha ocurrido un error ";
           this.abrirModal(this.mensajeModal);
         });
     },
       (error) => {
-        this.mensaje = "Ha ocurrido un error";
+        this.mensaje = "Ha ocurrido un error al guardar la información";
         this.abrirModal(this.mensajeModal);
       });
+
 
   }
   modalWhatsapp(modalVC) {
@@ -277,6 +273,11 @@ export class CompletarPerfilComponent implements OnInit {
             id: this.usuario.id
           }
         ).subscribe(infoCambio => {
+          this._bienvenidoService.guardarSuperMonedas(this.superMonedas).subscribe((infoSM) => { },
+            (error) => {
+              this.mensaje = "Ha ocurrido un error";
+              this.abrirModal(this.mensajeModal);
+            });
           this.usuario.estado = "4";
           localStorage.setItem('grpPersonasUser', JSON.stringify(this.usuario));
           this.modalService.dismissAll();

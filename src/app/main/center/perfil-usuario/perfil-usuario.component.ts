@@ -118,7 +118,7 @@ export class PerfilUsuarioComponent implements OnInit {
       usuario.estado = "6";
       localStorage.setItem('grpPersonasUser', JSON.stringify(usuario));
       setTimeout(() => {
-        this._router.navigate(['/']);
+        window.location.href = "/";
       }, 100);
     });
 
@@ -126,20 +126,20 @@ export class PerfilUsuarioComponent implements OnInit {
     // redirect to home page
   }
   guardarInformacion() {
-    if (this.validado) {
-      this.informacionBasica = { ...this.personaForm.value, fechaNacimiento: this.informacionBasica.fechaNacimiento };
-      this.informacionBasica.user_id = this.usuario.id;
-
-      this._perfilUsuarioService.guardarInformacion(this.informacionBasica).subscribe(info => {
-        this.usuario.persona = info;
-        localStorage.setItem("grpPersonasUser", JSON.stringify(this.usuario));
-        this.mensaje = "Información guardada correctamente"
-        this.abrirModal(this.mensajeModal);
-      });
-    } else {
+    if (!this.validado) {
       this.mensaje = "Es necesario validar el usuario";
       this.abrirModal(this.mensajeModal);
     }
+    this.informacionBasica = { ...this.personaForm.value, fechaNacimiento: this.informacionBasica.fechaNacimiento };
+    this.informacionBasica.user_id = this.usuario.id;
+
+    this._perfilUsuarioService.guardarInformacion(this.informacionBasica).subscribe(info => {
+      this.usuario.persona = info;
+      localStorage.setItem("grpPersonasUser", JSON.stringify(this.usuario));
+      this.mensaje = "Información guardada correctamente"
+      this.abrirModal(this.mensajeModal);
+    });
+
   }
   calcularEdad() {
     this.informacionBasica.edad = moment().diff(this.f.fechaNacimiento.value[0], 'years');

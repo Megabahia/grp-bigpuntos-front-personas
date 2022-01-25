@@ -90,12 +90,13 @@ export class MisCalificacionesComponent implements OnInit {
     this.obtenerProvinciaOpciones();
     this.obtenerCiudadOpciones();
     this.obtenerCategoriaEmpresaOpciones();
+    this.obtenerEmpresaId();
   }
   obtenerEmpresaId() {
     this._bienvenidoService.obtenerEmpresa({
       nombreComercial: "Global Red Pyme"
     }).subscribe((info) => {
-      this.superMonedas.empresa_id = info._id;
+      this.empresaId = info._id;
 
     }, (error) => {
       this.mensaje = "Ha ocurrido un error al actualizar su imagen";
@@ -189,16 +190,17 @@ export class MisCalificacionesComponent implements OnInit {
 
       this.obtenerListaFacturas();
       this.toggleSidebar('calificar', '');
-
+      this.superMonedas.empresa_id = this.empresaId;
       this._bienvenidoService.guardarSuperMonedas(this.superMonedas).subscribe((infoSM) => {
         this.loading = false;
 
-        this.mensaje = "Factura cargada con éxito, ud ha ganado " + this.ganarMonedas.valor + " super monedas";
+        this.mensaje = "Factura calificada con éxito, ud ha ganado " + this.ganarMonedas.valor + " super monedas";
         this.abrirModal(this.mensajeModal);
       });
 
     },
       (error) => {
+        this.loading = false;
         this.mensaje = "Ha ocurrido un error al cargar su factura";
         this.abrirModal(this.mensajeModal);
       });
