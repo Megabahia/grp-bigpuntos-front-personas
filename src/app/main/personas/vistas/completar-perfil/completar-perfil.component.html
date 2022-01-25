@@ -128,7 +128,7 @@
                                                 <div *ngIf="submitted && f.whatsapp.errors" class="invalid-feedback">
                                                     <div *ngIf="f.whatsapp.errors.pattern">Solo se aceptan números</div>
                                                     <div *ngIf="f.whatsapp.errors.required">Nro de WhatsApp requerido</div>
-                                                    <div *ngIf="f.whatsapp.errors.minlength || f.whatsapp.errors.maxlength">Ingrese un número de 10 dígitos</div>
+                                                    <div *ngIf="f.whatsapp.errors.minlength || f.whatsapp.errors.maxlength || f.whatsapp.errors.min">Ingrese un número de 10 dígitos</div>
                                                 </div>
                                             </div>
                                         </div>

@@ -51,7 +51,7 @@ export class PrincipalComponent implements OnInit {
     });
     this._principalService.obtenerProductosMostrar(
       {
-        tipo: "premios"
+        tipo: "bienvenida"
       }
     ).subscribe(info => {
       this.productos = info;

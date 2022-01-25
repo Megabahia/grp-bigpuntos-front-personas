@@ -46,6 +46,9 @@ export class CompartirPublicacionesComponent implements OnInit {
       this.collectionSize = info.cont;
     });
   }
+  obtenerEvento(evento){
+    console.log(evento);
+  }
   obtenerMes(fecha) {
     let nuevaFecha = this.datePipe.transform(fecha, 'MMM');
     return nuevaFecha;

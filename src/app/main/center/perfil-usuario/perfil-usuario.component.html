@@ -191,6 +191,7 @@
                                         <div class="col-12 d-flex flex-sm-row flex-column mt-2">
                                             <a (click)="guardarInformacion()" class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-float waves-light">Guardar
                                                 cambios</a>
+                                                <button type="button" class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-float waves-light" (click)="omitirContinuar()" *ngIf="!validado">Omitir y Continuar</button>
                                     </div>
                                 </div>
                                 </form>
