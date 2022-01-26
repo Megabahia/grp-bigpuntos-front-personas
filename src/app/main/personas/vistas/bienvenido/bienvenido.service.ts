@@ -31,5 +31,4 @@ export class BienvenidoService {
     return this._httpClient.post<any>(`${environment.apiUrl}/corp/empresas/listOne/filtros/`,datos
     );
   }
- 
 }
