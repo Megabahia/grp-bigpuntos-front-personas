@@ -132,7 +132,9 @@ export class PerfilUsuarioComponent implements OnInit {
     }
     this.informacionBasica = { ...this.personaForm.value, fechaNacimiento: this.informacionBasica.fechaNacimiento };
     this.informacionBasica.user_id = this.usuario.id;
-
+    if (!this.informacionBasica.fechaNacimiento) {
+      delete this.informacionBasica.fechaNacimiento;
+    }
     this._perfilUsuarioService.guardarInformacion(this.informacionBasica).subscribe(info => {
       this.usuario.persona = info;
       localStorage.setItem("grpPersonasUser", JSON.stringify(this.usuario));
