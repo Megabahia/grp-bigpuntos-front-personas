@@ -97,6 +97,9 @@ export class PerfilUsuarioComponent implements OnInit {
       }
       info.created_at = this.transformarFecha(info.created_at);
       info.fechaNacimiento = this.transformarFecha(info.fechaNacimiento);
+      if (info.whatsapp.length > 1) {
+        info.whatsapp = info.whatsapp ? info.whatsapp.replace("+593", 0) : 0;
+      }
       this.fecha = this.transformarFecha(info.fechaNacimiento);
       this.personaForm.patchValue(
         info,
@@ -126,6 +129,7 @@ export class PerfilUsuarioComponent implements OnInit {
     // redirect to home page
   }
   guardarInformacion() {
+    let wppAux = "";
 
     this.informacionBasica = { ...this.personaForm.value, fechaNacimiento: this.informacionBasica.fechaNacimiento };
     this.informacionBasica.user_id = this.usuario.id;
@@ -135,6 +139,9 @@ export class PerfilUsuarioComponent implements OnInit {
     if (!this.informacionBasica.whatsapp) {
       delete this.informacionBasica.whatsapp;
     }
+    this.informacionBasica.whatsapp = this.f.whatsapp.value;
+    wppAux += "+593" + this.f.whatsapp.value.substring(1, 10);
+    this.informacionBasica.whatsapp = wppAux;
     this._perfilUsuarioService.guardarInformacion(this.informacionBasica).subscribe(info => {
       this.usuario.persona = info;
       localStorage.setItem("grpPersonasUser", JSON.stringify(this.usuario));
