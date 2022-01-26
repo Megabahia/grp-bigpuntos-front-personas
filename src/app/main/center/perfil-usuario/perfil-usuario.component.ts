@@ -126,10 +126,7 @@ export class PerfilUsuarioComponent implements OnInit {
     // redirect to home page
   }
   guardarInformacion() {
-    if (!this.validado) {
-      this.mensaje = "Es necesario validar el usuario";
-      this.abrirModal(this.mensajeModal);
-    }
+
     this.informacionBasica = { ...this.personaForm.value, fechaNacimiento: this.informacionBasica.fechaNacimiento };
     this.informacionBasica.user_id = this.usuario.id;
     if (!this.informacionBasica.fechaNacimiento) {
@@ -141,8 +138,16 @@ export class PerfilUsuarioComponent implements OnInit {
     this._perfilUsuarioService.guardarInformacion(this.informacionBasica).subscribe(info => {
       this.usuario.persona = info;
       localStorage.setItem("grpPersonasUser", JSON.stringify(this.usuario));
-      this.mensaje = "Información guardada correctamente"
-      this.abrirModal(this.mensajeModal);
+      if (!this.validado) {
+        this.mensaje = "Información guardada correctamente<br>Es necesario validar el usuario";
+        this.abrirModal(this.mensajeModal);
+      } else {
+        this.mensaje = "Información guardada correctamente"
+        this.abrirModal(this.mensajeModal);
+      }
+
+    }, (error) => {
+
     });
 
   }
