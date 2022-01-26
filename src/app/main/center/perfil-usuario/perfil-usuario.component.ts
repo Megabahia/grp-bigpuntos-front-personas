@@ -147,7 +147,8 @@ export class PerfilUsuarioComponent implements OnInit {
       }
 
     }, (error) => {
-
+      this.mensaje = "Error al guardar la información, verifique que la información sea la correcta"
+      this.abrirModal(this.mensajeModal);
     });
 
   }
