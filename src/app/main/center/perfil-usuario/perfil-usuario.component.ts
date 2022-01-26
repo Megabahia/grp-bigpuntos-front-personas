@@ -135,6 +135,9 @@ export class PerfilUsuarioComponent implements OnInit {
     if (!this.informacionBasica.fechaNacimiento) {
       delete this.informacionBasica.fechaNacimiento;
     }
+    if (!this.informacionBasica.whatsapp) {
+      delete this.informacionBasica.whatsapp;
+    }
     this._perfilUsuarioService.guardarInformacion(this.informacionBasica).subscribe(info => {
       this.usuario.persona = info;
       localStorage.setItem("grpPersonasUser", JSON.stringify(this.usuario));
