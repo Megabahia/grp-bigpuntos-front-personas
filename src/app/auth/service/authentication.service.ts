@@ -7,6 +7,7 @@ import { environment } from 'environments/environment';
 import { User, Role } from 'app/auth/models';
 import { ToastrService } from 'ngx-toastr';
 import moment from 'moment';
+import { SocialAuthService } from 'angularx-social-login';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -21,7 +22,8 @@ export class AuthenticationService {
    * @param {HttpClient} _http
    * @param {ToastrService} _toastrService
    */
-  constructor(private _http: HttpClient, private _toastrService: ToastrService) {
+    
+    constructor(private _http: HttpClient, private _toastrService: ToastrService,private socialAuthService: SocialAuthService,) {
     this.grpPersonasUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('grpPersonasUser')));
     this.grpPersonasUser = this.grpPersonasUserSubject.asObservable();
   }
@@ -88,8 +90,13 @@ export class AuthenticationService {
    */
   logout() {
     // remove user from local storage to log user out
+    this.signOut();
     localStorage.removeItem('grpPersonasUser');
     // notify
     this.grpPersonasUserSubject.next(null);
   }
+  signOut(): void {
+    this.socialAuthService.signOut();
+  }
+
 }

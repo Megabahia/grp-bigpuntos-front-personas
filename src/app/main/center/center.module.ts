@@ -17,6 +17,8 @@ import { ReseteoPasswordComponent } from './reseteo-password/reseteo-password.co
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { Role } from 'app/auth/models';
+import { NgxCaptchaModule } from 'ngx-captcha';
+import { FacebookLoginProvider, SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 
 const routes = [
   {
@@ -62,7 +64,13 @@ const routes = [
     CoreTouchspinModule,
     CoreSidebarModule,
     NgbModule,
-    Ng2FlatpickrModule
+    Ng2FlatpickrModule,
+    NgxCaptchaModule,
+    // SocialLoginModule
+  ],
+  providers: [
+    
+    
   ]
 })
 export class CenterModule { }

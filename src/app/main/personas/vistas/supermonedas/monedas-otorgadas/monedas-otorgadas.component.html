@@ -20,14 +20,12 @@
         <!-- users list start -->
         <section class="user-list">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" style="text-align: -webkit-center;">
                     <h4 class="text-primary d-block">Aquí tienes el resumen de tus compras en establecimientos afiliados a Super Monedas, por cada compra en establecimientos afiliados recibes 10 super monedas.</h4>
                     <hr/>
                     <h6 class="text-info">Tiendas afiliadas</h6>
-                    <div class="text-center">
-                        <img src="assets/images/tienda1.png" width="500">
-                        <img src="assets/images/tienda2.png" width="500">
-                        <img src="assets/images/tienda3.png" width="500">
+                    <div class="text-center" style="width: 600px;">
+                        <img [src]="imagen.imagen" width="80" height="80" *ngFor="let imagen of imagenes">
                     </div>
                 </div>
             </div>
@@ -185,8 +183,7 @@
 
 
                 </div>
-                <ngb-pagination #paginator [collectionSize]="collectionSize" [(page)]="page" [(pageSize)]="page_size"
-                [maxSize]="5" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+                <ngb-pagination #paginator [collectionSize]="collectionSize" [(page)]="page" [(pageSize)]="page_size" [maxSize]="5" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
             </div>
             <!-- list section end -->
         </section>

@@ -21,7 +21,14 @@ export class BienvenidoService {
   }
   obtenerProducto(id) {
     return this._httpClient.get<any>(`${environment.apiUrl}/central/productos/listOne/${id}`,
-      
+    );
+  }
+  guardarSuperMonedas(datos) {
+    return this._httpClient.post<any>(`${environment.apiUrl}/core/monedas/create/`,datos
+    );
+  }
+  obtenerEmpresa(datos) {
+    return this._httpClient.post<any>(`${environment.apiUrl}/corp/empresas/listOne/filtros/`,datos
     );
   }
 }

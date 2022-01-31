@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { CoreConfigService } from '../../../../@core/services/config.service';
@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { RecuperarPassService } from '../recuperar-pass/recuperar-pass.service';
 import { Subject } from 'rxjs';
 import { ReseteoPasswordService } from './reseteo-password.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-reseteo-password',
@@ -13,6 +14,8 @@ import { ReseteoPasswordService } from './reseteo-password.service';
   styleUrls: ['./reseteo-password.component.scss']
 })
 export class ReseteoPasswordComponent implements OnInit {
+  @ViewChild('mensajeModalConfirm') mensajeModalConfirm;
+
   // Public
   public emailVar;
   public coreConfig: any;
@@ -24,6 +27,7 @@ export class ReseteoPasswordComponent implements OnInit {
   public confirmPasswordTextType: boolean;
   public passwordSimilar: boolean;
   public token;
+  public mensaje = "";
   public email;
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -40,7 +44,9 @@ export class ReseteoPasswordComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _router: Router,
     private _reseteoPasswordService: ReseteoPasswordService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private _modalService: NgbModal,
+
   ) {
     this._unsubscribeAll = new Subject();
 
@@ -117,13 +123,20 @@ export class ReseteoPasswordComponent implements OnInit {
     ).subscribe((info) => {
       this.error = null;
       if (info.status) {
-        this._router.navigate(['/']);
+        this.mensaje = "Contraseña actualizada correctamente, haga click en continuar para ir a la página de inicio";
+        this.abrirModal(this.mensajeModalConfirm);
       }
     },
       (error) => {
-        console.log(error);
-        this.error = error.error.password;
+        this.error = ["Verifique si su contraseña es correcta"];
+        // console.log(error);
+        // this.error = error.error.password;
       });
+  }
+  redirigir() {
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 1000);
   }
   compararPassword() {
     if (this.f.password.value == this.f.confirmPassword.value) {
@@ -131,6 +144,12 @@ export class ReseteoPasswordComponent implements OnInit {
     } else {
       this.passwordSimilar = false;
     }
+  }
+  abrirModal(modal) {
+    this._modalService.open(modal);
+  }
+  cerrarModal() {
+    this._modalService.dismissAll();
   }
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions

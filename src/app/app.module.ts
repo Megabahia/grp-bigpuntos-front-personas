@@ -14,6 +14,7 @@ import { CoreCommonModule } from '@core/common.module';
 import { CoreSidebarModule, CoreThemeCustomizerModule } from '@core/components';
 
 import { coreConfig } from 'app/app-config';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
@@ -21,6 +22,7 @@ import { SampleModule } from 'app/main/sample/sample.module';
 import { AuthGuard } from './auth/helpers/auth.guards';
 import { JwtInterceptor } from './auth/helpers/jwt.interceptor';
 import { ErrorInterceptor } from './auth/helpers/error.interceptor';
+import { FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 
 const appRoutes: Routes = [
   {
@@ -67,14 +69,30 @@ const appRoutes: Routes = [
     CoreCommonModule,
     CoreSidebarModule,
     CoreThemeCustomizerModule,
-
     // App modules
     LayoutModule,
-    SampleModule
+    SampleModule,
+    SocialLoginModule
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(
+              '340664221170846'
+            )
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+
   ],
   bootstrap: [AppComponent]
 })

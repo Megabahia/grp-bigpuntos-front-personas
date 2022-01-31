@@ -12,4 +12,7 @@ export class MonedasOtorgadasService {
   obtenerListaMonedas(datos) {
     return this._httpClient.post<any>(`${environment.apiUrl}/core/monedas/list/otorgadas/`, datos);
   }
+  obtenerListaImagenesEmpresas(datos) {
+    return this._httpClient.post<any>(`${environment.apiUrl}/corp/empresas/list/logos`, datos);
+  }
 }

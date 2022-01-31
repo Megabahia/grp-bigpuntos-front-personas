@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CoreConfigService } from '@core/services/config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { RecuperarPassService } from './recuperar-pass.service';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-recuperar-pass',
@@ -12,12 +13,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./recuperar-pass.component.scss']
 })
 export class RecuperarPassComponent implements OnInit {
+  @ViewChild('mensajeModalConfirm') mensajeModalConfirm;
+
   // Public
   public emailVar;
   public coreConfig: any;
   public forgotPasswordForm: FormGroup;
   public submitted = false;
   public data;
+  public mensaje = "";
   public error;
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -33,7 +37,9 @@ export class RecuperarPassComponent implements OnInit {
     private _coreConfigService: CoreConfigService,
     private _formBuilder: FormBuilder,
     private _router: Router,
-    private _recuperarPassService: RecuperarPassService) {
+    private _recuperarPassService: RecuperarPassService,
+    private _modalService: NgbModal,
+  ) {
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
@@ -74,7 +80,11 @@ export class RecuperarPassComponent implements OnInit {
       this.coreConfig = config;
     });
   }
-
+  redirigir() {
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 1000);
+  }
   /**
    * On destroy
    */
@@ -88,15 +98,21 @@ export class RecuperarPassComponent implements OnInit {
     }
     this._recuperarPassService.recuperarPassword(this.f.email.value).subscribe((info) => {
       this.error = null;
-      if(info.status){
-        this._router.navigate(['/grp/login']);
+      if (info.status) {
+        this.mensaje = "Revise su correo para cambiar su contraseña";
+        this.abrirModal(this.mensajeModalConfirm);
       }
     },
-    (error)=>{
-      this.error = "Ocurrió un error al enviar su correo";
-    });
+      (error) => {
+        this.error = "Ocurrió un error al enviar su correo";
+      });
   }
-
+  abrirModal(modal) {
+    this._modalService.open(modal);
+  }
+  cerrarModal() {
+    this._modalService.dismissAll();
+  }
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();

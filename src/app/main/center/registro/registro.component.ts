@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoreConfigService } from '@core/services/config.service';
@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { RegistroService } from './registro.service';
 import { Role } from '../../../auth/models/role';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -14,12 +15,16 @@ import { Role } from '../../../auth/models/role';
   styleUrls: ['./registro.component.scss']
 })
 export class RegistroComponent implements OnInit {
+  @ViewChild('mensajeModal') mensajeModal;
+  @ViewChild('mensajeConfirmModal') mensajeConfirmModal;
   //  Public
   public coreConfig: any;
   public registerForm: FormGroup;
   public loading = false;
   public submitted = false;
   public returnUrl: string;
+  public mensaje: string;
+  public mensajeConfirm = "";
   public error = '';
   public passwordTextType: boolean;
   public confirmPasswordTextType: boolean;
@@ -35,11 +40,12 @@ export class RegistroComponent implements OnInit {
    */
   constructor(
     private _coreConfigService: CoreConfigService,
-    private _registroService:RegistroService,
+    private _registroService: RegistroService,
     private _formBuilder: FormBuilder,
     private _route: ActivatedRoute,
-    private _router: Router
-    
+    private _router: Router,
+    private _modalService: NgbModal,
+
   ) {
     this._unsubscribeAll = new Subject();
 
@@ -85,30 +91,48 @@ export class RegistroComponent implements OnInit {
     }
 
     // Login
-    
+    this.error = null;
+    this.loading = true;
     this._registroService.registrarUsuario(
       {
         password: this.f.password.value,
-        roles:Role.SuperMonedas,
+        roles: Role.SuperMonedas,
         email: this.f.correo.value,
-        estado: 1
+        estado: 1,
+        tipoUsuario: 'core'
       }
     ).subscribe((info) => {
-      this.error = null;
-      this.loading = true;
-      localStorage.setItem('grpPersonasUser', JSON.stringify(info));
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 1000);
+
+      if (info.email == "Ya existe usuarios con este email.") {
+        this.error = null;
+        this.loading = false;
+        this.mensaje = info.email;
+        this.abrirModal(this.mensajeModal);
+      } else {
+        this.error = null;
+        this.loading = false;
+        localStorage.setItem('grpPersonasUser', JSON.stringify(info));
+        this.mensajeConfirm = "Registro completo, haga click en continuar para ir al portal de inicio de sesión";
+        this.abrirModal(this.mensajeConfirmModal);
+      }
+
     },
       (error) => {
-        console.log(error);
+        this.error = null;
+        this.loading = false;
+        this.mensaje = "Ha ocurrido un error en su registro";
+        this.abrirModal(this.mensajeModal);
         // this.error = error.error.password;
       });
     // redirect to home page
-    
+
   }
 
+  redirigir() {
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 1000);
+  }
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
 
@@ -120,7 +144,7 @@ export class RegistroComponent implements OnInit {
       correo: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
-      terminos: [false,[Validators.requiredTrue]]
+      terminos: [false, [Validators.requiredTrue]]
     });
 
     // get return url from route parameters or default to '/'
@@ -132,14 +156,19 @@ export class RegistroComponent implements OnInit {
     });
   }
 
-  compararPassword(){
-    if(this.f.password.value==this.f.confirmPassword.value){
+  compararPassword() {
+    if (this.f.password.value == this.f.confirmPassword.value) {
       this.passwordSimilar = true;
-    }else{
+    } else {
       this.passwordSimilar = false;
     }
   }
-
+  abrirModal(modal) {
+    this._modalService.open(modal);
+  }
+  cerrarModal() {
+    this._modalService.dismissAll();
+  }
   /**
    * On destroy
    */

@@ -20,6 +20,7 @@ export class MonedasOtorgadasComponent implements OnInit {
   public maxSize;
   public collectionSize;
   public monedas;
+  public imagenes;
   public usuario: User;
   public cantidadMonedas;
   private _unsubscribeAll: Subject<any>;
@@ -35,11 +36,12 @@ export class MonedasOtorgadasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
   ngAfterViewInit() {
     this.iniciarPaginador();
     this.obtenerListaMonedas();
+    this.obtenerListaImagenes();
   }
 
   obtenerListaMonedas() {
@@ -48,6 +50,13 @@ export class MonedasOtorgadasComponent implements OnInit {
     }).subscribe(info => {
       this.monedas = info.info;
       this.collectionSize = info.cont;
+    });
+  }
+  obtenerListaImagenes() {
+    this._monedasOtorgadasService.obtenerListaImagenesEmpresas({
+      page: this.page - 1, page_size: this.page_size
+    }).subscribe(info => {
+      this.imagenes = info.info;
     });
   }
   iniciarPaginador() {
