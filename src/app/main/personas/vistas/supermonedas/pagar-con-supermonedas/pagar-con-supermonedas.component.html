@@ -64,7 +64,7 @@
                     <tbody>
                         <tr *ngFor="let empresa of listaEmpresas">
                             <td>{{empresa.nombreComercial}}</td>
-                            <td><img src="assets/images/coral.jpg" width="60"></td>
+                            <td><img [src]="empresa.imagen" width="60"></td>
                             <td>
                                 <a href="javascript:void(0)" class="avatar bg-primary mr-1" (click)="toggleSidebar('guardarCompraSupermonedas',empresa._id)">
                                     <div class="avatar-content" data-toggle="tooltip" data-placement="bottom" title="Comprar con super monedas">
