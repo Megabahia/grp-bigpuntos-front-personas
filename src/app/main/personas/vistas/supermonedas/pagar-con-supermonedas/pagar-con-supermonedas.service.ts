@@ -15,4 +15,7 @@ export class PagarConSuperMonedasService {
   pagarConSuperMonedas(datos){
     return this._httpClient.post<any>(`${environment.apiUrl}/corp/pagos/create/`, datos);
   }
+  obtenerLongitudCodigoPago(){
+    return this._httpClient.get<any>(`${environment.apiUrl}/corp/pagos/create/`);
+  }
 }

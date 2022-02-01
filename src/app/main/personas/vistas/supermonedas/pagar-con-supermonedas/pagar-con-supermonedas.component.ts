@@ -9,6 +9,8 @@ import { CoreSidebarService } from '../../../../../../@core/components/core-side
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PagoMonto } from '../../../models/supermonedas';
 import moment from 'moment';
+import { MisMonedasService } from '../mis-monedas/mis-monedas.service';
+import { ParametrizacionesService } from '../../../servicios/parametrizaciones.service';
 
 @Component({
   selector: 'app-pagar-con-supermonedas',
@@ -33,11 +35,13 @@ export class PagarConSuperMonedasComponent implements OnInit {
   public cargandoCompraSupermonedas = false;
   public cobrarSuperMonedasSubmitted = false;
   public nombreTienda;
+  public imagenTienda;
   public monto;
   public nombreComercial;
   public listaEmpresas;
   public pagoMonto: PagoMonto;
   public mensaje = "";
+  public longitudCodigoPago;
   constructor(
     private _pagarConSuperMonedasService: PagarConSuperMonedasService,
     private _coreMenuService: CoreMenuService,
@@ -45,6 +49,8 @@ export class PagarConSuperMonedasComponent implements OnInit {
     private datePipe: DatePipe,
     private _formBuilder: FormBuilder,
     private _modalService: NgbModal,
+    private _misMonedasService: MisMonedasService,
+    private paramService: ParametrizacionesService,
 
   ) {
     this._unsubscribeAll = new Subject();
@@ -55,6 +61,14 @@ export class PagarConSuperMonedasComponent implements OnInit {
     return this.compraSuperMonedasForm.controls;
   }
   ngOnInit(): void {
+    this._misMonedasService.obtenerCantidadMonedas(this.usuario.id).subscribe(info => {
+      this.cantidadMonedas = info.saldo;
+    });
+
+    this.paramService.obtenerParametroNombreTipo("longitud_codigo_pago", "LONGITUD_CODIGO_PAGO").subscribe((info) => {
+      this.longitudCodigoPago = info.valor;
+    });
+
     this.compraSuperMonedasForm = this._formBuilder.group({
       monto: ['', [Validators.required]],
     }
@@ -81,17 +95,25 @@ export class PagarConSuperMonedasComponent implements OnInit {
     let empresa = this.listaEmpresas.filter(x => x._id == id);
     if (empresa.length) {
       this.nombreTienda = empresa[0].nombreComercial;
+      this.imagenTienda = empresa[0].imagen;
     }
     this._coreSidebarService.getSidebarRegistry(name).toggleOpen();
   }
   enviarMonto() {
+    
+    if(this.cantidadMonedas < this.pagoMonto.monto){
+      this.mensaje = "El monto que ingreso supera su cantidad de super monedas, ingrese otra cantidad que disponga en su cuenta."
+      this.abrirModal(this.mensajeModal);
+      return;
+    }
+
     this.cobrarSuperMonedasSubmitted = true;
 
     // stop here if form is invalid
     if (this.compraSuperMonedasForm.invalid) {
       return;
     }
-    this.pagoMonto.codigoCobro = this.pagoMonto.user_id + "-" + moment().valueOf().toString();
+    this.pagoMonto.codigoCobro = this.generarNumeros(this.longitudCodigoPago) + "-" + moment().valueOf().toString();
 
     this.cargandoCompraSupermonedas = true;
     this._pagarConSuperMonedasService.pagarConSuperMonedas(this.pagoMonto).subscribe((info) => {
@@ -135,6 +157,9 @@ export class PagarConSuperMonedasComponent implements OnInit {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
+  }
+  generarNumeros(longitudCodigo) {
+    return Math.floor(Math.pow(10, longitudCodigo-1) + Math.random() * (Math.pow(10, longitudCodigo) - Math.pow(10, longitudCodigo-1) - 1));
   }
 
 }
