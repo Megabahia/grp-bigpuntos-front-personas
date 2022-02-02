@@ -116,6 +116,7 @@
     </div>
 </core-sidebar>
 <ng-template #comprobanteCompraSuperMonedasMdl let-modal>
+<div id="print-section">
     <div class="modal-header">
         <h4 class="modal-title">Comprobante de compra con super monedas</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss( 'Cross click')">
@@ -153,10 +154,10 @@
                     </div>
                     <br><br>
                     <small class="d-block">Código QR de canje</small>
-                    <qrcode [qrdata]="pagoMonto.codigoCobro" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+                    <qrcode [elementType]="elementType" [qrdata]="pagoMonto.codigoCobro" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-primary" type="button">Imprimir</button>
+                    <button class="btn btn-primary" type="button" [useExistingCss]="true" printSectionId="print-section" ngxPrint>Imprimir</button>
                     <button class="btn btn-info" type="button">Descargar</button>
                 </div>
             </div>
@@ -164,6 +165,7 @@
     </div>
     <div class="modal-footer">
     </div>
+</div>
 </ng-template>
 <ng-template #mensajeModal let-modal>
     <div class="modal-header">

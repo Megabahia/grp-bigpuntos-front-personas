@@ -29,6 +29,7 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { PagarConSuperMonedasComponent } from './vistas/supermonedas/pagar-con-supermonedas/pagar-con-supermonedas.component';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { QRCodeModule } from 'angularx-qrcode';
+import {NgxPrintModule} from 'ngx-print';
 import { CreditosAutonomosComponent } from './vistas/creditos-autonomos/creditos-autonomos.component';
 import { VideoExplicativoAutComponent } from './vistas/creditos-autonomos/video-explicativo/video-explicativo.component';
 import { PerfilPersonaAutComponent } from './vistas/creditos-autonomos/perfil-persona/perfil-persona.component';
@@ -214,7 +215,8 @@ const routes = [
     ShareIconsModule,
     ShareButtonsModule,
     NgxBarcodeModule,
-    QRCodeModule
+    QRCodeModule,
+    NgxPrintModule
   ],
   exports: [
     BienvenidoComponent,
