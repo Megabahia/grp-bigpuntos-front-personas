@@ -12,6 +12,9 @@ import moment from 'moment';
 import { MisMonedasService } from '../mis-monedas/mis-monedas.service';
 import { ParametrizacionesService } from '../../../servicios/parametrizaciones.service';
 
+import { jsPDF } from "jspdf";
+import html2canvas from 'html2canvas';
+
 @Component({
   selector: 'app-pagar-con-supermonedas',
   templateUrl: './pagar-con-supermonedas.component.html',
@@ -160,6 +163,22 @@ export class PagarConSuperMonedasComponent implements OnInit {
   }
   generarNumeros(longitudCodigo) {
     return Math.floor(Math.pow(10, longitudCodigo-1) + Math.random() * (Math.pow(10, longitudCodigo) - Math.pow(10, longitudCodigo-1) - 1));
+  }
+
+  exportHtmlToPDF(){
+    let data = document.getElementById('print-section');
+
+    html2canvas(data).then(canvas => {
+      let docWidth = 208;
+      let docHeight = canvas.height * docWidth / canvas.width;
+      
+      const contentDataURL = canvas.toDataURL('image/png')
+      let doc = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      doc.addImage(contentDataURL, 'PNG', 0, position, docWidth, docHeight)
+      
+      doc.save('comprobante.pdf');
+    });
   }
 
 }
