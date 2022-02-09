@@ -102,19 +102,11 @@ export const menu: CoreMenu[] = [
             icon: 'circle',
             url: 'personas/creditos-autonomos/solicitar-credito'
           },
-          {
-            id: 'estadoCreditosAut',
-            title: 'Estado de mis créditos',
-            // translate: 'MENU.APPS.EMAIL',
-            type: 'item',
-            icon: 'circle',
-            url: 'personas/supermonedas/mis-facturas'
-          }
         ]
       },
       {
         id: 'creditosEmpleado',
-        title: 'Créditos para Empleado',
+        title: 'Empleado',
         role: [Role.SuperMonedas],
         // translate: 'MENU.PAGES.SECTION',
         type: 'collapsible',
@@ -147,7 +139,24 @@ export const menu: CoreMenu[] = [
             url: 'personas/creditos-pre-aprobados/listado'
           }
         ]
-      }
+      },
+      {
+        id: 'misCreditos',
+        title: 'Mis créditos',
+        role: [Role.SuperMonedas],
+        // translate: 'MENU.PAGES.SECTION',
+        type: 'collapsible',
+        icon: 'credit-card',
+      },
+      {
+        id: 'reclamosRequerimientos',
+        title: 'Reclamos y Requerimientos',
+        role: [Role.SuperMonedas],
+        // translate: 'MENU.PAGES.SECTION',
+        type: 'item',
+        icon: 'message-circle',
+        url: 'personas/inicio',
+      },
 
     ]
   },

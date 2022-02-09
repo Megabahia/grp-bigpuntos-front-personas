@@ -11,6 +11,7 @@ import { FlatpickrOptions } from 'ng2-flatpickr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BienvenidoService } from '../../personas/vistas/bienvenido/bienvenido.service';
 import { Router } from '@angular/router';
+import { ParametrizacionesService } from '../../personas/servicios/parametrizaciones.service';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -25,6 +26,7 @@ export class PerfilUsuarioComponent implements OnInit {
   public usuario: User;
   public coreConfig: any;
   public personaForm: FormGroup;
+  public datosTrabajoForm: FormGroup;
   public informacionBasica: InformacionBasica;
   public persona;
   public imagen;
@@ -38,6 +40,10 @@ export class PerfilUsuarioComponent implements OnInit {
     altFormat: 'Y-n-j',
     altInputClass: 'form-control flat-picker flatpickr-input invoice-edit-input',
   };
+  public paisOpciones;
+  public provinciaOpciones;
+  public ciudadOpciones;
+  public profesionOpciones;
   // Private
   private _unsubscribeAll: Subject<any>;
   constructor(
@@ -48,9 +54,12 @@ export class PerfilUsuarioComponent implements OnInit {
     private _modalService: NgbModal,
     private _bienvenidoService: BienvenidoService,
     private _router: Router,
+    private paramService: ParametrizacionesService,
 
   ) {
     this.informacionBasica = {
+      pais: "",
+      provincia: "",
       ciudad: "",
       edad: 0,
       emailAdicional: "",
@@ -60,6 +69,7 @@ export class PerfilUsuarioComponent implements OnInit {
       instagram: "",
       tiktok: "",
       twitter: "",
+      telefono: "",
       whatsapp: "",
       youtube: "",
       user_id: ""
@@ -80,6 +90,9 @@ export class PerfilUsuarioComponent implements OnInit {
       fechaNacimiento: ['string',],
       edad: ['',],
       whatsapp: ['',],
+      telefono: ['',],
+      pais: ['',],
+      provincia: ['',],
       ciudad: ['',],
       email: ['',],
       emailAdicional: ['',],
@@ -88,6 +101,14 @@ export class PerfilUsuarioComponent implements OnInit {
       twitter: ['',],
       tiktok: ['',],
       youtube: ['',],
+    });
+    this.datosTrabajoForm = this._formBuilder.group({
+      fechaNacimiento: ['string',],
+      created_at: ['',],
+      identificacion: ['',],
+      nombres: ['',],
+      apellidos: ['',],
+      genero: ['',],
     });
     this.usuario = this._coreMenuService.grpPersonasUser;
     this._perfilUsuarioService.obtenerInformacion(this.usuario.id).subscribe(info => {
@@ -104,6 +125,10 @@ export class PerfilUsuarioComponent implements OnInit {
       this.personaForm.patchValue(
         info,
       );
+      this.obtenerPaisOpciones();
+      this.obtenerProvinciaOpciones();
+      this.obtenerCiudadOpciones();
+      this.obtenerProfesionOpciones();
     });
   }
   transformarFecha(fecha) {
@@ -201,5 +226,28 @@ export class PerfilUsuarioComponent implements OnInit {
   }
   cerrarModal() {
     this._modalService.dismissAll();
+  }
+  obtenerPaisOpciones() {
+    this.paramService.obtenerListaPadres("PAIS").subscribe((info) => {
+      this.paisOpciones = info;
+    });
+  }
+  obtenerProvinciaOpciones() {
+    this.paramService.obtenerListaHijos(this.informacionBasica.pais, "PAIS").subscribe((info) => {
+      this.provinciaOpciones = info;
+    });
+  }
+  obtenerCiudadOpciones() {
+    this.paramService.obtenerListaHijos(this.informacionBasica.provincia, "PROVINCIA").subscribe((info) => {
+      this.ciudadOpciones = info;
+    });
+  }
+  obtenerProfesionOpciones() {
+    this.paramService.obtenerListaPadres("PROFESIONES").subscribe((info) => {
+      this.profesionOpciones = info;
+    });
+  }
+  guardarDatosTrabajo(){
+    
   }
 }

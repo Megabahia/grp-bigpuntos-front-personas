@@ -50,10 +50,10 @@
                                                 <a ngbNavLink class="d-flex align-items-center nav-link font-weight-bold"><span class="d-none d-sm-block">Datos de trabajo</span></a
                                                     >
                                             </li>
-                                            <li class="nav-item" [ngbNavItem]="3">
+                                            <!-- <li class="nav-item" [ngbNavItem]="3">
                                                 <a ngbNavLink class="d-flex align-items-center nav-link font-weight-bold"><span class="d-none d-sm-block">Historial laboral</span></a
                                                     >
-                                            </li>
+                                            </li> -->
                                         </ul>
                                                                     </div>
                                 </div>
@@ -130,8 +130,32 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
+                                                <label for="username">País</label>
+                                                <select class="form-control select2" formControlName="pais" [(ngModel)]="informacionBasica.pais" (change)="obtenerProvinciaOpciones()">
+                                                    <option value="">- Seleccione -</option>
+                                                    <option *ngFor="let paisOp of paisOpciones" value="{{paisOp.nombre}}">{{paisOp.nombre}}</option>
+                                             </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Provincia</label>
+                                                <select class="form-control select2" formControlName="provincia" [(ngModel)]="informacionBasica.provincia" (change)="obtenerCiudadOpciones() ">
+                                                    <option value="">- Seleccione -</option>
+                                                    <option *ngFor="let provinciaOp of provinciaOpciones" value="{{provinciaOp.nombre}}">{{provinciaOp.nombre}}</option>
+                    
+                                             </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
                                                 <label for="username">Ciudad</label>
-                                                <input formControlName="ciudad" type="text" class="form-control">
+                                                <select class="form-control select2" formControlName="ciudad" [(ngModel)]="informacionBasica.ciudad">
+                                                    <option value="">- Seleccione -</option>
+                                                    <option *ngFor="let ciudadOp of ciudadOpciones" value="{{ciudadOp.nombre}}">{{ciudadOp.nombre}}</option>
+                    
+                                             </select>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -150,6 +174,12 @@
                                             <div class="form-group">
                                                 <label for="username">Número Whats App</label>
                                                 <input formControlName="whatsapp" type="text" class="form-control" value="0992354776">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Número celular</label>
+                                                <input formControlName="telefono" type="text" class="form-control" value="0992354776">
                                             </div>
                                         </div>
     
@@ -203,41 +233,57 @@
                 <div class="tab-pane {{tab == 2 ? 'active':''}}" aria-labelledby="account-tab" role="tabpane2">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="username">Fecha de inicio</label>
-                                        <input type="text" class="form-control" placeholder="escojer" value="21-04-2021" disabled />
+                            <form class="auth-login-form mt-2" [formGroup]="datosTrabajoForm" (ngSubmit)="guardarDatosTrabajo()">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="username">Fecha de inicio</label>
+                                            <input type="text" class="form-control" placeholder="escojer" value="21-04-2021" disabled />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="username" class="d-block">Logo de Empresa</label>
+                                            <img src="app-assets/images/jep.jpg" width="50">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="username">Empresa</label>
+                                            <input type="text" class="form-control" value="Movistar" disabled>
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="username">Tiempo de trabajo (meses)</label>
+                                            <input type="text" class="form-control" value="12" disabled>
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="username">Cargo actual</label>
+                                            <input type="text" class="form-control" value="Diseñador gráfico" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="username">Profesión</label>
+                                            <select class="form-control select2">
+                                                <option value="">- Seleccione -</option>
+                                                <option *ngFor="let profesionOp of profesionOpciones" value="{{profesionOp.nombre}}">{{profesionOp.nombre}}</option>
+                                         </select>
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="col-12 d-flex flex-sm-row flex-column mt-2">
+                                        <a href="javascript:void(0)" class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-float waves-light">Guardar
+                                                cambios</a>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="username">Empresa</label>
-                                        <input type="text" class="form-control" value="Movistar" disabled>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="username">Tiempo de trabajo (meses)</label>
-                                        <input type="text" class="form-control" value="12" disabled>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="username">Cargo actual</label>
-                                        <input type="text" class="form-control" value="Diseñador gráfico">
-                                    </div>
-                                </div>
-
-
-
-                                <div class="col-12 d-flex flex-sm-row flex-column mt-2">
-                                    <a href="javascript:void(0)" class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-float waves-light">Guardar
-                                            cambios</a>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -12,8 +12,11 @@ export class InformacionBasica {
     genero: string;
     fechaNacimiento: string;
     edad: number;
-    ciudad: string;
+    pais?: string;
+    provincia?: string;
+    ciudad?: string;
     emailAdicional: string;
+    telefono: string;
     whatsapp: string;
     facebook: string;
     instagram: string;

@@ -5,6 +5,7 @@ import { User } from 'app/auth/models';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { Subject } from 'rxjs';
 import { PrincipalService } from './principal.service';
+import { ParametrizacionesService } from '../../servicios/parametrizaciones.service';
 
 @Component({
   selector: 'app-principal',
@@ -31,10 +32,15 @@ export class PrincipalComponent implements OnInit {
   public cantidadMonedas;
   public usuario: User;
 
+  public configTextoBanner;
+  public configLinkBanner;
+  public configImagenBanner;
+
   constructor(
     private _principalService: PrincipalService,
     private _coreMenuService: CoreMenuService,
     private modalService: NgbModal,
+    private paramService: ParametrizacionesService,
   ) {
     this._unsubscribeAll = new Subject();
     this.usuario = this._coreMenuService.grpPersonasUser;
@@ -82,6 +88,7 @@ export class PrincipalComponent implements OnInit {
         }
       };
     });
+    this.obtenerConfiguracionBanner();
   }
   obtenerProducto(id) {
     this._principalService.obtenerProducto(id).subscribe(info => {
@@ -98,6 +105,18 @@ export class PrincipalComponent implements OnInit {
     this.modalService.open(this.CanjearProducto, {
       centered: true,
       size: 'lg'
+    });
+  }
+
+  obtenerConfiguracionBanner() {
+    this.paramService.obtenerParametroNombreTipo("config_banner_texto", "CONFIG_BANNER_TEXTO").subscribe((info) => {
+      this.configTextoBanner = info.valor;
+    });
+    this.paramService.obtenerParametroNombreTipo("config_banner_link", "CONFIG_BANNER_LINK").subscribe((info) => {
+      this.configLinkBanner = info.valor;
+    });
+    this.paramService.obtenerParametroNombreTipo("config_banner_imagen", "CONFIG_BANNER_IMAGEN").subscribe((info) => {
+      this.configImagenBanner = info.valor;
     });
   }
 

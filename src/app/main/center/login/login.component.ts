@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
     private _registroService: RegistroService,
 
   ) {
-    this.siteKey = "6Lf8RtUaAAAAAJ-X1OdWM1yk80S_U4dF_A3nNMc1";
+    this.siteKey = "6LevfmMeAAAAAD9FB7d_lSUqobACqJgbeIwFt5dt";
     this.captcha = false;
     this._unsubscribeAll = new Subject();
 
