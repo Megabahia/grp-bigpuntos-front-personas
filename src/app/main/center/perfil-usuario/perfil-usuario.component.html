@@ -233,53 +233,58 @@
                 <div class="tab-pane {{tab == 2 ? 'active':''}}" aria-labelledby="account-tab" role="tabpane2">
                     <div class="card">
                         <div class="card-body">
-                            <form class="auth-login-form mt-2" [formGroup]="datosTrabajoForm" (ngSubmit)="guardarDatosTrabajo()">
+                            <form class="auth-login-form mt-2" [formGroup]="datosTrabajoForm">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="username">Fecha de inicio</label>
-                                            <input type="text" class="form-control" placeholder="escojer" value="21-04-2021" disabled />
+                                            <input type="text" class="form-control" formControlName="fechaInicio" [(ngModel)]="datosTrabajo.fechaInicio" disabled />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="username" class="d-block">Logo de Empresa</label>
-                                            <img src="app-assets/images/jep.jpg" width="50">
+                                            <img [src]="datosTrabajo.imagen" width="50">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="username">Empresa</label>
-                                            <input type="text" class="form-control" value="Movistar" disabled>
+                                            <input type="text" class="form-control" formControlName="nombreEmpresa" [(ngModel)]="datosTrabajo.nombreEmpresa" disabled>
                                         </div>
                                     </div>
     
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="username">Tiempo de trabajo (meses)</label>
-                                            <input type="text" class="form-control" value="12" disabled>
+                                            <input type="text" class="form-control" formControlName="tiempoTrabajo" [(ngModel)]="datosTrabajo.tiempoTrabajo" disabled>
                                         </div>
                                     </div>
     
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="username">Cargo actual</label>
-                                            <input type="text" class="form-control" value="Diseñador gráfico" disabled>
+                                            <input type="text" class="form-control" formControlName="cargoActual" [(ngModel)]="datosTrabajo.cargoActual" disabled>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="username">Profesión</label>
-                                            <select class="form-control select2">
+                                            <select class="form-control select2" formControlName="profesion" [(ngModel)]="datosTrabajo.profesion">
                                                 <option value="">- Seleccione -</option>
                                                 <option *ngFor="let profesionOp of profesionOpciones" value="{{profesionOp.nombre}}">{{profesionOp.nombre}}</option>
-                                         </select>
+                                            </select>
+                                            <div *ngIf="submitted && tForm.profesion.errors" class="invalid-feedback" style="display: block;">
+                                                <div *ngIf="tForm.profesion.errors.required">Reporte de Aprobación de Crédito es requerido</div>
+                                            </div>
                                         </div>
                                     </div>
     
     
                                     <div class="col-12 d-flex flex-sm-row flex-column mt-2">
-                                        <a href="javascript:void(0)" class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-float waves-light">Guardar
+                                        <a href="javascript:void(0)"
+                                        (click)="guardarDatosTrabajo()"
+                                        class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-float waves-light">Guardar
                                                 cambios</a>
                                     </div>
                                 </div>

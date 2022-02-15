@@ -4,7 +4,7 @@ import { PerfilUsuarioService } from './perfil-usuario.service';
 import { User } from '../../../auth/models/user';
 import { CoreMenuService } from '../../../../@core/components/core-menu/core-menu.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { InformacionBasica } from '../../personas/models/persona';
+import { InformacionBasica, HistorialLaboral } from '../../personas/models/persona';
 import { DatePipe } from '@angular/common';
 import moment from 'moment';
 import { FlatpickrOptions } from 'ng2-flatpickr';
@@ -22,10 +22,12 @@ import { ParametrizacionesService } from '../../personas/servicios/parametrizaci
 export class PerfilUsuarioComponent implements OnInit {
   @ViewChild('mensajeModal') mensajeModal;
 
+  public submitted = false;
   public tab;
   public usuario: User;
   public coreConfig: any;
   public personaForm: FormGroup;
+  public datosTrabajo: HistorialLaboral;
   public datosTrabajoForm: FormGroup;
   public informacionBasica: InformacionBasica;
   public persona;
@@ -74,11 +76,23 @@ export class PerfilUsuarioComponent implements OnInit {
       youtube: "",
       user_id: ""
     }
+    this.datosTrabajo = {
+      fechaInicio: "",
+      imagen: "",
+      nombreEmpresa: "",
+      tiempoTrabajo: 0,
+      cargoActual: "",
+      profesion: "",
+      _id: "",
+    }
     this._unsubscribeAll = new Subject();
 
   }
   get f() {
     return this.personaForm.controls;
+  }
+  get tForm() {
+    return this.datosTrabajoForm.controls;
   }
   ngOnInit(): void {
     this.personaForm = this._formBuilder.group({
@@ -103,12 +117,12 @@ export class PerfilUsuarioComponent implements OnInit {
       youtube: ['',],
     });
     this.datosTrabajoForm = this._formBuilder.group({
-      fechaNacimiento: ['string',],
-      created_at: ['',],
-      identificacion: ['',],
-      nombres: ['',],
-      apellidos: ['',],
-      genero: ['',],
+      fechaInicio: ['',],
+      profesion: ['', [Validators.required]],
+      imagen: ['',],
+      nombreEmpresa: ['',],
+      tiempoTrabajo: ['',],
+      cargoActual: ['',],
     });
     this.usuario = this._coreMenuService.grpPersonasUser;
     this._perfilUsuarioService.obtenerInformacion(this.usuario.id).subscribe(info => {
@@ -129,6 +143,12 @@ export class PerfilUsuarioComponent implements OnInit {
       this.obtenerProvinciaOpciones();
       this.obtenerCiudadOpciones();
       this.obtenerProfesionOpciones();
+    });
+    this._perfilUsuarioService.obtenerHistorialLaboral(this.usuario.id).subscribe(info => {
+      this.datosTrabajo = info;
+      this.datosTrabajoForm.patchValue(
+        info,
+      );
     });
   }
   transformarFecha(fecha) {
@@ -248,6 +268,30 @@ export class PerfilUsuarioComponent implements OnInit {
     });
   }
   guardarDatosTrabajo(){
-    
+    this.submitted = true;
+    if (this.datosTrabajoForm.invalid) {
+      return;
+    }
+    console.log(this.datosTrabajo)
+    console.log(this.datosTrabajoForm)
+    this._perfilUsuarioService.guardarHistorialLaboral(this.usuario.id,this.datosTrabajo).subscribe(info => {
+      this.datosTrabajo = info;
+      this.datosTrabajoForm.patchValue(
+        info,
+      );
+      console.log('datosTrabajo', this.datosTrabajo)
+      // localStorage.setItem("grpPersonasUser", JSON.stringify(this.usuario));
+      if (!this.validado) {
+        this.mensaje = "Información guardada correctamente<br>Es necesario validar el usuario";
+        this.abrirModal(this.mensajeModal);
+      } else {
+        this.mensaje = "Información guardada correctamente"
+        this.abrirModal(this.mensajeModal);
+      }
+
+    }, (error) => {
+      this.mensaje = "Error al guardar la información, verifique que la información sea la correcta"
+      this.abrirModal(this.mensajeModal);
+    });
   }
 }
