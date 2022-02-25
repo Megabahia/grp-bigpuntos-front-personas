@@ -72,3 +72,12 @@ export class RucPersona {
     ventaMensual: number;
     _id: string;
 }
+export class HistorialLaboral {
+    fechaInicio: string;
+    imagen: string;
+    nombreEmpresa: string;
+    tiempoTrabajo: number;
+    cargoActual: string;
+    profesion: string;
+    _id: string;
+}
