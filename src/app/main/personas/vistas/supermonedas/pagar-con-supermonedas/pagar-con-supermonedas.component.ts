@@ -98,7 +98,11 @@ export class PagarConSuperMonedasComponent implements OnInit {
     let empresa = this.listaEmpresas.filter(x => x._id == id);
     if (empresa.length) {
       this.nombreTienda = empresa[0].nombreComercial;
-      this.imagenTienda = empresa[0].imagen;
+      this._pagarConSuperMonedasService.imageUrlToBase64(empresa[0].imagen).subscribe(
+          base64 => {
+            console.log(base64);
+            this.imagenTienda = 'data:image/jpeg;base64,'+base64
+      })
     }
     this._coreSidebarService.getSidebarRegistry(name).toggleOpen();
   }
