@@ -56,6 +56,7 @@ export class SolicitarCredito {
     user_id: string;
     empresaComercial_id: string;
     empresaIfis_id: string;
+    canal: string;
 }
 export class RucPersona {
     actividadComercial: string;

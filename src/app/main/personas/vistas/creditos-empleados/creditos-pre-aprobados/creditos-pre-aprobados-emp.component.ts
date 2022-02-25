@@ -137,7 +137,8 @@ export class CreditosPreAprobadosEmpComponent implements OnInit {
       estado: "",
       monto: 0,
       plazo: 0,
-      user_id: ""
+      user_id: "",
+      canal: "Autonomo"
     }
   }
   // Lifecycle Hooks
