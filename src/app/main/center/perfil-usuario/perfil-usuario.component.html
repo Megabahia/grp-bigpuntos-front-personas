@@ -13,9 +13,9 @@
             <div class="">
               <!-- profile picture -->
               <div class="">
-                <div class="cat">
+                <div>
                   <img src="{{imagenTemp ? imagenTemp: imagen ? imagen: '/assets/images/avatars/avatar.png' }}"
-                    class="rounded img-fluid" alt="Card image" />
+                    class="cat" />
                 </div>
                 <!-- profile title -->
                 <div class="profile-title ml-3">
@@ -73,7 +73,7 @@
                           <div class="col-md-3">
                             <div class="form-group">
                               <label for="username">Fecha de creación</label>
-                              <input type="text" formControlName="created_at" class="form-control" placeholder="escojer"
+                              <input type="text" formControlName="created_at" class="form-control" placeholder="Fecha"
                                 disabled />
                             </div>
                           </div>
@@ -81,14 +81,22 @@
                             <div class="form-group">
                               <label for="username">Número de cédula</label>
                               <input type="text" formControlName="identificacion" class="form-control"
-                                value="1817284467" disabled>
+                                value="1817284467" [ngClass]="{ isDisabled: usuario.persona.identificacion }">
+                            </div>
+                            <div *ngIf="PerfilSub && f.identificacion.errors" class="invalid-feedback"
+                              style="display: block;">
+                              <div *ngIf="PerfilSub && f.identificacion.errors.required">Es requerido</div>
                             </div>
                           </div>
 
                           <div class="col-md-3">
                             <div class="form-group">
                               <label for="username">Nombres</label>
-                              <input type="text" formControlName="nombres" class="form-control" value="Edgar" disabled>
+                              <input type="text" formControlName="nombres" class="form-control" value="Edgar"
+                                [ngClass]="{ isDisabled: usuario.persona.nombres}">
+                            </div>
+                            <div *ngIf="PerfilSub && f.nombres.errors" class="invalid-feedback" style="display: block;">
+                              <div *ngIf="PerfilSub && f.nombres.errors.required">Es requerido</div>
                             </div>
                           </div>
 
@@ -96,7 +104,11 @@
                             <div class="form-group">
                               <label for="username">Apellidos</label>
                               <input type="text" formControlName="apellidos" class="form-control" value="Flores"
-                                disabled>
+                                [ngClass]="{ isDisabled: usuario.persona.apellidos }">
+                            </div>
+                            <div *ngIf="PerfilSub && f.apellidos.errors" class="invalid-feedback"
+                              style="display: block;">
+                              <div *ngIf="PerfilSub && f.apellidos.errors.required">Es requerido</div>
                             </div>
                           </div>
 
@@ -110,6 +122,9 @@
                                 <option>No especificado</option>
                               </select>
                             </div>
+                            <div *ngIf="PerfilSub && f.genero.errors" class="invalid-feedback" style="display: block;">
+                              <div *ngIf="PerfilSub && f.genero.errors.required">Es requerido</div>
+                            </div>
                           </div>
 
                           <div class="col-md-3">
@@ -118,6 +133,10 @@
                               <ng2-flatpickr [setDate]="fecha" formControlName="fechaNacimiento"
                                 [config]="startDateOptions" (input)="calcularEdad()"></ng2-flatpickr>
                             </div>
+                            <div *ngIf="PerfilSub && f.fechaNacimiento.errors" class="invalid-feedback"
+                              style="display: block;">
+                              <div *ngIf="PerfilSub && f.fechaNacimiento.errors.required">Es requerido</div>
+                            </div>
                           </div>
 
                           <div class="col-md-3">
@@ -125,6 +144,11 @@
                               <label for="username">Edad</label>
                               <input formControlName="edad" type="text" class="form-control" value="30" disabled>
                             </div>
+                            <div *ngIf="PerfilSub && f.provincia.errors" class="invalid-feedback"
+                              style="display: block;">
+                              <div *ngIf="PerfilSub && f.provincia.errors.required">Es requerido</div>
+                            </div>
+
                           </div>
                           <div class="col-md-3">
                             <div class="form-group">
@@ -135,6 +159,10 @@
                                 <option *ngFor="let paisOp of paisOpciones" value="{{paisOp.nombre}}">{{paisOp.nombre}}
                                 </option>
                               </select>
+                              <div *ngIf="PerfilSub && f.provincia.errors" class="invalid-feedback"
+                                style="display: block;">
+                                <div *ngIf="PerfilSub && f.provincia.errors.required">Es requerido</div>
+                              </div>
                             </div>
                           </div>
 
@@ -149,6 +177,10 @@
 
                               </select>
                             </div>
+                            <div *ngIf="PerfilSub && f.provincia.errors" class="invalid-feedback"
+                              style="display: block;">
+                              <div *ngIf="PerfilSub && f.provincia.errors.required">Es requerido</div>
+                            </div>
                           </div>
                           <div class="col-md-3">
                             <div class="form-group">
@@ -158,15 +190,16 @@
                                 <option value="">- Seleccione -</option>
                                 <option *ngFor="let ciudadOp of ciudadOpciones" value="{{ciudadOp.nombre}}">
                                   {{ciudadOp.nombre}}</option>
-
                               </select>
+                            </div>
+                            <div *ngIf="PerfilSub && f.ciudad.errors" class="invalid-feedback" style="display: block;">
+                              <div *ngIf="PerfilSub && f.ciudad.errors.required">Es requerido</div>
                             </div>
                           </div>
                           <div class="col-md-3">
                             <div class="form-group">
                               <label for="username">Correo</label>
-                              <input formControlName="email" type="text" class="form-control" value="jasgg@gmail.com"
-                                value="30" disabled>
+                              <input formControlName="email" type="text" class="form-control" disabled>
                             </div>
                           </div>
                           <div class="col-md-3">
@@ -174,18 +207,27 @@
                               <label for="username">Correo adicional</label>
                               <input formControlName="emailAdicional" type="text" class="form-control"
                                 placeholder="micorreo@dominio.com">
+
                             </div>
                           </div>
                           <div class="col-md-3">
                             <div class="form-group">
-                              <label for="username">Número Whats App</label>
+                              <label for="username">Número WhatsApp</label>
                               <input formControlName="whatsapp" type="text" class="form-control" value="0992354776">
+                            </div>
+                            <div *ngIf="PerfilSub && f.whatsapp.errors" class="invalid-feedback"
+                              style="display: block;">
+                              <div *ngIf="PerfilSub && f.whatsapp.errors.required">Es requerido</div>
                             </div>
                           </div>
                           <div class="col-md-3">
                             <div class="form-group">
                               <label for="username">Número celular</label>
                               <input formControlName="telefono" type="text" class="form-control" value="0992354776">
+                            </div>
+                            <div *ngIf="PerfilSub && f.telefono.errors" class="invalid-feedback"
+                              style="display: block;">
+                              <div *ngIf="PerfilSub && f.telefono.errors.required">Es requerido</div>
                             </div>
                           </div>
 

@@ -1,17 +1,7 @@
 .cat {
-  max-width: 50%;
-  max-height: 50%;
+  width: 150px;
+  height: 200px;
   float: center;
-}
-
-@import "@core/scss/base/pages/page-profile.scss";
-#user-profile .profile-header .profile-img-container {
-  width: 100%;
-  height: auto;
-  bottom: 13px;
-  left: 2.14rem;
-  z-index: 2;
-  text-align: center;
 }
 
 .btn-info {
@@ -58,4 +48,10 @@
 .nav-pills .nav-link.active {
   border-color: #385e8c;
   box-shadow: 0 4px 18px -4px rgb(115 103 240 / 65%);
+}
+
+.isDisabled {
+  background: #efefef;
+  pointer-events: none;
+  cursor: not-allowed;
 }

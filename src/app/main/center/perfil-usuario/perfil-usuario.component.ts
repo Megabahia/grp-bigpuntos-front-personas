@@ -1,26 +1,31 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Subject } from 'rxjs';
-import { PerfilUsuarioService } from './perfil-usuario.service';
-import { User } from '../../../auth/models/user';
-import { CoreMenuService } from '../../../../@core/components/core-menu/core-menu.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { InformacionBasica, HistorialLaboral } from '../../personas/models/persona';
-import { DatePipe } from '@angular/common';
-import moment from 'moment';
-import { FlatpickrOptions } from 'ng2-flatpickr';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BienvenidoService } from '../../personas/vistas/bienvenido/bienvenido.service';
-import { Router } from '@angular/router';
-import { ParametrizacionesService } from '../../personas/servicios/parametrizaciones.service';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { Subject } from "rxjs";
+import { PerfilUsuarioService } from "./perfil-usuario.service";
+import { User } from "../../../auth/models/user";
+import { CoreMenuService } from "../../../../@core/components/core-menu/core-menu.service";
+import { FormBuilder, Validators, FormGroup } from "@angular/forms";
+import {
+  InformacionBasica,
+  HistorialLaboral,
+} from "../../personas/models/persona";
+import { DatePipe } from "@angular/common";
+import moment from "moment";
+import { FlatpickrOptions } from "ng2-flatpickr";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { BienvenidoService } from "../../personas/vistas/bienvenido/bienvenido.service";
+import { Router } from "@angular/router";
+import { ParametrizacionesService } from "../../personas/servicios/parametrizaciones.service";
 
 @Component({
-  selector: 'app-perfil-usuario',
-  templateUrl: './perfil-usuario.component.html',
-  styleUrls: ['./perfil-usuario.component.scss'],
-  providers: [DatePipe]
+  selector: "app-perfil-usuario",
+  templateUrl: "./perfil-usuario.component.html",
+  styleUrls: ["./perfil-usuario.component.scss"],
+  providers: [DatePipe],
 })
 export class PerfilUsuarioComponent implements OnInit {
-  @ViewChild('mensajeModal') mensajeModal;
+  @ViewChild("mensajeModal") mensajeModal;
+
+  public PerfilSub = false;
 
   public submitted = false;
   public tab;
@@ -38,14 +43,16 @@ export class PerfilUsuarioComponent implements OnInit {
   public validado = false;
   public startDateOptions: FlatpickrOptions = {
     altInput: true,
-    mode: 'single',
-    altFormat: 'Y-n-j',
-    altInputClass: 'form-control flat-picker flatpickr-input invoice-edit-input',
+    mode: "single",
+    altFormat: "Y-n-j",
+    altInputClass:
+      "form-control flat-picker flatpickr-input invoice-edit-input",
   };
   public paisOpciones;
   public provinciaOpciones;
   public ciudadOpciones;
   public profesionOpciones;
+  private disabledVal = "disabled";
   // Private
   private _unsubscribeAll: Subject<any>;
   constructor(
@@ -56,8 +63,7 @@ export class PerfilUsuarioComponent implements OnInit {
     private _modalService: NgbModal,
     private _bienvenidoService: BienvenidoService,
     private _router: Router,
-    private paramService: ParametrizacionesService,
-
+    private paramService: ParametrizacionesService
   ) {
     this.informacionBasica = {
       pais: "",
@@ -74,8 +80,8 @@ export class PerfilUsuarioComponent implements OnInit {
       telefono: "",
       whatsapp: "",
       youtube: "",
-      user_id: ""
-    }
+      user_id: "",
+    };
     this.datosTrabajo = {
       fechaInicio: "",
       imagen: "",
@@ -84,9 +90,8 @@ export class PerfilUsuarioComponent implements OnInit {
       cargoActual: "",
       profesion: "",
       _id: "",
-    }
+    };
     this._unsubscribeAll = new Subject();
-
   }
   get f() {
     return this.personaForm.controls;
@@ -96,87 +101,95 @@ export class PerfilUsuarioComponent implements OnInit {
   }
   ngOnInit(): void {
     this.personaForm = this._formBuilder.group({
-      created_at: ['',],
-      identificacion: ['',],
-      nombres: ['',],
-      apellidos: ['',],
-      genero: ['',],
-      fechaNacimiento: ['string',],
-      edad: ['',],
-      whatsapp: ['',],
-      telefono: ['',],
-      pais: ['',],
-      provincia: ['',],
-      ciudad: ['',],
-      email: ['',],
-      emailAdicional: ['',],
-      facebook: ['',],
-      instagram: ['',],
-      twitter: ['',],
-      tiktok: ['',],
-      youtube: ['',],
+      created_at: [""],
+      identificacion: ["", [Validators.required]],
+      nombres: ["", [Validators.required]],
+      apellidos: ["", [Validators.required]],
+      genero: ["", [Validators.required]],
+      fechaNacimiento: ["string", [Validators.required]],
+      edad: ["", [Validators.required]],
+      whatsapp: ["", [Validators.required]],
+      telefono: ["", [Validators.required]],
+      pais: ["", [Validators.required]],
+      provincia: ["", [Validators.required]],
+      ciudad: ["", [Validators.required]],
+      email: ["", [Validators.required]],
+      emailAdicional: [""],
+      facebook: [""],
+      instagram: [""],
+      twitter: [""],
+      tiktok: [""],
+      youtube: [""],
     });
     this.datosTrabajoForm = this._formBuilder.group({
-      fechaInicio: ['',],
-      profesion: ['', [Validators.required]],
-      imagen: ['',],
-      nombreEmpresa: ['',],
-      tiempoTrabajo: ['',],
-      cargoActual: ['',],
+      fechaInicio: [""],
+      profesion: ["", [Validators.required]],
+      imagen: [""],
+      nombreEmpresa: [""],
+      tiempoTrabajo: [""],
+      cargoActual: [""],
     });
     this.usuario = this._coreMenuService.grpPersonasUser;
-    this._perfilUsuarioService.obtenerInformacion(this.usuario.id).subscribe(info => {
-      this.imagen = info.imagen;
-      if (info.identificacion) {
-        this.validado = true;
-      }
-      info.created_at = this.transformarFecha(info.created_at);
-      info.fechaNacimiento = this.transformarFecha(info.fechaNacimiento);
-      if (info.whatsapp.length > 1) {
-        info.whatsapp = info.whatsapp ? info.whatsapp.replace("+593", 0) : 0;
-      }
-      this.fecha = this.transformarFecha(info.fechaNacimiento);
-      this.personaForm.patchValue(
-        info,
-      );
-      this.obtenerPaisOpciones();
-      this.obtenerProvinciaOpciones();
-      this.obtenerCiudadOpciones();
-      this.obtenerProfesionOpciones();
-    });
-    this._perfilUsuarioService.obtenerHistorialLaboral(this.usuario.id).subscribe(info => {
-      this.datosTrabajo = info;
-      this.datosTrabajoForm.patchValue(
-        info,
-      );
-    });
+    this._perfilUsuarioService
+      .obtenerInformacion(this.usuario.id)
+      .subscribe((info) => {
+        this.imagen = info.imagen;
+        if (info.identificacion) {
+          this.validado = true;
+        }
+        info.created_at = this.transformarFecha(info.created_at);
+        info.fechaNacimiento = this.transformarFecha(info.fechaNacimiento);
+
+        if (typeof info.whatsapp !== "undefined") {
+          info.whatsapp = info.whatsapp ? info.whatsapp.replace("+593", 0) : 0;
+        }
+
+        this.fecha = this.transformarFecha(info.fechaNacimiento);
+        this.personaForm.patchValue(info);
+        this.obtenerPaisOpciones();
+        this.obtenerProvinciaOpciones();
+        this.obtenerCiudadOpciones();
+        this.obtenerProfesionOpciones();
+      });
+    this._perfilUsuarioService
+      .obtenerHistorialLaboral(this.usuario.id)
+      .subscribe((info) => {
+        this.datosTrabajo = info;
+        this.datosTrabajoForm.patchValue(info);
+      });
   }
   transformarFecha(fecha) {
-    let nuevaFecha = this.datePipe.transform(fecha, 'yyyy-MM-dd');
+    let nuevaFecha = this.datePipe.transform(fecha, "yyyy-MM-dd");
     return nuevaFecha;
   }
   omitirContinuar() {
     let usuario = this._coreMenuService.grpPersonasUser;
-    this._bienvenidoService.cambioDeEstado(
-      {
+    this._bienvenidoService
+      .cambioDeEstado({
         estado: "6",
-        id: usuario.id
-      }
-    ).subscribe((info) => {
-      usuario.estado = "6";
-      localStorage.setItem('grpPersonasUser', JSON.stringify(usuario));
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 100);
-    });
-
+        id: usuario.id,
+      })
+      .subscribe((info) => {
+        usuario.estado = "6";
+        localStorage.setItem("grpPersonasUser", JSON.stringify(usuario));
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 100);
+      });
 
     // redirect to home page
   }
   guardarInformacion() {
+    this.PerfilSub = true;
+    if (this.personaForm.invalid) {
+      return;
+    }
     let wppAux = "";
 
-    this.informacionBasica = { ...this.personaForm.value, fechaNacimiento: this.informacionBasica.fechaNacimiento };
+    this.informacionBasica = {
+      ...this.personaForm.value,
+      fechaNacimiento: this.informacionBasica.fechaNacimiento,
+    };
     this.informacionBasica.user_id = this.usuario.id;
     if (!this.informacionBasica.fechaNacimiento) {
       delete this.informacionBasica.fechaNacimiento;
@@ -187,28 +200,41 @@ export class PerfilUsuarioComponent implements OnInit {
     this.informacionBasica.whatsapp = this.f.whatsapp.value;
     wppAux += "+593" + this.f.whatsapp.value.substring(1, 10);
     this.informacionBasica.whatsapp = wppAux;
-    this._perfilUsuarioService.guardarInformacion(this.informacionBasica).subscribe(info => {
-      this.usuario.persona = info;
-      localStorage.setItem("grpPersonasUser", JSON.stringify(this.usuario));
-      if (!this.validado) {
-        this.mensaje = "Información guardada correctamente<br>Es necesario validar el usuario";
-        this.abrirModal(this.mensajeModal);
-      } else {
-        this.mensaje = "Información guardada correctamente"
-        this.abrirModal(this.mensajeModal);
-      }
-
-    }, (error) => {
-      this.mensaje = "Error al guardar la información, verifique que la información sea la correcta"
-      this.abrirModal(this.mensajeModal);
-    });
-
+    this._perfilUsuarioService
+      .guardarInformacion(this.informacionBasica)
+      .subscribe(
+        (info) => {
+          this.usuario.persona = info;
+          if (this.usuario.persona) {
+            this.disabledVal = "disabled";
+          }
+          localStorage.setItem("grpPersonasUser", JSON.stringify(this.usuario));
+          if (!this.validado) {
+            this.mensaje =
+              "Información guardada correctamente<br>Es necesario validar el usuario";
+            this.abrirModal(this.mensajeModal);
+          } else {
+            this.mensaje = "Información guardada correctamente";
+            this.abrirModal(this.mensajeModal);
+          }
+        },
+        (error) => {
+          this.mensaje =
+            "Error al guardar la información, verifique que la información sea la correcta";
+          this.abrirModal(this.mensajeModal);
+        }
+      );
   }
   calcularEdad() {
-    this.informacionBasica.edad = moment().diff(this.f.fechaNacimiento.value[0], 'years');
-    this.informacionBasica.fechaNacimiento = moment(this.f.fechaNacimiento.value[0]).format('YYYY-MM-DD');
+    this.informacionBasica.edad = moment().diff(
+      this.f.fechaNacimiento.value[0],
+      "years"
+    );
+    this.informacionBasica.fechaNacimiento = moment(
+      this.f.fechaNacimiento.value[0]
+    ).format("YYYY-MM-DD");
     this.personaForm.patchValue({
-      edad: this.informacionBasica.edad
+      edad: this.informacionBasica.edad,
     });
   }
   ngOnDestroy(): void {
@@ -217,28 +243,30 @@ export class PerfilUsuarioComponent implements OnInit {
     this._unsubscribeAll.complete();
   }
   async subirImagen(event) {
-
     if (event.target.files && event.target.files[0]) {
       let imagen = event.target.files[0];
       let nuevaImagen = new FormData();
-      nuevaImagen.append('imagen', imagen, imagen.name);
+      nuevaImagen.append("imagen", imagen, imagen.name);
 
+      this._perfilUsuarioService
+        .guardarImagen(nuevaImagen, this.usuario.id)
+        .subscribe(
+          (data) => {
+            let reader = new FileReader();
 
-      this._perfilUsuarioService.guardarImagen(nuevaImagen, this.usuario.id).subscribe((data) => {
-        let reader = new FileReader();
+            reader.onload = (event: any) => {
+              this.imagenTemp = event.target.result;
+            };
 
-        reader.onload = (event: any) => {
-          this.imagenTemp = event.target.result;
-        };
-
-        reader.readAsDataURL(event.target.files[0]);
-        this.mensaje = "Imagen guardada correctamente"
-        this.abrirModal(this.mensajeModal);
-      },
-        (error) => {
-          this.mensaje = "Error al guardar imagen"
-          this.abrirModal(this.mensajeModal);
-        });
+            reader.readAsDataURL(event.target.files[0]);
+            this.mensaje = "Imagen guardada correctamente";
+            this.abrirModal(this.mensajeModal);
+          },
+          (error) => {
+            this.mensaje = "Error al guardar imagen";
+            this.abrirModal(this.mensajeModal);
+          }
+        );
     }
   }
   abrirModal(modal) {
@@ -253,45 +281,53 @@ export class PerfilUsuarioComponent implements OnInit {
     });
   }
   obtenerProvinciaOpciones() {
-    this.paramService.obtenerListaHijos(this.informacionBasica.pais, "PAIS").subscribe((info) => {
-      this.provinciaOpciones = info;
-    });
+    this.paramService
+      .obtenerListaHijos(this.informacionBasica.pais, "PAIS")
+      .subscribe((info) => {
+        this.provinciaOpciones = info;
+      });
   }
   obtenerCiudadOpciones() {
-    this.paramService.obtenerListaHijos(this.informacionBasica.provincia, "PROVINCIA").subscribe((info) => {
-      this.ciudadOpciones = info;
-    });
+    this.paramService
+      .obtenerListaHijos(this.informacionBasica.provincia, "PROVINCIA")
+      .subscribe((info) => {
+        this.ciudadOpciones = info;
+      });
   }
   obtenerProfesionOpciones() {
     this.paramService.obtenerListaPadres("PROFESIONES").subscribe((info) => {
       this.profesionOpciones = info;
     });
   }
-  guardarDatosTrabajo(){
+  guardarDatosTrabajo() {
     this.submitted = true;
     if (this.datosTrabajoForm.invalid) {
       return;
     }
-    console.log(this.datosTrabajo)
-    console.log(this.datosTrabajoForm)
-    this._perfilUsuarioService.guardarHistorialLaboral(this.usuario.id,this.datosTrabajo).subscribe(info => {
-      this.datosTrabajo = info;
-      this.datosTrabajoForm.patchValue(
-        info,
+    console.log(this.datosTrabajo);
+    console.log(this.datosTrabajoForm);
+    this._perfilUsuarioService
+      .guardarHistorialLaboral(this.usuario.id, this.datosTrabajo)
+      .subscribe(
+        (info) => {
+          this.datosTrabajo = info;
+          this.datosTrabajoForm.patchValue(info);
+          console.log("datosTrabajo", this.datosTrabajo);
+          // localStorage.setItem("grpPersonasUser", JSON.stringify(this.usuario));
+          if (!this.validado) {
+            this.mensaje =
+              "Información guardada correctamente<br>Es necesario validar el usuario";
+            this.abrirModal(this.mensajeModal);
+          } else {
+            this.mensaje = "Información guardada correctamente";
+            this.abrirModal(this.mensajeModal);
+          }
+        },
+        (error) => {
+          this.mensaje =
+            "Error al guardar la información, verifique que la información sea la correcta";
+          this.abrirModal(this.mensajeModal);
+        }
       );
-      console.log('datosTrabajo', this.datosTrabajo)
-      // localStorage.setItem("grpPersonasUser", JSON.stringify(this.usuario));
-      if (!this.validado) {
-        this.mensaje = "Información guardada correctamente<br>Es necesario validar el usuario";
-        this.abrirModal(this.mensajeModal);
-      } else {
-        this.mensaje = "Información guardada correctamente"
-        this.abrirModal(this.mensajeModal);
-      }
-
-    }, (error) => {
-      this.mensaje = "Error al guardar la información, verifique que la información sea la correcta"
-      this.abrirModal(this.mensajeModal);
-    });
   }
 }
