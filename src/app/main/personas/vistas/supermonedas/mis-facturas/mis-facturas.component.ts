@@ -373,6 +373,12 @@ export class MisFacturasComponent implements OnInit {
   async subirImagen(event) {
     if (event.target.files && event.target.files[0]) {
       let imagen = event.target.files[0];
+      if (imagen.size > this.sizeFile * 1000) {
+        this.mensaje = "Imagen  demaciado grande";
+        this.abrirModal(this.mensajeModal);
+        this.archivoFacturaFisica = "";
+        return;
+      }
       this.archivoFacturaFisica = imagen.name;
       this.facFisiFormData.delete("urlFoto");
       this.facFisiFormData.append("urlFoto", imagen, imagen.name);
