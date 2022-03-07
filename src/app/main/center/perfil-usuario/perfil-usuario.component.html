@@ -208,6 +208,13 @@
                               <input formControlName="emailAdicional" type="text" class="form-control"
                                 placeholder="micorreo@dominio.com">
 
+                              <div *ngIf="PerfilSub && f.emailAdicional.errors" class="invalid-feedback"
+                                style="display: block;">
+                                <div *ngIf="PerfilSub && f.emailAdicional.errors.email">Debe ingresar una dirección de
+                                  correo válida
+                                </div>
+                              </div>
+
                             </div>
                           </div>
                           <div class="col-md-3">

@@ -114,7 +114,7 @@ export class PerfilUsuarioComponent implements OnInit {
       provincia: ["", [Validators.required]],
       ciudad: ["", [Validators.required]],
       email: ["", [Validators.required]],
-      emailAdicional: [""],
+      emailAdicional: ["", [Validators.email]],
       facebook: [""],
       instagram: [""],
       twitter: [""],
@@ -141,7 +141,7 @@ export class PerfilUsuarioComponent implements OnInit {
         info.fechaNacimiento = this.transformarFecha(info.fechaNacimiento);
 
         if (typeof info.whatsapp !== "undefined") {
-          info.whatsapp = info.whatsapp ? info.whatsapp.replace("+593", 0) : 0;
+          info.whatsapp = info.whatsapp ? info.whatsapp.replace("+593", 0) : "";
         }
 
         this.fecha = this.transformarFecha(info.fechaNacimiento);
