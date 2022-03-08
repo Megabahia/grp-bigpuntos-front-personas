@@ -1,23 +1,31 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { first, takeUntil } from 'rxjs/operators';
-import { CoreConfigService } from '../../../../@core/services/config.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { AuthenticationService } from '../../../auth/service/authentication.service';
-import { ReCaptchaV3Service } from 'ngx-captcha';
-import { FacebookLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
-import { RegistroService } from '../registro/registro.service';
-import { Role } from 'app/auth/models';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { Validators, FormBuilder, FormGroup } from "@angular/forms";
+import { first, takeUntil } from "rxjs/operators";
+import { CoreConfigService } from "../../../../@core/services/config.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Observable, Subject, Subscription } from "rxjs";
+import { AuthenticationService } from "../../../auth/service/authentication.service";
+import { ReCaptchaV3Service } from "ngx-captcha";
+import {
+  FacebookLoginProvider,
+  SocialAuthService,
+  SocialUser,
+} from "angularx-social-login";
+import { RegistroService } from "../registro/registro.service";
+import { Role } from "app/auth/models";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
   //  Public
-  @ViewChild('captchaElem') captchaElem
+  @ViewChild("captchaElem") captchaElem;
+
+  @ViewChild("mensajeModal") mensajeModal;
+  public mensaje = "";
 
   public coreConfig: any;
   public loginForm: FormGroup;
@@ -26,16 +34,18 @@ export class LoginComponent implements OnInit {
   public returnUrl: string;
   public captcha: boolean;
   public siteKey: string;
-  public error = '';
+  public error = "";
   public passwordTextType: boolean;
   private socialUser: SocialUser;
   private isLoggedin: boolean = null;
   private logginSubs: Subscription;
+
   public startDateOptions = {
     altInput: true,
-    mode: 'single',
-    altInputClass: 'form-control flat-picker flatpickr-input invoice-edit-input',
-    enableTime: true
+    mode: "single",
+    altInputClass:
+      "form-control flat-picker flatpickr-input invoice-edit-input",
+    enableTime: true,
   };
 
   // Private
@@ -54,7 +64,7 @@ export class LoginComponent implements OnInit {
     private _authenticationService: AuthenticationService,
     private socialAuthService: SocialAuthService,
     private _registroService: RegistroService,
-
+    private _modalService: NgbModal
   ) {
     this.siteKey = "6LevfmMeAAAAAD9FB7d_lSUqobACqJgbeIwFt5dt";
     this.captcha = false;
@@ -64,20 +74,20 @@ export class LoginComponent implements OnInit {
     this._coreConfigService.config = {
       layout: {
         navbar: {
-          hidden: true
+          hidden: true,
         },
         menu: {
-          hidden: true
+          hidden: true,
         },
         footer: {
-          hidden: true
+          hidden: true,
         },
         customizer: false,
-        enableLocalStorage: false
-      }
+        enableLocalStorage: false,
+      },
     };
     if (this._authenticationService.grpPersonasUserValue) {
-      this._router.navigate(['/']);
+      this._router.navigate(["/"]);
     }
   }
 
@@ -107,12 +117,17 @@ export class LoginComponent implements OnInit {
       .login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe(
-        data => {
-          // this._router.navigate([this.returnUrl]);
-          this._router.navigate(['/']);
-        },
-        error => {
+        (data) => {
+          if (data.code === 400) {
+            this.mensaje = data.msg;
+            this.abrirModal(this.mensajeModal);
+            this.loading = false;
+          }
 
+          // this._router.navigate([this.returnUrl]);
+          this._router.navigate(["/"]);
+        },
+        (error) => {
           this.error = "Fallo en la autenticación, vuelva a intentarlo";
           this.loading = false;
         }
@@ -121,82 +136,87 @@ export class LoginComponent implements OnInit {
   async loginWithFacebook() {
     await this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
 
-    this.logginSubs = await this.socialAuthService.authState.subscribe((user) => {
-      this.socialUser = user;
-      this.isLoggedin = (user != null);
-      this.loginForm.patchValue({
-        email: user.email,
-        password: user.id
-      });
-      this.logginSocial();
-
-    });
+    this.logginSubs = await this.socialAuthService.authState.subscribe(
+      (user) => {
+        this.socialUser = user;
+        this.isLoggedin = user != null;
+        this.loginForm.patchValue({
+          email: user.email,
+          password: user.id,
+        });
+        this.logginSocial();
+      }
+    );
   }
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
+  abrirModal(modal) {
+    this._modalService.open(modal);
+  }
 
+  cerrarModal() {
+    this._modalService.dismissAll();
+  }
   /**
    * On init
    */
   ngOnInit(): void {
     this.loginForm = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", Validators.required],
     });
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this._route.snapshot.queryParams["returnUrl"] || "/";
 
     // Subscribe to config changes
-    this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
-      this.coreConfig = config;
-    });
-
-
+    this._coreConfigService.config
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((config) => {
+        this.coreConfig = config;
+      });
   }
   logginSocial() {
-    this._registroService.registrarUsuario(
-      {
+    this._registroService
+      .registrarUsuario({
         password: this.f.password.value,
         roles: Role.SuperMonedas,
         email: this.f.email.value,
         estado: 1,
-        tipoUsuario: 'core'
-      }
-    ).subscribe((info) => {
-      if (info.email == "Ya existe usuarios con este email.") {
-        this.login();
+        tipoUsuario: "core",
+      })
+      .subscribe(
+        (info) => {
+          if (info.email == "Ya existe usuarios con este email.") {
+            this.login();
+          } else {
+            this.error = null;
+            this.loading = true;
+            localStorage.setItem("grpPersonasUser", JSON.stringify(info));
+            setTimeout(() => {
+              window.location.href = "/";
+            }, 1000);
+          }
+        },
+        (error) => {
+          this.login();
 
-      } else {
-        this.error = null;
-        this.loading = true;
-        localStorage.setItem('grpPersonasUser', JSON.stringify(info));
-        setTimeout(() => {
-          window.location.href = '/';
-        }, 1000);
-      }
-
-    },
-      (error) => {
-        this.login();
-
-        // this.error = error.error.password;
-      });
-
+          // this.error = error.error.password;
+        }
+      );
   }
   login() {
     this._authenticationService
       .login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe(
-        data => {
+        (data) => {
           // this._router.navigate([this.returnUrl]);
-          this._router.navigate(['/']);
+          this._router.navigate(["/"]);
         },
-        error => {
-          console.log(error)
+        (error) => {
+          console.log(error);
           this.error = "Fallo en la autenticación, vuelva a intentarlo";
-
         }
       );
   }
@@ -215,5 +235,4 @@ export class LoginComponent implements OnInit {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
-
 }

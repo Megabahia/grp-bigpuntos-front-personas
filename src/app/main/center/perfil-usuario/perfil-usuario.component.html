@@ -86,6 +86,9 @@
                             <div *ngIf="PerfilSub && f.identificacion.errors" class="invalid-feedback"
                               style="display: block;">
                               <div *ngIf="PerfilSub && f.identificacion.errors.required">Es requerido</div>
+                              <div
+                                *ngIf="f.identificacion.errors.minlength || f.identificacion.errors.maxlength || f.identificacion.errors.min">
+                                Ingrese 10 dígitos y solo numéricos</div>
                             </div>
                           </div>
 
@@ -225,6 +228,10 @@
                             <div *ngIf="PerfilSub && f.whatsapp.errors" class="invalid-feedback"
                               style="display: block;">
                               <div *ngIf="PerfilSub && f.whatsapp.errors.required">Es requerido</div>
+                              <div *ngIf="f.whatsapp.errors.pattern">Solo se aceptan números</div>
+                              <div
+                                *ngIf="f.whatsapp.errors.minlength || f.whatsapp.errors.maxlength || f.whatsapp.errors.min">
+                                Ingrese un número de 10 dígitos</div>
                             </div>
                           </div>
                           <div class="col-md-3">
@@ -235,6 +242,9 @@
                             <div *ngIf="PerfilSub && f.telefono.errors" class="invalid-feedback"
                               style="display: block;">
                               <div *ngIf="PerfilSub && f.telefono.errors.required">Es requerido</div>
+                              <div
+                                *ngIf="f.telefono.errors.minlength || f.telefono.errors.maxlength || f.telefono.errors.min">
+                                Ingrese un número de 10 dígitos</div>
                             </div>
                           </div>
 

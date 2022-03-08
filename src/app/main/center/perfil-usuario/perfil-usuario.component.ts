@@ -102,14 +102,41 @@ export class PerfilUsuarioComponent implements OnInit {
   ngOnInit(): void {
     this.personaForm = this._formBuilder.group({
       created_at: [""],
-      identificacion: ["", [Validators.required]],
+      identificacion: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern("^[0-9]*$"),
+          Validators.maxLength(10),
+          Validators.minLength(10),
+          Validators.min(1),
+        ],
+      ],
       nombres: ["", [Validators.required]],
       apellidos: ["", [Validators.required]],
       genero: ["", [Validators.required]],
       fechaNacimiento: ["string", [Validators.required]],
       edad: ["", [Validators.required]],
-      whatsapp: ["", [Validators.required]],
-      telefono: ["", [Validators.required]],
+      whatsapp: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern("^[0-9]*$"),
+          Validators.maxLength(10),
+          Validators.minLength(10),
+          Validators.min(1),
+        ],
+      ],
+      telefono: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern("^[0-9]*$"),
+          Validators.maxLength(10),
+          Validators.minLength(10),
+          Validators.min(1),
+        ],
+      ],
       pais: ["", [Validators.required]],
       provincia: ["", [Validators.required]],
       ciudad: ["", [Validators.required]],

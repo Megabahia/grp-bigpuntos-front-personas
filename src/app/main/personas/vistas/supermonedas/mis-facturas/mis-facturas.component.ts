@@ -245,8 +245,10 @@ export class MisFacturasComponent implements OnInit {
   cargarFacturaElec(event: any) {
     if (event.target.files && event.target.files[0]) {
       let archivo = event.target.files[0];
-      if (archivo.size > this.sizeFile * 1000) {
-        this.mensaje = "Archivo  demaciado grande";
+      let aux = this.sizeFile * 1024 * 1024;
+
+      if (archivo.size > aux) {
+        this.mensaje = "Archivo demaciado grande";
         this.abrirModal(this.mensajeModal);
         this.nombreFacElec = "";
         return;
@@ -373,7 +375,9 @@ export class MisFacturasComponent implements OnInit {
   async subirImagen(event) {
     if (event.target.files && event.target.files[0]) {
       let imagen = event.target.files[0];
-      if (imagen.size > this.sizeFile * 1000) {
+      let aux = this.sizeFile * 1024 * 1024;
+
+      if (imagen.size > aux) {
         this.mensaje = "Imagen  demaciado grande";
         this.abrirModal(this.mensajeModal);
         this.archivoFacturaFisica = "";
