@@ -194,6 +194,7 @@ export class LoginComponent implements OnInit {
           this._router.navigate(['/']);
         },
         error => {
+          console.log(error)
           this.error = "Fallo en la autenticación, vuelva a intentarlo";
 
         }
