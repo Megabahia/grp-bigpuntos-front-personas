@@ -231,6 +231,12 @@ export class PerfilUsuarioComponent implements OnInit {
       .guardarInformacion(this.informacionBasica)
       .subscribe(
         (info) => {
+          if(info.error){
+            // this.abrirModal(info.error);
+            this.mensaje = info.error;
+            this.abrirModal(this.mensajeModal);
+            return;
+          }
           this.usuario.persona = info;
           if (this.usuario.persona) {
             this.disabledVal = "disabled";
