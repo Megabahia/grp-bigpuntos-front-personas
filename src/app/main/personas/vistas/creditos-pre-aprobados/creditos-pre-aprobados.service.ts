@@ -15,6 +15,9 @@ export class CreditosPreAprobadosService {
   obtenerListaConvenios(datos) {
     return this._httpClient.post<any>(`${environment.apiUrl}/corp/empresas/list/convenio/`, datos);
   }
+  obtenerListaEmpresasArray(datos) {
+    return this._httpClient.post<any>(`${environment.apiUrl}/corp/empresas/list/empresas/array/`, datos);
+  }
   actualizarCredito(datos) {
     return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoPreaprobados/update/${datos.id}`, datos);
   }

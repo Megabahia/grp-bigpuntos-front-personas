@@ -269,16 +269,18 @@ export class ListadoCreditosPreAprobadosComponent implements OnInit {
           id: this.idCredito,
           estado: "Confirmado",
           empresa_financiera: this.idEmpresaFinanciera,
+          fechaAprobado: this.transformarFecha(Date.now()),
           empresa_comercial: this.idEmpresaComercial
         }).subscribe(() => {
+          this.obtenerListaCreditos();
           this.cerrarModal();
         })
       });
   }
-  verEmpresas(id, empresa) {
+  verEmpresas(id, empresa, empresas) {    
     this.idCredito = id;
     this.idEmpresaFinanciera = empresa;
-    this._creditosPreAprobadosService.obtenerListaConvenios({ empresa }).subscribe((info) => {
+    this._creditosPreAprobadosService.obtenerListaEmpresasArray({ empresas }).subscribe((info) => {
       this.listaConvenios = info.info;
 
     });
