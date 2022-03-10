@@ -123,8 +123,12 @@ export class ReseteoPasswordComponent implements OnInit {
     ).subscribe((info) => {
       this.error = null;
       if (info.status) {
-        this.mensaje = "Contraseña actualizada correctamente, haga click en continuar para ir a la página de inicio";
-        this.abrirModal(this.mensajeModalConfirm);
+        this._reseteoPasswordService.updateUsuarioByEmail({email: this.email}).subscribe(info=>{
+          this.mensaje = "Contraseña actualizada correctamente, haga click en continuar para ir a la página de inicio";
+          this.abrirModal(this.mensajeModalConfirm);
+        },error=>{
+          console.log(error);
+        })        
       }
     },
       (error) => {
