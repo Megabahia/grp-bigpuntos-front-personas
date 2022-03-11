@@ -268,8 +268,8 @@ export class ListadoCreditosPreAprobadosComponent implements OnInit {
         this._creditosPreAprobadosService.actualizarCredito({
           id: this.idCredito,
           estado: "Confirmado",
-          empresa_financiera: this.idEmpresaFinanciera,
-          empresa_comercial: this.idEmpresaComercial
+          empresaIfis_id: this.idEmpresaFinanciera,
+          empresaComercial_id: this.idEmpresaComercial
         }).subscribe(() => {
           this.obtenerListaCreditos();
           this.cerrarModal();
