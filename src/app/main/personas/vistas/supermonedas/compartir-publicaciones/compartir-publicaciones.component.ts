@@ -55,7 +55,10 @@ export class CompartirPublicacionesComponent implements OnInit {
 
   ngOnInit(): void {
     this.paramService
-      .obtenerParametroNombreTipo("monedas_facturas_elec", "GANAR_SUPERMONEDAS")
+      .obtenerParametroNombreTipo(
+        "monedas_compartir_publicaciones+",
+        "GANAR_SUPERMONEDAS"
+      )
       .subscribe((info) => {
         this.ganarMonedasFacElec = info;
         this.superMonedasElec.credito = this.ganarMonedasFacElec.valor;
