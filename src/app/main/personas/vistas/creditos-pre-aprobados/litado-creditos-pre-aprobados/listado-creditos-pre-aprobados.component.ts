@@ -269,7 +269,6 @@ export class ListadoCreditosPreAprobadosComponent implements OnInit {
           id: this.idCredito,
           estado: "Confirmado",
           empresa_financiera: this.idEmpresaFinanciera,
-          fechaAprobado: this.transformarFecha(Date.now()),
           empresa_comercial: this.idEmpresaComercial
         }).subscribe(() => {
           this.obtenerListaCreditos();
