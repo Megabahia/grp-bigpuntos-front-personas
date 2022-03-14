@@ -78,11 +78,16 @@ export class CreditosAutonomosComponent implements OnInit {
       aceptaTerminos: 0,
       empresaComercial_id: "",
       empresaIfis_id: "",
-      estado: "",
+      estado: "Confirmado",
       monto: 0,
       plazo: 0,
       user_id: "",
       canal: "Autonomo",
+      tipoCredito: "Autonomo",
+      concepto: "Autonomo",
+      nombres: "",
+      apellidos: "",
+      numeroIdentificacion: "",
     }
   }
   // Lifecycle Hooks
@@ -182,6 +187,10 @@ export class CreditosAutonomosComponent implements OnInit {
   }
   continuar(value) {
     if (value == 7) {
+      // Agregar informacion al credito
+      this.solicitarCredito.nombres = this.usuario.persona.nombres;
+      this.solicitarCredito.apellidos = this.usuario.persona.apellidos;
+      this.solicitarCredito.numeroIdentificacion = this.usuario.persona.identificacion;
       this._creditosAutonomosService.crearCredito(this.solicitarCredito).subscribe((info) => {
         this.proceso = value;
       });
