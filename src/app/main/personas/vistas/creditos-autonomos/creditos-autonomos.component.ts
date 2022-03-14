@@ -191,7 +191,6 @@ export class CreditosAutonomosComponent implements OnInit {
       this.solicitarCredito.nombres = this.usuario.persona.nombres;
       this.solicitarCredito.apellidos = this.usuario.persona.apellidos;
       this.solicitarCredito.numeroIdentificacion = this.usuario.persona.identificacion;
-      console.log(this.solicitarCredito)
       this._creditosAutonomosService.crearCredito(this.solicitarCredito).subscribe((info) => {
         this.proceso = value;
       });
