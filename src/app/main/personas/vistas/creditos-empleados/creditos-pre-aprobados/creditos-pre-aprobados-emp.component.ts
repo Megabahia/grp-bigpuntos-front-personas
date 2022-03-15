@@ -227,7 +227,7 @@ export class CreditosPreAprobadosEmpComponent implements OnInit {
     this._creditosPreAprobadosService.obtenerListaCreditos({
       page: this.page - 1,
       page_size: this.page_size,
-      tipoPersona: "Empleados",
+      tipoCredito: "Empleado",
       user_id: this.usuario.id
     }).subscribe((info) => {
       this.listaCreditos = info.info;
@@ -266,21 +266,21 @@ export class CreditosPreAprobadosEmpComponent implements OnInit {
     this._creditosAutonomosService.guardarInformacion({ ...this.informacionBasica, user_id: this.usuario.id, imagen: [] })
       .subscribe((info) => {
         this._creditosPreAprobadosService.actualizarCredito({
-          id:this.idCredito,
+          id: this.idCredito,
           estado: "Confirmado",
-          empresa_financiera: this.idEmpresaFinanciera,
-          empresa_comercial: this.idEmpresaComercial
+          empresaIfis_id: this.idEmpresaFinanciera,
+          empresaComercial_id: this.idEmpresaComercial
         }).subscribe(() => {
+          this.obtenerListaCreditos();
           this.cerrarModal();
         })
       });
   }
-  verEmpresas(id, empresa) {
+  verEmpresas(id, empresa, empresas) {
     this.idCredito = id;
     this.idEmpresaFinanciera = empresa;
-    this._creditosPreAprobadosService.obtenerListaConvenios({ empresa }).subscribe((info) => {
+    this._creditosPreAprobadosService.obtenerListaEmpresasArray({ empresas }).subscribe((info) => {
       this.listaConvenios = info.info;
-      
     });
     this.abrirModalLg(this.establecimientoSeleccionadoMdl);
   }

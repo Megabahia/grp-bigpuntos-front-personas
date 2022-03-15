@@ -10,13 +10,16 @@ export class CreditosPreAprobadosService {
   constructor(private _httpClient: HttpClient) { }
 
   obtenerListaCreditos(datos) {
-    return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoPreaprobados/list/`, datos);
+    return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoPersonas/list/`, datos);
   }
   obtenerListaConvenios(datos) {
     return this._httpClient.post<any>(`${environment.apiUrl}/corp/empresas/list/convenio/`, datos);
   }
+  obtenerListaEmpresasArray(datos) {
+    return this._httpClient.post<any>(`${environment.apiUrl}/corp/empresas/list/empresas/array/`, datos);
+  }
   actualizarCredito(datos) {
-    return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoPreaprobados/update/${datos.id}`, datos);
+    return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoPersonas/update/${datos.id}`, datos);
   }
   // obtenerListaEmpresasIfis(datos) {
   //   return this._httpClient.post<any>(`${environment.apiUrl}/corp/empresas/list/ifis`, datos);
