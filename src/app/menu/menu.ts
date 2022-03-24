@@ -147,6 +147,24 @@ export const menu: CoreMenu[] = [
         // translate: 'MENU.PAGES.SECTION',
         type: 'collapsible',
         icon: 'credit-card',
+        children: [
+          {
+            id: 'estadoCreditos',
+            title: 'Estado de mis créditos',
+            // translate: 'MENU.APPS.EMAIL',
+            type: 'item',
+            icon: 'circle',
+            url: 'personas/mis-creditos/estado-creditos'
+          },
+          {
+            id: 'registrarPagoCuotas',
+            title: 'Registrar pago de cuota',
+            // translate: 'MENU.APPS.EMAIL',
+            type: 'item',
+            icon: 'circle',
+            url: 'personas/mis-creditos/registrar-pagos-cuotas'
+          }
+        ]
       },
       {
         id: 'reclamosRequerimientos',

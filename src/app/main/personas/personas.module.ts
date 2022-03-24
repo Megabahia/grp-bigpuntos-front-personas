@@ -40,6 +40,8 @@ import { ResultadosCreditoAutComponent } from './vistas/creditos-autonomos/resul
 import { MensajeResultadoAutComponent } from './vistas/creditos-autonomos/mensaje-resultado/mensaje-resultado.component';
 import { ListadoCreditosPreAprobadosComponent } from './vistas/creditos-pre-aprobados/litado-creditos-pre-aprobados/listado-creditos-pre-aprobados.component';
 import { CreditosPreAprobadosEmpComponent } from './vistas/creditos-empleados/creditos-pre-aprobados/creditos-pre-aprobados-emp.component';
+import { ListadoComponent as listadoEstadoCreditos } from './vistas/mis-creditos/vistas/estado-creditos/listado/listado.component';
+import { ListadoComponent as listadoPagoCuotas } from './vistas/mis-creditos/vistas/registrar-pagos-cuotas/listado/listado.component';
 const routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   {
@@ -149,6 +151,26 @@ const routes = [
       },]
   },
   {
+    path: 'mis-creditos',
+    children: [
+      { path: '', redirectTo: 'estado-creditos', pathMatch: 'full' },
+      {
+        path: 'estado-creditos',
+        component: listadoEstadoCreditos,
+        data: { roles: [Role.SuperMonedas] },
+        canActivate: [AuthGuard]
+        // data: { animation: 'auth' }
+      },
+      {
+        path: 'registrar-pagos-cuotas',
+        component: listadoPagoCuotas,
+        data: { roles: [Role.SuperMonedas] },
+        canActivate: [AuthGuard]
+        // data: { animation: 'auth' }
+      },
+    ]
+  },
+  {
     path: 'bienvenido',
     component: BienvenidoComponent,
     data: { activacion: [1] },
@@ -199,7 +221,10 @@ const routes = [
     ResultadosCreditoAutComponent,
     MensajeResultadoAutComponent,
     ListadoCreditosPreAprobadosComponent,
-    CreditosPreAprobadosEmpComponent],
+    CreditosPreAprobadosEmpComponent,
+    listadoEstadoCreditos,
+    listadoPagoCuotas,
+    ],
   imports: [
     CoreCommonModule,
     RouterModule.forChild(routes),
@@ -239,6 +264,9 @@ const routes = [
     ResultadosCreditoAutComponent,
     MensajeResultadoAutComponent,
     ListadoCreditosPreAprobadosComponent,
-    CreditosPreAprobadosEmpComponent]
+    CreditosPreAprobadosEmpComponent,
+    listadoEstadoCreditos,
+    listadoPagoCuotas,
+  ],
 })
 export class PersonasModule { }
