@@ -52,7 +52,7 @@
 
                         <tr *ngFor="let credito of listaCreditos">
                             <td>{{transformarFecha(credito.created_at)}}</td>
-                            <td>{{credito.vigencia}}</td>
+                            <td>{{credito.canal}}</td>
                             <td><img [src]="credito.imagen" width="80"></td>
                             <td>{{credito.entidadFinanciera}}</td>
                             <td>{{credito.concepto}}</td>
