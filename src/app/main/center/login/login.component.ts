@@ -123,7 +123,6 @@ export class LoginComponent implements OnInit {
             this.abrirModal(this.mensajeModal);
             this.loading = false;
           }
-
           // this._router.navigate([this.returnUrl]);
           this._router.navigate(["/"]);
         },
