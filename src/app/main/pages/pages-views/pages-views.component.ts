@@ -45,7 +45,7 @@ export class PagesViewsComponent implements OnInit {
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
-    /*  this._coreConfigService.config = {
+    this._coreConfigService.config = {
       layout: {
         navbar: {
           hidden: true,
@@ -59,7 +59,7 @@ export class PagesViewsComponent implements OnInit {
         customizer: false,
         enableLocalStorage: false,
       },
-    }; */
+    };
   }
 
   // Lifecycle Hooks
@@ -84,7 +84,7 @@ export class PagesViewsComponent implements OnInit {
     );
 
     // Subscribe to config changes
-    /*     this._coreConfigService.config
+    /*    this._coreConfigService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config) => {
         this.coreConfig = config;
@@ -121,13 +121,15 @@ export class PagesViewsComponent implements OnInit {
 
   listarProductos() {
     this._pages_viewsService
-      .getlistaProductos({ tipo: "producto-bienvenido-sm" })
+      .getlistaProductosfree({ tipo: "producto-bienvenido-sm" })
       .subscribe(
         (data) => {
           this.productos = data.info;
           console.log("Los productos ", this.productos);
         },
         (error) => {
+          console.log(error);
+
           this.mensaje = "Error al cargar productos";
           this.abrirModal(this.mensajeModal);
         }

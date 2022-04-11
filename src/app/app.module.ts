@@ -50,10 +50,6 @@ const appRoutes: Routes = [
       import("./main/personas/personas.module").then((m) => m.PersonasModule),
   },
   {
-    path: "newExample",
-    redirectTo: "/pages/pages-views", //Error 404 - Page not found
-  },
-  {
     path: "**",
     redirectTo: "/pages/miscellaneous/error", //Error 404 - Page not found
   },

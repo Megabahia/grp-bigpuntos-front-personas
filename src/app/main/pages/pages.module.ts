@@ -20,7 +20,7 @@ const routes: Routes = [
   {
     path: "pages-views",
     component: PagesViewsComponent,
-    data: { animation: "misc" },
+    data: { roles: "SuperMonedas" },
   },
   {
     path: "mensajes-productos",

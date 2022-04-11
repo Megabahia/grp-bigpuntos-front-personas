@@ -65,7 +65,7 @@ export class MensajeProductosFreeComponent implements OnInit {
 
   listarProductos() {
     this._pages_viewsService
-      .getlistaProductos({ tipo: "producto-nuestra-familia-sm" })
+      .getlistaProductosfree({ tipo: "producto-nuestra-familia-sm" })
       .subscribe(
         (data) => {
           this.productos = data.info;
