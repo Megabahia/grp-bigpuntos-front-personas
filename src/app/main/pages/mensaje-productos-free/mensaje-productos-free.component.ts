@@ -69,11 +69,8 @@ export class MensajeProductosFreeComponent implements OnInit {
       .subscribe(
         (data) => {
           this.productos = data.info;
-          console.log("Los productos ", this.productos);
         },
         (error) => {
-          console.log("No tiene productos");
-
           /*      this.mensaje = "Error al cargar productos";
           this.abrirModal(this.mensajeModal); */
         }

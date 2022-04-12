@@ -23,7 +23,7 @@ const routes: Routes = [
     data: { roles: "SuperMonedas" },
   },
   {
-    path: "mensajes-productos",
+    path: "mensajes-productos/:_id",
     component: MensajeProductosComponent,
     data: { animation: "misc" },
   },

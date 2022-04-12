@@ -22,16 +22,12 @@ export class PagesViewsService {
     );
   }
   getlistaProductosfree(datos) {
-    console.log("pasa por el servicio");
-
     return this._httpClient.post<any>(
       `${environment.apiUrl}/central/productos/list-free/`,
       datos
     );
   }
   getlistaProductos(datos) {
-    console.log("pasa por el servicio");
-
     return this._httpClient.post<any>(
       `${environment.apiUrl}/central/productos/list/`,
       datos

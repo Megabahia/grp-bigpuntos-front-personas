@@ -10,6 +10,7 @@ import { Validators, FormBuilder, FormGroup } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 import { PagesViewsService } from "./pages-views.service";
+import moment from "moment";
 @Component({
   selector: "app-pages-views",
   templateUrl: "./pages-views.component.html",
@@ -70,7 +71,7 @@ export class PagesViewsComponent implements OnInit {
    */
   ngOnInit(): void {
     this.email_code_Form = this._formBuilder.group({
-      email: [null, [Validators.required, Validators.email]],
+      email: ["", [Validators.required, Validators.email]],
     });
 
     this.confir_email_code_Form = this._formBuilder.group(
@@ -125,21 +126,15 @@ export class PagesViewsComponent implements OnInit {
       .subscribe(
         (data) => {
           this.productos = data.info;
-          console.log("Los productos ", this.productos);
         },
         (error) => {
-          console.log(error);
-
           this.mensaje = "Error al cargar productos";
           this.abrirModal(this.mensajeModal);
         }
       );
   }
   enviarCodigo() {
-    console.log("llega ", this.email_code_Form);
     this.submitted = true;
-    console.log("llega ", this.submitted);
-    console.log();
 
     if (this.email_code_Form.invalid) {
       return;
@@ -151,33 +146,37 @@ export class PagesViewsComponent implements OnInit {
         (data) => {
           this.correolanding = data;
           this.confir_email_code_Form.controls["codeaux"].setValue(data.codigo);
-          console.log(data);
+          this.mensaje = "Código enviado";
+          this.abrirModal(this.mensajeModal);
         },
         (error) => {
-          this.mensaje = "Error al guardar imagen";
+          this.mensaje = "Error al enviar código";
           this.abrirModal(this.mensajeModal);
         }
       );
-
-    console.log("ss" + this.f.email.value);
   }
 
   validarCodigo() {
     this.submitted2 = true;
-    console.log(
-      "code input " + this.confir_email_code_Form.controls.code.value
-    );
-    console.log("prueba  ", this.correolanding);
 
     if (this.correolanding !== undefined) {
-      console.log("llega el codigo ", this.correolanding.codigo);
-
       if (
         this.correolanding.codigo ===
         this.confir_email_code_Form.controls.code.value
       ) {
-        console.log("codigos iguales loco......");
-        this._router.navigate(["/pages/mensajes-productos"]);
+        localStorage.setItem("codigo", moment().add(59, "s").toString());
+        this.correolanding.correoValido = true;
+        this.correolanding.codigoValido = true;
+
+        this._pages_viewsService.actualizarCorreo(this.correolanding).subscribe(
+          (data) => {
+            this._router.navigate(["/pages/mensajes-productos/_id"]);
+          },
+          (error) => {
+            this.mensaje = "Error al enviar código";
+            this.abrirModal(this.mensajeModal);
+          }
+        );
       } else {
         this.confir_email_code_Form.controls["code"].setErrors({
           incorrect: true,

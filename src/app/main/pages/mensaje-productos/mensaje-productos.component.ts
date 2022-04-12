@@ -5,6 +5,7 @@ import { Subject } from "rxjs";
 
 import { CoreConfigService } from "@core/services/config.service";
 import { PagesViewsService } from "../pages-views/pages-views.service";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 
 @Component({
   selector: "app-mensaje-productos",
@@ -14,6 +15,7 @@ import { PagesViewsService } from "../pages-views/pages-views.service";
 export class MensajeProductosComponent implements OnInit {
   public coreConfig: any;
   public productos;
+  public _id;
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -25,8 +27,36 @@ export class MensajeProductosComponent implements OnInit {
    */
   constructor(
     private _coreConfigService: CoreConfigService,
-    private _pages_viewsService: PagesViewsService
+    private _pages_viewsService: PagesViewsService,
+    private _router: Router,
+    private rutaActiva: ActivatedRoute
   ) {
+    let time = localStorage.getItem("codigo");
+
+    this.rutaActiva.params.subscribe((params: Params) => {
+      this._id = params._id;
+    });
+    console.log("Id ", this._id);
+
+    localStorage.removeItem("codigo");
+
+    /*   if (!time) {
+      this._router.navigate(["/"]);
+    }
+    if (Date.parse(time) - Date.now() <= 0) {
+      this._router.navigate(["/"]);
+    } */
+
+    this._pages_viewsService
+      .actualizarCorreo({ id: this._id, accedio: true })
+      .subscribe(
+        (data) => {},
+        (error) => {
+          /*         this.mensaje = "Error al enviar código";
+        this.abrirModal(this.mensajeModal); */
+        }
+      );
+
     this.listarProductos();
 
     this._unsubscribeAll = new Subject();
@@ -50,15 +80,12 @@ export class MensajeProductosComponent implements OnInit {
   }
   listarProductos() {
     this._pages_viewsService
-      .getlistaProductos({ tipo: "producto-mensaje-sm" })
+      .getlistaProductosfree({ tipo: "producto-mensaje-sm" })
       .subscribe(
         (data) => {
           this.productos = data.info;
-          console.log("Los productos ", this.productos);
         },
         (error) => {
-          console.log("No tiene productos");
-
           /*      this.mensaje = "Error al cargar productos";
           this.abrirModal(this.mensajeModal); */
         }
