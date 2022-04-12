@@ -36,16 +36,15 @@ export class MensajeProductosComponent implements OnInit {
     this.rutaActiva.params.subscribe((params: Params) => {
       this._id = params._id;
     });
-    console.log("Id ", this._id);
 
     localStorage.removeItem("codigo");
 
-    /*   if (!time) {
+    if (!time) {
       this._router.navigate(["/"]);
     }
     if (Date.parse(time) - Date.now() <= 0) {
       this._router.navigate(["/"]);
-    } */
+    }
 
     this._pages_viewsService
       .actualizarCorreo({ id: this._id, accedio: true })

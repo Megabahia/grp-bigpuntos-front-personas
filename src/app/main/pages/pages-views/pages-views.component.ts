@@ -170,7 +170,9 @@ export class PagesViewsComponent implements OnInit {
 
         this._pages_viewsService.actualizarCorreo(this.correolanding).subscribe(
           (data) => {
-            this._router.navigate(["/pages/mensajes-productos/_id"]);
+            this._router.navigate([
+              `/pages/mensajes-productos/${this.correolanding.id}`,
+            ]);
           },
           (error) => {
             this.mensaje = "Error al enviar código";
