@@ -86,86 +86,86 @@ export const menu: CoreMenu[] = [
           }
         ]
       },
-      {
-        id: 'creditosAutonomos',
-        title: 'Créditos para Autónomos',
-        role: [Role.SuperMonedas],
-        // translate: 'MENU.PAGES.SECTION',
-        type: 'collapsible',
-        icon: 'credit-card',
-        children: [
-          {
-            id: 'solicitarCreditoAut',
-            title: 'Solicitar crédito',
-            // translate: 'MENU.APPS.EMAIL',
-            type: 'item',
-            icon: 'circle',
-            url: 'personas/creditos-autonomos/solicitar-credito'
-          },
-        ]
-      },
-      {
-        id: 'creditosEmpleado',
-        title: 'Empleado',
-        role: [Role.SuperMonedas],
-        // translate: 'MENU.PAGES.SECTION',
-        type: 'collapsible',
-        icon: 'credit-card',
-        children: [
-          {
-            id: 'creditosPreEmp',
-            title: 'Créditos preaprobados',
-            // translate: 'MENU.APPS.EMAIL',
-            type: 'item',
-            icon: 'circle',
-            url: 'personas/creditos-empleados/creditos-pre-aprobados'
-          }
-        ]
-      },
-      {
-        id: 'creditosPreAprobados',
-        title: 'Créditos Pre Aprobados',
-        role: [Role.SuperMonedas],
-        // translate: 'MENU.PAGES.SECTION',
-        type: 'collapsible',
-        icon: 'credit-card',
-        children: [
-          {
-            id: 'listadoCreditosPre',
-            title: 'Listado de créditos Pre Aprobados',
-            // translate: 'MENU.APPS.EMAIL',
-            type: 'item',
-            icon: 'circle',
-            url: 'personas/creditos-pre-aprobados/listado'
-          }
-        ]
-      },
-      {
-        id: 'misCreditos',
-        title: 'Mis créditos',
-        role: [Role.SuperMonedas],
-        // translate: 'MENU.PAGES.SECTION',
-        type: 'collapsible',
-        icon: 'credit-card',
-        children: [
-          {
-            id: 'estadoCreditos',
-            title: 'Estado de mis créditos',
-            // translate: 'MENU.APPS.EMAIL',
-            type: 'item',
-            icon: 'circle',
-            url: 'personas/mis-creditos/estado-creditos'
-          },
-          {
-            id: 'registrarPagoCuotas',
-            title: 'Registrar pago de cuota',
-            // translate: 'MENU.APPS.EMAIL',
-            type: 'item',
-            icon: 'circle',
-            url: 'personas/mis-creditos/registrar-pagos-cuotas'
-          }
-        ]
-      },
+      // {
+      //   id: 'creditosAutonomos',
+      //   title: 'Créditos para Autónomos',
+      //   role: [Role.SuperMonedas],
+      //   // translate: 'MENU.PAGES.SECTION',
+      //   type: 'collapsible',
+      //   icon: 'credit-card',
+      //   children: [
+      //     {
+      //       id: 'solicitarCreditoAut',
+      //       title: 'Solicitar crédito',
+      //       // translate: 'MENU.APPS.EMAIL',
+      //       type: 'item',
+      //       icon: 'circle',
+      //       url: 'personas/creditos-autonomos/solicitar-credito'
+      //     },
+      //   ]
+      // },
+      // {
+      //   id: 'creditosEmpleado',
+      //   title: 'Empleado',
+      //   role: [Role.SuperMonedas],
+      //   // translate: 'MENU.PAGES.SECTION',
+      //   type: 'collapsible',
+      //   icon: 'credit-card',
+      //   children: [
+      //     {
+      //       id: 'creditosPreEmp',
+      //       title: 'Créditos preaprobados',
+      //       // translate: 'MENU.APPS.EMAIL',
+      //       type: 'item',
+      //       icon: 'circle',
+      //       url: 'personas/creditos-empleados/creditos-pre-aprobados'
+      //     }
+      //   ]
+      // },
+      // {
+      //   id: 'creditosPreAprobados',
+      //   title: 'Créditos Pre Aprobados',
+      //   role: [Role.SuperMonedas],
+      //   // translate: 'MENU.PAGES.SECTION',
+      //   type: 'collapsible',
+      //   icon: 'credit-card',
+      //   children: [
+      //     {
+      //       id: 'listadoCreditosPre',
+      //       title: 'Listado de créditos Pre Aprobados',
+      //       // translate: 'MENU.APPS.EMAIL',
+      //       type: 'item',
+      //       icon: 'circle',
+      //       url: 'personas/creditos-pre-aprobados/listado'
+      //     }
+      //   ]
+      // },
+      // {
+      //   id: 'misCreditos',
+      //   title: 'Mis créditos',
+      //   role: [Role.SuperMonedas],
+      //   // translate: 'MENU.PAGES.SECTION',
+      //   type: 'collapsible',
+      //   icon: 'credit-card',
+      //   children: [
+      //     {
+      //       id: 'estadoCreditos',
+      //       title: 'Estado de mis créditos',
+      //       // translate: 'MENU.APPS.EMAIL',
+      //       type: 'item',
+      //       icon: 'circle',
+      //       url: 'personas/mis-creditos/estado-creditos'
+      //     },
+      //     {
+      //       id: 'registrarPagoCuotas',
+      //       title: 'Registrar pago de cuota',
+      //       // translate: 'MENU.APPS.EMAIL',
+      //       type: 'item',
+      //       icon: 'circle',
+      //       url: 'personas/mis-creditos/registrar-pagos-cuotas'
+      //     }
+      //   ]
+      // },
       {
         id: 'reclamosRequerimientos',
         title: 'Reclamos y Requerimientos',
