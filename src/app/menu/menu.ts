@@ -14,7 +14,7 @@ export const menu: CoreMenu[] = [
   },
   {
     id: 'que-es',
-    title: '¿Qué es super monedas?',
+    title: '¿Qué es Big Puntoss?',
     // translate: 'MENU.SAMPLE',
     type: 'item',
     icon: 'info',
@@ -30,7 +30,7 @@ export const menu: CoreMenu[] = [
     children: [
       {
         id: 'superMonedas',
-        title: 'Super monedas',
+        title: 'Big Puntoss',
         role: [Role.SuperMonedas],
         // translate: 'MENU.PAGES.SECTION',
         type: 'collapsible',
@@ -38,7 +38,7 @@ export const menu: CoreMenu[] = [
         children: [
           {
             id: 'misSuperMonedas',
-            title: 'Mis super monedas',
+            title: 'Mis Big Puntoss',
             // translate: 'MENU.APPS.EMAIL',
             type: 'item',
             icon: 'circle',
@@ -78,7 +78,7 @@ export const menu: CoreMenu[] = [
           },
           {
             id: 'pagarSupermonedas',
-            title: 'Pagar con super monedas',
+            title: 'Pagar con Big Puntoss',
             // translate: 'MENU.APPS.EMAIL',
             type: 'item',
             icon: 'circle',

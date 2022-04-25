@@ -297,7 +297,7 @@ export class MisFacturasComponent implements OnInit {
                 this.mensaje =
                   "Factura cargada con éxito, ud ha ganado " +
                   this.ganarMonedasFacElec.valor +
-                  " super monedas";
+                  " Big Puntos";
                 this.abrirModal(this.mensajeModal);
               },
               (error) => {
@@ -355,7 +355,7 @@ export class MisFacturasComponent implements OnInit {
               this.mensaje =
                 "Factura cargada con éxito, ud ha ganado " +
                 this.ganarMonedasFacFisi.valor +
-                " super monedas";
+                " Big Puntoss";
               this.abrirModal(this.mensajeModal);
             },
             (error) => {
