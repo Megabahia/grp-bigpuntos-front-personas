@@ -355,7 +355,7 @@ export class MisFacturasComponent implements OnInit {
               this.mensaje =
                 "Factura cargada con éxito, ud ha ganado " +
                 this.ganarMonedasFacFisi.valor +
-                " Big Puntoss";
+                " Big Puntos";
               this.abrirModal(this.mensajeModal);
             },
             (error) => {

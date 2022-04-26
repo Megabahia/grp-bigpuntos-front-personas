@@ -14,6 +14,7 @@ import { PagesViewsComponent } from "./pages-views/pages-views.component";
 import { RouterModule, Routes } from "@angular/router";
 import { MensajeProductosComponent } from "./mensaje-productos/mensaje-productos.component";
 import { MensajeProductosFreeComponent } from "./mensaje-productos-free/mensaje-productos-free.component";
+import { PaginaEmpresaComponent } from './pagina-empresa/pagina-empresa.component';
 
 // routing
 const routes: Routes = [
@@ -32,6 +33,11 @@ const routes: Routes = [
     component: MensajeProductosFreeComponent,
     data: { animation: "misc" },
   },
+  {
+    path: "premios/:empresa_id",
+    component: PaginaEmpresaComponent,
+    data: { animation: "misc" },
+  },
 ];
 
 @NgModule({
@@ -39,6 +45,7 @@ const routes: Routes = [
     PagesViewsComponent,
     MensajeProductosComponent,
     MensajeProductosFreeComponent,
+    PaginaEmpresaComponent,
   ],
 
   imports: [

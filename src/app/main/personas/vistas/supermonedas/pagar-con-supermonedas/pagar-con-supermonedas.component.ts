@@ -115,7 +115,7 @@ export class PagarConSuperMonedasComponent implements OnInit {
   enviarMonto() {
     if (this.cantidadMonedas < this.pagoMonto.monto) {
       this.mensaje =
-        "El monto que ingreso supera su cantidad de Big Puntoss, ingrese otra cantidad que disponga en su cuenta.";
+        "El monto que ingreso supera su cantidad de Big Puntos, ingrese otra cantidad que disponga en su cuenta.";
       this.abrirModal(this.mensajeModal);
       return;
     }

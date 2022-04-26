@@ -194,7 +194,7 @@ export class MisCalificacionesComponent implements OnInit {
       this._bienvenidoService.guardarSuperMonedas(this.superMonedas).subscribe((infoSM) => {
         this.loading = false;
 
-        this.mensaje = "Factura calificada con éxito, ud ha ganado " + this.ganarMonedas.valor + " Big Puntoss";
+        this.mensaje = "Factura calificada con éxito, ud ha ganado " + this.ganarMonedas.valor + " Big Puntos";
         this.abrirModal(this.mensajeModal);
       });
 

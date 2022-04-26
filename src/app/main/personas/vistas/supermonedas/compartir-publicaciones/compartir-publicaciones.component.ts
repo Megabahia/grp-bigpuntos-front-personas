@@ -112,7 +112,7 @@ export class CompartirPublicacionesComponent implements OnInit {
           this.mensaje =
             "Compartido con éxito, ud ha ganado " +
             this.ganarMonedasFacElec.valor +
-            " Big Puntoss";
+            " Big Puntos";
           this.abrirModal(this.mensajeModal);
         },
         (error) => {
