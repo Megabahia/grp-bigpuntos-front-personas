@@ -4,6 +4,7 @@ import {CoreConfigService} from '../../../../@core/services/config.service';
 import {PagesViewsService} from '../pages-views/pages-views.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {stringify} from 'querystring';
 
 @Component({
     selector: 'app-pagina-empresa',
@@ -11,6 +12,9 @@ import {takeUntil} from 'rxjs/operators';
     styleUrls: ['./pagina-empresa.component.scss']
 })
 export class PaginaEmpresaComponent implements OnInit {
+
+    public empresa_id;
+
     public coreConfig: any;
 
     // Private
@@ -46,7 +50,7 @@ export class PaginaEmpresaComponent implements OnInit {
         };
 
         this.rutaActiva.params.subscribe((params: Params) => {
-            localStorage.setItem('empresa_id', params.empresa_id);
+            this.empresa_id = params.empresa_id;
         });
     }
 
@@ -72,7 +76,9 @@ export class PaginaEmpresaComponent implements OnInit {
         this._unsubscribeAll.complete();
     }
 
-    redirigirLogin() {
+    redirigirLogin(pantalla) {
+        const semilla = {'empresa_id': this.empresa_id, 'pantalla': pantalla};
+        localStorage.setItem('semillaPago', JSON.stringify(semilla));
         this._router.navigate([
             `/grp/login`,
         ]);
