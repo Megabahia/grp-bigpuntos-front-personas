@@ -79,7 +79,7 @@ export class MisFacturasComponent implements OnInit {
     return {
       credito: 0,
       descripcion: "",
-      tipo: "Credito",
+      tipo: "Recompensa",
       user_id: this.usuario.id,
       empresa_id: this.empresaId,
     };
@@ -142,7 +142,7 @@ export class MisFacturasComponent implements OnInit {
       provincia: ["", [Validators.required]],
       ciudad: ["", [Validators.required]],
       fechaEmision: ["", [Validators.required]],
-      importeTotal: [0, [Validators.required]],
+      importeTotal: [0, [Validators.required, Validators.pattern('^[0-9]*$')]],
       categoria: ["", [Validators.required]],
       urlFoto: ["", [Validators.required]],
     });

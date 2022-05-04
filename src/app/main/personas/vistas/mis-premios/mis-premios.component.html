@@ -9,15 +9,16 @@
                 <h5 class="card-header">Filtros de búsqueda</h5>
                 <div class="card-body">
                     <div class="row">
-<!--                        <div class="col-md-4">-->
-<!--                            <input class="form-control form-control-sm" type="text" placeholder="Nombre parámetro"-->
-<!--                                [(ngModel)]="nombreBuscar" (change)="obtenerListaParametros()">-->
-<!--                        </div>-->
+                        <!--                        <div class="col-md-4">-->
+                        <!--                            <input class="form-control form-control-sm" type="text" placeholder="Nombre parámetro"-->
+                        <!--                                [(ngModel)]="nombreBuscar" (change)="obtenerListaParametros()">-->
+                        <!--                        </div>-->
                         <div class="col-md-4">
                             <select class="select2 form-control form-control-sm" [(ngModel)]="opcionEmpresa"
-                                (change)="obtenerListaProductos()">
+                                    (change)="obtenerListaProductos()">
                                 <option value="" selected>- Tipo de parámetro -</option>
-                                <option *ngFor="let tipo of tipos" value="{{tipo._id}}">{{tipo.nombreComercial}}</option>
+                                <option *ngFor="let tipo of tipos"
+                                        value="{{tipo._id}}">{{tipo.nombreComercial}}</option>
                             </select>
                         </div>
                     </div>
@@ -49,11 +50,11 @@
                                     <label class="custom-control-label" for="customCheck2"></label>
                                 </div>
                             </th>
-                            <th>Nombre</th>
-                            <th>Marca</th>
-                            <th>Precio Normal</th>
-                            <th>Precio Supermonedas</th>
-                            <th>Efectivo</th>
+                            <th>PREMIO</th>
+                            <th>ESTABLECIMIENTO</th>
+                            <th>PRECIO NORMAL</th>
+                            <th>PRECIO BIG PUNTOS</th>
+                            <th>PAGA EN EFECTIVO</th>
                             <th>Imagen</th>
                         </tr>
                         </thead>
@@ -73,12 +74,14 @@
                                     </div>
                                 </div>
                             </td>
-                            <td> {{producto.marca}} </td>
+                            <td>
+                                <img [src]="producto.imagen_empresa" [width]="100">
+                            </td>
                             <td> {{producto.precioNormal}}</td>
                             <td> {{producto.precioSupermonedas}}</td>
                             <td> {{producto.efectivo}}</td>
                             <td>
-                                <img [src]="producto.imagen" [width]="150" />
+                                <img [src]="producto.imagen" [width]="150"/>
                             </td>
                         </tr>
                         </tbody>

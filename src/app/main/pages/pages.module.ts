@@ -21,7 +21,7 @@ const routes: Routes = [
   {
     path: "pages-views",
     component: PagesViewsComponent,
-    data: { roles: "SuperMonedas" },
+    data: { roles: "BigPuntos" },
   },
   {
     path: "mensajes-productos/:_id",

@@ -192,7 +192,7 @@ export class LoginComponent implements OnInit {
         this._registroService
             .registrarUsuario({
                 password: this.f.password.value,
-                roles: Role.SuperMonedas,
+                roles: Role.BigPuntos,
                 email: this.f.email.value,
                 estado: 1,
                 tipoUsuario: 'core',

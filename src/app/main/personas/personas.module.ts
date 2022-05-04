@@ -55,14 +55,14 @@ const routes = [
     {
         path: 'inicio',
         component: PrincipalComponent,
-        data: {roles: [Role.SuperMonedas]},
+        data: {roles: [Role.BigPuntos]},
         canActivate: [AuthGuard]
         // data: { animation: 'auth' }
     },
     {
         path: 'que-es',
         component: QueEsComponent,
-        data: {roles: [Role.SuperMonedas]},
+        data: {roles: [Role.BigPuntos]},
         canActivate: [AuthGuard]
         // data: { animation: 'auth' }
     },
@@ -73,49 +73,49 @@ const routes = [
             {
                 path: 'mis-monedas',
                 component: MisMonedasComponent,
-                data: {roles: [Role.SuperMonedas]},
+                data: {roles: [Role.BigPuntos]},
                 canActivate: [AuthGuard]
                 // data: { animation: 'auth' }
             },
             {
                 path: 'mis-facturas',
                 component: MisFacturasComponent,
-                data: {roles: [Role.SuperMonedas]},
+                data: {roles: [Role.BigPuntos]},
                 canActivate: [AuthGuard]
                 // data: { animation: 'auth' }
             },
             {
                 path: 'mis-calificaciones',
                 component: MisCalificacionesComponent,
-                data: {roles: [Role.SuperMonedas]},
+                data: {roles: [Role.BigPuntos]},
                 canActivate: [AuthGuard]
                 // data: { animation: 'auth' }
             },
             {
                 path: 'mis-calificaciones',
                 component: MisCalificacionesComponent,
-                data: {roles: [Role.SuperMonedas]},
+                data: {roles: [Role.BigPuntos]},
                 canActivate: [AuthGuard]
                 // data: { animation: 'auth' }
             },
             {
                 path: 'compartir-publicaciones',
                 component: CompartirPublicacionesComponent,
-                data: {roles: [Role.SuperMonedas]},
+                data: {roles: [Role.BigPuntos]},
                 canActivate: [AuthGuard]
                 // data: { animation: 'auth' }
             },
             {
                 path: 'monedas-otorgadas',
                 component: MonedasOtorgadasComponent,
-                data: {roles: [Role.SuperMonedas]},
+                data: {roles: [Role.BigPuntos]},
                 canActivate: [AuthGuard]
                 // data: { animation: 'auth' }
             },
             {
                 path: 'pagar-con-supermonedas',
                 component: PagarConSuperMonedasComponent,
-                data: {roles: [Role.SuperMonedas]},
+                data: {roles: [Role.BigPuntos]},
                 canActivate: [AuthGuard]
                 // data: { animation: 'auth' }
             },
@@ -129,7 +129,7 @@ const routes = [
             {
                 path: 'solicitar-credito',
                 component: CreditosAutonomosComponent,
-                data: {roles: [Role.SuperMonedas]},
+                data: {roles: [Role.BigPuntos]},
                 canActivate: [AuthGuard]
                 // data: { animation: 'auth' }
             },
@@ -142,7 +142,7 @@ const routes = [
             {
                 path: 'creditos-pre-aprobados',
                 component: CreditosPreAprobadosEmpComponent,
-                data: {roles: [Role.SuperMonedas]},
+                data: {roles: [Role.BigPuntos]},
                 canActivate: [AuthGuard]
                 // data: { animation: 'auth' }
             },
@@ -155,7 +155,7 @@ const routes = [
             {
                 path: 'listado',
                 component: ListadoCreditosPreAprobadosComponent,
-                data: {roles: [Role.SuperMonedas]},
+                data: {roles: [Role.BigPuntos]},
                 canActivate: [AuthGuard]
                 // data: { animation: 'auth' }
             },
@@ -168,14 +168,14 @@ const routes = [
             {
                 path: 'estado-creditos',
                 component: listadoEstadoCreditos,
-                data: {roles: [Role.SuperMonedas]},
+                data: {roles: [Role.BigPuntos]},
                 canActivate: [AuthGuard]
                 // data: { animation: 'auth' }
             },
             {
                 path: 'registrar-pagos-cuotas',
                 component: listadoPagoCuotas,
-                data: {roles: [Role.SuperMonedas]},
+                data: {roles: [Role.BigPuntos]},
                 canActivate: [AuthGuard]
                 // data: { animation: 'auth' }
             },

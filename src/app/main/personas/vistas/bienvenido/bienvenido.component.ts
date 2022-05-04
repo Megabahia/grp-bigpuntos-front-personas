@@ -111,7 +111,7 @@ export class BienvenidoComponent implements OnInit {
     return {
       credito: 0,
       descripcion: "",
-      tipo: "Credito",
+      tipo: "Recompensa",
       user_id: this.usuario.id,
       empresa_id: this.empresaId
     }

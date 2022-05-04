@@ -47,7 +47,7 @@ export class CompartirPublicacionesComponent implements OnInit {
     return {
       credito: 0,
       descripcion: "",
-      tipo: "Credito",
+      tipo: "Recompensa",
       user_id: this.usuario.id,
       empresa_id: this.empresaId,
     };
@@ -56,7 +56,7 @@ export class CompartirPublicacionesComponent implements OnInit {
   ngOnInit(): void {
     this.paramService
       .obtenerParametroNombreTipo(
-        "monedas_compartir_publicaciones+",
+        "monedas_compartir_publicaciones",
         "GANAR_SUPERMONEDAS"
       )
       .subscribe((info) => {

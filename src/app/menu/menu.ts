@@ -6,7 +6,7 @@ export const menu: CoreMenu[] = [
     id: 'inicio',
     title: 'Inicio',
     // translate: 'MENU.HOME',
-    role: [Role.SuperMonedas],
+    role: [Role.BigPuntos],
     type: 'item',
     icon: 'home',
     url: 'personas/inicio',
@@ -24,14 +24,14 @@ export const menu: CoreMenu[] = [
     id: 'apps',
     type: 'section',
     title: 'Administración',
-    role: [Role.SuperMonedas],
+    role: [Role.BigPuntos],
     // translate: 'MENU.APPS.SECTION',
     icon: 'package',
     children: [
       {
         id: 'superMonedas',
         title: 'Big Puntos',
-        role: [Role.SuperMonedas],
+        role: [Role.BigPuntos],
         // translate: 'MENU.PAGES.SECTION',
         type: 'collapsible',
         icon: 'dollar-sign',
@@ -89,7 +89,7 @@ export const menu: CoreMenu[] = [
       // {
       //   id: 'creditosAutonomos',
       //   title: 'Créditos para Autónomos',
-      //   role: [Role.SuperMonedas],
+      //   role: [Role.BigPuntos],
       //   // translate: 'MENU.PAGES.SECTION',
       //   type: 'collapsible',
       //   icon: 'credit-card',
@@ -107,7 +107,7 @@ export const menu: CoreMenu[] = [
       // {
       //   id: 'creditosEmpleado',
       //   title: 'Empleado',
-      //   role: [Role.SuperMonedas],
+      //   role: [Role.BigPuntos],
       //   // translate: 'MENU.PAGES.SECTION',
       //   type: 'collapsible',
       //   icon: 'credit-card',
@@ -125,7 +125,7 @@ export const menu: CoreMenu[] = [
       // {
       //   id: 'creditosPreAprobados',
       //   title: 'Créditos Pre Aprobados',
-      //   role: [Role.SuperMonedas],
+      //   role: [Role.BigPuntos],
       //   // translate: 'MENU.PAGES.SECTION',
       //   type: 'collapsible',
       //   icon: 'credit-card',
@@ -143,7 +143,7 @@ export const menu: CoreMenu[] = [
       // {
       //   id: 'misCreditos',
       //   title: 'Mis créditos',
-      //   role: [Role.SuperMonedas],
+      //   role: [Role.BigPuntos],
       //   // translate: 'MENU.PAGES.SECTION',
       //   type: 'collapsible',
       //   icon: 'credit-card',
@@ -169,7 +169,7 @@ export const menu: CoreMenu[] = [
       {
         id: 'reclamosRequerimientos',
         title: 'Reclamos y Requerimientos',
-        role: [Role.SuperMonedas],
+        role: [Role.BigPuntos],
         // translate: 'MENU.PAGES.SECTION',
         type: 'item',
         icon: 'message-circle',
@@ -178,7 +178,7 @@ export const menu: CoreMenu[] = [
       {
         id: 'misPremios',
         title: 'Mis premios',
-        role: [Role.SuperMonedas],
+        role: [Role.BigPuntos],
         // translate: 'MENU.PAGES.SECTION',
         type: 'item',
         icon: 'message-circle',
