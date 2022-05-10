@@ -13,10 +13,8 @@
             <div class="">
               <!-- profile picture -->
               <div class="">
-                <div>
-                  <img src="{{imagenTemp ? imagenTemp: imagen ? imagen: '/assets/images/avatars/avatar.png' }}"
+                  <img src="{{imagenTemp ? imagenTemp: imagen ? imagen: 'assets/images/portrait/small/sin_foto.png' }}"
                     class="cat" />
-                </div>
                 <!-- profile title -->
                 <div class="profile-title ml-3">
                   <h2>{{usuario.persona.nombres}} {{usuario.persona.apellidos}}</h2>
@@ -306,29 +304,23 @@
                           <div class="col-md-3">
                             <div class="form-group">
                               <label for="username">Fecha de inicio</label>
-                              <input type="text" class="form-control" formControlName="fechaInicio"
-                                [(ngModel)]="datosTrabajo.fechaInicio" disabled />
-                            </div>
-                          </div>
-                          <div class="col-md-3">
-                            <div class="form-group">
-                              <label for="username" class="d-block">Logo de Empresa</label>
-                              <img [src]="datosTrabajo.imagen" width="50">
+                              <ng2-flatpickr [setDate]="fecha" formControlName="fechaInicio"
+                                             [config]="startDateOptions"></ng2-flatpickr>
                             </div>
                           </div>
                           <div class="col-md-3">
                             <div class="form-group">
                               <label for="username">Empresa</label>
                               <input type="text" class="form-control" formControlName="nombreEmpresa"
-                                [(ngModel)]="datosTrabajo.nombreEmpresa" disabled>
+                                [(ngModel)]="datosTrabajo.nombreEmpresa">
                             </div>
                           </div>
 
                           <div class="col-md-3">
                             <div class="form-group">
                               <label for="username">Tiempo de trabajo (meses)</label>
-                              <input type="text" class="form-control" formControlName="tiempoTrabajo"
-                                [(ngModel)]="datosTrabajo.tiempoTrabajo" disabled>
+                              <input type="number" class="form-control" formControlName="tiempoTrabajo"
+                                [(ngModel)]="datosTrabajo.tiempoTrabajo">
                             </div>
                           </div>
 
@@ -336,7 +328,7 @@
                             <div class="form-group">
                               <label for="username">Cargo actual</label>
                               <input type="text" class="form-control" formControlName="cargoActual"
-                                [(ngModel)]="datosTrabajo.cargoActual" disabled>
+                                [(ngModel)]="datosTrabajo.cargoActual">
                             </div>
                           </div>
                           <div class="col-md-3">
