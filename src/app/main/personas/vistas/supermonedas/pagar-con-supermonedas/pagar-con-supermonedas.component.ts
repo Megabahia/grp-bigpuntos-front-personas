@@ -38,6 +38,7 @@ export class PagarConSuperMonedasComponent implements OnInit {
     public cargandoCompraSupermonedas = false;
     public cobrarSuperMonedasSubmitted = false;
     public nombreTienda;
+    public direccionTienda;
     public imagenTienda;
     public monto;
     public nombreComercial;
@@ -111,6 +112,7 @@ export class PagarConSuperMonedasComponent implements OnInit {
         if (empresa.length) {
             this.nombreTienda = empresa[0].nombreComercial;
             this.imagenTienda = empresa[0].imagen;
+            this.direccionTienda = empresa[0].direccion;
 
             /* this._pagarConSuperMonedasService
               .imageUrlToBase64(empresa[0].imagen)
