@@ -56,6 +56,7 @@
                             <th>PRECIO BIG PUNTOS</th>
                             <th>PAGA EN EFECTIVO</th>
                             <th>Imagen</th>
+                            <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -83,6 +84,9 @@
                             <td>
                                 <img [src]="producto.imagen" [width]="150"/>
                             </td>
+                            <td>
+                                <button class="btn btn-primary mr-1" (click)="enviarMonto(producto)">Pagar</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -97,3 +101,79 @@
     </div>
 </div>
 
+<ng-template #comprobanteCompraSuperMonedasMdl let-modal>
+    <div id="print-section">
+        <div class="modal-header">
+            <h4 class="modal-title">Comprobante de compra con Big Puntos</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss( 'Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row p-2">
+                <div class="col-md-6">
+                    <div class="card plan-card border-primary">
+                        <div class="card-body">
+                            <div class="item-heading">
+                                <h6 class="text-truncate mb-0 text-info text-center">{{nombreTienda}}</h6>
+                            </div>
+                            <div class="img-container w-50 mx-auto py-50">
+                                <img [src]="imagenTienda" class="img-fluid" alt="image" />
+                            </div>
+                            <hr />
+                            <div class="item-meta">
+                                <h6 class="mt-1">Direccion:</h6>
+                                <h6 class="mt-1 text-info">
+                                    {{direccionTienda}}
+                                </h6>
+                                <h6 class="mt-1">Monto Big Puntos:</h6>
+                                <h6 class="mt-1 text-info">
+                                    <div class="iso-moneda"></div>
+                                    Big Puntos (equivalente a: ${{pagoMonto.monto}})
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <p class="text-primary">Descarga o imprime este documento y acércate al local para que puedas cajear tu
+                        producto. <span class="text-info">Escane 1 vez el código QR o de barras, sus puntos serán descontados automáticamente.</span></p>
+
+                    <hr />
+                    <div class="text-center">
+                        <div>
+                            <ngx-barcode [bc-value]="pagoMonto.codigoCobro" [bc-display-value]="true" [bc-width]="0.75"
+                                         [bc-element-type]="img" [bc-font-size]="15"></ngx-barcode>
+                        </div>
+                        <br><br>
+                        <small class="d-block">Código QR de canje</small>
+                        <qrcode [elementType]="elementType" [qrdata]="pagoMonto.codigoCobro" [width]="256"
+                                [errorCorrectionLevel]="'M'"></qrcode>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary" type="button" [useExistingCss]="true" printSectionId="print-section"
+                                ngxPrint>Imprimir</button>
+                        <button class="btn btn-info" type="button" (click)="exportHtmlToPDF()">Descargar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #mensajeModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Mensaje</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+        <div [innerHTML]="mensaje"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="cerrarModal()">Cerrar</button>
+    </div>
+</ng-template>
