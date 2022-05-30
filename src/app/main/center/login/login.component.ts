@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
         private _registroService: RegistroService,
         private _modalService: NgbModal
     ) {
-        this.siteKey = '6LevfmMeAAAAAD9FB7d_lSUqobACqJgbeIwFt5dt';
+        this.siteKey = '6Ld2gy4gAAAAAJB5lGmJDgjgOvhA34jp4iAWuPGk';
         this.captcha = false;
         this._unsubscribeAll = new Subject();
 
