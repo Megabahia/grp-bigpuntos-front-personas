@@ -53,36 +53,46 @@ export const menu: CoreMenu[] = [
                 url: 'personas/supermonedas/mis-monedas'
             },
             {
-                id: 'cargarMisFacturas',
-                title: 'Cargar mis facturas',
-                // translate: 'MENU.APPS.EMAIL',
-                type: 'item',
-                icon: 'circle',
-                url: 'personas/supermonedas/mis-facturas'
-            },
-            {
-                id: 'calificarCompras',
-                title: 'Calificar compras',
-                // translate: 'MENU.APPS.EMAIL',
-                type: 'item',
-                icon: 'circle',
-                url: 'personas/supermonedas/mis-calificaciones'
-            },
-            {
-                id: 'compartirPublicaciones',
-                title: 'Compartir publicaciones',
-                // translate: 'MENU.APPS.EMAIL',
-                type: 'item',
-                icon: 'circle',
-                url: 'personas/supermonedas/compartir-publicaciones'
-            },
-            {
-                id: 'monedasOtorgadas',
-                title: 'Monedas por compras en locales afiliados',
-                // translate: 'MENU.APPS.EMAIL',
-                type: 'item',
-                icon: 'circle',
-                url: 'personas/supermonedas/monedas-otorgadas'
+                id: 'apps',
+                type: 'collapsible',
+                title: 'Ganar BP',
+                role: [Role.BigPuntos],
+                // translate: 'MENU.APPS.SECTION',
+                icon: 'package',
+                children: [
+                    {
+                        id: 'cargarMisFacturas',
+                        title: 'Cargar mis facturas',
+                        // translate: 'MENU.APPS.EMAIL',
+                        type: 'item',
+                        icon: 'circle',
+                        url: 'personas/supermonedas/mis-facturas'
+                    },
+                    {
+                        id: 'calificarCompras',
+                        title: 'Calificar compras',
+                        // translate: 'MENU.APPS.EMAIL',
+                        type: 'item',
+                        icon: 'circle',
+                        url: 'personas/supermonedas/mis-calificaciones'
+                    },
+                    {
+                        id: 'compartirPublicaciones',
+                        title: 'Compartir publicaciones',
+                        // translate: 'MENU.APPS.EMAIL',
+                        type: 'item',
+                        icon: 'circle',
+                        url: 'personas/supermonedas/compartir-publicaciones'
+                    },
+                    {
+                        id: 'monedasOtorgadas',
+                        title: 'Monedas por compras en locales afiliados',
+                        // translate: 'MENU.APPS.EMAIL',
+                        type: 'item',
+                        icon: 'circle',
+                        url: 'personas/supermonedas/monedas-otorgadas'
+                    },
+                ]
             },
             {
                 id: 'pagarSupermonedas',
