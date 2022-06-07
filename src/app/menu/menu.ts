@@ -26,7 +26,7 @@ export const menu: CoreMenu[] = [
         // translate: 'MENU.SAMPLE',
         type: 'item',
         icon: 'info',
-        url: 'personas/que-es'
+        url: 'personas/como-funciona'
     },
     {
         id: 'en-donde-canjear',
@@ -34,7 +34,7 @@ export const menu: CoreMenu[] = [
         // translate: 'MENU.SAMPLE',
         type: 'item',
         icon: 'info',
-        url: 'personas/que-es'
+        url: 'personas/donde-canjear'
     },
     {
         id: 'apps',
@@ -179,7 +179,7 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.PAGES.SECTION',
                 type: 'item',
                 icon: 'message-circle',
-                url: 'personas/inicio',
+                url: 'personas/reclamos-y-requerimientos',
             },
             {
                 id: 'misPremios',

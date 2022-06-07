@@ -49,6 +49,9 @@ import {CreditosPreAprobadosEmpComponent} from './vistas/creditos-empleados/cred
 import {ListadoComponent as listadoEstadoCreditos} from './vistas/mis-creditos/vistas/estado-creditos/listado/listado.component';
 import {ListadoComponent as listadoPagoCuotas} from './vistas/mis-creditos/vistas/registrar-pagos-cuotas/listado/listado.component';
 import {MisPremiosComponent} from './vistas/mis-premios/mis-premios.component';
+import { ComoFuncionaComponent } from './vistas/como-funciona/como-funciona.component';
+import { DondeCanjearComponent } from './vistas/donde-canjear/donde-canjear.component';
+import { ReclamosRequerimientosComponent } from './vistas/reclamos-requerimientos/reclamos-requerimientos.component';
 
 const routes = [
     {path: '', redirectTo: 'inicio', pathMatch: 'full'},
@@ -62,6 +65,20 @@ const routes = [
     {
         path: 'que-es',
         component: QueEsComponent,
+        data: {roles: [Role.BigPuntos]},
+        canActivate: [AuthGuard]
+        // data: { animation: 'auth' }
+    },
+    {
+        path: 'como-funciona',
+        component: ComoFuncionaComponent,
+        data: {roles: [Role.BigPuntos]},
+        canActivate: [AuthGuard]
+        // data: { animation: 'auth' }
+    },
+    {
+        path: 'donde-canjear',
+        component: DondeCanjearComponent,
         data: {roles: [Role.BigPuntos]},
         canActivate: [AuthGuard]
         // data: { animation: 'auth' }
@@ -206,6 +223,13 @@ const routes = [
         // data: { animation: 'auth' }
     },
     {
+        path: 'reclamos-y-requerimientos',
+        component: ReclamosRequerimientosComponent,
+        // data: {activacion: [4]},
+        canActivate: [AuthGuard]
+        // data: { animation: 'auth' }
+    },
+    {
         path: 'mis-premios',
         component: MisPremiosComponent,
         // data: {activacion: [4]},
@@ -243,6 +267,9 @@ const routes = [
         listadoEstadoCreditos,
         listadoPagoCuotas,
         MisPremiosComponent,
+        ComoFuncionaComponent,
+        DondeCanjearComponent,
+        ReclamosRequerimientosComponent,
     ],
     imports: [
         CoreCommonModule,
