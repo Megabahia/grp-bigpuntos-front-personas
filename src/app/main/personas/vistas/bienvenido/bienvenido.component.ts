@@ -231,7 +231,7 @@ export class BienvenidoComponent implements OnInit {
     this.paramService.obtenerParametroNombreTipo("monedas_bienvenida", "GANAR_SUPERMONEDAS").subscribe((info) => {
       this.ganarMonedas = info;
       this.superMonedas.credito = this.ganarMonedas.valor;
-      this.superMonedas.descripcion = "Gana " + this.ganarMonedas.valor + " supermonedas por bienvenida";
+      this.superMonedas.descripcion = "Gana " + this.ganarMonedas.valor + " BP por bienvenida";
     });
   }
   obtenerEmpresaId() {

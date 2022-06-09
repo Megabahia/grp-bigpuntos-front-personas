@@ -84,7 +84,7 @@ export class MisCalificacionesComponent implements OnInit {
     this.paramService.obtenerParametroNombreTipo("monedas_calificar", "GANAR_SUPERMONEDAS").subscribe((info) => {
       this.ganarMonedas = info;
       this.superMonedas.credito = this.ganarMonedas.valor;
-      this.superMonedas.descripcion = "Gana " + this.ganarMonedas.valor + " supermonedas por calificar Factura";
+      this.superMonedas.descripcion = "Gana " + this.ganarMonedas.valor + " BP por calificar Factura";
     });
     this.obtenerPaisOpciones();
     this.obtenerProvinciaOpciones();

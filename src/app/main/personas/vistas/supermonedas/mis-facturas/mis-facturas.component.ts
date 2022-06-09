@@ -162,7 +162,7 @@ export class MisFacturasComponent implements OnInit {
         this.superMonedasElec.descripcion =
           "Gana " +
           this.ganarMonedasFacElec.valor +
-          " supermonedas por subir factura electrónica";
+          " BP por subir factura electrónica";
       });
     this.paramService
       .obtenerParametroNombreTipo("monedas_facturas_fisi", "GANAR_SUPERMONEDAS")
@@ -172,7 +172,7 @@ export class MisFacturasComponent implements OnInit {
         this.superMonedasFisi.descripcion =
           "Gana " +
           this.ganarMonedasFacFisi.valor +
-          " supermonedas por subir factura física";
+          " BP por subir factura física";
       });
     this.cdRef.detectChanges();
   }

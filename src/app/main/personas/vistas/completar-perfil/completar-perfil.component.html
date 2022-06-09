@@ -4,7 +4,7 @@
 
 <!-- Forgot Password v1 -->
 <div class="text-center mb-3">
-  <img src="assets/images/logo2.svg" width="250">
+  <img src="../../../../../assets/images/logo.svg" width="250">
 </div>
 <div class="card mb-0">
   <div class="card-body">
@@ -113,8 +113,10 @@
 
             <div class="col-md-8">
               <div class="form-group">
-                <label for="whatsapp" class="font-weight-bold">Número WhatsApp <small class="text-info">(Importante
-                    para validar tu cuenta)</small></label>
+                <label for="whatsapp" class="font-weight-bold">Número WhatsApp
+<!--                  <small class="text-info">(Importante-->
+<!--                    para validar tu cuenta)</small>-->
+                </label>
                 <input formControlName="whatsapp" type="text"
                   [ngClass]="{ 'is-invalid': submitted && f.whatsapp.errors }" class="form-control"
                   placeholder="Ejemplo: 0987654321">

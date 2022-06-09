@@ -147,7 +147,7 @@ export class CompletarPerfilComponent implements OnInit {
         this.paramService.obtenerParametroNombreTipo('monedas_registro', 'GANAR_SUPERMONEDAS').subscribe((info) => {
             this.ganarMonedas = info;
             this.superMonedas.credito = this.ganarMonedas.valor;
-            this.superMonedas.descripcion = 'Gana ' + this.ganarMonedas.valor + ' supermonedas por completar perfil';
+            this.superMonedas.descripcion = 'Gana ' + this.ganarMonedas.valor + ' BP por completar perfil';
         });
     }
 
