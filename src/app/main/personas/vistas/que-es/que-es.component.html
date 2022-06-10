@@ -19,18 +19,24 @@
         <section id="media-player-wrapper">
             <div class="row">
                 <!-- VIDEO -->
-                <div class="col-6" *ngFor="let video of videos; let i =index">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">{{video.nombre}}</h4>
-                            <div class="video-player" id="plyr-video-player">
-                                <iframe [src]="obtenerURL(i)" allowfullscreen allow="autoplay"></iframe>
-                            </div>
-                            <p><strong>Descripción: </strong>{{video.descripcion}}</p>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="col-6" *ngFor="let video of videos; let i =index">-->
+<!--                    <div class="card">-->
+<!--                        <div class="card-body">-->
+<!--                            <h4 class="card-title">{{video.nombre}}</h4>-->
+<!--                            <div class="video-player" id="plyr-video-player">-->
+<!--                                <iframe [src]="obtenerURL(i)" allowfullscreen allow="autoplay"></iframe>-->
+<!--                            </div>-->
+<!--                            <p><strong>Descripción: </strong>{{video.descripcion}}</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <!--/ VIDEO -->
+                <div class="col-lg-6 mt-1">
+                    <img width="100%" src="./assets/images/informacion/que_es_big_puntos.jpeg">
+                </div>
+                <div class="col-lg-6 mt-1">
+                    <img width="100%" src="./assets/images/informacion/que_es_big_puntos_explicacion.jpeg">
+                </div>
 
             </div>
         </section>
