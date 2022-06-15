@@ -3,7 +3,7 @@
         <div class="col-12 mb-2">
             <div class="row breadcrumbs-top">
                 <div class="col-12">
-                    <h2 class="content-header-title float-left mb-0">Que es Big Puntos</h2>
+                    <h2 class="content-header-title float-left mb-0">Reclamos y Requerimientos</h2>
                     <div class="breadcrumb-wrapper">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a class="text-primary" [routerLink]="['/']">Inicio</a>
@@ -112,10 +112,26 @@
                             <!--                            </div>-->
                         </div>
                         <div class="form-group">
+                            <label>Elige un tema:</label>
+                            <select class="form-control select2" formControlName="categoria">
+                                <option value="">- Seleccione -</option>
+                                <option>Accidente con productos</option>
+                                <option>La funda se rompió</option>
+                                <option>Accidente en el local</option>
+                                <option>Robo en el local</option>
+                                <!--                                <option *ngFor="let categoriaEmpresaOp of categoriaEmpresaOpciones"-->
+                                <!--                                        value="{{categoriaEmpresaOp.nombre}}">{{categoriaEmpresaOp.nombre}}</option>-->
+
+                            </select>
+                            <!--                            <div *ngIf="submittedFactura && FFForm.categoria.errors" class="invalid-feedback" style="display: block;">-->
+                            <!--                                <div *ngIf="FFForm.categoria.errors.required">Categoría es requerido</div>-->
+                            <!--                            </div>-->
+                        </div>
+                        <div class="form-group">
                             <label>En sus palabras, cuéntenos qué pasó:</label>
                             <!--                                    <input class="form-control" type="text" formControlName="importeTotal"-->
                             <!--                                           [(ngModel)]="facturaFisica.importeTotal">-->
-                            <input class="form-control" type="text" formControlName="importeTotal">
+                            <textarea class="form-control" type="text" formControlName="importeTotal"></textarea>
                             <!--                                    <div *ngIf="submittedFactura && FFForm.importeTotal.errors" class="invalid-feedback"-->
                             <!--                                         style="display: block;">-->
                             <!--                                        <div *ngIf="FFForm.importeTotal.errors.required">Monto es requerido</div>-->
