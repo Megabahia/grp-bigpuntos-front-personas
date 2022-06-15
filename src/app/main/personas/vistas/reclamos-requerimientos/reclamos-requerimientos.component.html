@@ -1,58 +1,137 @@
-<ul>Atención empleados
+<div class="content-wrapper">
+    <div class="content-header row">
+        <div class="col-12 mb-2">
+            <div class="row breadcrumbs-top">
+                <div class="col-12">
+                    <h2 class="content-header-title float-left mb-0">Que es Big Puntos</h2>
+                    <div class="breadcrumb-wrapper">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="text-primary" [routerLink]="['/']">Inicio</a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="checkout-items">
+        <!-- users list start -->
+        <section id="media-player-wrapper">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card card-developer-meetup" (click)="toggleSidebar('factura-electronica')">
+                        <div class="rounded-top text-center">
+                            <h4 class="card-title">Atención empleados</h4>
+                            <img src="https://www.pec-supermaxi.com/wp-content/uploads/2021/09/icono_empleados.png"
+                                 alt="Meeting Pic" height="170"/>
+                        </div>
+                    </div>
+                </div>
 
-    <li>■ Seleccione un local: locales afiliados</li>
-    <li>■ Elija un tema: Atención irrespetuosa, acusación falsa, problemas del sistema, mala actitud del empleado, mala
-        presentación de los empleados, factura mal hecha, problemas con parqueos y taxis, tiempo de espera para el cobro
-        en caja, productos
-    </li>
-    <li>■ En sus palabras, cuéntenos qué pasó</li>
-    <li>■ Enviar</li>
-</ul>
-<ul> Accidentes, robos
-    <li>■ Seleccione un local</li>
-    <li>■ Accidente con productos</li>
-    <li>■ La funda se rompió</li>
-    <li>■ Accidente en el local</li>
-    <li>■ Robo en el local</li>
-    <li>■ Acusación falsa de robo</li>
-    <li>■ Recomendaciones para el local</li>
-    <li>■ Doble cobro</li>
-    <li>■ En sus palabras, cuéntenos qué pasó</li>
-    <li>■ Enviar</li>
-</ul>
-<ul> Ambiente
-    <li>■ Seleccione un local</li>
-    <li>■ Cajas</li>
-    <li>■ Limpieza</li>
-    <li>■ Letrero de precio</li>
-    <li>■ Desorden en el local</li>
-    <li>■ Coches</li>
-    <li>■ Robo</li>
-    <li>■ Temperatura del local</li>
-    <li>■ En sus palabras, cuéntenos qué pasó</li>
-    <li>■ Enviar</li>
-</ul>
-<ul> Precios promocionales
-    <li>■ No hubo el producto en promoción</li>
-    <li>■ Precios altos</li>
-    <li>■ Promociones falsas</li>
-    <li>■ Cobro excesivo</li>
-    <li>■ Errores en la aplicación</li>
-    <li>■ No se aplicó el descuento</li>
-    <li>■ Productos sin precio</li>
-    <li>■ El precio del producto no coincide con el precio publicado</li>
-    <li>■ Doble cobro</li>
-    <li>■ En sus palabras, cuéntenos qué pasó</li>
-    <li>■ Enviar</li>
-</ul>
-<ul>PAGOS DUPLICADOS:
-    <li>■ Se descontó dos veces el pago con BP</li>
-    <li>■ No se pudo realizar el pago con BP</li>
-    <li>■ Error al generar el código para el pago</li>
-    <li>■ En sus palabras, cuéntenos qué pasó</li>
-    <li>■ Enviar</li>
-</ul>
-<ul>DEVOLUCIONES Y REEMBOLSOS
-    <li>- Reembolsos (aquí aparecerán las devoluciones por cobros dobles)</li>
-    <li>- Solicitudes procesadas (aquí aparecerán las solicitudes del usuario que han sido enviadas)</li>
-</ul>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card card-developer-meetup" (click)="toggleSidebar('factura-electronica')">
+                        <div class="rounded-top text-center">
+                            <h4 class="card-title">Accidentes, robos</h4>
+                            <img src="https://www.pec-supermaxi.com/wp-content/uploads/2021/09/icono_robos.png"
+                                 alt="Meeting Pic" height="170"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card card-developer-meetup" (click)="toggleSidebar('factura-electronica')">
+                        <div class="rounded-top text-center">
+                            <h4 class="card-title">Ambiente</h4>
+                            <img src="https://www.pec-supermaxi.com/wp-content/uploads/2021/09/icono_cajas.png"
+                                 alt="Meeting Pic" height="170"/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card card-developer-meetup" (click)="toggleSidebar('factura-electronica')">
+                        <div class="rounded-top text-center">
+                            <h4 class="card-title">Precios promocionales</h4>
+                            <img src="https://www.pec-supermaxi.com/wp-content/uploads/2021/09/icono_precio.png"
+                                 alt="Meeting Pic" height="170"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card card-developer-meetup" (click)="toggleSidebar('factura-electronica')">
+                        <div class="rounded-top text-center">
+                            <h4 class="card-title">Devoluciones y reembolsos</h4>
+                            <img src="https://www.pec-supermaxi.com/wp-content/uploads/2021/09/icono_tiempo.png"
+                                 alt="Meeting Pic" height="170"/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- users list ends -->
+    </div>
+
+</div>
+
+<core-sidebar class="modal modal-slide-in sidebar-todo-modal fade" name="factura-electronica"
+              overlayClass="modal-backdrop">
+    <div class="slideout-content">
+        <!-- Modal to add new user starts-->
+        <div class="modalsd modal-slide-in sdfade new-user-modal" id="modals-slide-in">
+            <div class="modal-dialog">
+                <form class="add-new-user modal-content pt-0" (ngSubmit)="(newUserForm.form.valid)"
+                      #newUserForm="ngForm">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            (click)="toggleSidebar('factura-electronica')">
+                        ×
+                    </button>
+                    <div class="modal-header mb-1">
+                        <h5 class="modal-title" id="exampleModalLabel">Sugerencia</h5>
+                    </div>
+                    <div class="modal-body flex-grow-1">
+                        <div class="form-group">
+                            <label>Seleccione un local:</label>
+                            <select class="form-control select2" formControlName="categoria">
+                                <option value="">- Seleccione -</option>
+                                <option>Accidente con productos</option>
+                                <option>La funda se rompió</option>
+                                <option>Accidente en el local</option>
+                                <option>Robo en el local</option>
+                                <!--                                <option *ngFor="let categoriaEmpresaOp of categoriaEmpresaOpciones"-->
+                                <!--                                        value="{{categoriaEmpresaOp.nombre}}">{{categoriaEmpresaOp.nombre}}</option>-->
+
+                            </select>
+                            <!--                            <div *ngIf="submittedFactura && FFForm.categoria.errors" class="invalid-feedback" style="display: block;">-->
+                            <!--                                <div *ngIf="FFForm.categoria.errors.required">Categoría es requerido</div>-->
+                            <!--                            </div>-->
+                        </div>
+                        <div class="form-group">
+                            <label>En sus palabras, cuéntenos qué pasó:</label>
+                            <!--                                    <input class="form-control" type="text" formControlName="importeTotal"-->
+                            <!--                                           [(ngModel)]="facturaFisica.importeTotal">-->
+                            <input class="form-control" type="text" formControlName="importeTotal">
+                            <!--                                    <div *ngIf="submittedFactura && FFForm.importeTotal.errors" class="invalid-feedback"-->
+                            <!--                                         style="display: block;">-->
+                            <!--                                        <div *ngIf="FFForm.importeTotal.errors.required">Monto es requerido</div>-->
+                            <!--                                    </div>-->
+                        </div>
+                        <button type="reset" class="btn btn-outline-primary mr-1" data-dismiss="modal"
+                                (click)="toggleSidebar('factura-electronica')"> Enviar
+                        </button>
+                        <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal"
+                                (click)="toggleSidebar('factura-electronica')"> Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Modal to add new user Ends-->
+    </div>
+
+</core-sidebar>

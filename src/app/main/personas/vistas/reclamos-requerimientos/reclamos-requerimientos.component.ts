@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CoreSidebarService} from '../../../../../@core/components/core-sidebar/core-sidebar.service';
 
 @Component({
   selector: 'app-reclamos-requerimientos',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReclamosRequerimientosComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+      private _coreSidebarService: CoreSidebarService,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  toggleSidebar(name): void {
+    this._coreSidebarService.getSidebarRegistry(name).toggleOpen();
   }
 
 }
