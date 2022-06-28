@@ -1,0 +1,174 @@
+<!-- Error page-->
+<section class="head-LP text-LP">
+    <div class="container p5">
+        <div class="row align-items-center py-5">
+            <div class="col-md-12 text-center m4">
+                <img src="../../../../assets/images/logo/logo.png" width="120" alt="">
+                <h1 class="yellow2 mt-4 text-bold">GRP Personas CrediCompra</h1>
+                <h2 class="azul2 mt-2">{{banner2}}</h2>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="col-md-12">
+                            <form class="form form-horizontal">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-3 col-form-label">
+                                                <label>Fecha:</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="text" id="fecha" class="form-control" disabled
+                                                       value="{{info?.fecha}}"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-3 col-form-label">
+                                                <label>Plazo(Meses):</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="text" id="plazoPago" class="form-control" disabled
+                                                       value="{{info?.plazo}}"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-3 col-form-label">
+                                                <label>Taza interés nominal:</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="email" id="tazaInteres" class="form-control" disabled
+                                                       value="{{info?.interes}}"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-3 col-form-label">
+                                                <label>Tipo de sistema de amortización</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="email" id="typeAmort" class="form-control" disabled
+                                                       value="{{info?.system}}"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="col-12">
+                            <div class="form-group row">
+                                <div class="col-sm-3 col-form-label">
+                                    <label>Producto:</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input
+                                            type="text"
+                                            id="producto"
+                                            class="form-control"
+                                            disabled
+                                            value="{{info?.product}}"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group row">
+                                <div class="col-sm-3 col-form-label">
+                                    <label>Frecuencia de pagp:</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input
+                                            type="text"
+                                            id="frecuPago"
+                                            class="form-control"
+                                            disabled
+                                            value="{{info?.frequencyPay}}"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group row">
+                                <div class="col-sm-3 col-form-label">
+                                    <label>Tipo de tasa:</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input
+                                            type="text"
+                                            id="tipoTasa"
+                                            class="form-control"
+                                            disabled
+                                            value="{{info?.frequencyPay}}"
+
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group row">
+                                <!--                                <div class="col-sm-3 col-form-label">-->
+                                <!--                                    <label>Tasa contribución Solca:</label>-->
+                                <!--                                </div>-->
+                                <!--                                <div class="col-sm-9">-->
+                                <!--                                    <input-->
+                                <!--                                            type="text"-->
+                                <!--                                            id="tasaContri"-->
+                                <!--                                            class="form-control"-->
+                                <!--                                            disabled-->
+                                <!--                                            value="{{info?.desgravamen}}"-->
+                                <!--                                    />-->
+                                <!--                                </div>-->
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12  text-center">
+                <h3 class="azul mt-5 text-bold"> Tabla de créditos:</h3>
+                <div class="card card-company-table ">
+                    <div class="card-datatable table-responsive pt-0">
+                        <table class="table table-striped">
+                            <thead class=".thead-dark">
+                            <tr>
+                                <th>N° Cuota</th>
+                                <th>Cuota</th>
+                                <th>Interes</th>
+                                <th>Termino Amortizativo</th>
+                                <th>Capital</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let item of info.table;let i = index">
+                                <td>{{i}}</td>
+                                <td>{{item.terminoAmortizativo}}</td>
+                                <td>{{item.interePen}}</td>
+                                <td>{{item.CuotaPend}}</td>
+                                <td>{{item.capitalpendi}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- / Error page-->

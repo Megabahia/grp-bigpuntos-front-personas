@@ -1,0 +1,181 @@
+<!-- Error page-->
+<div *ngIf="tableview">
+
+    <section class="head-LP text-LP">
+        <div class="container pb-5">
+            <div class="row align-items-center py-5">
+                <div class="col-md-12 text-center mb-4">
+                    <img src="../../../../assets/images/logo/logo.png" width="120" alt="">
+                    <h1 class="yellow2 mt-4 text-bold">GRP Personas CrediCompra</h1>
+                    <h2 class="azul2 mt-2">{{banner1}}</h2>
+                </div>
+                <div class="col-md-12  text-center">
+                    <h3 class="azul mt-5 text-bold"> Simulador de créditos:</h3>
+                    <br>
+                </div>
+
+                <div class="col-md-12">
+                    <form [formGroup]="simuladorForm" (ngSubmit)="calcularAmortizacion()">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <span class="user-name font-weight-bolder">Fecha de cálculo</span>
+                                    <input type="text" formControlName="date" class="form-control" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <span class="user-name font-weight-bolder">Sistema de amortización</span>
+                                    <select formControlName="system" class="form-control">
+                                        <option value="">-Selecione-</option>
+                                        <option [value]="item.valor"
+                                                *ngFor="let item of  iconsAmor">{{item.nombre}}</option>
+                                    </select>
+                                    <div *ngIf="submittedSimulador && getsimuladorForm.system.errors"
+                                         class="invalid-feedback" style="display: block;">
+                                        <div *ngIf="getsimuladorForm.system.errors.required">Sistema de amortización es
+                                            requerido
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <span class="user-name font-weight-bolder">Tipo de perosna</span>
+                                    <select formControlName="typePerson" class="form-control">
+                                        <option value="">-Selecione-</option>
+                                        <option [value]="item.valor"
+                                                *ngFor="let item of  iconsTipoPers">{{item.nombre}}</option>
+                                    </select>
+                                    <div *ngIf="submittedSimulador && getsimuladorForm.typePerson.errors"
+                                         class="invalid-feedback" style="display: block;">
+                                        <div *ngIf="getsimuladorForm.typePerson.errors.required">Tipo de perosna es
+                                            requerido
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <span class="user-name font-weight-bolder">Producto</span>
+                                    <select formControlName="product" class="form-control">
+                                        <option value="">-Selecione-</option>
+                                        <option [value]="item.valor"
+                                                *ngFor="let item of  iconsProductso">{{item.nombre}}</option>
+                                    </select>
+                                    <div *ngIf="submittedSimulador && getsimuladorForm.product.errors"
+                                         class="invalid-feedback" style="display: block;">
+                                        <div *ngIf="getsimuladorForm.product.errors.required">Producto es requerido
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <span class="user-name font-weight-bolder">Subproducto</span>
+                                    <select formControlName="subProduct" class="form-control">
+                                        <option value="">-Selecione-</option>
+                                        <option [value]="item.valor"
+                                                *ngFor="let item of  iconsSubProducto">{{item.nombre}}</option>
+                                    </select>
+                                    <div *ngIf="submittedSimulador && getsimuladorForm.subProduct.errors"
+                                         class="invalid-feedback" style="display: block;">
+                                        <div *ngIf="getsimuladorForm.subProduct.errors.required">Subproducto es
+                                            requerido
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <span class="user-name font-weight-bolder">Monto</span>
+                                    <input formControlName="monto" type="text" class="form-control" name="monto">
+                                    <div *ngIf="submittedSimulador && getsimuladorForm.monto.errors"
+                                         class="invalid-feedback" style="display: block;">
+                                        <div *ngIf="getsimuladorForm.monto.errors.required">Monto es requerida</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <span class="user-name font-weight-bolder">Plazo (meses)</span>
+                                    <input formControlName="plazo" type="text" class="form-control" name="plazo">
+                                    <div *ngIf="submittedSimulador && getsimuladorForm.plazo.errors"
+                                         class="invalid-feedback" style="display: block;">
+                                        <div *ngIf="getsimuladorForm.plazo.errors.required">Plazo es requerido</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <span class="user-name font-weight-bolder">Frecuencia de pago</span>
+                                    <select formControlName="frequencyPay" class="form-control">
+                                        <option value="">-Selecione-</option>
+                                        <option [value]="item.valor"
+                                                *ngFor="let item of  iconsFrePago">{{item.nombre}}</option>
+                                    </select>
+                                    <div *ngIf="submittedSimulador && getsimuladorForm.frequencyPay.errors"
+                                         class="invalid-feedback" style="display: block;">
+                                        <div *ngIf="getsimuladorForm.frequencyPay.errors.required">Frecuencia de pago es
+                                            requerido
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--                            <div class="col-md-3">-->
+                            <!--                                <div class="form-group">-->
+                            <!--                                    <span class="user-name font-weight-bolder">Con seguro desgravamen</span>-->
+                            <!--                                    <div class="custom-control custom-radio">-->
+                            <!--                                        <input type="radio" id="customRadio1" name="desgravamen"-->
+                            <!--                                               formControlName="desgravamen" value="Si"-->
+                            <!--                                               class="custom-control-input" checked/>-->
+                            <!--                                        <label class="custom-control-label" for="customRadio1">Si</label>-->
+                            <!--                                    </div>-->
+                            <!--                                    <div class="custom-control custom-radio">-->
+                            <!--                                        <input type="radio" id="customRadio2" name="desgravamen"-->
+                            <!--                                               formControlName="desgravamen" value="No"-->
+                            <!--                                               class="custom-control-input"/>-->
+                            <!--                                        <label class="custom-control-label" for="customRadio2">No</label>-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
+
+                        </div>
+                        <div class="row">
+                            <div class="col-12 d-flex flex-sm-row flex-column mt-2">
+                                <a (click)="calcularAmortizacion()"
+                                   class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-float waves-light">Calcular</a>
+                                <a
+
+                                        class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-float waves-light">
+                                    Borrar Todo
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+<div *ngIf="!tableview">
+    <app-table-simulador [info]="info" [banner2]="banner2">
+
+    </app-table-simulador>
+    <div class="row mb-5 ml-2">
+        <div class="col-12 d-flex flex-sm-row flex-column mt-2">
+            <a (click)="viewsClose()"
+               class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-float waves-light">
+                Cancelar
+            </a> <a
+                (click)="actionContinue()"
+                class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-float waves-light">
+            Contiuar
+        </a>
+        </div>
+    </div>
+</div>
+<div class="footer-LP"></div>
