@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {Subject} from 'rxjs';
-import {CoreConfigService} from '../../../../@core/services/config.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {ParametrizacionesService} from '../../personas/servicios/parametrizaciones.service';
+import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { CoreConfigService } from '../../../../@core/services/config.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ParametrizacionesService } from '../../personas/servicios/parametrizaciones.service';
 import Decimal from 'decimal.js';
 
 @Component({
@@ -32,6 +32,15 @@ export class SimuladorComponent implements OnInit {
         private _router: Router,
         private paramService: ParametrizacionesService,
     ) {
+        const ref = document.referrer;
+        if (ref !== 'https://credicompra.com/') {
+            this._router.navigate([
+                `/grp/login`,
+            ]);
+            localStorage.clear();
+            return;
+        }
+        localStorage.setItem('simulador', 'ok');
         this.getSelectContet();
         this._unsubscribeAll = new Subject();
         // Configure the layout
