@@ -1,19 +1,19 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Validators, FormBuilder, FormGroup} from '@angular/forms';
-import {first, takeUntil} from 'rxjs/operators';
-import {CoreConfigService} from '../../../../@core/services/config.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Observable, Subject, Subscription} from 'rxjs';
-import {AuthenticationService} from '../../../auth/service/authentication.service';
-import {ReCaptchaV3Service} from 'ngx-captcha';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { first, takeUntil } from 'rxjs/operators';
+import { CoreConfigService } from '../../../../@core/services/config.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { AuthenticationService } from '../../../auth/service/authentication.service';
+import { ReCaptchaV3Service } from 'ngx-captcha';
 import {
     FacebookLoginProvider,
     SocialAuthService,
     SocialUser,
 } from 'angularx-social-login';
-import {RegistroService} from '../registro/registro.service';
-import {Role} from 'app/auth/models';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { RegistroService } from '../registro/registro.service';
+import { Role } from 'app/auth/models';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-login',
@@ -69,7 +69,6 @@ export class LoginComponent implements OnInit {
         this.siteKey = '6Ld2gy4gAAAAAJB5lGmJDgjgOvhA34jp4iAWuPGk';
         this.captcha = false;
         this._unsubscribeAll = new Subject();
-
         // Configure the layout
         this._coreConfigService.config = {
             layout: {
@@ -125,6 +124,7 @@ export class LoginComponent implements OnInit {
                     }
                     // this._router.navigate([this.returnUrl]);
                     const semilla = JSON.parse(localStorage.getItem('semillaPago'));
+                    const simulador = localStorage.getItem('simulador');
                     if (semilla) {
                         if (semilla.pantalla === 'verPremios') {
                             this._router.navigate(['/personas/mis-premios']);
@@ -132,7 +132,11 @@ export class LoginComponent implements OnInit {
                             this._router.navigate(['/personas/supermonedas/pagar-con-supermonedas']);
                         }
                     } else {
-                        this._router.navigate(['/']);
+                        if (simulador === 'ok') {
+                            this._router.navigate(['/personas/creditos-autonomos/solicitar-credito']);
+                        } else {
+                            this._router.navigate(['/']);
+                        }
                     }
                 },
                 (error) => {
