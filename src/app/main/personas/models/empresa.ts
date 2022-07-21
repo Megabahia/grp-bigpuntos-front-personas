@@ -12,4 +12,5 @@ export class EmpresaInformacion {
     telefono1: string;
     telefono2: string;
     correo: string;
+    imagen: string;
 }

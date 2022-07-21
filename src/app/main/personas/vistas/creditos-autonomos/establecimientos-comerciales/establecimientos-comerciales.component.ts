@@ -181,7 +181,7 @@ export class EstablecimientosComercialesAutComponent implements OnInit {
     });
   }
   obtenerCiudadesOpciones() {
-    this.paramService.obtenerListaPadres("CIUDAD").subscribe((info) => {
+    this.paramService.obtenerListaPadres("Ciudad").subscribe((info) => {
       this.ciudadOpciones = info;
     });
   }

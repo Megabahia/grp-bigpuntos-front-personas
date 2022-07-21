@@ -53,6 +53,12 @@ import { ComoFuncionaComponent } from './vistas/como-funciona/como-funciona.comp
 import { DondeCanjearComponent } from './vistas/donde-canjear/donde-canjear.component';
 import { ReclamosRequerimientosComponent } from './vistas/reclamos-requerimientos/reclamos-requerimientos.component';
 
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+
+const maskConfig: Partial<IConfig> = {
+    validation: false,
+};
+
 const routes = [
     {path: '', redirectTo: 'inicio', pathMatch: 'full'},
     {
@@ -287,7 +293,9 @@ const routes = [
         ShareButtonsModule,
         NgxBarcodeModule,
         QRCodeModule,
-        NgxPrintModule
+        NgxPrintModule,
+        // Mask
+        NgxMaskModule.forRoot(maskConfig),
     ],
     exports: [
         BienvenidoComponent,
