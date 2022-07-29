@@ -77,7 +77,6 @@ export class SimuladorComponent implements OnInit {
             plazo: ['', [Validators.required]],
             frequencyPay: ['', [Validators.required]],
             desgravamen: [''],
-
         });
         this.simuladorForm.controls['date'].setValue(new Date(Date.now()).toLocaleDateString('pt-PT'));
         this.simuladorForm.controls['desgravamen'].setValue('Si');

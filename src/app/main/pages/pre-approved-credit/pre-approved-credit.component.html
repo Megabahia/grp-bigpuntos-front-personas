@@ -1,0 +1,75 @@
+<!-- Error page-->
+<div>
+    <section class="head-LP text-LP">
+        <div class="container pb-5">
+            <div class="row justify-content-center align-items-center py-5">
+                <div class="col-md-12 text-center mb-4">
+                    <img src="../../../../assets/images/logo/logo.png" width="120" alt="">
+                    <h1 class="yellow2 mt-4 text-bold">GRP Personas CrediCompra</h1>
+                    <!--                    <h2 class="azul2 mt-2">{{banner1}}</h2>-->
+                </div>
+                <div class="col-md-12 text-center">
+                    <h2 class="user-name font-weight-bolder text-center">Si te llegó una notificación de crédito
+                        pre-aprobado, por favor ingresa el código y tú número de Cédula</h2>
+
+                </div>
+                <div class="align-items-center ">
+                    <form [formGroup]="envioForm" (ngSubmit)="sentCode()">
+                        <div class="row align-items-center">
+                            <div class="form-group">
+                                <span class="user-name font-weight-bolder">Código:</span>
+                                <input size="50" formControlName="code" type="text" class="form-control" name="code">
+                                <!--                                    <div *ngIf="submittedSimulador && getsimuladorForm.monto.errors"-->
+                                <!--                                         class="invalid-feedback" style="display: block;">-->
+                                <!--                                        <div *ngIf="getsimuladorForm.monto.errors.required">Monto es requerida</div>-->
+                                <!--                                    </div>-->
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center">
+                            <div class="form-group ">
+                                <span class="user-name font-weight-bolder">#Cédula:</span>
+                                <input size="50" formControlName="document" type="text" class="form-control" name="document">
+                                <!--                                    <div *ngIf="submittedSimulador && getsimuladorForm.plazo.errors"-->
+                                <!--                                         class="invalid-feedback" style="display: block;">-->
+                                <!--                                        <div >Plazo es requerido</div>-->
+                                <!--                                    </div>-->
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <a class=" btn btn-primary mb-sm-0 mr-0 mr-sm-1 waves-effect waves-float waves-light"
+                               (click)="sentCode()"
+                            >
+                                Enviar
+                            </a>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="col-md-12 text-center">
+                    <div class="col-12 d-flex flex-sm-row flex-column mt-2">
+                        <h3 class="user-name font-weight-bolder text-center">En caso de no haber
+                            recibido código, por favor continua para que accedas a tu Crédito, por favor
+                            Clic en Continuar
+                        </h3>
+                    </div>
+                    <a
+                            (click)="actionContinue()"
+                            class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-float waves-light">
+                        Continuar
+                    </a>
+                </div>
+
+                <div class="col-md-12 mb-4">
+                    <div class="col-md-12 ">
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div class="footer-LP"></div>
