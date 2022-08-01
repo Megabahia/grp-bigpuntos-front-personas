@@ -19,6 +19,10 @@ export class TableSimuladorComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private _router: Router,
     ) {
+        localStorage.getItem('simulador');
+        if (localStorage.getItem('simulador') !== 'ok') {
+            this.actionContinue();
+        }
 
         this._unsubscribeAll = new Subject();
         // Configure the layout
@@ -41,5 +45,9 @@ export class TableSimuladorComponent implements OnInit {
 
     ngOnInit(): void {
     }
-
+    actionContinue() {
+        this._router.navigate([
+            `/grp/login`,
+        ]);
+    }
 }

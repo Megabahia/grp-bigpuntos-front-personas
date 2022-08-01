@@ -1,40 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { CoreConfigService } from '../../../../@core/services/config.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-credit-aproved',
-  templateUrl: './credit-aproved.component.html',
-  styleUrls: ['../simulador/simulador.component.scss']
+    selector: 'app-credit-aproved',
+    templateUrl: './credit-aproved.component.html',
+    styleUrls: ['../simulador/simulador.component.scss']
 })
 export class CreditAprovedComponent implements OnInit {
+    public monto;
 
-  constructor(      private _coreConfigService: CoreConfigService,
-                    private _router: Router,
-  ) {
-    this._coreConfigService.config = {
-      layout: {
-        navbar: {
-          hidden: true,
-        },
-        footer: {
-          hidden: true,
-        },
-        menu: {
-          hidden: true,
-        },
-        customizer: false,
-        enableLocalStorage: false,
-      },
-    };
-  }
+    constructor(private _coreConfigService: CoreConfigService,
+                private _router: ActivatedRoute,
+                private _routerN: Router,
+    ) {
+        if (localStorage.getItem('preApproved')) {
+            this._router.queryParams.subscribe((params) => {
+                this.monto = params.monto;
+            });
+            localStorage.removeItem('preApproved');
+        } else {
+            this.actionContinue();
+        }
 
-  ngOnInit(): void {
-  }
-  actionContinue() {
-    this._router.navigate([
-      `/grp/login`,
-    ]);
-  }
+        this._coreConfigService.config = {
+            layout: {
+                navbar: {
+                    hidden: true,
+                },
+                footer: {
+                    hidden: true,
+                },
+                menu: {
+                    hidden: true,
+                },
+                customizer: false,
+                enableLocalStorage: false,
+            },
+        };
+    }
+
+    ngOnInit(): void {
+    }
+
+    actionContinue() {
+        this._routerN.navigate([
+            `/grp/login`,
+        ]);
+    }
 
 }

@@ -32,22 +32,10 @@ export class SimuladorComponent implements OnInit {
         private _router: Router,
         private paramService: ParametrizacionesService,
     ) {
-        const ref = document.referrer;
-        const host = document.location.host;
-        if (ref !== 'https://credicompra.com/') {
-            if (host !== '209.145.61.41:4201') {
-                this._router.navigate([
-                    `/grp/login`,
-                ]);
-                localStorage.clear();
-                return;
-            }
-        }
         localStorage.setItem('simulador', 'ok');
         this.getSelectContet();
         this._unsubscribeAll = new Subject();
         // Configure the layout
-
         this._coreConfigService.config = {
             layout: {
                 navbar: {

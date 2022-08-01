@@ -7,14 +7,12 @@ import { environment } from "environments/environment";
 })
 export class PagesViewsService {
   constructor(private _httpClient: HttpClient) {}
-
   guardarEmail(datos) {
     return this._httpClient.post<any>(
       `${environment.apiUrl}/central/correosLanding/create/`,
       datos
     );
   }
-
   actualizarCorreo(datos) {
     return this._httpClient.post<any>(
       `${environment.apiUrl}/central/correosLanding/update/${datos.id}`,

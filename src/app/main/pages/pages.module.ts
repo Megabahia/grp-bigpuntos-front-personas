@@ -17,6 +17,8 @@ import {MensajeProductosFreeComponent} from './mensaje-productos-free/mensaje-pr
 import {PaginaEmpresaComponent} from './pagina-empresa/pagina-empresa.component';
 import {SimuladorComponent} from './simulador/simulador.component';
 import {TableSimuladorComponent} from './table-simulador/table-simulador.component';
+import { PreApprovedCreditComponent } from './pre-approved-credit/pre-approved-credit.component';
+import { CreditAprovedComponent } from './credit-aproved/credit-aproved.component';
 
 // routing
 const routes: Routes = [
@@ -50,6 +52,16 @@ const routes: Routes = [
         component: TableSimuladorComponent,
         data: {animation: 'misc'},
     },
+    {
+        path: 'preApprovedCredit',
+        component: PreApprovedCreditComponent,
+        data: {animation: 'misc'},
+    },
+    {
+        path: 'approvedCredit',
+        component: CreditAprovedComponent,
+        data: {animation: 'misc'},
+    },
 ];
 
 @NgModule({
@@ -60,6 +72,8 @@ const routes: Routes = [
         PaginaEmpresaComponent,
         SimuladorComponent,
         TableSimuladorComponent,
+        PreApprovedCreditComponent,
+        CreditAprovedComponent,
     ],
 
     imports: [
