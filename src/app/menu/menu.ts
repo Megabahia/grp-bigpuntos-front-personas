@@ -77,12 +77,20 @@ export const menu: CoreMenu[] = [
                         url: 'personas/supermonedas/mis-calificaciones'
                     },
                     {
-                        id: 'compartirPublicaciones',
-                        title: 'Compartir publicaciones',
+                        id: 'compartirPublicacionesFacebook',
+                        title: 'Compartir publicaciones en Facebook',
                         // translate: 'MENU.APPS.EMAIL',
                         type: 'item',
                         icon: 'circle',
-                        url: 'personas/supermonedas/compartir-publicaciones'
+                        url: 'personas/supermonedas/compartir-publicaciones-facebook'
+                    },
+                    {
+                        id: 'compartirPublicacionesInstagram',
+                        title: 'Compartir publicaciones en Instagram',
+                        // translate: 'MENU.APPS.EMAIL',
+                        type: 'item',
+                        icon: 'circle',
+                        url: 'personas/supermonedas/compartir-publicaciones-instagram'
                     },
                     {
                         id: 'monedasOtorgadas',

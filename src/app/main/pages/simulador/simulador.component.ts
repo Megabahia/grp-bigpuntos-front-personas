@@ -32,6 +32,11 @@ export class SimuladorComponent implements OnInit {
         private _router: Router,
         private paramService: ParametrizacionesService,
     ) {
+        if (localStorage.getItem('preApproved')) {
+            localStorage.removeItem('preApproved');
+        } else {
+            this.actionContinue();
+        }
         localStorage.setItem('simulador', 'ok');
         this.getSelectContet();
         this._unsubscribeAll = new Subject();

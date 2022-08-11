@@ -47,12 +47,12 @@
               <h6>Compartir</h6>
               <div class="btn-group" role="group" aria-label="Basic example">
                 <!-- <share-buttons theme="modern-light" show="11"></share-buttons> -->
-                <button type="button" shareButton="facebook" [url]="'https://www.facebook.com/'" class="btn btn-primary"
+                <button type="button" shareButton="facebook" [url]="publicacion.url" class="btn btn-primary"
                   (opened)="obtenerEvento($eventm,publicacion._id)" (closed)="obtenerEvento($event,publicacion._id)"><i
                     data-feather="facebook"></i></button>
-                <!--    <button type="button" shareButton="instagram" [url]="'https://www.instagram.com/'"
-                  class="btn btn-primary" (opened)="obtenerEvento($eventm,publicacion._id)"
-                  (closed)="obtenerEvento($event,publicacion._id)"><i data-feather="instagram"></i></button> -->
+                <button type="button" shareButton="whatsapp" [url]="publicacion.url" class="btn btn-primary"
+                        (opened)="obtenerEvento($eventm,publicacion._id)" (closed)="obtenerEvento($event,publicacion._id)"><i
+                    data-feather="message-circle"></i></button>
                 <!--  <button type="button" shareButton="twitter" [url]="'https://www.twitter.com/'"
                   class="btn btn-primary"><i data-feather="twitter"></i></button>
                 <button type="button" shareButton="whatsapp" class="btn btn-primary" data-target="#whatsapp"

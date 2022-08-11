@@ -7,6 +7,7 @@ import {ParametrizacionesService} from 'app/main/personas/servicios/parametrizac
 import {GanarSuperMoneda} from 'app/main/personas/models/supermonedas';
 import {BienvenidoService} from '../../bienvenido/bienvenido.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'app-compartir-publicaciones',
@@ -28,6 +29,7 @@ export class CompartirPublicacionesComponent implements OnInit {
     public superMonedasElec: GanarSuperMoneda;
     public empresaId;
     public mensaje = '';
+    public tipo: string;
 
     constructor(
         private modalService: NgbModal,
@@ -35,7 +37,8 @@ export class CompartirPublicacionesComponent implements OnInit {
         private paramService: ParametrizacionesService,
         private _bienvenidoService: BienvenidoService,
         private _compartirPublicacionesService: CompartirPublicacionesService,
-        private datePipe: DatePipe
+        private datePipe: DatePipe,
+        private route: ActivatedRoute
     ) {
         this._unsubscribeAll = new Subject();
         this.usuario = this._coreMenuService.grpPersonasUser;
@@ -67,6 +70,12 @@ export class CompartirPublicacionesComponent implements OnInit {
                     ' por publicación en Facebook';
             });
         this.obtenerIdEm();
+        this.route
+          .data
+          .subscribe(data => {
+              this.tipo = data.tipo;
+
+          });
     }
 
     cerrarModal() {
@@ -98,6 +107,7 @@ export class CompartirPublicacionesComponent implements OnInit {
         this._compartirPublicacionesService
             .obtenerPublicaciones({
                 user_id: this.usuario.id,
+                tipo: this.tipo,
             })
             .subscribe((info) => {
                 if (info.info.length === 0) {

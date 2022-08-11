@@ -121,5 +121,6 @@ export class PreApprovedCreditComponent implements OnInit {
         this._router.navigate([
             `/pages/simulador`,
         ]);
+        localStorage.setItem('preApproved', 'true');
     }
 }

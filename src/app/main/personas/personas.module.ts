@@ -122,9 +122,16 @@ const routes = [
                 // data: { animation: 'auth' }
             },
             {
-                path: 'compartir-publicaciones',
+                path: 'compartir-publicaciones-facebook',
                 component: CompartirPublicacionesComponent,
-                data: {roles: [Role.BigPuntos]},
+                data: {roles: [Role.BigPuntos], pantalla: 'facebook'},
+                canActivate: [AuthGuard]
+                // data: { animation: 'auth' }
+            },
+            {
+                path: 'compartir-publicaciones-instagram',
+                component: CompartirPublicacionesComponent,
+                data: {roles: [Role.BigPuntos], pantalla: 'instagram'},
                 canActivate: [AuthGuard]
                 // data: { animation: 'auth' }
             },
