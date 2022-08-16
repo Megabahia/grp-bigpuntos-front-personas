@@ -26,17 +26,17 @@ export class PreApprovedCreditComponent implements OnInit {
         private _preArpovedCreditService: PreArpovedCreditService,
         private modalService: NgbModal,
     ) {
-        // const ref = document.referrer;
-        // const host = document.location.host;
-        // if (ref !== 'https://credicompra.com/') {
-        //     if (host !== '209.145.61.41:4201') {
-        //         this._router.navigate([
-        //             `/grp/login`,
-        //         ]);
-        //         localStorage.clear();
-        //         return;
-        //     }
-        // }
+        const ref = document.referrer;
+        const host = document.location.host;
+        if (ref !== 'https://credicompra.com/') {
+            if (host !== '209.145.61.41:4201') {
+                this._router.navigate([
+                    `/grp/login`,
+                ]);
+                localStorage.clear();
+                return;
+            }
+        }
 
         this._coreConfigService.config = {
             layout: {
