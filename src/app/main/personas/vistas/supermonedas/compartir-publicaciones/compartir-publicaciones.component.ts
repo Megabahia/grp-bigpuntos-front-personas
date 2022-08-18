@@ -67,7 +67,7 @@ export class CompartirPublicacionesComponent implements OnInit {
                 this.superMonedasElec.descripcion =
                     'Gana ' +
                     this.ganarMonedasFacElec.valor +
-                    ' por publicación en Facebook';
+                    ' por publicación en ' + this.tipo;
             });
         this.obtenerIdEm();
         this.route

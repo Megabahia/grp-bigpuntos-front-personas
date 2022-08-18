@@ -85,12 +85,12 @@ export const menu: CoreMenu[] = [
                         url: 'personas/supermonedas/compartir-publicaciones-facebook'
                     },
                     {
-                        id: 'compartirPublicacionesInstagram',
-                        title: 'Compartir publicaciones en Instagram',
+                        id: 'compartirPublicacionesWhatsapp',
+                        title: 'Compartir publicaciones en Whatsapp',
                         // translate: 'MENU.APPS.EMAIL',
                         type: 'item',
                         icon: 'circle',
-                        url: 'personas/supermonedas/compartir-publicaciones-instagram'
+                        url: 'personas/supermonedas/compartir-publicaciones-whatsapp'
                     },
                     {
                         id: 'monedasOtorgadas',

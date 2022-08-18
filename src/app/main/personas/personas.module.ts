@@ -129,9 +129,9 @@ const routes = [
                 // data: { animation: 'auth' }
             },
             {
-                path: 'compartir-publicaciones-instagram',
+                path: 'compartir-publicaciones-whatsapp',
                 component: CompartirPublicacionesComponent,
-                data: {roles: [Role.BigPuntos], pantalla: 'instagram'},
+                data: {roles: [Role.BigPuntos], pantalla: 'whatsapp'},
                 canActivate: [AuthGuard]
                 // data: { animation: 'auth' }
             },
