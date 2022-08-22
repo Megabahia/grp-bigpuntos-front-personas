@@ -95,6 +95,7 @@ const appRoutes: Routes = [
             provider: new FacebookLoginProvider('489448599659628'),
           },
         ],
+
       } as SocialAuthServiceConfig,
     },
   ],
