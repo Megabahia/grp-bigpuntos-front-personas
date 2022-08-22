@@ -151,6 +151,7 @@ export class LoginComponent implements OnInit {
 
         this.logginSubs = await this.socialAuthService.authState.subscribe(
             (user) => {
+                console.log('User ', user);
                 this.socialUser = user;
                 this.isLoggedin = user != null;
                 this.loginForm.patchValue({
@@ -203,7 +204,7 @@ export class LoginComponent implements OnInit {
             })
             .subscribe(
                 (info) => {
-                    if (info.email == 'Ya existe usuarios con este email.') {
+                    if (info.email === 'Ya existe usuarios con este email.') {
                         this.login();
                     } else {
                         this.error = null;
