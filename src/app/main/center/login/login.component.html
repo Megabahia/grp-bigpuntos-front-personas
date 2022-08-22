@@ -120,3 +120,14 @@
     <button type="button" class="btn btn-light" (click)="cerrarModal()">Cerrar</button>
   </div>
 </ng-template>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId            : '489448599659628',
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v14.0'
+        });
+    };
+</script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
