@@ -26,7 +26,7 @@ export class MisPremiosComponent implements OnInit {
     public mensaje = '';
 
     public page = 1;
-    public pageSize: any = 10;
+    public pageSize: any = 4;
     public maxSize;
     public collectionSize;
     public loading = false;
