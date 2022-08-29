@@ -199,12 +199,12 @@ export class LoginComponent implements OnInit {
                 password: this.f.password.value,
                 roles: Role.BigPuntos,
                 email: this.f.email.value,
-                estado: 1,
+                estado: 2,
                 tipoUsuario: 'core',
             })
             .subscribe(
                 (info) => {
-                    if (info.email === 'Ya existe usuarios con este email.') {
+                    if (info.email[0] === 'Ya existe usuarios con este email.') {
                         this.login();
                     } else {
                         this.error = null;
