@@ -151,7 +151,7 @@ export class LoginComponent implements OnInit {
 
         this.logginSubs = await this.socialAuthService.authState.subscribe(
             (user) => {
-                // console.log('User ', user);
+                console.log('User ', user);
                 this.socialUser = user;
                 this.isLoggedin = user != null;
                 this.loginForm.patchValue({
