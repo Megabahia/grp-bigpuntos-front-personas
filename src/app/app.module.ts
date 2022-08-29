@@ -92,7 +92,7 @@ const appRoutes: Routes = [
         providers: [
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('489448599659628'),
+            provider: new FacebookLoginProvider('1956388501418254'),
           },
         ],
 
