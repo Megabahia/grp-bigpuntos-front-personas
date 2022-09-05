@@ -23,7 +23,7 @@ export class MisFacturasComponent implements OnInit {
     @ViewChild('mensajeModal') mensajeModal;
     sizeFile;
     public page = 1;
-    public page_size: any = 4;
+    public page_size: any = 2;
     public maxSize;
     public collectionSize;
     public usuario;

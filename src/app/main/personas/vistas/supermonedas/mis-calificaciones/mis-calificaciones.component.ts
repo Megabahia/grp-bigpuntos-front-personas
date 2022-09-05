@@ -22,7 +22,7 @@ export class MisCalificacionesComponent implements OnInit {
     public ganarMonedas;
     public superMonedas: GanarSuperMoneda;
     public page = 1;
-    public page_size: any = 4;
+    public page_size: any = 2;
     public maxSize;
     public collectionSize;
     public submittedFactura = false;

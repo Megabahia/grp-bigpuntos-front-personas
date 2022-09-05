@@ -30,7 +30,7 @@ export class ListadoCreditosPreAprobadosComponent implements OnInit {
   @ViewChild('whatsapp') whatsapp;
   @ViewChild(NgbPagination) paginator: NgbPagination;
   public page = 1;
-  public page_size: any = 4;
+  public page_size: any = 3;
   public maxSize;
   public collectionSize;
   public error;
