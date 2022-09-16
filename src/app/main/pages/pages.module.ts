@@ -19,6 +19,9 @@ import {SimuladorComponent} from './simulador/simulador.component';
 import {TableSimuladorComponent} from './table-simulador/table-simulador.component';
 import { PreApprovedCreditComponent } from './pre-approved-credit/pre-approved-credit.component';
 import { CreditAprovedComponent } from './credit-aproved/credit-aproved.component';
+import { CreditRequestComponent } from './credit-request/credit-request.component';
+import { SimulatorCrediCompraComponent } from './simulator-credi-compra/simulator-credi-compra.component';
+import { CreditRequirementsComponent } from './credit-requirements/credit-requirements.component';
 
 // routing
 const routes: Routes = [
@@ -62,6 +65,21 @@ const routes: Routes = [
         component: CreditAprovedComponent,
         data: {animation: 'misc'},
     },
+    {
+        path: 'solicitud-credito',
+        component: CreditRequestComponent,
+        data: {animation: 'misc'},
+    },
+    {
+        path: 'simulador-de-credito',
+        component: SimulatorCrediCompraComponent,
+        data: {animation: 'misc'},
+    },
+    {
+        path: 'requisitos-de-credito',
+        component: SimulatorCrediCompraComponent,
+        data: {animation: 'misc'},
+    },
 ];
 
 @NgModule({
@@ -74,6 +92,9 @@ const routes: Routes = [
         TableSimuladorComponent,
         PreApprovedCreditComponent,
         CreditAprovedComponent,
+        CreditRequestComponent,
+        SimulatorCrediCompraComponent,
+        CreditRequirementsComponent,
     ],
 
     imports: [
