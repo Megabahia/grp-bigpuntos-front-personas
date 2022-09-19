@@ -33,7 +33,7 @@ export class CreditRequirementsComponent implements OnInit {
     private _coreConfigService: CoreConfigService,
     private paramService: ParametrizacionesService,
   ) {
-    if (localStorage.getItem('pagina') === 'credicompra') {
+    if (localStorage.getItem('pagina') !== 'credicompra') {
       this._router.navigate([
         `/grp/login`,
       ]);
