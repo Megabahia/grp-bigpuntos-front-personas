@@ -28,15 +28,15 @@ export class PreApprovedCreditComponent implements OnInit {
     ) {
         const ref = document.referrer;
         const host = document.location.host;
-        // if (ref !== 'https://credicompra.com/') {
-        //     if (host !== '209.145.61.41:4201') {
-        //         this._router.navigate([
-        //             `/grp/login`,
-        //         ]);
-        //         localStorage.clear();
-        //         return;
-        //     }
-        // }
+        if (ref !== 'https://credicompra.com/') {
+            if (host !== '209.145.61.41:4201') {
+                this._router.navigate([
+                    `/grp/login`,
+                ]);
+                localStorage.clear();
+                return;
+            }
+        }
 
         this._coreConfigService.config = {
             layout: {
@@ -66,8 +66,8 @@ export class PreApprovedCreditComponent implements OnInit {
     sentCode() {
         this.submittedSimulador = true;
         if (this.envioForm.invalid) {
-            // this.mensaje = 'Datos Incorrectos';
-            // this.abrirModal(this.mensajeModal);
+            this.mensaje = 'Datos Incorrectos';
+            this.abrirModal(this.mensajeModal);
             return;
         }
         const code = new Decimal(this.envioForm.value.code).toNumber();

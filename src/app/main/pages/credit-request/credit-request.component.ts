@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {CoreConfigService} from '../../../../@core/services/config.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-credit-request',
   templateUrl: './credit-request.component.html',
-  styleUrls: ['./credit-request.component.scss']
+  styleUrls: ['../simulador/simulador.component.scss']
 })
 export class CreditRequestComponent implements OnInit {
 
   constructor(
+    private _router: Router,
       private _coreConfigService: CoreConfigService,
   ) {
     this._coreConfigService.config = {
@@ -26,6 +28,19 @@ export class CreditRequestComponent implements OnInit {
         enableLocalStorage: false,
       },
     };
+    // Verificar dominio pagina
+    const ref = document.referrer;
+    const host = document.location.host;
+    if (ref !== 'https://credicompra.com/') {
+      if (host !== '209.145.61.41:4201') {
+        this._router.navigate([
+          `/grp/login`,
+        ]);
+        localStorage.clear();
+        return;
+      }
+    }
+    localStorage.setItem('pagina', 'credicompra');
   }
 
   ngOnInit(): void {

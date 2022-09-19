@@ -1,26 +1,64 @@
 import {Component, OnInit} from '@angular/core';
 import Decimal from 'decimal.js';
 import {ParametrizacionesService} from '../../personas/servicios/parametrizaciones.service';
+import {CoreConfigService} from '../../../../@core/services/config.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-credit-requirements',
   templateUrl: './credit-requirements.component.html',
-  styleUrls: ['./credit-requirements.component.scss']
+  styleUrls: ['../simulador/simulador.component.scss']
 })
 export class CreditRequirementsComponent implements OnInit {
 
   public coutaMensual;
   public montoCreditoFinal;
-  public requisitos;
-  public descripcion;
+  public requisitos = {
+    valor: '',
+    config: [],
+    nombre: '',
+    _id: ''
+  };
+  public descripcion = {
+    valor: '',
+    config: [],
+    nombre: '',
+    _id: ''
+  };
+  public tipoPersona;
 
 
   constructor(
+    private _router: Router,
+    private _coreConfigService: CoreConfigService,
     private paramService: ParametrizacionesService,
   ) {
+    if (localStorage.getItem('pagina') === 'credicompra') {
+      this._router.navigate([
+        `/grp/login`,
+      ]);
+      localStorage.clear();
+      return;
+    }
+    this._coreConfigService.config = {
+      layout: {
+        navbar: {
+          hidden: true,
+        },
+        footer: {
+          hidden: true,
+        },
+        menu: {
+          hidden: true,
+        },
+        customizer: false,
+        enableLocalStorage: false,
+      },
+    };
+
     this.coutaMensual = localStorage.getItem('coutaMensual');
     this.montoCreditoFinal = localStorage.getItem('montoCreditoFinal');
-    const tipoPersona = localStorage.getItem('tipoPersona') === 'Empleado' ? 'REQUISITOS_EMPLEADO_CREDICOMPRA' : 'REQUISITOS_NEGOCIOS_CREDICOMPRA';
+    this.tipoPersona = localStorage.getItem('tipoPersona') === 'Empleado' ? 'REQUISITOS_EMPLEADO_CREDICOMPRA' : 'REQUISITOS_NEGOCIOS_CREDICOMPRA';
     this.getInfo();
   }
 
@@ -28,12 +66,21 @@ export class CreditRequirementsComponent implements OnInit {
   }
 
   getInfo() {
-    this.paramService.obtenerListaPadresSinToken('REQUISITOS_NEGOCIOS_CREDICOMPRA').subscribe((info) => {
-      this.requisitos = info;
+    this.paramService.obtenerListaPadresSinToken(this.tipoPersona).subscribe((info) => {
+      this.requisitos = info[0];
+      this.requisitos.config = this.requisitos.config.slice(1, -1).toString().split(',').map(item => {
+        return item.replace(/'/g, '');
+      });
     });
     this.paramService.obtenerListaPadresSinToken('DESCRIPCION_REQUISITOS_CREDICOMPRA').subscribe((info) => {
-      this.descripcion = info;
+      this.descripcion = info[0];
+      this.descripcion.valor = this.descripcion.valor.replace('${{montoCreditoFinal}}', this.montoCreditoFinal);
+      this.descripcion.valor = this.descripcion.valor.replace('${{coutaMensual}}', this.coutaMensual);
     });
+  }
+
+  cancelar() {
+    localStorage.clear();
   }
 
 }

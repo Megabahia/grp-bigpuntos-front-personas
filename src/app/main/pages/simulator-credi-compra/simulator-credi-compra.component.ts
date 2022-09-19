@@ -30,6 +30,13 @@ export class SimulatorCrediCompraComponent implements OnInit {
     private _coreConfigService: CoreConfigService,
     private paramService: ParametrizacionesService,
   ) {
+    if (localStorage.getItem('pagina') === 'credicompra') {
+      this._router.navigate([
+        `/grp/login`,
+      ]);
+      localStorage.clear();
+      return;
+    }
     this._coreConfigService.config = {
       layout: {
         navbar: {
@@ -90,9 +97,9 @@ export class SimulatorCrediCompraComponent implements OnInit {
 
   calcular() {
     this.submittedSimulador = true;
-    // if (this.infoCreditForm.invalid) {
-    //   return;
-    // }
+    if (this.infoCreditForm.invalid) {
+      return;
+    }
     // Formula para el calculo interes
     const ingresosMensuales = new Decimal(this.infoCreditForm.get('ingresosMensuales').value);
     const ingresosConyuge = new Decimal(this.infoCreditForm.get('ingresosConyuge').value);
@@ -113,7 +120,7 @@ export class SimulatorCrediCompraComponent implements OnInit {
     localStorage.setItem('coutaMensual', coutaMensual.toString());
     localStorage.setItem('montoCreditoFinal', montoCreditoFinal.toString());
     localStorage.setItem('tipoPersona', this.infoCreditForm.value['tipoPersona']);
-    this._router.navigate(['/login']);
+    this._router.navigate(['/pages/requisitos-de-credito']);
   }
 
 }
