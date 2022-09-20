@@ -1,0 +1,561 @@
+<div class="content-wrapper">
+
+    <div class="content-body">
+        <div id="user-profile">
+            <!-- profile header -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card p-2">
+                        <h4>Para solicitud de crédito por favor completa la siguiente información</h4>
+                    </div>
+                </div>
+            </div>
+            <!--/ profile header -->
+
+            <!-- profile info section -->
+            <section>
+                <div class="tab-content">
+
+
+                    <div class="tab-pane active" id="tab1" aria-labelledby="account-tab" role="tabpanel">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <form [formGroup]="personaForm">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Fecha de creación de solicitud</label>
+                                                <input type="text" class="form-control" formControlName="fechaSolicitud"
+                                                       disabled/>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Nombres</label>
+                                                <input type="text" formControlName="nombres" class="form-control">
+                                                <div *ngIf="submittedPersona && persForm.nombres.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="persForm.nombres.errors.required">Nombres son
+                                                        requeridos
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Apellidos</label>
+                                                <input type="text" formControlName="apellidos" class="form-control">
+                                                <div *ngIf="submittedPersona && persForm.apellidos.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="persForm.apellidos.errors.required">Apellidos son
+                                                        requeridos
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Fecha de nacimiento</label>
+                                                <ng2-flatpickr [setDate]="fecha" formControlName="fechaNacimiento"
+                                                               [config]="startDateOptions"
+                                                               ></ng2-flatpickr>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Número de cédula</label>
+                                                <input type="text" formControlName="identificacion"
+                                                       class="form-control">
+                                                <div *ngIf="submittedPersona && persForm.identificacion.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="persForm.identificacion.errors.required">Número de
+                                                        cédula es requerida
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Nivel de Instrucción</label>
+                                                <select formControlName="nivelInstruccion" class="form-control"
+                                                        id="status">
+                                                    <option value="">- Seleccione -</option>
+                                                    <option *ngFor="let generoOp of tipoNivelInstrucciones"
+                                                            value="{{generoOp.valor}}">
+                                                        {{generoOp.nombre}}</option>
+
+                                                </select>
+                                                <div *ngIf="submittedPersona && persForm.nivelInstruccion.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="persForm.nivelInstruccion.errors.required">Nivel de
+                                                        Instrucción es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Tipo de vivienda</label>
+                                                <select formControlName="tipoVivienda" class="form-control" id="status">
+                                                    <option value="">- Seleccione -</option>
+                                                    <option *ngFor="let generoOp of tipoViviendas"
+                                                            value="{{generoOp.valor}}">
+                                                        {{generoOp.nombre}}</option>
+
+                                                </select>
+                                                <div *ngIf="submittedPersona && persForm.tipoVivienda.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="persForm.tipoVivienda.errors.required">Tipo de vivienda
+                                                        es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Nombre del dueño</label>
+                                                <input formControlName="nombreDueno" type="text" class="form-control">
+                                                <div *ngIf="submittedPersona && persForm.nombreDueno.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="persForm.nombreDueno.errors.required">Nombre del dueño
+                                                        es
+                                                        requerida
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Direccioón del domicilio</label>
+                                                <input formControlName="direccionDomicilio" type="text"
+                                                       class="form-control">
+                                                <div *ngIf="submittedPersona && persForm.direccionDomicilio.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="persForm.direccionDomicilio.errors.required">Direccioón
+                                                        del domicilio
+                                                        es requerida
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Referencia del domicilio</label>
+                                                <input formControlName="referenciaDomicilio" type="text"
+                                                       class="form-control">
+                                                <div *ngIf="submittedPersona && persForm.referenciaDomicilio.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="persForm.referenciaDomicilio.errors.required">Referencia
+                                                        del domicilio
+                                                        es requerida
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="row">
+                                    <div class="col-md-12 my-1">
+                                        <h4>Ocupación del solicitante</h4>
+                                    </div>
+                                </div>
+                                <form [formGroup]="ocupacionSolicitanteForm">
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Nombre del negocio o empresa en la que
+                                                    trabaja</label>
+                                                <input type="text" class="form-control" formControlName="nombreNegocio">
+                                                <div *ngIf="submittedPersona && ocuSolicitanteForm.nombreNegocio.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="ocuSolicitanteForm.nombreNegocio.errors.required">
+                                                        Dirección es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Dirección del negocio o empresa en la que
+                                                    trabaja</label>
+                                                <input type="text" class="form-control"
+                                                       formControlName="direccionNegocio">
+                                                <div *ngIf="submittedPersona && ocuSolicitanteForm.direccionNegocio.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="ocuSolicitanteForm.direccionNegocio.errors.required">
+                                                        Dirección del negocio o empresa en la que trabaja es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Tiempo de trabajo en el negocio o empresa en la
+                                                    que trabaja (años)</label>
+                                                <input type="text" class="form-control"
+                                                       formControlName="tiempoTrabajo">
+                                                <div *ngIf="submittedPersona && ocuSolicitanteForm.tiempoTrabajo.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="ocuSolicitanteForm.tiempoTrabajo.errors.required">
+                                                        Tiempo de trabajo en el negocio o empresa en la que trabaja es
+                                                        requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Cargo que desempeña</label>
+                                                <input type="text" class="form-control" formControlName="cargoDesempeno">
+                                                <div *ngIf="submittedPersona && ocuSolicitanteForm.cargoDesempeno.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="ocuSolicitanteForm.cargoDesempeno.errors.required">Cargo
+                                                        que desempeña
+                                                        es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Sueldo que percibe</label>
+                                                <input type="text" class="form-control" formControlName="sueldoPercibe">
+                                                <div *ngIf="submittedPersona && ocuSolicitanteForm.sueldoPercibe.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="ocuSolicitanteForm.sueldoPercibe.errors.required">Correo
+                                                        es
+                                                        requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                                <div class="row">
+                                    <div class="col-md-12 my-1">
+                                        <h4>REFERENCIAS DEL SOLICITANTE</h4>
+                                    </div>
+                                </div>
+                                <form [formGroup]="referenciasSolicitanteForm">
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Referencia familiar</label>
+                                                <input type="text" class="form-control"
+                                                       formControlName="referenciaSolicitante">
+                                                <div *ngIf="submittedPersona && refeSolicitanteForm.referenciaSolicitante.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="refeSolicitanteForm.referenciaSolicitante.errors.required">
+                                                        Referencia familiar es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Nombre</label>
+                                                <input type="text" class="form-control"
+                                                       formControlName="nombre">
+                                                <div *ngIf="submittedPersona && refeSolicitanteForm.nombre.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="refeSolicitanteForm.nombre.errors.required">Nombre es
+                                                        requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Apellido</label>
+                                                <input type="text" class="form-control" formControlName="apellido">
+                                                <div *ngIf="submittedPersona && refeSolicitanteForm.apellido.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="refeSolicitanteForm.apellido.errors.required">Apellido
+                                                        es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Dirección</label>
+                                                <input type="text" class="form-control" formControlName="direccion">
+                                                <div *ngIf="submittedPersona && refeSolicitanteForm.direccion.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="refeSolicitanteForm.direccion.errors.required">Dirección
+                                                        es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Teléfono que percibe</label>
+                                                <input type="text" class="form-control" formControlName="telefono">
+                                                <div *ngIf="submittedPersona && refeSolicitanteForm.telefono.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="refeSolicitanteForm.telefono.errors.required">Teléfono
+                                                        es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                                <div class="row">
+                                    <div class="col-md-12 my-1">
+                                        <h4>INGRESOS DEL SOLICITANTE</h4>
+                                    </div>
+                                </div>
+                                <form [formGroup]="ingresosSolicitanteForm">
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Sueldo mensual</label>
+                                                <input type="text" class="form-control" formControlName="sueldoMensual">
+                                                <div *ngIf="submittedPersona && ingreSolicitanteForm.sueldoMensual.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="ingreSolicitanteForm.sueldoMensual.errors.required">
+                                                        Sueldo mensual es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Sueldo cónyuge</label>
+                                                <input type="text" class="form-control"
+                                                       formControlName="sueldoConyuge">
+                                                <div *ngIf="submittedPersona && ingreSolicitanteForm.sueldoConyuge.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="ingreSolicitanteForm.sueldoConyuge.errors.required">
+                                                        Sueldo cónyuge es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Otros ingresos</label>
+                                                <input type="text" class="form-control" formControlName="otrosIngresos">
+                                                <div *ngIf="submittedPersona && ingreSolicitanteForm.otrosIngresos.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="ingreSolicitanteForm.otrosIngresos.errors.required">
+                                                        Otros ingresos es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Especifique otros ingresos (ejemplo: vendo
+                                                    artículos de revista en mi tiempo libre, etc.)</label>
+                                                <input type="text" class="form-control" formControlName="descripcion">
+                                                <div *ngIf="submittedPersona && ingreSolicitanteForm.descripcion.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="ingreSolicitanteForm.descripcion.errors.required">
+                                                        Especifique otros ingresos es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                                <div class="row">
+                                    <div class="col-md-12 my-1">
+                                        <h4>GASTOS DEL SOLICITANTE</h4>
+                                    </div>
+                                </div>
+                                <form [formGroup]="gastosSolicitanteForm">
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Alimentación</label>
+                                                <input type="text" class="form-control" formControlName="alimentacion">
+                                                <div *ngIf="submittedPersona && gasSolicitanteForm.alimentacion.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="gasSolicitanteForm.alimentacion.errors.required">
+                                                        Alimentación es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Arriendo (ingrese 0 si es propia)</label>
+                                                <input type="text" class="form-control"
+                                                       formControlName="arriendo">
+                                                <div *ngIf="submittedPersona && gasSolicitanteForm.arriendo.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="gasSolicitanteForm.arriendo.errors.required">
+                                                        Arriendo es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Vestido</label>
+                                                <input type="text" class="form-control" formControlName="vestido">
+                                                <div *ngIf="submittedPersona && gasSolicitanteForm.vestido.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="gasSolicitanteForm.vestido.errors.required">
+                                                        Vestido es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Transporte</label>
+                                                <input type="text" class="form-control" formControlName="trasporte">
+                                                <div *ngIf="submittedPersona && gasSolicitanteForm.trasporte.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="gasSolicitanteForm.trasporte.errors.required">
+                                                        Transporte es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Servicios básicos</label>
+                                                <input type="text" class="form-control"
+                                                       formControlName="serviciosBasicos">
+                                                <div *ngIf="submittedPersona && gasSolicitanteForm.serviciosBasicos.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="gasSolicitanteForm.serviciosBasicos.errors.required">
+                                                        Servicios básicos es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Medicina básicos</label>
+                                                <input type="text" class="form-control" formControlName="medicina">
+                                                <div *ngIf="submittedPersona && gasSolicitanteForm.medicina.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="gasSolicitanteForm.medicina.errors.required">
+                                                        Medicina es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Educación</label>
+                                                <input type="text" class="form-control" formControlName="educacion">
+                                                <div *ngIf="submittedPersona && gasSolicitanteForm.educacion.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="gasSolicitanteForm.educacion.errors.required">
+                                                        Educación es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Otros préstamos (ingrese el valor mensual)</label>
+                                                <input type="text" class="form-control"
+                                                       formControlName="otrosPrestamos">
+                                                <div *ngIf="submittedPersona && gasSolicitanteForm.otrosPrestamos.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="gasSolicitanteForm.otrosPrestamos.errors.required">Otros
+                                                        préstamos es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Otros gastos</label>
+                                                <input type="text" class="form-control" formControlName="otrosGastos">
+                                                <div *ngIf="submittedPersona && gasSolicitanteForm.otrosGastos.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="gasSolicitanteForm.otrosGastos.errors.required">Otros
+                                                        gastos es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="username">Especifique otros gastos ejemplo: colegiaturas
+                                                    divididas, cuidados a terceras personas, etc.)
+                                                </label>
+                                                <input type="text" class="form-control" formControlName="descripcion">
+                                                <div *ngIf="submittedPersona && gasSolicitanteForm.descripcion.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="gasSolicitanteForm.descripcion.errors.required">
+                                                        Especifique otros gastos es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                                <div class="row">
+                                    <div class="col-12 d-flex flex-sm-row flex-column mt-2">
+                                        <a href="javascript:void(0)"
+                                           class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-float waves-light"
+                                           (click)="continuar()">Continuar</a>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </section>
+            <!--/ profile info section -->
+        </div>
+    </div>
+</div>

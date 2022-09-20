@@ -8,6 +8,7 @@ import { FlatpickrOptions } from 'ng2-flatpickr';
 import moment from 'moment';
 import { CoreConfigService } from '../../../../../../@core/services/config.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import {ParametrizacionesService} from '../../../servicios/parametrizaciones.service';
 
 @Component({
     selector: 'app-video-explicativo-aut',
@@ -38,6 +39,7 @@ export class VideoExplicativoAutComponent implements OnInit {
     // Private
     private _unsubscribeAll: Subject<any>;
     public video;
+    public requisitos;
 
     /**
      * Constructor
@@ -49,7 +51,8 @@ export class VideoExplicativoAutComponent implements OnInit {
         private sanitizer: DomSanitizer,
         private _router: Router,
         private _formBuilder: FormBuilder,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private paramService: ParametrizacionesService,
     ) {
         localStorage.clear();
         this.video = {
@@ -71,6 +74,15 @@ export class VideoExplicativoAutComponent implements OnInit {
                 enableLocalStorage: false,
             },
         };
+        const cuotaMensual = localStorage.getItem('coutaMensual');
+        const montoCreditoFinal = localStorage.getItem('montoCreditoFinal');
+        this.paramService.obtenerListaPadresSinToken('DESCRIPCION_VIDEO_INFORMATIVO').subscribe((info) => {
+            this.requisitos = info[0];
+            this.requisitos.config = this.requisitos.config.slice(1, -1).toString().split(',').map(item => {
+                return item.replace(/'/g, '').replace('${{montoCreditoFinal}}', montoCreditoFinal)
+                  .replace('${{cuotaMensual}}', cuotaMensual);
+            });
+        });
     }
 
     continuar() {

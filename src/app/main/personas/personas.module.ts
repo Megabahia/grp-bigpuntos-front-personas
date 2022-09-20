@@ -54,6 +54,8 @@ import { DondeCanjearComponent } from './vistas/donde-canjear/donde-canjear.comp
 import { ReclamosRequerimientosComponent } from './vistas/reclamos-requerimientos/reclamos-requerimientos.component';
 
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { SolicitudCreditoComponent } from './vistas/creditos-autonomos/solicitud-credito/solicitud-credito.component';
+import { ResumenRequisitosCreditoComponent } from './vistas/creditos-autonomos/resumen-requisitos-credito/resumen-requisitos-credito.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -283,6 +285,8 @@ const routes = [
         ComoFuncionaComponent,
         DondeCanjearComponent,
         ReclamosRequerimientosComponent,
+        SolicitudCreditoComponent,
+        ResumenRequisitosCreditoComponent,
     ],
     imports: [
         CoreCommonModule,
