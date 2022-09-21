@@ -40,7 +40,7 @@ export class CreditRequestComponent implements OnInit {
         return;
       }
     }
-    localStorage.setItem('pagina', 'credicompra');
+    localStorage.setItem('pagina', ref);
   }
 
   ngOnInit(): void {

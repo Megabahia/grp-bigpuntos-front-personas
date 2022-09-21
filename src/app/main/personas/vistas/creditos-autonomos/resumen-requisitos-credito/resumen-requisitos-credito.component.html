@@ -14,15 +14,15 @@
                         <h3>{{requisitos.valor}}</h3>
                     </div>
                     <div class="row mx-2 justify-content-center align-items-center py-2">
+                        <div class="col-12">
+                            <button type="submit" rippleEffect class="btn btn-primary mr-1" routerLink="/" (click)="guardarCredito()">Whatsapp
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row mx-2 justify-content-center align-items-center py-2">
                         <ul class="list-group">
                             <li class="list-group-item" *ngFor="let item of requisitos.config">{{item}}</li>
                         </ul>
-                    </div>
-                    <div class="row mx-2 justify-content-center align-items-center py-2">
-                        <div class="col-12">
-                            <button type="submit" rippleEffect class="btn btn-primary mr-1" routerLink="/" >Whatsapp
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>

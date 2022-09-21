@@ -150,8 +150,6 @@ export class SolicitudCreditoComponent implements OnInit {
       .subscribe((info) => {
         this.estado.emit(3);
       });
-    console.log('holaaa');
-
   }
 
 }
