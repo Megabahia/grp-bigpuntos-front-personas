@@ -121,6 +121,10 @@ export class SolicitudCreditoComponent implements OnInit {
     this.gastosSolicitanteForm.patchValue(JSON.parse(this.usuario.gastosSolicitante));
   }
 
+  obtenerFecha() {
+    this.personaForm.controls['date'].setValue(this.fecha[0]);
+  }
+
   obtenerListas() {
     this.paramService.obtenerListaPadres('NIVEL_INSTRUCCION').subscribe((info) => {
       this.tipoNivelInstrucciones = info;
