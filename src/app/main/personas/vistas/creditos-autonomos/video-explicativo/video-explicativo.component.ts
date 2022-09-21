@@ -54,7 +54,7 @@ export class VideoExplicativoAutComponent implements OnInit {
         private modalService: NgbModal,
         private paramService: ParametrizacionesService,
     ) {
-        localStorage.clear();
+        localStorage.removeItem('simulador');
         this.video = {
             url: 'https://www.youtube.com/embed/aK52RxV2XuI'
         };
