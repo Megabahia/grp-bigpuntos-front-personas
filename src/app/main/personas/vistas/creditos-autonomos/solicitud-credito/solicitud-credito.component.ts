@@ -122,7 +122,10 @@ export class SolicitudCreditoComponent implements OnInit {
   }
 
   obtenerFecha() {
-    this.personaForm.controls['date'].setValue(this.fecha[0]);
+    console.log('entro');
+    console.log(moment(this.persForm.fechaNacimiento.value[0]).format('YYYY-MM-DD'));
+    this.personaForm.get('fechaNacimiento').setValue(moment(this.persForm.fechaNacimiento.value[0]).format('YYYY-MM-DD'));
+    console.log(this.personaForm.value);
   }
 
   obtenerListas() {

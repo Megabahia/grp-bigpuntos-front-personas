@@ -62,6 +62,7 @@
                                                 <label for="username">Fecha de nacimiento</label>
                                                 <ng2-flatpickr [setDate]="fecha" formControlName="fechaNacimiento"
                                                                [config]="startDateOptions"
+                                                               (input)="obtenerFecha()"
                                                                ></ng2-flatpickr>
                                             </div>
                                         </div>
