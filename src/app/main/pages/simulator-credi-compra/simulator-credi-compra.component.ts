@@ -91,6 +91,7 @@ export class SimulatorCrediCompraComponent implements OnInit {
     } else {
       this.infoCreditForm.get('ingresosConyuge').setValidators(null);
       this.infoCreditForm.get('ingresosConyuge').setErrors(null);
+      this.infoCreditForm.get('ingresosConyuge').setValue(0);
       this.estadoCivil = false;
     }
   }
