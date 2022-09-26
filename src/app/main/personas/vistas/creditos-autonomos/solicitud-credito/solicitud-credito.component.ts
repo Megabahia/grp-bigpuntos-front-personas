@@ -81,6 +81,7 @@ export class SolicitudCreditoComponent implements OnInit {
       nombreDueno: [this.usuario.nombreDueno, Validators.required],
       direccionDomicilio: [this.usuario.direccionDomicilio, Validators.required],
       referenciaDomicilio: [this.usuario.referenciaDomicilio, Validators.required],
+      estadoCivil: [this.usuario.estadoCivil, Validators.required],
     });
     this.ocupacionSolicitanteForm = this._formBuilder.group({
       nombreNegocio: ['', Validators.required],
