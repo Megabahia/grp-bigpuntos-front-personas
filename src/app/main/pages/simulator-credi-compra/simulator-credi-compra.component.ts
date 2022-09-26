@@ -107,7 +107,7 @@ export class SimulatorCrediCompraComponent implements OnInit {
     const gastosMensuales = new Decimal(this.infoCreditForm.get('gastosMensuales').value);
     const ingresoDisponible = ingresosMensuales.add(ingresosConyuge.mul(this.porcentajeConyuge)).sub(gastosMensuales).floor().toNumber();
     const capacidadPago = new Decimal(ingresoDisponible).mul(this.porcentajeCapacidaPago).floor().toNumber();
-    const tasaInteresMensual = new Decimal(this.tasaInteres).sub(this.tiempo).floor().toNumber();
+    const tasaInteresMensual = new Decimal(this.tasaInteres).div(this.tiempo).floor().toNumber();
     const coutaMensual = new Decimal(capacidadPago).mul(tasaInteresMensual).floor().toNumber();
     const montoCredito = new Decimal(coutaMensual).mul(this.tiempo).floor().toNumber();
     let montoCreditoFinal = 0;
