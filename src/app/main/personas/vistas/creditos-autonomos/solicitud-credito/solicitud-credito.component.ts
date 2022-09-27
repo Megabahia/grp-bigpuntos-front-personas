@@ -81,7 +81,7 @@ export class SolicitudCreditoComponent implements OnInit {
       nombreDueno: [this.usuario.nombreDueno, Validators.required],
       direccionDomicilio: [this.usuario.direccionDomicilio, Validators.required],
       referenciaDomicilio: [this.usuario.referenciaDomicilio, Validators.required],
-      estadoCivil: [this.usuario.estadoCivil, Validators.required],
+      estadoCivil: [this.usuario.estadoCivil],
     });
     this.ocupacionSolicitanteForm = this._formBuilder.group({
       nombreNegocio: ['', Validators.required],
@@ -140,7 +140,7 @@ export class SolicitudCreditoComponent implements OnInit {
 
   continuar() {
     this.submittedPersona = true;
-
+    console.log(this.personaForm.invalid);
     if (this.personaForm.invalid) {
       return;
     }
