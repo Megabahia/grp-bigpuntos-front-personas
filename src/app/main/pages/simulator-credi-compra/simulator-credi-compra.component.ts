@@ -19,6 +19,8 @@ export class SimulatorCrediCompraComponent implements OnInit {
   public porcentajeCapacidaPago = 0.80;
   public tasaInteres = 17;
   public tiempo = 12;
+  public montoMaximo = 2500;
+  public montoMinimo = 500;
 
   public submittedSimulador = false;
   public estadoCivil = false;
@@ -80,6 +82,28 @@ export class SimulatorCrediCompraComponent implements OnInit {
     this.paramService.obtenerListaPadresSinToken('ESTADO_CIVIL').subscribe((info) => {
       this.listEstadoCivil = info;
     });
+    this.paramService.obtenerListaPadresSinToken('VALORES_CALCULAR_CREDITO_CREDICOMPRA').subscribe((info) => {
+      info.map(item => {
+        if (item.nombre === 'PORCENTAJE_CONYUGE') {
+          this.porcentajeConyuge = new Decimal(item.valor).div(100).toNumber();
+        }
+        if (item.nombre === 'PORCENTAJE_CAPACIDAD_PAGO') {
+          this.porcentajeCapacidaPago = new Decimal(item.valor).div(100).toNumber();
+        }
+        if (item.nombre === 'TASA_INTERES') {
+          this.tasaInteres = item.valor;
+        }
+        if (item.nombre === 'TIEMPO_PLAZO') {
+          this.tiempo = item.valor;
+        }
+        if (item.nombre === 'MONTO_MAXIMO') {
+          this.montoMaximo = item.valor;
+        }
+        if (item.nombre === 'MONTO_MINIMO') {
+          this.montoMinimo = item.valor;
+        }
+      });
+    });
   }
 
   verificarEstadoCivil() {
@@ -111,10 +135,10 @@ export class SimulatorCrediCompraComponent implements OnInit {
     const coutaMensual = new Decimal(capacidadPago).mul(tasaInteresMensual).floor().toNumber();
     const montoCredito = new Decimal(coutaMensual).mul(this.tiempo).floor().toNumber();
     let montoCreditoFinal = 0;
-    if (montoCredito >= 2500) {
-      montoCreditoFinal = 2500;
-    } else if (montoCredito <= 500) {
-      montoCreditoFinal = 500;
+    if (montoCredito >= this.montoMaximo) {
+      montoCreditoFinal = this.montoMaximo;
+    } else if (montoCredito <= this.montoMinimo) {
+      montoCreditoFinal = this.montoMinimo;
     } else {
       montoCreditoFinal = montoCredito;
     }
