@@ -52,11 +52,12 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
       empresaComercial_id: '',
       empresaIfis_id: '',
       estado: 'Nuevo',
-      monto: 0,
-      plazo: 0,
+      monto: this.montoCreditoFinal,
+      cuota: this.coutaMensual,
+      plazo: 12,
       user_id: '',
       canal: 'Autonomo',
-      tipoCredito: 'Autonomo',
+      tipoCredito: this.tipoPersona === 'Empleado' ? 'Empleado' : 'Autonomo',
       concepto: 'Autonomo',
       nombres: '',
       apellidos: '',
@@ -88,6 +89,7 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
     this.solicitarCredito.empresaComercial_id = localStorage.getItem('pagina');
     this._creditosAutonomosService.crearCredito(this.solicitarCredito).subscribe((info) => {
       console.log('se creo credito');
+      localStorage.clear();
     });
   }
 
