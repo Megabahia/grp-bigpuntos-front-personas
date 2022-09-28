@@ -136,6 +136,7 @@ export class ListadoCreditosPreAprobadosComponent implements OnInit {
       empresaIfis_id: "",
       estado: "",
       monto: 0,
+      cuota: 0,
       plazo: 0,
       user_id: "",
       canal: "Autonomo"

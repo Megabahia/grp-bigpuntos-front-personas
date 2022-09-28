@@ -80,6 +80,7 @@ export class CreditosAutonomosComponent implements OnInit, AfterViewInit {
       empresaIfis_id: '',
       estado: 'Confirmado',
       monto: 0,
+      cuota: 0,
       plazo: 0,
       user_id: '',
       canal: 'Autonomo',
