@@ -71,9 +71,9 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
       cuota: this.coutaMensual,
       plazo: 12,
       user_id: '',
-      canal: 'Autonomo',
-      tipoCredito: this.tipoPersona === 'Empleado' ? 'Empleado' : 'Autonomo',
-      concepto: 'Autonomo',
+      canal: localStorage.getItem('pagina'),
+      tipoCredito: this.tipoPersona === 'Empleado' ? 'Empleado' : 'Negocio propio',
+      concepto: 'Negocio propio',
       nombres: '',
       apellidos: '',
       numeroIdentificacion: '',
@@ -101,11 +101,10 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
     this.solicitarCredito.apellidos = this.usuario.persona.apellidos;
     this.solicitarCredito.numeroIdentificacion = this.usuario.persona.identificacion;
     this.solicitarCredito.user = this.usuario.persona;
-    this.solicitarCredito.empresaComercial_id = localStorage.getItem('pagina');
+    // this.solicitarCredito.empresaComercial_id = localStorage.getItem('pagina');
     this._creditosAutonomosService.crearCredito(this.solicitarCredito).subscribe((info) => {
-      console.log('se creo credito');
       localStorage.clear();
-      this._router.navigate(['/grp/login']);
+      this._router.navigate(['/']);
     });
   }
 
