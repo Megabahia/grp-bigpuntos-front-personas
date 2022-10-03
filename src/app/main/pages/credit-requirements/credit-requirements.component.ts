@@ -58,7 +58,20 @@ export class CreditRequirementsComponent implements OnInit {
 
     this.coutaMensual = localStorage.getItem('coutaMensual');
     this.montoCreditoFinal = localStorage.getItem('montoCreditoFinal');
-    this.tipoPersona = localStorage.getItem('tipoPersona') === 'Empleado' ? 'REQUISITOS_EMPLEADO_CREDICOMPRA' : 'REQUISITOS_NEGOCIOS_CREDICOMPRA';
+    const casados = ['UNIÓN LIBRE', 'CASADO'];
+    let tipoPersona;
+    let estadoCivil;
+    if (localStorage.getItem('tipoPersona') === 'Empleado') {
+      tipoPersona = 'EMPLEADO';
+    } else {
+      tipoPersona = 'NEGOCIOS';
+    }
+    if ( casados.find( item => item === localStorage.getItem('estadoCivil').toUpperCase()) ) {
+      estadoCivil = 'CASADO';
+    } else {
+      estadoCivil = 'SOLTERO';
+    }
+    this.tipoPersona = `REQUISITOS_${tipoPersona}_${estadoCivil}_CREDICOMPRA`;
     this.getInfo();
   }
 

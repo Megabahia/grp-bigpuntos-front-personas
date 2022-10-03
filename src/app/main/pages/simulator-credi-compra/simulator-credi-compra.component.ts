@@ -18,7 +18,7 @@ export class SimulatorCrediCompraComponent implements OnInit {
   public porcentajeConyuge = 0.50;
   public porcentajeCapacidaPago = 0.80;
   public tasaInteres = 17;
-  public tiempo = 12;
+  public plazo = 12;
   public montoMaximo = 2500;
   public montoMinimo = 500;
 
@@ -91,10 +91,10 @@ export class SimulatorCrediCompraComponent implements OnInit {
           this.porcentajeCapacidaPago = new Decimal(item.valor).div(100).toNumber();
         }
         if (item.nombre === 'TASA_INTERES') {
-          this.tasaInteres = item.valor;
+          this.tasaInteres = new Decimal(item.valor).div(100).toNumber();
         }
         if (item.nombre === 'TIEMPO_PLAZO') {
-          this.tiempo = item.valor;
+          this.plazo = item.valor;
         }
         if (item.nombre === 'MONTO_MAXIMO') {
           this.montoMaximo = item.valor;
@@ -131,19 +131,24 @@ export class SimulatorCrediCompraComponent implements OnInit {
     const gastosMensuales = new Decimal(this.infoCreditForm.get('gastosMensuales').value);
     const ingresoDisponible = ingresosMensuales.add(ingresosConyuge.mul(this.porcentajeConyuge)).sub(gastosMensuales).floor().toNumber();
     const capacidadPago = new Decimal(ingresoDisponible).mul(this.porcentajeCapacidaPago).floor().toNumber();
-    const tasaInteresMensual = new Decimal(this.tasaInteres).div(this.tiempo).floor().toNumber();
-    const coutaMensual = new Decimal(capacidadPago).mul(tasaInteresMensual).floor().toNumber();
-    const montoCredito = new Decimal(coutaMensual).mul(this.tiempo).floor().toNumber();
+    const montoCreditoCalculado = new Decimal(capacidadPago).mul(12).floor().toNumber();
+    const montoCreditoRedondeado = new Decimal(montoCreditoCalculado)
+      .sub(new Decimal(montoCreditoCalculado.toString().substr(2, 4)).floor().toNumber()).toNumber();
     let montoCreditoFinal = 0;
-    if (montoCredito >= this.montoMaximo) {
-      montoCreditoFinal = this.montoMaximo;
-    } else if (montoCredito <= this.montoMinimo) {
+    if ( montoCreditoRedondeado <= this.montoMinimo) {
       montoCreditoFinal = this.montoMinimo;
+    } else if (montoCreditoRedondeado >= this.montoMaximo) {
+      montoCreditoFinal = this.montoMaximo;
     } else {
-      montoCreditoFinal = montoCredito;
+      montoCreditoFinal = montoCreditoRedondeado;
     }
+    const montoInteres = new Decimal(montoCreditoFinal).mul(this.tasaInteres).floor().toNumber();
+    const coutaMensual = new Decimal(new Decimal(montoCreditoFinal).add(montoInteres).floor().toNumber()).div(this.plazo)
+      .floor().toNumber();
+    localStorage.setItem('montoInteres', montoInteres.toString());
     localStorage.setItem('coutaMensual', coutaMensual.toString());
     localStorage.setItem('montoCreditoFinal', montoCreditoFinal.toString());
+    localStorage.setItem('estadoCivil', this.infoCreditForm.value['estadoCivil']);
     localStorage.setItem('tipoPersona', this.infoCreditForm.value['tipoPersona']);
     this._router.navigate(['/pages/requisitos-de-credito']);
   }
