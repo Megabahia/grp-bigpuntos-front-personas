@@ -37,7 +37,6 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
     private _coreMenuService: CoreMenuService,
   ) {
     this.usuario = this._coreMenuService.grpPersonasUser;
-    this.solicitarCredito = this.inicialidarSolicitudCredito();
     this.coutaMensual = localStorage.getItem('coutaMensual');
     this.montoCreditoFinal = localStorage.getItem('montoCreditoFinal');
     const casados = ['UNIÓN LIBRE', 'CASADO'];
@@ -58,6 +57,7 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getInfo();
+    this.solicitarCredito = this.inicialidarSolicitudCredito();
   }
 
   inicialidarSolicitudCredito(): SolicitarCredito {
@@ -70,7 +70,7 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
       monto: this.montoCreditoFinal,
       cuota: this.coutaMensual,
       plazo: 12,
-      user_id: '',
+      user_id: this.usuario.id,
       canal: localStorage.getItem('pagina'),
       tipoCredito: this.tipoPersona === 'Empleado' ? 'Empleado' : 'Negocio propio',
       concepto: 'Negocio propio',
