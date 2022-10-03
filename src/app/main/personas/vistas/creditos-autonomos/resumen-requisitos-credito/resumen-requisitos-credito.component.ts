@@ -3,6 +3,7 @@ import {ParametrizacionesService} from '../../../servicios/parametrizaciones.ser
 import {CreditosAutonomosService} from '../creditos-autonomos.service';
 import {SolicitarCredito} from '../../../models/persona';
 import {CoreMenuService} from '../../../../../../@core/components/core-menu/core-menu.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-resumen-requisitos-credito',
@@ -30,6 +31,7 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
   private usuario: any;
 
   constructor(
+    private _router: Router,
     private paramService: ParametrizacionesService,
     private _creditosAutonomosService: CreditosAutonomosService,
     private _coreMenuService: CoreMenuService,
@@ -38,7 +40,20 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
     this.solicitarCredito = this.inicialidarSolicitudCredito();
     this.coutaMensual = localStorage.getItem('coutaMensual');
     this.montoCreditoFinal = localStorage.getItem('montoCreditoFinal');
-    this.tipoPersona = localStorage.getItem('tipoPersona') === 'Empleado' ? 'REQUISITOS_EMPLEADO_CREDICOMPRA' : 'REQUISITOS_NEGOCIOS_CREDICOMPRA';
+    const casados = ['UNIÓN LIBRE', 'CASADO'];
+    let tipoPersona;
+    let estadoCivil;
+    if (localStorage.getItem('tipoPersona') === 'Empleado') {
+      tipoPersona = 'EMPLEADO';
+    } else {
+      tipoPersona = 'NEGOCIOS';
+    }
+    if ( casados.find( item => item === localStorage.getItem('estadoCivil').toUpperCase()) ) {
+      estadoCivil = 'CASADO';
+    } else {
+      estadoCivil = 'SOLTERO';
+    }
+    this.tipoPersona = `REQUISITOS_${tipoPersona}_${estadoCivil}_CREDICOMPRA`;
   }
 
   ngOnInit(): void {
@@ -90,6 +105,7 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
     this._creditosAutonomosService.crearCredito(this.solicitarCredito).subscribe((info) => {
       console.log('se creo credito');
       localStorage.clear();
+      this._router.navigate(['/grp/login']);
     });
   }
 
