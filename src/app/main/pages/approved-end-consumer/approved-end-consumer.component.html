@@ -1,0 +1,73 @@
+<!-- Error page-->
+<div>
+    <section class="head-LP text-LP">
+        <div class="container pb-5">
+            <div class="row">
+                <div class="col-4">
+                    <img src="../../../../assets/images/logo/logo.png" class="" width="120" alt="" >
+                    <img src="../../../../assets/images/logo/logo.png" width="120" alt="" align="let">
+
+                </div>
+
+                <div class="col-8">
+                    <h1 class="yellow2 mt-4 text-bold">GRP Personas CrediCompra</h1>
+                </div>
+
+            </div>
+            <div class="row justify-content-center align-items-center py-5">
+
+                <div class="col-md-12 text-center">
+                    <h2 class="user-name font-weight-bolder text-center"> ¡FELICIDADES! </h2>
+                    <h3 class="user-name font-weight-bolder text-center">
+                        Tienes un crédito Pre-Aprobado de: $MONTO
+                        <br>
+                        Nombre del Cliente: $NOMBRES Y $APELLIDOS
+                    </h3>
+                    <h3 class="user-name font-weight-bolder text-center">
+                        Tú crédito pre-paprobado puedes hacer uso en 2 simples pasos.
+                    </h3>
+                    <h3 class="user-name font-weight-bolder text-center">
+                        1.- Completa tu información en la Solicitud de Crédito dentro del portal, si no tienes acceso
+                        debes crear cuenta
+                    </h3>
+                    <h3 class="user-name font-weight-bolder text-center">
+                        2.- Visita las tiendas en las que podrás usar tu dinero, y listo!.
+
+                    </h3>
+
+
+                </div>
+                <div class="align-items-center ">
+
+                    <div class="col-md-12 text-center">
+                        <a class=" btn btn-primary "
+                           (click)="actionContinue()"
+                        >
+                            Continuar
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div class="footer-LP"></div>
+
+<ng-template #mensajeModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Mensaje</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+        <div [innerHTML]="mensaje"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="cerrarModal()">Cerrar</button>
+    </div>
+</ng-template>

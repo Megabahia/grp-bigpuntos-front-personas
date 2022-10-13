@@ -1,0 +1,68 @@
+<!-- Error page-->
+<div>
+    <section class="head-LP text-LP">
+        <div class="container pb-5">
+            <div class="row justify-content-center align-items-center py-5">
+                <div class="col-md-12 text-center mb-4">
+                    <img src="../../../../assets/images/logo/logo.png" width="120" alt="">
+                    <h1 class="yellow2 mt-4 text-bold">GRP Personas CrediCompra</h1>
+                    <!--                    <h2 class="azul2 mt-2">{{banner1}}</h2>-->
+                </div>
+                <div class="col-md-12 text-center">
+                    <h2 class="user-name font-weight-bolder text-center"> ¡FELICIDADES! </h2>
+
+
+
+                        <h3 class="user-name font-weight-bolder text-center">
+                            INGRESA EL CÓDIGO QUE RECIBISTE EN TU CELULAR AQUÍ:
+                        </h3>
+
+                </div>
+                <div class="align-items-center ">
+                    <form [formGroup]="envioForm" (ngSubmit)="sentCode()">
+                        <div class="align-items-center">
+
+                            <div class="form-group text-center align-items-center" >
+                                <input size="50" formControlName="code" type="text" class="form-control text-center" name="code">
+                                <div *ngIf="submittedSimulador && getsimuladorForm.code.errors"
+                                     class="invalid-feedback" style="display: block;">
+                                    <div *ngIf="getsimuladorForm.code.errors.required">Código es requerido</div>
+                                    <div *ngIf="getsimuladorForm.code.errors.pattern">Solo se aceptan números</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <a class=" btn btn-primary "
+                               (click)="sentCode()"
+                            >
+                                OK
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-12 mb-4">
+                    <div class="col-md-12 ">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div class="footer-LP"></div>
+
+<ng-template #mensajeModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Mensaje</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+        <div [innerHTML]="mensaje"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="cerrarModal()">Cerrar</button>
+    </div>
+</ng-template>

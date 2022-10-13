@@ -22,6 +22,8 @@ import { CreditAprovedComponent } from './credit-aproved/credit-aproved.componen
 import { CreditRequestComponent } from './credit-request/credit-request.component';
 import { SimulatorCrediCompraComponent } from './simulator-credi-compra/simulator-credi-compra.component';
 import { CreditRequirementsComponent } from './credit-requirements/credit-requirements.component';
+import { PreApprovedCreditConsumerComponent } from './pre-approved-credit-consumer/pre-approved-credit-consumer.component';
+import { ApprovedEndConsumerComponent } from './approved-end-consumer/approved-end-consumer.component';
 
 // routing
 const routes: Routes = [
@@ -61,6 +63,16 @@ const routes: Routes = [
         data: {animation: 'misc'},
     },
     {
+        path: 'preApprovedCreditConsumer',
+        component: PreApprovedCreditConsumerComponent,
+        data: {animation: 'misc'},
+    },
+    {
+        path: 'preApprovedEndConsumer',
+        component: ApprovedEndConsumerComponent,
+        data: {animation: 'misc'},
+    },
+    {
         path: 'approvedCredit',
         component: CreditAprovedComponent,
         data: {animation: 'misc'},
@@ -95,6 +107,8 @@ const routes: Routes = [
         CreditRequestComponent,
         SimulatorCrediCompraComponent,
         CreditRequirementsComponent,
+        PreApprovedCreditConsumerComponent,
+        ApprovedEndConsumerComponent,
     ],
 
     imports: [
