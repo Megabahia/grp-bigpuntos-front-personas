@@ -56,6 +56,7 @@ import { ReclamosRequerimientosComponent } from './vistas/reclamos-requerimiento
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { SolicitudCreditoComponent } from './vistas/creditos-autonomos/solicitud-credito/solicitud-credito.component';
 import { ResumenRequisitosCreditoComponent } from './vistas/creditos-autonomos/resumen-requisitos-credito/resumen-requisitos-credito.component';
+import { ValidacionDatosComponent } from './vistas/creditos-autonomos/validacion-datos/validacion-datos.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -161,6 +162,13 @@ const routes = [
             {
                 path: 'solicitar-credito',
                 component: CreditosAutonomosComponent,
+                data: {roles: [Role.BigPuntos]},
+                canActivate: [AuthGuard]
+                // data: { animation: 'auth' }
+            },
+            {
+                path: 'validacion-datos',
+                component: ValidacionDatosComponent,
                 data: {roles: [Role.BigPuntos]},
                 canActivate: [AuthGuard]
                 // data: { animation: 'auth' }
@@ -287,6 +295,7 @@ const routes = [
         ReclamosRequerimientosComponent,
         SolicitudCreditoComponent,
         ResumenRequisitosCreditoComponent,
+        ValidacionDatosComponent,
     ],
     imports: [
         CoreCommonModule,

@@ -70,22 +70,17 @@ export class PreApprovedCreditConsumerComponent  implements OnInit {
       return;
     }
     const code = new Decimal(this.envioForm.value.code).toNumber();
-    const document = new Decimal(this.envioForm.value.document).toNumber();
     //    ingresar if de validación antes de redireccionar
     localStorage.setItem('preApproved', 'true');
-    const info = {
-      code,
-      document
-    };
-    this._preArpovedCreditService.validateCredit({'codigo': code, 'cedula': document})
-        .subscribe((data: any) => {
-          this._router.navigate([
-            `/pages/approvedCredit`], {queryParams: data}
-          );
-        }, (error: any) => {
-          this.mensaje = 'Usted No tiene un Crédito Pre-Aprobado pero puede acceder un a Crédito para realizar su compra';
-          this.abrirModal(this.mensajeModal);
-        });
+    // this._preArpovedCreditService.validateCredit({'codigo': code})
+    //     .subscribe((data: any) => {
+    //       this._router.navigate([
+    //         `/pages/approvedCredit`], {queryParams: data}
+    //       );
+    //     }, (error: any) => {
+    //       this.mensaje = 'Usted No tiene un Crédito Pre-Aprobado pero puede acceder un a Crédito para realizar su compra';
+    //       this.abrirModal(this.mensajeModal);
+    //     });
     this.actionContinue();
   }
 
@@ -108,8 +103,7 @@ export class PreApprovedCreditConsumerComponent  implements OnInit {
 
   actionContinue() {
     this._router.navigate([
-      `/pages/simulador`,
+      `/pages/preApprovedEndConsumer`,
     ]);
-    localStorage.setItem('preApproved', 'true');
   }
 }
