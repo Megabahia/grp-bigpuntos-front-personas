@@ -90,6 +90,16 @@ export class PreApprovedCreditConsumerComponent  implements OnInit {
 
   ngOnInit(): void {
     this.envioForm = this._formBuilder.group({
+      document:  [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[0-9]*$'),
+          Validators.maxLength(10),
+          Validators.minLength(10),
+          Validators.min(1),
+        ],
+      ],
       code:  [
         '',
         [
