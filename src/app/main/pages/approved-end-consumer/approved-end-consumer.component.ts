@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CoreConfigService} from '../../../../@core/services/config.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {PreArpovedCreditService} from '../pre-approved-credit/pre-arpoved-credit.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import Decimal from 'decimal.js';
@@ -17,25 +17,32 @@ export class ApprovedEndConsumerComponent  implements OnInit {
   public pathSent;
   @ViewChild('mensajeModal') mensajeModal;
   public mensaje = '';
-
+  public monto;
+  public usuario;
   constructor(
       private _coreConfigService: CoreConfigService,
       private _formBuilder: FormBuilder,
-      private _router: Router,
+      private _router: ActivatedRoute,
+      private _routerN: Router,
       private _preArpovedCreditService: PreArpovedCreditService,
       private modalService: NgbModal,
   ) {
     const ref = document.referrer;
     const host = document.location.host;
-    // if (ref !== 'https://credicompra.com/') {
-    //     if (host !== '209.145.61.41:4201') {
-    //         this._router.navigate([
-    //             `/grp/login`,
-    //         ]);
-    //         localStorage.clear();
-    //         return;
-    //     }
-    // }
+    this._router.queryParams.subscribe((params) => {
+      console.log('params---', params);
+      this.monto = params.monto;
+    });
+
+    if (localStorage.getItem('preApproved')) {
+      this._router.queryParams.subscribe((params) => {
+        console.log('params', params);
+        this.monto = params.monto;
+      });
+      localStorage.removeItem('preApproved');
+    } else {
+      this.actionContinue();
+    }
 
     this._coreConfigService.config = {
       layout: {
@@ -82,7 +89,7 @@ export class ApprovedEndConsumerComponent  implements OnInit {
   }
 
   actionContinue() {
-    this._router.navigate([
+    this._routerN.navigate([
       `/`,
     ]);
     localStorage.setItem('preApproved', 'true');

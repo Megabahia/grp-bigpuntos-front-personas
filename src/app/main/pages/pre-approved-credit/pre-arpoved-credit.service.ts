@@ -8,7 +8,6 @@ import { environment } from 'environments/environment';
 export class PreArpovedCreditService {
   constructor(private _httpClient: HttpClient) {}
   validateCredit(data) {
-    console.log('log', data);
     return this._httpClient.post<any>(
         `${environment.apiUrl}/corp/creditoPersonas/creditoPreaprobado/codigo`,
         data
