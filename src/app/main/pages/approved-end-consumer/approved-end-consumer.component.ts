@@ -92,6 +92,6 @@ export class ApprovedEndConsumerComponent implements OnInit {
         this._routerN.navigate([
             `/`,
         ]);
-        localStorage.setItem('preApproved', 'true');
+        localStorage.setItem('simulador', 'ok');
     }
 }
