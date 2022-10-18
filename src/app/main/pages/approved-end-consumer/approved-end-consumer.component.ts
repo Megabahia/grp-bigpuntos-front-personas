@@ -30,8 +30,8 @@ export class ApprovedEndConsumerComponent  implements OnInit {
     const ref = document.referrer;
     const host = document.location.host;
     this._router.queryParams.subscribe((params) => {
-      console.log('params---', params);
       this.monto = params.monto;
+      this.usuario = params.nombreCompleto;
     });
 
     if (localStorage.getItem('preApproved')) {
