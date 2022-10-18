@@ -36,7 +36,6 @@ export class ApprovedEndConsumerComponent  implements OnInit {
 
     if (localStorage.getItem('preApproved')) {
       this._router.queryParams.subscribe((params) => {
-        console.log('params', params);
         this.monto = params.monto;
       });
       localStorage.removeItem('preApproved');
