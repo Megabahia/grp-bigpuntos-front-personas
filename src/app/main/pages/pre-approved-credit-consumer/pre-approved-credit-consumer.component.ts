@@ -75,7 +75,11 @@ export class PreApprovedCreditConsumerComponent implements OnInit {
         localStorage.setItem('preApproved', 'true');
         this._preArpovedCreditService.validateCredit({'codigo': code, 'cedula': document})
             .subscribe((data: any) => {
-                console.log('data', data);
+                localStorage.setItem('coutaMensual', data.cuota);
+                localStorage.setItem('montoCreditoFinal', data.monto);
+                localStorage.setItem('tipoPersona', data.tipoPersona);
+                localStorage.setItem('estadoCivil', data.estadoCivil);
+                localStorage.setItem('simulador', 'ok');
                 this._router.navigate([
                     `/pages/preApprovedEndConsumer`], {queryParams: data}
                 );
