@@ -38,7 +38,7 @@ export class ApprovedEndConsumerComponent implements OnInit {
         if (localStorage.getItem('preApproved')) {
             this._router.queryParams.subscribe((params) => {
                 this.monto = params.monto;
-                this.usuario = params.nombreCompleto;
+                this.usuario = params.nombresCompleto;
             });
             localStorage.removeItem('preApproved');
         } else {
