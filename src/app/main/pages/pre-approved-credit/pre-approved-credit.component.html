@@ -13,10 +13,10 @@
                         pre-aprobado, por favor ingresa el código y tú número de Cédula</h2>
 
                 </div>
-                <div class="align-items-center ">
+                <div class="align-items-center " style="text-align: center">
                     <form [formGroup]="envioForm" (ngSubmit)="sentCode()">
                         <div class="row align-items-center">
-                            <div class="form-group">
+                            <div class="form-group" >
                                 <span class="user-name font-weight-bolder">Código:</span>
                                 <input size="50" formControlName="code" type="text" class="form-control" name="code">
                                 <div *ngIf="submittedSimulador && getsimuladorForm.code.errors"
