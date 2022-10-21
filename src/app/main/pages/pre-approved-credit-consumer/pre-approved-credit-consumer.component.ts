@@ -80,6 +80,7 @@ export class PreApprovedCreditConsumerComponent implements OnInit {
                 localStorage.setItem('tipoPersona', data.tipoPersona);
                 localStorage.setItem('estadoCivil', data.estadoCivil);
                 localStorage.setItem('simulador', 'ok');
+                localStorage.setItem('credito', JSON.stringify(data));
                 this._router.navigate([
                     `/pages/preApprovedEndConsumer`], {queryParams: data}
                 );
