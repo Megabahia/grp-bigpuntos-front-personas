@@ -13,7 +13,8 @@
                     </div>
                     <div class="row mx-2 justify-content-center align-items-center py-2">
                         <p>Para tus compras en las mejores casas comerciales
-                            afiliadas a credicompra.com podrás acceder a un crédito desde ${{montoMinimo}} hasta ${{montoMaximo}}. Realiza esta
+                            afiliadas a credicompra.com podrás acceder a un crédito desde ${{montoMinimo}} hasta
+                            ${{montoMaximo}}. Realiza esta
                             simulación </p>
                     </div>
                     <div class="row mx-2">
@@ -132,3 +133,19 @@
 </div>
 
 <div class="footer-LP"></div>
+
+<ng-template #modalAviso let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Aviso</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss( 'Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <h4>{{mensaje}}</h4>
+        </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</ng-template>
