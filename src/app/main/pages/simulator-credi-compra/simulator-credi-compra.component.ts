@@ -113,7 +113,9 @@ export class SimulatorCrediCompraComponent implements OnInit {
     }
 
     verificarEstadoCivil() {
-        if (this.infoCreditForm.value['estadoCivil'].toUpperCase() === 'CASADO' || this.infoCreditForm.value['estadoCivil'].toUpperCase() === 'UNIÓN LIBRE') {
+        if (this.infoCreditForm.value['estadoCivil']
+            .toUpperCase() === 'CASADO' || this.infoCreditForm.value['estadoCivil']
+            .toUpperCase() === 'UNIÓN LIBRE') {
             this.infoCreditForm.get('ingresosConyuge').setValidators(Validators.required);
             this.infoCreditForm.get('ingresosConyuge').setErrors({'required': true});
             this.infoCreditForm.get('ingresosConyuge').setValue(null);
