@@ -23,7 +23,7 @@ export class CreditosAutonomosService {
   }
 
   actualizarDatosRuc(datos) {
-    return this._httpClient.post<any>(`${environment.apiUrl}/personas/rucPersonas/update/${datos.user_id}`, datos);
+    return this._httpClient.post<any>(`${environment.apiUrl}/personas/rucPersonas/update/${datos.user_id}`, datos );
   }
 
   obtenerEmpresa(id) {
