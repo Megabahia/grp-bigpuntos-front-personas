@@ -8631,19 +8631,20 @@ category-result .card-header {
 }
 //escritorio
 .footer-LP {
-  background: #385e8c url(../../../../assets/images/pages/foot8.svg) no-repeat center top 10px;
+  background:  url(../../../../assets/images/pages/logoCrediCompra.svg) no-repeat center top 10px;
   //margin-top: 220px;
-  background-size: cover;
+  background-size: 100px;
   height: 150px;
 
 }
 //movil
 @media only screen and (max-width: 600px) {
   .footer-LP {
-    background: #385e8c url(../../../../assets/images/pages/foot13.svg) no-repeat center bottom;
+    background:  url(../../../../assets/images/pages/logoCrediCompra.svg) no-repeat center bottom;
     //margin-top: 100px;
-    background-size: cover;
+    background-size: 30px;
     height: 100px;
+    margin-bottom: 100px ;
   }
 }
 
