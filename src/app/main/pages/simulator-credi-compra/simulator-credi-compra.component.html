@@ -100,24 +100,27 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-md-6 col-12">
                                     <div class="form-group row">
                                         <div class="col-sm-3 col-form-label">
-                                            <label>Gastos mensuales</label>
+                                            <label>Gastos mensuales: </label>
                                         </div>
                                         <div class="col-sm-9">
-                                            <input type="number" id="gastosMensuales" formControlName="gastosMensuales"
+                                            <input type="number" formControlName="gastosMensuales"
+                                                   id="gastosMensuales"
                                                    class="form-control" name="gastosMensuales"
                                                    oninput="this.value = Math.round(this.value);"/>
                                             <div *ngIf="submittedSimulador && infoCredit.gastosMensuales.errors"
                                                  class="invalid-feedback" style="display: block;">
-                                                <div *ngIf="infoCredit.gastosMensuales.errors.required">Gastos mensuales
-                                                    es requerido
+                                                <div *ngIf="infoCredit.gastosMensuales.errors.required">Gastos
+                                                    mensuales es
+                                                    requerido
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-12">
                                     <button type="submit" rippleEffect class="btn btn-primary mr-1">Calcular
                                     </button>
