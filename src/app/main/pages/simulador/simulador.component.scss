@@ -7810,7 +7810,7 @@ category-result .card-header {
   color: #f2d81d;
 }
 .head-LP {
-  background: url(../../../../assets/images/pages/collage.jpg) repeat center top;
+  //background: url(../../../../assets/images/pages/collage.jpg) repeat center top;
 
 }
 
@@ -7873,7 +7873,8 @@ category-result .card-header {
 
 @media only screen and (max-width: 600px) {
   .footer-LP {
-    background: #385e8c url(../../../../assets/images/pages/foot7.svg) no-repeat
+    margin-top: 200px;
+    background: #385e8c url(../../../../assets/images/pages/foot8.svg) no-repeat
     center bottom;
     background-size: cover;
     height: 100px;
