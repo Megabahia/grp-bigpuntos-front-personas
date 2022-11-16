@@ -207,7 +207,31 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 (info) => {
                     if (info.email[0] === 'Ya existe usuarios con este email.') {
-                        this.login();
+                        this._authenticationService.loginFacebok(this.f.email.value)
+                            .subscribe((data) => {
+                                if (data.code === 400) {
+                                    this.mensaje = data.msg;
+                                    this.abrirModal(this.mensajeModal);
+                                    this.loading = false;
+                                }
+                                // this._router.navigate([this.returnUrl]);
+                                const semilla = JSON.parse(localStorage.getItem('semillaPago'));
+                                const simulador = localStorage.getItem('simulador');
+                                if (semilla) {
+                                    if (semilla.pantalla === 'verPremios') {
+                                        this._router.navigate(['/personas/mis-premios']);
+                                    } else if (semilla.pantalla === 'pagar') {
+                                        this._router.navigate(['/personas/supermonedas/pagar-con-supermonedas']);
+                                    }
+                                } else {
+                                    if (simulador === 'ok') {
+                                        this._router.navigate(['/personas/creditos-autonomos/solicitar-credito']);
+                                    } else {
+                                        this._router.navigate(['/']);
+                                    }
+                                }
+                            });
+                        // this.login();
                     } else {
                         this.error = null;
                         this.loading = true;
