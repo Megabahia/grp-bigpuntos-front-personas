@@ -19,6 +19,7 @@ import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.componen
 import { Role } from 'app/auth/models';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { FacebookLoginProvider, SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-condiciones.component';
 
 const routes = [
   {
@@ -45,6 +46,11 @@ const routes = [
     data: { animation: 'auth' }
   },
   {
+    path: 'terminosCondiciones',
+    component: TerminosCondicionesComponent,
+    data: { animation: 'auth' }
+  },
+  {
     path: 'perfil',
     component: PerfilUsuarioComponent,
     data: { roles: [Role.BigPuntos, Role.Autonomo, Role.Empleado] },
@@ -53,7 +59,7 @@ const routes = [
 ];
 
 @NgModule({
-  declarations: [LoginComponent, RecuperarPassComponent, RegistroComponent, ReseteoPasswordComponent],
+  declarations: [LoginComponent, RecuperarPassComponent, RegistroComponent, ReseteoPasswordComponent, TerminosCondicionesComponent],
   imports: [
     RouterModule.forChild(routes),
     ContentHeaderModule,
@@ -69,8 +75,8 @@ const routes = [
     // SocialLoginModule
   ],
   providers: [
-    
-    
+
+
   ]
 })
 export class CenterModule { }
