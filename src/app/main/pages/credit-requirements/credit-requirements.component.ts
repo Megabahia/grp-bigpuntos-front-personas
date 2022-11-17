@@ -56,9 +56,8 @@ export class CreditRequirementsComponent implements OnInit {
             },
         };
 
-        this.coutaMensual =  localStorage.getItem('coutaMensual') ;
-        this.montoCreditoFinal =  localStorage.getItem('montoCreditoFinal') ;
-        ;
+        this.coutaMensual = localStorage.getItem('coutaMensual');
+        this.montoCreditoFinal = localStorage.getItem('montoCreditoFinal');
         const casados = ['UNIÓN LIBRE', 'CASADO'];
         let tipoPersona;
         let estadoCivil;
@@ -82,9 +81,9 @@ export class CreditRequirementsComponent implements OnInit {
     getInfo() {
         this.paramService.obtenerListaPadresSinToken(this.tipoPersona).subscribe((info) => {
             this.requisitos = info[0];
-            this.requisitos.config = this.requisitos.config.slice(1, -1).toString().split(',').map(item => {
-                return item.replace(/'/g, '');
-            });
+            // this.requisitos.config = this.requisitos.config.slice(1, -1).toString().split(',').map(item => {
+            //     return item.replace(/'/g, '');
+            // });
         });
         this.paramService.obtenerListaPadresSinToken('DESCRIPCION_REQUISITOS_CREDICOMPRA').subscribe((info) => {
             this.descripcion = info[0];
