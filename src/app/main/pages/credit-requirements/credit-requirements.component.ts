@@ -89,7 +89,6 @@ export class CreditRequirementsComponent implements OnInit {
             this.descripcion = info[0];
             this.descripcion.valor = this.descripcion.valor.replace('${{montoCreditoFinal}}', this.montoCreditoFinal);
             this.descripcion.valor = this.descripcion.valor.replace('${{coutaMensual}}', this.coutaMensual);
-            console.log('info', this.descripcion.valor);
         });
     }
 
