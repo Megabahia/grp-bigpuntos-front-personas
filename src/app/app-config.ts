@@ -18,7 +18,7 @@ export const coreConfig: CoreConfig = {
   app: {
     appName     : 'Global RedPyme',                                        // App Name
     appTitle    : 'Big Puntos', // App Title
-    appLogoImage: 'assets/images/logo/credi%20-big.png',                  // App Logo
+    appLogoImage: 'assets/images/logo/credi-big.png',                  // App Logo
   },
   layout: {
     skin  : 'default',                        // default, dark, bordered, semi-dark
