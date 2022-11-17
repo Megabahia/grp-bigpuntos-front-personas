@@ -139,7 +139,7 @@ export class SimulatorCrediCompraComponent implements OnInit {
         const gastosMensuales = new Decimal(this.infoCreditForm.get('gastosMensuales').value);
         const ingresoDisponible = ingresosMensuales.add(ingresosConyuge).sub(gastosMensuales).toDecimalPlaces(2).toNumber();
         if (ingresoDisponible === 0) {
-            this.mensaje = 'No tiene capacidad de Pago';
+            this.mensaje = '¡Lo sentimos! Con los datos ingresados lamentamos informarte que no cuentas con capacidad de pago.';
             this.abrirModalLg(this.modalAviso);
             return;
         }
@@ -152,7 +152,7 @@ export class SimulatorCrediCompraComponent implements OnInit {
         const montoCredito = new Decimal(cuotaMensual).mul(12).toNumber();
 
         if (montoCredito === 0) {
-            this.mensaje = 'No tiene capacidad de Pago';
+            this.mensaje = '¡Lo sentimos! Con los datos ingresados lamentamos informarte que no cuentas con capacidad de pago.';
             this.abrirModalLg(this.modalAviso);
             return;
         }
