@@ -213,6 +213,7 @@ export class LoginComponent implements OnInit {
                         this.error = null;
                         this.loading = true;
                         localStorage.setItem('grpPersonasUser', JSON.stringify(info));
+                        console.log('va espear 10 ssss');
                         setTimeout(() => {
                             console.log('va espear 10 s');
                             window.location.href = '/';
@@ -226,7 +227,9 @@ export class LoginComponent implements OnInit {
                 }
             );
 
-        setTimeout(this.loginFacebook, 1000);
+        setTimeout(() => {
+            this.loginFacebook();
+        }, 1000);
 
     }
 
