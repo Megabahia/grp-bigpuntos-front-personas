@@ -5,6 +5,9 @@ import {SolicitarCredito} from '../../../models/persona';
 import {CoreMenuService} from '../../../../../../@core/components/core-menu/core-menu.service';
 import {Router} from '@angular/router';
 import {Parser} from '@angular/compiler';
+import {takeUntil} from 'rxjs/operators';
+import {CoreConfigService} from '../../../../../../@core/services/config.service';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-resumen-requisitos-credito',
@@ -13,6 +16,8 @@ import {Parser} from '@angular/compiler';
 })
 export class ResumenRequisitosCreditoComponent implements OnInit {
 
+  public coreConfig: any;
+  private _unsubscribeAll: Subject<any>;
   public solicitarCredito;
   public coutaMensual;
   public montoCreditoFinal;
@@ -36,7 +41,9 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
     private paramService: ParametrizacionesService,
     private _creditosAutonomosService: CreditosAutonomosService,
     private _coreMenuService: CoreMenuService,
+    private _coreConfigService: CoreConfigService,
   ) {
+    this._unsubscribeAll = new Subject();
     this.usuario = this._coreMenuService.grpPersonasUser;
     this.coutaMensual = localStorage.getItem('coutaMensual');
     this.montoCreditoFinal = localStorage.getItem('montoCreditoFinal');
@@ -60,6 +67,10 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
     this.getInfo();
     console.log(localStorage.getItem('credito'));
     this.solicitarCredito = localStorage.getItem('credito') !== null ? JSON.parse(localStorage.getItem('credito')) : this.inicialidarSolicitudCredito();
+    // Subscribe to config changes
+    this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
+      this.coreConfig = config;
+    });
   }
 
   inicialidarSolicitudCredito(): SolicitarCredito {
@@ -86,9 +97,6 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
   getInfo() {
     this.paramService.obtenerListaPadresSinToken(this.tipoPersona).subscribe((info) => {
       this.requisitos = info[0];
-      this.requisitos.config = this.requisitos.config.slice(1, -1).toString().split(',').map(item => {
-        return item.replace(/'/g, '');
-      });
     });
     this.paramService.obtenerListaPadresSinToken('TITULO_REQUISITOS_CREDICOMPRA_ULTIMA_PANTALLA').subscribe((info) => {
       this.descripcion = info[0];
