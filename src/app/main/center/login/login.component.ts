@@ -215,7 +215,7 @@ export class LoginComponent implements OnInit {
                         localStorage.setItem('grpPersonasUser', JSON.stringify(info));
                         setTimeout(() => {
                             window.location.href = '/';
-                        }, 1000);
+                        }, 6000);
                     }
                 },
                 (error) => {
@@ -225,7 +225,7 @@ export class LoginComponent implements OnInit {
                 }
             );
 
-        setTimeout(this.loginFacebook, 5000);
+        setTimeout(this.loginFacebook, 1000);
 
     }
 
