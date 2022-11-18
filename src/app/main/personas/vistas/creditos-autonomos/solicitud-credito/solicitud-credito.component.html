@@ -39,19 +39,18 @@
 
 
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="username">Nombres</label>
-                                                <input type="text" formControlName="nombres" class="form-control">
-                                                <div *ngIf="submittedPersona && persForm.nombres.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="persForm.nombres.errors.required">Nombres son
-                                                        requeridos
-                                                    </div>
+                                                <label for="nombres">Nombres</label>
+                                                <input formControlName="nombres" type="text" class="form-control"
+                                                       [ngClass]="{ 'is-invalid': submittedPersona && persForm.nombres.errors }">
+                                                <div *ngIf="submittedPersona && persForm.nombres.errors" class="invalid-feedback">
+                                                    <div *ngIf="persForm.nombres.errors.required">Nombres son requeridos</div>
                                                     <div *ngIf="persForm.nombres.errors.min">
                                                         Ingrese mínimo 4 letras
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </div>
 

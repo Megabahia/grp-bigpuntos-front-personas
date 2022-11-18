@@ -126,8 +126,8 @@ export class CompletarPerfilComponent implements OnInit {
         this.registerForm = this._formBuilder.group({
             tipoIdentificacion: ['', [Validators.required]],
             documento: ['', [Validators.required]],
-            nombres: ['', [Validators.required, Validators.min(4)]],
-            apellidos: ['', [Validators.required, Validators.min(4)]],
+            nombres: ['', [Validators.required, Validators.pattern('^([A-Za-z]){4}$')]],
+            apellidos: ['', [Validators.required, Validators.pattern('^([A-Za-z]){4}$')]],
             genero: ['', Validators.required],
             fechaNacimiento: ['', Validators.required],
             edad: ['', Validators.required],
@@ -135,7 +135,7 @@ export class CompletarPerfilComponent implements OnInit {
                 Validators.maxLength(10),
                 Validators.minLength(10),
                 Validators.pattern('^[0-9]*$')]]
-        }, );
+        },);
         // Subscribe to config changes
         this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
             this.coreConfig = config;
@@ -150,7 +150,7 @@ export class CompletarPerfilComponent implements OnInit {
                 genero: info.genero,
                 // fechaNacimiento: [info.fechaNacimiento],
                 edad: info.edad,
-                whatsapp: info.whatsapp ? info.whatsapp.replace('+593', 0) : 0
+                // whatsapp: info.whatsapp ? info.whatsapp.replace('+593', 0) : 0
             });
         });
         this.paramService.obtenerParametroNombreTipo('monedas_registro', 'GANAR_SUPERMONEDAS').subscribe((info) => {
@@ -233,7 +233,7 @@ export class CompletarPerfilComponent implements OnInit {
         this.informacion.edad = this.f.edad.value;
         // this.informacion.fechaNacimiento = this.f.fechaNacimiento.value;;
         this.informacion.genero = this.f.genero.value;
-        this.informacion.identificacion = this.f.identificacion.value;
+        this.informacion.identificacion = this.f.documento.value;
         this.informacion.nombres = this.f.nombres.value;
         this.informacion.whatsapp = this.f.whatsapp.value;
         wppAux += '+593' + this.f.whatsapp.value.substring(1, 10);
@@ -280,7 +280,12 @@ export class CompletarPerfilComponent implements OnInit {
             usuario.estado = '6';
             localStorage.setItem('grpPersonasUser', JSON.stringify(usuario));
             setTimeout(() => {
-                this._router.navigate(['/']);
+                const simulador = localStorage.getItem('simulador');
+                if (simulador === 'ok') {
+                    this._router.navigate(['/personas/creditos-autonomos/solicitar-credito']);
+                } else {
+                    this._router.navigate(['/']);
+                }
             }, 100);
         });
         // Login
@@ -311,7 +316,12 @@ export class CompletarPerfilComponent implements OnInit {
                     localStorage.setItem('grpPersonasUser', JSON.stringify(this.usuario));
                     this.modalService.dismissAll();
                     setTimeout(() => {
-                        this._router.navigate(['/']);
+                        const simulador = localStorage.getItem('simulador');
+                        if (simulador === 'ok') {
+                            this._router.navigate(['/personas/creditos-autonomos/solicitar-credito']);
+                        } else {
+                            this._router.navigate(['/']);
+                        }
                     }, 100);
                 });
 
@@ -322,7 +332,7 @@ export class CompletarPerfilComponent implements OnInit {
     }
 
     validadorDePasaporte(pasaporte: String) {
-        const ExpRegNumDec = '[aA-Zz]{3,5}';
+        const ExpRegNumDec = '^([A-Za-z0-9]){4,25}$';
         if (pasaporte.match(ExpRegNumDec) != null) {
             // console.log(' Válido');
         }
