@@ -71,13 +71,8 @@
                                     <div *ngIf="f.documento.errors.pattern">Identificación es requerida</div>
 
                                 </div>
-                                --{{f.documento.errors?.validoCed}}
-                                <div *ngIf="!f.documento.errors?.validoCed" class="invalid-feedback">Cédula incorrecta
+                                <div *ngIf="!f.documento.errors?.validoCed" class="invalid-feedback">Documento no valido
                                 </div>
-                                <div *ngIf="!f.documento.errors?.validoPas" class="invalid-feedback">Pasaporte
-                                    incorrecto
-                                </div>
-
 
                             </div>
                         </div>

@@ -79,8 +79,6 @@
                                                                [ngClass]="{ 'is-invalid': submittedPersona && persForm.fechaNacimiento.errors }"
                                                                (input)="calcularEdad()"
                                                 ></ng2-flatpickr>
-
-
                                                 <div *ngIf="submittedPersona && persForm.fechaNacimiento.errors" class="invalid-feedback">
                                                     <div *ngIf="persForm.fechaNacimiento.errors.required">Fecha es requerida</div>
                                                 </div>

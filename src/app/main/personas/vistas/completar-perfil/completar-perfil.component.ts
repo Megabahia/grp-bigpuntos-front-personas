@@ -322,12 +322,12 @@ export class CompletarPerfilComponent implements OnInit {
     }
 
     validadorDePasaporte(pasaporte: String) {
-        const ExpRegNumDec = '[A-Za-z\\d$@$!%*?&]{3,25}';
+        const ExpRegNumDec = '[aA-Zz]{3,5}';
         if (pasaporte.match(ExpRegNumDec) != null) {
-            console.log(' Válido');
+            // console.log(' Válido');
         }
         if (pasaporte.match(ExpRegNumDec) == null) {
-            console.log('Invalido');
+            // console.log('Invalido');
             this.registerForm.get('documento').setErrors({validoPas: false});
         }
     }
