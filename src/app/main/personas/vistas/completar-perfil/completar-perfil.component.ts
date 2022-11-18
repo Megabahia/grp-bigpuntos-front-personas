@@ -121,13 +121,11 @@ export class CompletarPerfilComponent implements OnInit {
      */
     ngOnInit(): void {
         this.obtenerEmpresaId();
-        this.tipoIdentificacion = ['Cédula', 'Pasaporte'];
-        this.generos = ['Hombre', 'Mujer', 'Prefiero no decirlo'];
         this.registerForm = this._formBuilder.group({
             tipoIdentificacion: ['', [Validators.required]],
             documento: ['', [Validators.required]],
-            nombres: ['', [Validators.required, Validators.pattern('^([A-Za-z]){4}$')]],
-            apellidos: ['', [Validators.required, Validators.pattern('^([A-Za-z]){4}$')]],
+            nombres: ['', [Validators.required, Validators.pattern('^([A-Za-z]){4,25}$')]],
+            apellidos: ['', [Validators.required, Validators.pattern('^([A-Za-z]){4,25}$')]],
             genero: ['', Validators.required],
             fechaNacimiento: ['', Validators.required],
             edad: ['', Validators.required],
@@ -135,7 +133,7 @@ export class CompletarPerfilComponent implements OnInit {
                 Validators.maxLength(10),
                 Validators.minLength(10),
                 Validators.pattern('^[0-9]*$')]]
-        },);
+        });
         // Subscribe to config changes
         this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
             this.coreConfig = config;
@@ -158,6 +156,16 @@ export class CompletarPerfilComponent implements OnInit {
             this.superMonedas.credito = this.ganarMonedas.valor;
             this.superMonedas.descripcion = 'Gana ' + this.ganarMonedas.valor + ' BP por completar perfil';
         });
+        this.paramService.obtenerListaPadres('GENERO').subscribe((info) => {
+            console.log('----', info);
+            this.generos = info;
+        });
+        this.paramService.obtenerListaPadres('TIPO_IDENTIFICACION').subscribe((info) => {
+            console.log('----', info);
+
+            this.tipoIdentificacion = info;
+        });
+
     }
 
     obtenerEmpresaId() {

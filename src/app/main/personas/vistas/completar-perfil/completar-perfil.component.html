@@ -50,7 +50,7 @@
                                         [ngClass]="{ 'is-invalid': submitted && f.tipoIdentificacion.errors }">
                                     <option>- Seleccionar -</option>
                                     <option *ngFor="let value of tipoIdentificacion">
-                                        {{value}}
+                                        {{value.nombre}}
                                     </option>
                                 </select>
                                 <div *ngIf="submitted && f.tipoIdentificacion.errors" class="invalid-feedback">
@@ -83,8 +83,8 @@
                                 <input formControlName="nombres" type="text" class="form-control"
                                        [ngClass]="{ 'is-invalid': submitted && f.nombres.errors }">
                                 <div *ngIf="submitted && f.nombres.errors" class="invalid-feedback">
-                                    <div *ngIf="f.nombres.errors.required">Nombres son requeridos</div>
-                                    <div *ngIf="f.apellidos.errors.pattern">
+                                    <div *ngIf="f.nombres.errors.required">Apellidos son requeridos</div>
+                                    <div *ngIf="f.nombres.errors.pattern">
                                         Ingrese solo letras y mínimo 4
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
                                         [ngClass]="{ 'is-invalid': submitted && f.genero.errors }">
                                     <option>- Seleccionar -</option>
                                     <option *ngFor="let value of generos">
-                                        {{value}}
+                                        {{value.nombre}}
                                     </option>
                                 </select>
                                 <div *ngIf="submitted && f.genero.errors" class="invalid-feedback">
