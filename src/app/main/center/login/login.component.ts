@@ -195,8 +195,8 @@ export class LoginComponent implements OnInit {
             });
     }
 
-   async logginSocial() {
-       await this._registroService
+    async logginSocial() {
+        await this._registroService
             .registrarUsuario({
                 password: this.f.password.value,
                 roles: Role.BigPuntos,
@@ -224,6 +224,12 @@ export class LoginComponent implements OnInit {
                     // this.error = error.error.password;
                 }
             );
+
+        setTimeout(this.loginFacebook, 5000);
+
+    }
+
+    loginFacebook() {
         this._authenticationService.loginFacebok(this.f.email.value)
             .subscribe((data) => {
                 console.log('existe y va logear ');
