@@ -206,6 +206,7 @@ export class LoginComponent implements OnInit {
             })
             .subscribe(
                 (info) => {
+                    console.log('va registrar');
                     if (info.email[0] === 'Ya existe usuarios con este email.') {
                         // this.login();
                     } else {
@@ -225,6 +226,7 @@ export class LoginComponent implements OnInit {
             );
         this._authenticationService.loginFacebok(this.f.email.value)
             .subscribe((data) => {
+                console.log('existe y va logear ');
                 if (data.code === 400) {
                     this.mensaje = data.msg;
                     this.abrirModal(this.mensajeModal);
