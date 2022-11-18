@@ -41,11 +41,6 @@ export class VideoExplicativoAutComponent implements OnInit {
     public video;
     public requisitos;
 
-    /**
-     * Constructor
-     *
-     * @param {CoreConfigService} _coreConfigService
-     */
     constructor(
         private _coreConfigService: CoreConfigService,
         private sanitizer: DomSanitizer,

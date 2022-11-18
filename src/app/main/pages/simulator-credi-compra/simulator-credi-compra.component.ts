@@ -160,7 +160,7 @@ export class SimulatorCrediCompraComponent implements OnInit {
         const montoCreditoRedondeado = new Decimal(montoCredito).sub(resto).toNumber();
         let montoCreditoFinal = 0;
         if (montoCreditoRedondeado < this.montoMinimo) {
-            this.mensaje = 'No tiene capacidad de Pago';
+            this.mensaje = '¡Lo sentimos! Con los datos ingresados lamentamos informarte que no cuentas con capacidad de pago.';
             this.abrirModalLg(this.modalAviso);
             return;
         } else if (montoCreditoRedondeado >= this.montoMaximo) {

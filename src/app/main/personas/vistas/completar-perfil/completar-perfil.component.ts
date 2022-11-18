@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Subject} from 'rxjs';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {BienvenidoService} from '../bienvenido/bienvenido.service';
@@ -14,6 +14,7 @@ import moment from 'moment';
 import {User} from '../../../../auth/models/user';
 import {GanarSuperMoneda} from '../../models/supermonedas';
 import {ParametrizacionesService} from '../../servicios/parametrizaciones.service';
+import {log} from 'util';
 
 @Component({
     selector: 'app-completar-perfil',
@@ -43,6 +44,8 @@ export class CompletarPerfilComponent implements OnInit {
         altFormat: 'Y-n-j',
         altInputClass: 'form-control flat-picker flatpickr-input invoice-edit-input',
     };
+    public tipoIdentificacion = [];
+    public generos = [];
     public codigo;
     public fecha;
     // Private
@@ -63,6 +66,7 @@ export class CompletarPerfilComponent implements OnInit {
         private modalService: NgbModal,
         private paramService: ParametrizacionesService,
     ) {
+
         this.usuario = this._coreMenuService.grpPersonasUser;
         this.superMonedas = this.inicializarSuperMoneda();
 
@@ -117,15 +121,25 @@ export class CompletarPerfilComponent implements OnInit {
      */
     ngOnInit(): void {
         this.obtenerEmpresaId();
-
+        this.tipoIdentificacion = ['Cédula', 'Pasaporte'];
+        this.generos = ['Hombre', 'Mujer', 'Prefiero no decirlo'];
         this.registerForm = this._formBuilder.group({
-            identificacion: ['', [Validators.required]],
-            nombres: ['', Validators.required],
-            apellidos: ['', Validators.required],
+            tipoIdentificacion: ['', [Validators.required]],
+            documento: ['', [Validators.required]],
+            nombres: ['', [Validators.required, Validators.min(4)]],
+            apellidos: ['', [Validators.required, Validators.min(4)]],
             genero: ['', Validators.required],
-            fechaNacimiento: ['string', Validators.required],
+            fechaNacimiento: ['', Validators.required],
             edad: ['', Validators.required],
-            whatsapp: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern('^[0-9]*$'), Validators.min(1)]],
+            whatsapp: ['', [
+                Validators.maxLength(10),
+                Validators.minLength(10),
+                Validators.pattern('^[0-9]*$')]]
+        }, {
+            validators: [
+                // this.validadorEdad('nroAutCli', 'nroAutCliAux'),
+                // this.compararCodigos2('nroAutCorp', 'nroAutCorpAux'),
+            ]
         });
         // Subscribe to config changes
         this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
@@ -199,10 +213,21 @@ export class CompletarPerfilComponent implements OnInit {
         this.registerForm.patchValue({
             edad: this.informacion.edad
         });
+        if (this.informacion.edad < 18) {
+            this.registerForm.get('edad').setErrors({valido: false});
+        }
     }
 
     guardarRegistro() {
         let wppAux = '';
+        console.log('this.registerForm.get', this.registerForm);
+        console.log('this.registerForm.getRawValue().documento', this.registerForm.value.documento);
+        if (this.registerForm.value.tipoIdentificacion === 'Cédula') {
+            this.validadorDeCedula(this.registerForm.value.documento);
+        }
+        if (this.registerForm.value.tipoIdentificacion === 'Pasaporte') {
+            this.validadorDePasaporte(this.registerForm.value.documento);
+        }
 
         this.submitted = true;
         // stop here if form is invalid
@@ -300,6 +325,52 @@ export class CompletarPerfilComponent implements OnInit {
             this.error = 'Hay un fallo al tratar de verificar su código, intentelo nuevamente';
         });
     }
+
+    validadorDePasaporte(pasaporte: String) {
+        const ExpRegNumDec = '[A-Za-z\\d$@$!%*?&]{3,25}';
+        if (pasaporte.match(ExpRegNumDec) != null) {
+            console.log(' Válido');
+        }
+        if (pasaporte.match(ExpRegNumDec) == null) {
+            console.log('Invalido');
+            this.registerForm.get('documento').setErrors({validoPas: false});
+        }
+    }
+
+
+    validadorDeCedula(cedula: String) {
+        let cedulaCorrecta = false;
+        if (cedula.length === 10) {
+            const tercerDigito = parseInt(cedula.substring(2, 3), 10);
+            if (tercerDigito < 6) {
+                // El ultimo digito se lo considera dígito verificador
+                const coefValCedula = [2, 1, 2, 1, 2, 1, 2, 1, 2];
+                const verificador = parseInt(cedula.substring(9, 10), 10);
+                let suma = 0;
+                let digito = 0;
+                for (let i = 0; i < (cedula.length - 1); i++) {
+                    digito = parseInt(cedula.substring(i, i + 1), 10) * coefValCedula[i];
+                    suma += ((parseInt((digito % 10) + '', 10) + (parseInt((digito / 10) + '', 10))));
+                }
+                suma = Math.round(suma);
+                if ((Math.round(suma % 10) === 0) && (Math.round(suma % 10) === verificador)) {
+                    cedulaCorrecta = true;
+                } else if ((10 - (Math.round(suma % 10))) === verificador) {
+                    cedulaCorrecta = true;
+                } else {
+                    cedulaCorrecta = false;
+                }
+            } else {
+                cedulaCorrecta = false;
+            }
+        } else {
+            cedulaCorrecta = false;
+        }
+        if (!cedulaCorrecta) {
+            this.registerForm.get('documento').setErrors({valido: cedulaCorrecta});
+        }
+    }
+
 
     abrirModal(modal) {
         this.modalService.open(modal);
