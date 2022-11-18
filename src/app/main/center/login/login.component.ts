@@ -213,11 +213,11 @@ export class LoginComponent implements OnInit {
                         this.error = null;
                         this.loading = true;
                         localStorage.setItem('grpPersonasUser', JSON.stringify(info));
-                        console.log('va espear 10 ssss');
-                        setTimeout(() => {
-                            console.log('va espear 10 s');
-                            window.location.href = '/';
-                        }, 10000);
+                        // console.log('va espear 10 ssss');
+                        // setTimeout(() => {
+                        //     console.log('va espear 10 s');
+                        //     window.location.href = '/';
+                        // }, 10000);
                     }
                 },
                 (error) => {
@@ -234,10 +234,10 @@ export class LoginComponent implements OnInit {
     }
 
     loginFacebook() {
-        console.log('entra a preguntar---');
+        // console.log('entra a preguntar---');
         this._authenticationService.loginFacebok(this.f.email.value)
             .subscribe((data) => {
-                console.log('existe y va logear ');
+                // console.log('existe y va logear ');
                 if (data.code === 400) {
                     this.mensaje = data.msg;
                     this.abrirModal(this.mensajeModal);
