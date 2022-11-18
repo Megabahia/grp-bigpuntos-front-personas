@@ -1,5 +1,6 @@
-
-
+<div class="card-body text-center">
+    <img src="{{ coreConfig.app.appLogoImage }}" width="300">
+</div>
 <app-video-explicativo-aut *ngIf="proceso==1" (estado)="continuar($event)"></app-video-explicativo-aut>
 <!--<app-perfil-persona-aut *ngIf="proceso==2" (estado)="continuar($event)"></app-perfil-persona-aut>-->
 <app-solicitud-credito *ngIf="proceso==2" (estado)="continuar($event)"></app-solicitud-credito>
@@ -9,3 +10,7 @@
 <!--<app-ruc-persona-aut *ngIf="proceso==5" (estado)="continuar($event)"></app-ruc-persona-aut>-->
 <!--<app-resultados-credito-aut *ngIf="proceso==6" [monto]="solicitarCredito.monto" (idIfi)="obtenerIdIfi($event)" (estado)="continuar($event)"></app-resultados-credito-aut>-->
 <!--<app-mensaje-resultado-aut *ngIf="proceso==7"></app-mensaje-resultado-aut>-->
+<div class="text-center mt-1">
+    <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px"
+         width="50px">
+</div>

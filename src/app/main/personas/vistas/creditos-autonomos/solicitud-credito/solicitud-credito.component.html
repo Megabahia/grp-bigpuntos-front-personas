@@ -1,11 +1,17 @@
 <div class="content-wrapper">
 
     <div class="content-body">
+<!--        <div class="card-body text-center">-->
+<!--            <img src="{{ coreConfig.app.appLogoImage }}" width="300">-->
+<!--        </div>-->
         <div id="user-profile">
             <!-- profile header -->
             <div class="row">
                 <div class="col-12">
                     <div class="card p-2">
+                        <!--                        <div class="card-body text-center">-->
+                        <!--                            <img src="{{ coreConfig.app.appLogoImage }}" width="300">-->
+                        <!--                        </div>-->
                         <h4>Para solicitud de crédito por favor completa la siguiente información</h4>
                     </div>
                 </div>
@@ -31,6 +37,8 @@
                                             </div>
                                         </div>
 
+
+
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="username">Nombres</label>
@@ -39,6 +47,9 @@
                                                      class="invalid-feedback" style="display: block;">
                                                     <div *ngIf="persForm.nombres.errors.required">Nombres son
                                                         requeridos
+                                                    </div>
+                                                    <div *ngIf="persForm.nombres.errors.min">
+                                                        Ingrese mínimo 4 letras
                                                     </div>
                                                 </div>
                                             </div>
@@ -53,6 +64,9 @@
                                                     <div *ngIf="persForm.apellidos.errors.required">Apellidos son
                                                         requeridos
                                                     </div>
+                                                    <div *ngIf="persForm.apellidos.errors.min">
+                                                        Ingrese mínimo 4 letras
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -62,14 +76,43 @@
                                                 <label for="username">Fecha de nacimiento</label>
                                                 <ng2-flatpickr [setDate]="fecha" formControlName="fechaNacimiento"
                                                                [config]="startDateOptions"
-                                                               (input)="obtenerFecha()"
-                                                               ></ng2-flatpickr>
+                                                               [ngClass]="{ 'is-invalid': submittedPersona && persForm.fechaNacimiento.errors }"
+                                                               (input)="calcularEdad()"
+                                                ></ng2-flatpickr>
+
+
+                                                <div *ngIf="submittedPersona && persForm.fechaNacimiento.errors" class="invalid-feedback">
+                                                    <div *ngIf="persForm.fechaNacimiento.errors.required">Fecha es requerida</div>
+                                                </div>
+                                                <div *ngIf="submittedPersona && persForm.fechaNacimiento.errors" class="invalid-feedback">
+                                                    <div *ngIf="!persForm.fechaNacimiento.errors?.valido">Menor de edad</div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="tipoIdentificacion">Tipo de identificación</label>
+                                                <select formControlName="tipoIdentificacion" class="form-control"
+                                                        id="tipoIdentificacion"
+                                                        [ngClass]="{ 'is-invalid': submittedPersona && persForm.tipoIdentificacion.errors }">
+                                                    <option>- Seleccionar -</option>
+                                                    <option *ngFor="let value of tipoIdentificacion">
+                                                        {{value}}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="submittedPersona && persForm.tipoIdentificacion.errors" class="invalid-feedback">
+                                                    <div *ngIf="persForm.tipoIdentificacion.errors.required">Tipo de identificación es
+                                                        requerido
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="username">Número de cédula</label>
+                                                <label for="username">Número de identificación</label>
                                                 <input type="text" formControlName="identificacion"
                                                        class="form-control">
                                                 <div *ngIf="submittedPersona && persForm.identificacion.errors"
@@ -226,7 +269,8 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="username">Cargo que desempeña</label>
-                                                <input type="text" class="form-control" formControlName="cargoDesempeno">
+                                                <input type="text" class="form-control"
+                                                       formControlName="cargoDesempeno">
                                                 <div *ngIf="submittedPersona && ocuSolicitanteForm.cargoDesempeno.errors"
                                                      class="invalid-feedback" style="display: block;">
                                                     <div *ngIf="ocuSolicitanteForm.cargoDesempeno.errors.required">Cargo
@@ -540,12 +584,16 @@
                                     </div>
                                 </form>
                                 <div class="row">
-                                    <div class="col-12 d-flex flex-sm-row flex-column mt-2">
+                                    <div class="col-12 d-flex flex-sm-row flex-column mt-2 d-flex justify-content-center">
                                         <a href="javascript:void(0)"
                                            class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-float waves-light"
                                            (click)="continuar()">Continuar</a>
                                     </div>
                                 </div>
+<!--                                <div class="text-center mt-1">-->
+<!--                                    <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px"-->
+<!--                                         width="50px">-->
+<!--                                </div>-->
 
 
                             </div>

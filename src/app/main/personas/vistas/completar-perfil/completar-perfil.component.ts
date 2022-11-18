@@ -135,12 +135,7 @@ export class CompletarPerfilComponent implements OnInit {
                 Validators.maxLength(10),
                 Validators.minLength(10),
                 Validators.pattern('^[0-9]*$')]]
-        }, {
-            validators: [
-                // this.validadorEdad('nroAutCli', 'nroAutCliAux'),
-                // this.compararCodigos2('nroAutCorp', 'nroAutCorpAux'),
-            ]
-        });
+        }, );
         // Subscribe to config changes
         this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
             this.coreConfig = config;
@@ -214,7 +209,7 @@ export class CompletarPerfilComponent implements OnInit {
             edad: this.informacion.edad
         });
         if (this.informacion.edad < 18) {
-            this.registerForm.get('edad').setErrors({valido: false});
+            this.registerForm.get('edad').setErrors({valid: false});
         }
     }
 

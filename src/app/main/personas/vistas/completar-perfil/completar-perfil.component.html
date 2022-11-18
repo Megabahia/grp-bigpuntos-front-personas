@@ -17,7 +17,7 @@
                 <img src="{{imagen ? imagen: 'assets/images/portrait/small/sin_foto.png'}}" class="rounded img-fluid"
                      alt="Card image"/>
                 <!-- profile title -->
-                <br >
+                <br>
                 <div class="mt-1">
                     <label class="btn btn-info btn-sm mr-75 waves-effect waves-float waves-light" for="change-picture">
                         <span class="">Cambiar foto</span>
@@ -71,8 +71,12 @@
                                     <div *ngIf="f.documento.errors.pattern">Identificación es requerida</div>
 
                                 </div>
-                                <div *ngIf="!f.documento.errors?.validoCed" class="invalid-feedback">Cédula incorrecta</div>
-                                <div *ngIf="!f.documento.errors?.validoPas" class="invalid-feedback">Pasaporte incorrecto</div>
+                                --{{f.documento.errors?.validoCed}}
+                                <div *ngIf="!f.documento.errors?.validoCed" class="invalid-feedback">Cédula incorrecta
+                                </div>
+                                <div *ngIf="!f.documento.errors?.validoPas" class="invalid-feedback">Pasaporte
+                                    incorrecto
+                                </div>
 
 
                             </div>
