@@ -234,7 +234,7 @@ export class LoginComponent implements OnInit {
     }
 
     loginFacebook() {
-        console.log('entra a preguntar');
+        console.log('entra a preguntar---');
         this._authenticationService.loginFacebok(this.f.email.value)
             .subscribe((data) => {
                 console.log('existe y va logear ');
