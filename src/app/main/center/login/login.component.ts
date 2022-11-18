@@ -195,8 +195,8 @@ export class LoginComponent implements OnInit {
             });
     }
 
-    logginSocial() {
-        this._registroService
+   async logginSocial() {
+       await this._registroService
             .registrarUsuario({
                 password: this.f.password.value,
                 roles: Role.BigPuntos,
