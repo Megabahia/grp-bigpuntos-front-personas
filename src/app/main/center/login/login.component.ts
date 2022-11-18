@@ -195,8 +195,8 @@ export class LoginComponent implements OnInit {
             });
     }
 
-   logginSocial() {
-       this._registroService
+    logginSocial() {
+        this._registroService
             .registrarUsuario({
                 password: this.f.password.value,
                 roles: Role.BigPuntos,
@@ -214,6 +214,7 @@ export class LoginComponent implements OnInit {
                         this.loading = true;
                         localStorage.setItem('grpPersonasUser', JSON.stringify(info));
                         setTimeout(() => {
+                            console.log('va espear 10 s');
                             window.location.href = '/';
                         }, 10000);
                     }
@@ -230,6 +231,7 @@ export class LoginComponent implements OnInit {
     }
 
     loginFacebook() {
+        console.log('entra a preguntar');
         this._authenticationService.loginFacebok(this.f.email.value)
             .subscribe((data) => {
                 console.log('existe y va logear ');
