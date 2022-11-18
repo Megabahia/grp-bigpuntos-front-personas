@@ -215,7 +215,7 @@ export class LoginComponent implements OnInit {
                         localStorage.setItem('grpPersonasUser', JSON.stringify(info));
                         setTimeout(() => {
                             window.location.href = '/';
-                        }, 6000);
+                        }, 10000);
                     }
                 },
                 (error) => {
