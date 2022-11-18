@@ -46,8 +46,8 @@
                                                        [ngClass]="{ 'is-invalid': submittedPersona && persForm.nombres.errors }">
                                                 <div *ngIf="submittedPersona && persForm.nombres.errors" class="invalid-feedback">
                                                     <div *ngIf="persForm.nombres.errors.required">Nombres son requeridos</div>
-                                                    <div *ngIf="persForm.nombres.errors.min">
-                                                        Ingrese mínimo 4 letras
+                                                    <div *ngIf="persForm.nombres.errors.pattern">
+                                                        Ingrese solo letras y mínimo 4
                                                     </div>
                                                 </div>
 
@@ -63,8 +63,8 @@
                                                     <div *ngIf="persForm.apellidos.errors.required">Apellidos son
                                                         requeridos
                                                     </div>
-                                                    <div *ngIf="persForm.apellidos.errors.min">
-                                                        Ingrese mínimo 4 letras
+                                                    <div *ngIf="persForm.apellidos.errors.pattern">
+                                                        Ingrese solo letras y mínimo 4
                                                     </div>
                                                 </div>
                                             </div>
@@ -96,7 +96,7 @@
                                                         [ngClass]="{ 'is-invalid': submittedPersona && persForm.tipoIdentificacion.errors }">
                                                     <option>- Seleccionar -</option>
                                                     <option *ngFor="let value of tipoIdentificacion">
-                                                        {{value}}
+                                                        {{value.nombre}}
                                                     </option>
                                                 </select>
                                                 <div *ngIf="submittedPersona && persForm.tipoIdentificacion.errors" class="invalid-feedback">
@@ -107,17 +107,20 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="username">Número de identificación</label>
-                                                <input type="text" formControlName="identificacion"
-                                                       class="form-control">
-                                                <div *ngIf="submittedPersona && persForm.identificacion.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="persForm.identificacion.errors.required">Número de
-                                                        cédula es requerida
-                                                    </div>
+                                                <label for="">Número de identificación</label>
+                                                <input formControlName="documento" type="text" class="form-control"
+                                                       [ngClass]="{ 'is-invalid': submittedPersona && persForm.documento.errors }">
+
+                                                <div *ngIf="submittedPersona && persForm.documento.errors" class="invalid-feedback">
+                                                    <div *ngIf="persForm.documento.errors.required">Identificación es requerida</div>
+                                                    <div *ngIf="persForm.documento.errors.pattern">Identificación es requerida</div>
+
                                                 </div>
+                                                <div *ngIf="!persForm.documento.errors?.validoCed" class="invalid-feedback">Documento no valido
+                                                </div>
+
                                             </div>
                                         </div>
 

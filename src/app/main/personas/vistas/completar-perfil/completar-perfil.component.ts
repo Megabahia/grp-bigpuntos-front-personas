@@ -157,12 +157,9 @@ export class CompletarPerfilComponent implements OnInit {
             this.superMonedas.descripcion = 'Gana ' + this.ganarMonedas.valor + ' BP por completar perfil';
         });
         this.paramService.obtenerListaPadres('GENERO').subscribe((info) => {
-            console.log('----', info);
             this.generos = info;
         });
         this.paramService.obtenerListaPadres('TIPO_IDENTIFICACION').subscribe((info) => {
-            console.log('----', info);
-
             this.tipoIdentificacion = info;
         });
 
