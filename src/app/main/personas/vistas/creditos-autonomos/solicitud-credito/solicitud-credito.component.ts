@@ -142,13 +142,11 @@ export class SolicitudCreditoComponent implements OnInit {
 
     calcularEdad() {
         const edad = moment().diff(this.persForm.fechaNacimiento.value[0], 'years');
-        console.log('edad', edad);
         let valido = false;
         if (edad < 18) {
             valido = true;
             this.personaForm.get('fechaNacimiento').setErrors({valid: false});
 
-            console.log('menor de edad', valido);
         }
     }
 
@@ -217,7 +215,6 @@ export class SolicitudCreditoComponent implements OnInit {
         if (this.personaForm.invalid) {
             return;
         }
-        console.log('this.personaForm.value', (new Date(this.personaForm.value.fechaNacimiento)).getFullYear());
         this.personaForm.value.fechaNacimiento = '' + new Date(this.personaForm.value.fechaNacimiento).getFullYear() + '-' + new Date(this.personaForm.value.fechaNacimiento).getMonth() + '-' + new Date(this.personaForm.value.fechaNacimiento).getDay();
         const persona = {
             ...this.personaForm.value,
@@ -230,7 +227,6 @@ export class SolicitudCreditoComponent implements OnInit {
         };
         this._creditosAutonomosService.guardarInformacion(persona)
             .subscribe((info) => {
-                console.log('guardo');
                 this.estado.emit(3);
             });
     }

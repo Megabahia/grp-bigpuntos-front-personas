@@ -65,7 +65,6 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getInfo();
-    console.log(localStorage.getItem('credito'));
     this.solicitarCredito = localStorage.getItem('credito') !== null ? JSON.parse(localStorage.getItem('credito')) : this.inicialidarSolicitudCredito();
     // Subscribe to config changes
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
