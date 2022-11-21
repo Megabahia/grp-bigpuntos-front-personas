@@ -89,8 +89,8 @@ export class SolicitudCreditoComponent implements OnInit {
                 tipoIdentificacion: ['', [Validators.required]],
                 documento: [this.usuario.identificacion, Validators.required],
                 fechaSolicitud: [fechaSolicitud, Validators.required],
-                nombres: ['', [Validators.required, Validators.pattern('^([A-Za-z]){4,25}$')]],
-                apellidos: ['', [Validators.required, Validators.pattern('^([A-Za-z]){4,25}$')]],
+                nombres: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){4,25}$')]],
+                apellidos: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){4,25}$')]],
                 fechaNacimiento: [Validators.required],
                 nivelInstruccion: [this.usuario.nivelInstruccion, Validators.required],
                 tipoVivienda: [this.usuario.tipoVivienda, Validators.required],
@@ -101,17 +101,17 @@ export class SolicitudCreditoComponent implements OnInit {
             }
         );
         this.ocupacionSolicitanteForm = this._formBuilder.group({
-            nombreNegocio: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9]){1,50}$')]],
-            direccionNegocio: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9]){1,50}$')]],
-            tiempoTrabajo: ['', [Validators.required, Validators.pattern('^([0-9])$')]],
-            cargoDesempeno: ['', [Validators.required, Validators.pattern('^([A-Za-z]){4,25}$')]],
+            nombreNegocio: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9 ]){1,50}$')]],
+            direccionNegocio: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9 ]){1,50}$')]],
+            tiempoTrabajo: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+            cargoDesempeno: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){4,25}$')]],
             sueldoPercibe: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
         });
         this.referenciasSolicitanteForm = this._formBuilder.group({
-            referenciaSolicitante: ['', [Validators.required, Validators.pattern('^([A-Za-z]){4,50}$')]],
-            nombre: ['', [Validators.required, Validators.pattern('^([A-Za-z]){1,50}$')]],
-            apellido: ['', [Validators.required, Validators.pattern('^([A-Za-z]){1,50}$')]],
-            direccion: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9]){1,50}$')]],
+            referenciaSolicitante: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){4,50}$')]],
+            nombre: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){1,50}$')]],
+            apellido: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){1,50}$')]],
+            direccion: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9 ]){1,50}$')]],
             telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
         });
         this.ingresosSolicitanteForm = this._formBuilder.group({
