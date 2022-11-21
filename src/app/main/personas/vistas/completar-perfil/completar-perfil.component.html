@@ -65,11 +65,9 @@
                                 <label for="documento">Número de identificación</label>
                                 <input formControlName="documento" type="text" class="form-control"
                                        [ngClass]="{ 'is-invalid': submitted && f.documento.errors }">
-
                                 <div *ngIf="submitted && f.documento.errors" class="invalid-feedback">
                                     <div *ngIf="f.documento.errors.required">Identificación es requerida</div>
                                     <div *ngIf="f.documento.errors.pattern">Identificación es requerida</div>
-
                                 </div>
                                 <div *ngIf="!f.documento.errors?.validoCed" class="invalid-feedback">Documento no valido
                                 </div>

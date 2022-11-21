@@ -220,8 +220,6 @@ export class CompletarPerfilComponent implements OnInit {
 
     guardarRegistro() {
         let wppAux = '';
-        console.log('this.registerForm.get', this.registerForm);
-        console.log('this.registerForm.getRawValue().documento', this.registerForm.value.documento);
         if (this.registerForm.value.tipoIdentificacion === 'Cédula') {
             this.validadorDeCedula(this.registerForm.value.documento);
         }
@@ -254,6 +252,11 @@ export class CompletarPerfilComponent implements OnInit {
                 ).subscribe(infoCambio => {
                         this.usuario.estado = '3';
                         this.usuario.persona = info;
+                        if (info.error) {
+                            this.mensaje = 'Ha ocurrido un error: ' + info?.error;
+                            this.abrirModal(this.mensajeModal);
+                            return;
+                        }
                         localStorage.setItem('grpPersonasUser', JSON.stringify(this.usuario));
                         this.modalWhatsapp(this.whatsapp);
                     },

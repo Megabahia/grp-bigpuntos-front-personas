@@ -30,7 +30,7 @@ export class SolicitudCreditoComponent implements OnInit {
     public tipoIdentificacion = [];
     public menorEdad = false;
     private _unsubscribeAll: Subject<any>;
-
+    public nombreDueno = false;
     public submittedPersona = false;
 
     public startDateOptions: FlatpickrOptions = {
@@ -94,42 +94,42 @@ export class SolicitudCreditoComponent implements OnInit {
                 fechaNacimiento: [Validators.required],
                 nivelInstruccion: [this.usuario.nivelInstruccion, Validators.required],
                 tipoVivienda: [this.usuario.tipoVivienda, Validators.required],
-                nombreDueno: [this.usuario.nombreDueno, Validators.required],
+                nombreDueno: [this.usuario.nombreDueno],
                 direccionDomicilio: [this.usuario.direccionDomicilio, Validators.required],
                 referenciaDomicilio: [this.usuario.referenciaDomicilio, Validators.required],
                 estadoCivil: [this.usuario.estadoCivil],
             }
         );
         this.ocupacionSolicitanteForm = this._formBuilder.group({
-            nombreNegocio: ['', Validators.required],
-            direccionNegocio: ['', Validators.required],
-            tiempoTrabajo: ['', Validators.required],
-            cargoDesempeno: ['', Validators.required],
-            sueldoPercibe: ['', Validators.required],
+            nombreNegocio: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9]){1,50}$')]],
+            direccionNegocio: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9]){1,50}$')]],
+            tiempoTrabajo: ['', [Validators.required, Validators.pattern('^([0-9])$')]],
+            cargoDesempeno: ['', [Validators.required, Validators.pattern('^([A-Za-z]){4,25}$')]],
+            sueldoPercibe: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
         });
         this.referenciasSolicitanteForm = this._formBuilder.group({
-            referenciaSolicitante: ['', Validators.required],
-            nombre: ['', Validators.required],
-            apellido: ['', Validators.required],
-            direccion: ['', Validators.required],
-            telefono: ['', Validators.required],
+            referenciaSolicitante: ['', [Validators.required, Validators.pattern('^([A-Za-z]){4,50}$')]],
+            nombre: ['', [Validators.required, Validators.pattern('^([A-Za-z]){1,50}$')]],
+            apellido: ['', [Validators.required, Validators.pattern('^([A-Za-z]){1,50}$')]],
+            direccion: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9]){1,50}$')]],
+            telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
         });
         this.ingresosSolicitanteForm = this._formBuilder.group({
-            sueldoMensual: ['', Validators.required],
-            sueldoConyuge: ['', Validators.required],
-            otrosIngresos: ['', Validators.required],
+            sueldoMensual: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+            sueldoConyuge: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+            otrosIngresos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
             descripcion: ['', Validators.required],
         });
         this.gastosSolicitanteForm = this._formBuilder.group({
-            alimentacion: ['', Validators.required],
-            arriendo: ['', Validators.required],
-            vestido: ['', Validators.required],
-            trasporte: ['', Validators.required],
-            serviciosBasicos: ['', Validators.required],
-            medicina: ['', Validators.required],
-            educacion: ['', Validators.required],
-            otrosPrestamos: ['', Validators.required],
-            otrosGastos: ['', Validators.required],
+            alimentacion: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+            arriendo: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+            vestido: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+            trasporte: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+            serviciosBasicos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+            medicina: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+            educacion: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+            otrosPrestamos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+            otrosGastos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
             descripcion: ['', Validators.required],
         });
         this.obtenerListas();
@@ -189,6 +189,15 @@ export class SolicitudCreditoComponent implements OnInit {
         }
         if (!cedulaCorrecta) {
             this.personaForm.get('documento').setErrors({valido: cedulaCorrecta});
+        }
+    }
+
+    tipoViviendaSelected() {
+        console.log(this.personaForm.get('tipoVivienda').value);
+        if (this.personaForm.get('tipoVivienda').value === 'Propia') {
+            this.nombreDueno = false;
+        } else {
+            this.nombreDueno = true;
         }
     }
 
