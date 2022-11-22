@@ -78,8 +78,9 @@ export class VideoExplicativoAutComponent implements OnInit {
         const montoCreditoFinal = localStorage.getItem('montoCreditoFinal');
         this.paramService.obtenerListaPadresSinToken('DESCRIPCION_VIDEO_INFORMATIVO').subscribe((info) => {
             this.requisitos = info[0];
-            this.requisitos.config = this.requisitos.config[0].slice(1, -1).toString().split(',').map(item => {
-                return item.replace(/'/g, '').replace('${{montoCreditoFinal}}', montoCreditoFinal)
+            console.log(typeof this.requisitos.config);
+            this.requisitos.config = this.requisitos.config.map(item => {
+                return item.replace('${{montoCreditoFinal}}', montoCreditoFinal)
                   .replace('${{cuotaMensual}}', cuotaMensual);
             });
         });
