@@ -134,8 +134,8 @@
                                                         id="estadoCivil"
                                                         (change)="tipoEstadocivilSelected()"
                                                         [ngClass]="{ 'is-invalid': submittedPersona && persForm.estadoCivil.errors }">
-                                                    <option>- Seleccionar -</option>
-                                                    <option *ngFor="let value of estadoCivilOptions">
+                                                    <option value="">- Seleccionar -</option>
+                                                    <option   value="{{value.nombre}}" *ngFor="let value of estadoCivilOptions">
                                                         {{value.nombre}}
                                                     </option>
                                                 </select>
@@ -399,8 +399,8 @@
                                             <h4>REFERENCIAS DEL SOLICITANTE</h4>
                                         </div>
                                     </div>
-                                    <div formArrayName="refenciasSolicitantes">
-                                        <div *ngFor="let referencia of personaForm.get('refenciasSolicitantes')['controls']; let i = index">
+                                    <div formArrayName="referenciasSolicitante">
+                                        <div *ngFor="let referencia of personaForm.get('referenciasSolicitante')['controls']; let i = index">
                                             <div [formGroup]="referencia">
                                                 <div class="row">
                                                     <div class="col-md-12 my-1">
