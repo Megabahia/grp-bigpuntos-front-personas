@@ -1,9 +1,9 @@
 <!-- Error page-->
-<section class="head-LP text-LP">
+<section class="">
   <div class="container pb-5">
     <div class="row align-items-center py-5">
       <div class="col-md-12 text-center mb-4">
-        <img src="../../../../assets/images/logo/logo.png" width="120">
+        <img src="{{ coreConfig.app.appLogoImage }}" width="300">
         <h1 class="yellow2 mt-4 text-bold">Big Puntos</h1>
         <h4 class="azul2 mt-2">!Los puntos para vivir!</h4>
       </div>
@@ -32,13 +32,13 @@
 
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="text-center col-md-6">
         <h3 class="azul mt-5 text-bold">¿Qué son las Big Puntos?</h3>
         <p class="font-size-20 mt-4">Son monedas virtuales que acumulas por visitar un lugar y adquirir sus productos
         </p>
       </div>
 
-      <div class="col-md-6">
+      <div class="text-center col-md-6">
         <h3 class="azul mt-5 text-bold">¿Para qué Sirven las Big Puntos?</h3>
         <p class="font-size-20 mt-4">Sirven para canjear tus productos pagando menos dinero en efectivo</p>
       </div>
@@ -91,7 +91,9 @@
   </div>
 </section>
 
-<div class="footer-LP"></div>
+<div class="text-center my-3">
+  <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px" width="50px">
+</div>
 <ng-template #mensajeModal let-modal>
   <div class="modal-header">
     <h5 class="modal-title" id="exampleModalCenterTitle">Mensaje</h5>

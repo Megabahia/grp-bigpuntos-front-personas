@@ -86,11 +86,11 @@ export class PagesViewsComponent implements OnInit {
         );
 
         // Subscribe to config changes
-        /*    this._coreConfigService.config
+        this._coreConfigService.config
           .pipe(takeUntil(this._unsubscribeAll))
           .subscribe((config) => {
             this.coreConfig = config;
-          }); */
+          });
     }
 
     codeConfir(code, codeaux: string) {
