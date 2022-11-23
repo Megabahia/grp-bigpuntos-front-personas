@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FlatpickrOptions} from 'ng2-flatpickr';
 import {CoreConfigService} from '../../../../../../@core/services/config.service';
 import {ParametrizacionesService} from '../../../servicios/parametrizaciones.service';
@@ -20,10 +20,6 @@ export class SolicitudCreditoComponent implements OnInit {
     public usuario;
     public user_id;
     public personaForm: FormGroup;
-    public ocupacionSolicitanteForm: FormGroup;
-    public referenciasSolicitanteForm: FormGroup;
-    public ingresosSolicitanteForm: FormGroup;
-    public gastosSolicitanteForm: FormGroup;
     public tipoNivelInstrucciones = [];
     public tipoViviendas = [];
     public tipoPersona = [];
@@ -61,19 +57,19 @@ export class SolicitudCreditoComponent implements OnInit {
     }
 
     get ocuSolicitanteForm() {
-        return this.ocupacionSolicitanteForm.controls;
+        return this.personaForm.get('ocupacionSolicitante')['controls'];
     }
 
     get refeSolicitanteForm() {
-        return this.referenciasSolicitanteForm.controls;
+        return this.personaForm.controls['refenciasSolicitantes'] as FormArray;
     }
 
     get ingreSolicitanteForm() {
-        return this.ingresosSolicitanteForm.controls;
+        return this.personaForm.get('ingresosSolicitante')['controls'];
     }
 
     get gasSolicitanteForm() {
-        return this.gastosSolicitanteForm.controls;
+        return this.personaForm.get('gastosSolicitante')['controls'];
     }
 
     ngOnInit(): void {
@@ -94,47 +90,63 @@ export class SolicitudCreditoComponent implements OnInit {
                 direccionDomicilio: [this.usuario.direccionDomicilio, [Validators.required, Validators.pattern('^([A-Za-z0-9 ]){20,50}$')]],
                 referenciaDomicilio: [this.usuario.referenciaDomicilio, Validators.required],
                 estadoCivil: [this.usuario.estadoCivil, Validators.required],
+            ocupacionSolicitante: this._formBuilder.group({
+                nombreNegocio: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9 ]){1,50}$')]],
+                direccionNegocio: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9 ]){1,50}$')]],
+                tiempoTrabajo: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+                cargoDesempeno: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){4,25}$')]],
+                sueldoPercibe: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+            }),
+            refenciasSolicitantes: this._formBuilder.array([
+                this._formBuilder.group({
+                    referenciaSolicitante: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){4,50}$')]],
+                    nombre: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){1,50}$')]],
+                    apellido: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){1,50}$')]],
+                    direccion: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9 ]){1,50}$')]],
+                    telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+                }),
+                this._formBuilder.group({
+                    referenciaSolicitante: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){4,50}$')]],
+                    nombre: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){1,50}$')]],
+                    apellido: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){1,50}$')]],
+                    direccion: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9 ]){1,50}$')]],
+                    telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+                }),
+                this._formBuilder.group({
+                    referenciaSolicitante: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){4,50}$')]],
+                    nombre: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){1,50}$')]],
+                    apellido: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){1,50}$')]],
+                    direccion: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9 ]){1,50}$')]],
+                    telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+                })
+            ]),
+            ingresosSolicitante: this._formBuilder.group({
+                sueldoMensual: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+                sueldoConyuge: ['', [Validators.pattern('^([0-9])*$')]],
+                otrosIngresos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+                descripcion: ['', Validators.required],
+            }),
+            gastosSolicitante: this._formBuilder.group({
+                alimentacion: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+                arriendo: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+                vestido: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+                trasporte: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+                serviciosBasicos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+                medicina: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+                educacion: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+                otrosPrestamos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+                otrosGastos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+                descripcion: ['', Validators.required],
+            })
             }
         );
-        this.ocupacionSolicitanteForm = this._formBuilder.group({
-            nombreNegocio: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9 ]){1,50}$')]],
-            direccionNegocio: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9 ]){1,50}$')]],
-            tiempoTrabajo: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-            cargoDesempeno: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){4,25}$')]],
-            sueldoPercibe: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-        });
-        this.referenciasSolicitanteForm = this._formBuilder.group({
-            referenciaSolicitante: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){4,50}$')]],
-            nombre: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){1,50}$')]],
-            apellido: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){1,50}$')]],
-            direccion: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9 ]){1,50}$')]],
-            telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-        });
-        this.ingresosSolicitanteForm = this._formBuilder.group({
-            sueldoMensual: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-            sueldoConyuge: ['', [Validators.pattern('^([0-9])+$')]],
-            otrosIngresos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-            descripcion: ['', Validators.required],
-        });
-        this.gastosSolicitanteForm = this._formBuilder.group({
-            alimentacion: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-            arriendo: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-            vestido: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-            trasporte: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-            serviciosBasicos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-            medicina: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-            educacion: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-            otrosPrestamos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-            otrosGastos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-            descripcion: ['', Validators.required],
-        });
         this.obtenerListas();
         console.log('this.usuario.', this.usuario);
         this.fecha = this.usuario.fechaNacimiento;
-        this.ocupacionSolicitanteForm.patchValue(JSON.parse(this.usuario.ocupacionSolicitante));
-        this.referenciasSolicitanteForm.patchValue(JSON.parse(this.usuario.referenciasSolicitante));
-        this.ingresosSolicitanteForm.patchValue(JSON.parse(this.usuario.ingresosSolicitante));
-        this.gastosSolicitanteForm.patchValue(JSON.parse(this.usuario.gastosSolicitante));
+        this.personaForm.get('ocupacionSolicitante').patchValue(this.usuario.ocupacionSolicitante);
+        // this.personaForm.get('referenciasSolicitante').patchValue(this.usuario.referenciasSolicitante));
+        this.personaForm.get('ingresosSolicitante').patchValue(this.usuario.ingresosSolicitante);
+        this.personaForm.get('gastosSolicitante').patchValue(this.usuario.gastosSolicitante);
     }
 
 
@@ -249,10 +261,6 @@ export class SolicitudCreditoComponent implements OnInit {
         const persona = {
             identificacion: this.personaForm.get('documento').value,
             ...this.personaForm.value,
-            ocupacionSolicitante: JSON.stringify({...this.ocupacionSolicitanteForm.value}),
-            referenciasSolicitante: JSON.stringify({...this.referenciasSolicitanteForm.value}),
-            ingresosSolicitante: JSON.stringify({...this.ingresosSolicitanteForm.value}),
-            gastosSolicitante: JSON.stringify({...this.gastosSolicitanteForm.value}),
             user_id: this.user_id,
             imagen: []
         };

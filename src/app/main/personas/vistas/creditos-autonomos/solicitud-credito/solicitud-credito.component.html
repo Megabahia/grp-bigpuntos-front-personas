@@ -295,443 +295,452 @@
                                             <hr>
                                         </div>
                                     </div>
-                                </form>
-                                <div class="row">
-                                    <div class="col-md-12 my-1">
-                                        <h4>Ocupación del solicitante</h4>
-                                    </div>
-                                </div>
-                                <form [formGroup]="ocupacionSolicitanteForm">
                                     <div class="row">
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Nombre del negocio o empresa en la que
-                                                    trabaja</label>
-                                                <input type="text" class="form-control" formControlName="nombreNegocio">
-                                                <div *ngIf="submittedPersona && ocuSolicitanteForm.nombreNegocio.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="ocuSolicitanteForm.nombreNegocio.errors.required">
-                                                        Nombre del negocio es requerido
-                                                    </div>
-                                                    <div *ngIf="ocuSolicitanteForm.nombreNegocio.errors.pattern">
-                                                        Ingrese solo letras y números
-                                                    </div>
-
-                                                </div>
-                                            </div>
+                                        <div class="col-md-12 my-1">
+                                            <h4>Ocupación del solicitante</h4>
                                         </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Dirección del negocio o empresa en la que
-                                                    trabaja</label>
-                                                <input type="text" class="form-control"
-                                                       formControlName="direccionNegocio">
-                                                <div *ngIf="submittedPersona && ocuSolicitanteForm.direccionNegocio.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="ocuSolicitanteForm.direccionNegocio.errors.required">
-                                                        Dirección del negocio o empresa en la que trabaja es requerido
-                                                    </div>
-                                                    <div *ngIf="ocuSolicitanteForm.direccionNegocio.errors.pattern">
-                                                        Ingrese solo letras y números
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Tiempo de trabajo en el negocio o empresa en la
-                                                    que trabaja (años)</label>
-                                                <input type="text" class="form-control"
-                                                       formControlName="tiempoTrabajo">
-                                                <div *ngIf="submittedPersona && ocuSolicitanteForm.tiempoTrabajo.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="ocuSolicitanteForm.tiempoTrabajo.errors.required">
-                                                        Tiempo de trabajo en el negocio o empresa en la que trabaja es
-                                                        requerido
-                                                    </div>
-                                                    <div *ngIf="ocuSolicitanteForm.tiempoTrabajo.errors.pattern">
-                                                        Ingrese solo números
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Cargo que desempeña</label>
-                                                <input type="text" class="form-control"
-                                                       formControlName="cargoDesempeno">
-                                                <div *ngIf="submittedPersona && ocuSolicitanteForm.cargoDesempeno.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="ocuSolicitanteForm.cargoDesempeno.errors.required">Cargo
-                                                        que desempeña es requerido
-                                                    </div>
-                                                    <div *ngIf="ocuSolicitanteForm.cargoDesempeno.errors.pattern">
-                                                        Ingrese 4 letras mínimo
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Sueldo que percibe</label>
-                                                <input type="text" class="form-control" formControlName="sueldoPercibe">
-                                                <div *ngIf="submittedPersona && ocuSolicitanteForm.sueldoPercibe.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="ocuSolicitanteForm.sueldoPercibe.errors.required">Sueldo
-                                                        es requerido
-                                                    </div>
-                                                    <div *ngIf="ocuSolicitanteForm.sueldoPercibe.errors.pattern">
-                                                        Ingrese solo números
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </div>
-                                </form>
-                                <div class="row">
-                                    <div class="col-md-12 my-1">
-                                        <h4>REFERENCIAS DEL SOLICITANTE</h4>
+                                    <div formGroupName="ocupacionSolicitante">
+                                            <div class="row">
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Nombre del negocio o empresa en la que
+                                                            trabaja</label>
+                                                        <input type="text" class="form-control" formControlName="nombreNegocio">
+                                                        <div *ngIf="submittedPersona && ocuSolicitanteForm.nombreNegocio.errors"
+                                                             class="invalid-feedback" style="display: block;">
+                                                            <div *ngIf="ocuSolicitanteForm.nombreNegocio.errors.required">
+                                                                Nombre del negocio es requerido
+                                                            </div>
+                                                            <div *ngIf="ocuSolicitanteForm.nombreNegocio.errors.pattern">
+                                                                Ingrese solo letras y números
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Dirección del negocio o empresa en la que
+                                                            trabaja</label>
+                                                        <input type="text" class="form-control"
+                                                               formControlName="direccionNegocio">
+                                                        <div *ngIf="submittedPersona && ocuSolicitanteForm.direccionNegocio.errors"
+                                                             class="invalid-feedback" style="display: block;">
+                                                            <div *ngIf="ocuSolicitanteForm.direccionNegocio.errors.required">
+                                                                Dirección del negocio o empresa en la que trabaja es requerido
+                                                            </div>
+                                                            <div *ngIf="ocuSolicitanteForm.direccionNegocio.errors.pattern">
+                                                                Ingrese solo letras y números
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Tiempo de trabajo en el negocio o empresa en la
+                                                            que trabaja (años)</label>
+                                                        <input type="text" class="form-control"
+                                                               formControlName="tiempoTrabajo">
+                                                        <div *ngIf="submittedPersona && ocuSolicitanteForm.tiempoTrabajo.errors"
+                                                             class="invalid-feedback" style="display: block;">
+                                                            <div *ngIf="ocuSolicitanteForm.tiempoTrabajo.errors.required">
+                                                                Tiempo de trabajo en el negocio o empresa en la que trabaja es
+                                                                requerido
+                                                            </div>
+                                                            <div *ngIf="ocuSolicitanteForm.tiempoTrabajo.errors.pattern">
+                                                                Ingrese solo números
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Cargo que desempeña</label>
+                                                        <input type="text" class="form-control"
+                                                               formControlName="cargoDesempeno">
+                                                        <div *ngIf="submittedPersona && ocuSolicitanteForm.cargoDesempeno.errors"
+                                                             class="invalid-feedback" style="display: block;">
+                                                            <div *ngIf="ocuSolicitanteForm.cargoDesempeno.errors.required">Cargo
+                                                                que desempeña es requerido
+                                                            </div>
+                                                            <div *ngIf="ocuSolicitanteForm.cargoDesempeno.errors.pattern">
+                                                                Ingrese 4 letras mínimo
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Sueldo que percibe</label>
+                                                        <input type="text" class="form-control" formControlName="sueldoPercibe">
+                                                        <div *ngIf="submittedPersona && ocuSolicitanteForm.sueldoPercibe.errors"
+                                                             class="invalid-feedback" style="display: block;">
+                                                            <div *ngIf="ocuSolicitanteForm.sueldoPercibe.errors.required">Sueldo
+                                                                es requerido
+                                                            </div>
+                                                            <div *ngIf="ocuSolicitanteForm.sueldoPercibe.errors.pattern">
+                                                                Ingrese solo números
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                     </div>
-                                </div>
-                                <form [formGroup]="referenciasSolicitanteForm">
+
                                     <div class="row">
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Ingrese el parentesco</label>
-                                                <input type="text" class="form-control"
-                                                       formControlName="referenciaSolicitante">
-                                                <div *ngIf="submittedPersona && refeSolicitanteForm.referenciaSolicitante.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="refeSolicitanteForm.referenciaSolicitante.errors.required">
-                                                        Referencia familiar es requerido
-                                                    </div>
-                                                    <div *ngIf="refeSolicitanteForm.referenciaSolicitante.errors.pattern">
-                                                        Ingrese mínimo 4 letras
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div class="col-md-12 my-1">
+                                            <h4>REFERENCIAS DEL SOLICITANTE</h4>
                                         </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Nombre</label>
-                                                <input type="text" class="form-control"
-                                                       formControlName="nombre">
-                                                <div *ngIf="submittedPersona && refeSolicitanteForm.nombre.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="refeSolicitanteForm.nombre.errors.required">Nombre es
-                                                        requerido
-                                                    </div>
-                                                    <div *ngIf="refeSolicitanteForm.nombre.errors.pattern">
-                                                        Ingrese solo letras
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Apellido</label>
-                                                <input type="text" class="form-control" formControlName="apellido">
-                                                <div *ngIf="submittedPersona && refeSolicitanteForm.apellido.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="refeSolicitanteForm.apellido.errors.required">Apellido
-                                                        es requerido
-                                                    </div>
-                                                    <div *ngIf="refeSolicitanteForm.apellido.errors.pattern">
-                                                        Ingrese solo letras
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Dirección</label>
-                                                <input type="text" class="form-control" formControlName="direccion">
-                                                <div *ngIf="submittedPersona && refeSolicitanteForm.direccion.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="refeSolicitanteForm.direccion.errors.required">Dirección
-                                                        es requerido
-                                                    </div>
-                                                    <div *ngIf="refeSolicitanteForm.direccion.errors.pattern">
-                                                        Ingrese solo letras y números
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Teléfono celular</label>
-                                                <input type="text" class="form-control" formControlName="telefono">
-                                                <div *ngIf="submittedPersona && refeSolicitanteForm.telefono.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="refeSolicitanteForm.telefono.errors.required">Teléfono
-                                                        es requerido
-                                                    </div>
-                                                    <div *ngIf="refeSolicitanteForm.telefono.errors.pattern">
-                                                        Ingrese solo números
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </div>
-                                </form>
-                                <div class="row">
-                                    <div class="col-md-12 my-1">
-                                        <h4>INGRESOS DEL SOLICITANTE</h4>
+                                    <div formArrayName="refenciasSolicitantes">
+                                        <div *ngFor="let referencia of personaForm.get('refenciasSolicitantes')['controls']; let i = index">
+                                            <div [formGroup]="referencia">
+                                                <div class="row">
+                                                    <div class="col-md-12 my-1">
+                                                        <h4>REFERENCIA {{i+1}}</h4>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="referenciaSolicitante[{{i}}]">Ingrese el parentesco</label>
+                                                            <input type="text" class="form-control"
+                                                                   formControlName="referenciaSolicitante">
+                                                            <div *ngIf="submittedPersona && referencia.controls?.referenciaSolicitante?.errors"
+                                                                 class="invalid-feedback" style="display: block;">
+                                                                <div *ngIf="referencia.controls?.referenciaSolicitante?.errors.required">
+                                                                    Referencia familiar es requerido
+                                                                </div>
+                                                                <div *ngIf="referencia.controls?.referenciaSolicitante?.errors.pattern">
+                                                                    Ingrese mínimo 4 letras
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="nombre[{{i}}]">Nombre</label>
+                                                            <input type="text" class="form-control"
+                                                                   formControlName="nombre">
+                                                            <div *ngIf="submittedPersona && referencia.controls?.nombre?.errors"
+                                                                 class="invalid-feedback" style="display: block;">
+                                                                <div *ngIf="referencia.controls?.nombre?.errors.required">Nombre es
+                                                                    requerido
+                                                                </div>
+                                                                <div *ngIf="referencia.controls?.nombre?.errors.pattern">
+                                                                    Ingrese solo letras
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="apellido[{{i}}]">Apellido</label>
+                                                            <input type="text" class="form-control" formControlName="apellido">
+                                                            <div *ngIf="submittedPersona && referencia.controls?.apellido?.errors"
+                                                                 class="invalid-feedback" style="display: block;">
+                                                                <div *ngIf="referencia.controls?.apellido?.errors.required">Apellido
+                                                                    es requerido
+                                                                </div>
+                                                                <div *ngIf="referencia.controls?.apellido?.errors.pattern">
+                                                                    Ingrese solo letras
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="direccion[{{i}}]">Dirección</label>
+                                                            <input type="text" class="form-control" formControlName="direccion">
+                                                            <div *ngIf="submittedPersona && referencia.controls?.direccion?.errors"
+                                                                 class="invalid-feedback" style="display: block;">
+                                                                <div *ngIf="referencia.controls?.direccion?.errors.required">Dirección
+                                                                    es requerido
+                                                                </div>
+                                                                <div *ngIf="referencia.controls?.direccion?.errors.pattern">
+                                                                    Ingrese solo letras y números
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="telefono[{{i}}]">Teléfono celular</label>
+                                                            <input type="text" class="form-control" formControlName="telefono">
+                                                            <div *ngIf="submittedPersona && referencia.controls?.telefono?.errors"
+                                                                 class="invalid-feedback" style="display: block;">
+                                                                <div *ngIf="referencia.controls?.telefono?.errors.required">Teléfono
+                                                                    es requerido
+                                                                </div>
+                                                                <div *ngIf="referencia.controls?.telefono?.errors.pattern">
+                                                                    Ingrese solo números
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <form [formGroup]="ingresosSolicitanteForm">
+
                                     <div class="row">
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Sueldo mensual</label>
-                                                <input type="text" class="form-control" formControlName="sueldoMensual">
-                                                <div *ngIf="submittedPersona && ingreSolicitanteForm.sueldoMensual.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="ingreSolicitanteForm.sueldoMensual.errors.required">
-                                                        Sueldo mensual es requerido
-                                                    </div>
-                                                    <div *ngIf="ingreSolicitanteForm.sueldoMensual.errors.pattern">
-                                                        Ingrese solo números
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div class="col-md-12 my-1">
+                                            <h4>INGRESOS DEL SOLICITANTE</h4>
                                         </div>
-
-                                        <div class="col-md-3" *ngIf="casado">
-                                            <div class="form-group">
-                                                <label>Sueldo cónyuge</label>
-                                                <input type="text" class="form-control"
-                                                       formControlName="sueldoConyuge">
-                                                <div *ngIf="submittedPersona && ingreSolicitanteForm.sueldoConyuge.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="ingreSolicitanteForm.sueldoConyuge.errors.required">
-                                                        Sueldo cónyuge es requerido
-                                                    </div>
-                                                    <div *ngIf="ingreSolicitanteForm.sueldoMensual.errors.pattern">
-                                                        Ingrese solo números
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Otros ingresos</label>
-                                                <input type="text" class="form-control" formControlName="otrosIngresos">
-                                                <div *ngIf="submittedPersona && ingreSolicitanteForm.otrosIngresos.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="ingreSolicitanteForm.otrosIngresos.errors.required">
-                                                        Otros ingresos es requerido
-                                                    </div>
-                                                    <div *ngIf="ingreSolicitanteForm.otrosIngresos.errors.pattern">
-                                                        Ingrese solo números
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Especifique otros ingresos (ejemplo: vendo
-                                                    artículos de revista en mi tiempo libre, etc.)</label>
-                                                <input type="text" class="form-control" formControlName="descripcion">
-                                                <div *ngIf="submittedPersona && ingreSolicitanteForm.descripcion.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="ingreSolicitanteForm.descripcion.errors.required">
-                                                        Especifique otros ingresos es requerido
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </div>
-                                </form>
-                                <div class="row">
-                                    <div class="col-md-12 my-1">
-                                        <h4>GASTOS DEL SOLICITANTE</h4>
+                                    <div formGroupName="ingresosSolicitante">
+                                        <div class="row">
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Sueldo mensual</label>
+                                                    <input type="text" class="form-control" formControlName="sueldoMensual">
+                                                    <div *ngIf="submittedPersona && ingreSolicitanteForm.sueldoMensual.errors"
+                                                         class="invalid-feedback" style="display: block;">
+                                                        <div *ngIf="ingreSolicitanteForm.sueldoMensual.errors.required">
+                                                            Sueldo mensual es requerido
+                                                        </div>
+                                                        <div *ngIf="ingreSolicitanteForm.sueldoMensual.errors.pattern">
+                                                            Ingrese solo números
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3" *ngIf="casado">
+                                                <div class="form-group">
+                                                    <label>Sueldo cónyuge</label>
+                                                    <input type="text" class="form-control"
+                                                           formControlName="sueldoConyuge">
+                                                    <div *ngIf="submittedPersona && ingreSolicitanteForm.sueldoConyuge.errors"
+                                                         class="invalid-feedback" style="display: block;">
+                                                        <div *ngIf="ingreSolicitanteForm.sueldoConyuge.errors.required">
+                                                            Sueldo cónyuge es requerido
+                                                        </div>
+                                                        <div *ngIf="ingreSolicitanteForm.sueldoMensual.errors.pattern">
+                                                            Ingrese solo números
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Otros ingresos</label>
+                                                    <input type="text" class="form-control" formControlName="otrosIngresos">
+                                                    <div *ngIf="submittedPersona && ingreSolicitanteForm.otrosIngresos.errors"
+                                                         class="invalid-feedback" style="display: block;">
+                                                        <div *ngIf="ingreSolicitanteForm.otrosIngresos.errors.required">
+                                                            Otros ingresos es requerido
+                                                        </div>
+                                                        <div *ngIf="ingreSolicitanteForm.otrosIngresos.errors.pattern">
+                                                            Ingrese solo números
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Especifique otros ingresos (ejemplo: vendo
+                                                        artículos de revista en mi tiempo libre, etc.)</label>
+                                                    <input type="text" class="form-control" formControlName="descripcion">
+                                                    <div *ngIf="submittedPersona && ingreSolicitanteForm.descripcion.errors"
+                                                         class="invalid-feedback" style="display: block;">
+                                                        <div *ngIf="ingreSolicitanteForm.descripcion.errors.required">
+                                                            Especifique otros ingresos es requerido
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
-                                </div>
-                                <form [formGroup]="gastosSolicitanteForm">
                                     <div class="row">
+                                        <div class="col-md-12 my-1">
+                                            <h4>GASTOS DEL SOLICITANTE</h4>
+                                        </div>
+                                    </div>
+                                    <div formGroupName="gastosSolicitante">
+                                        <div class="row">
 
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Alimentación</label>
-                                                <input type="text" class="form-control" formControlName="alimentacion">
-                                                <div *ngIf="submittedPersona && gasSolicitanteForm.alimentacion.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="gasSolicitanteForm.alimentacion.errors.required">
-                                                        Alimentación es requerido
-                                                    </div>
-                                                    <div *ngIf="gasSolicitanteForm.alimentacion.errors.pattern">
-                                                        Ingrese solo números
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Alimentación</label>
+                                                    <input type="text" class="form-control" formControlName="alimentacion">
+                                                    <div *ngIf="submittedPersona && gasSolicitanteForm.alimentacion.errors"
+                                                         class="invalid-feedback" style="display: block;">
+                                                        <div *ngIf="gasSolicitanteForm.alimentacion.errors.required">
+                                                            Alimentación es requerido
+                                                        </div>
+                                                        <div *ngIf="gasSolicitanteForm.alimentacion.errors.pattern">
+                                                            Ingrese solo números
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Arriendo (ingrese 0 si es propia)</label>
-                                                <input type="text" class="form-control"
-                                                       formControlName="arriendo">
-                                                <div *ngIf="submittedPersona && gasSolicitanteForm.arriendo.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="gasSolicitanteForm.arriendo.errors.required">
-                                                        Arriendo es requerido
-                                                    </div>
-                                                    <div *ngIf="gasSolicitanteForm.arriendo.errors.pattern">
-                                                        Ingrese solo números
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Arriendo (ingrese 0 si es propia)</label>
+                                                    <input type="text" class="form-control"
+                                                           formControlName="arriendo">
+                                                    <div *ngIf="submittedPersona && gasSolicitanteForm.arriendo.errors"
+                                                         class="invalid-feedback" style="display: block;">
+                                                        <div *ngIf="gasSolicitanteForm.arriendo.errors.required">
+                                                            Arriendo es requerido
+                                                        </div>
+                                                        <div *ngIf="gasSolicitanteForm.arriendo.errors.pattern">
+                                                            Ingrese solo números
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Vestido</label>
-                                                <input type="text" class="form-control" formControlName="vestido">
-                                                <div *ngIf="submittedPersona && gasSolicitanteForm.vestido.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="gasSolicitanteForm.vestido.errors.required">
-                                                        Vestido es requerido
-                                                    </div>
-                                                    <div *ngIf="gasSolicitanteForm.vestido.errors.pattern">
-                                                        Ingrese solo números
-                                                    </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Vestido</label>
+                                                    <input type="text" class="form-control" formControlName="vestido">
+                                                    <div *ngIf="submittedPersona && gasSolicitanteForm.vestido.errors"
+                                                         class="invalid-feedback" style="display: block;">
+                                                        <div *ngIf="gasSolicitanteForm.vestido.errors.required">
+                                                            Vestido es requerido
+                                                        </div>
+                                                        <div *ngIf="gasSolicitanteForm.vestido.errors.pattern">
+                                                            Ingrese solo números
+                                                        </div>
 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Transporte</label>
-                                                <input type="text" class="form-control" formControlName="trasporte">
-                                                <div *ngIf="submittedPersona && gasSolicitanteForm.trasporte.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="gasSolicitanteForm.trasporte.errors.required">
-                                                        Transporte es requerido
-                                                    </div>
-                                                    <div *ngIf="gasSolicitanteForm.trasporte.errors.pattern">
-                                                        Ingrese solo números
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Servicios básicos</label>
-                                                <input type="text" class="form-control"
-                                                       formControlName="serviciosBasicos">
-                                                <div *ngIf="submittedPersona && gasSolicitanteForm.serviciosBasicos.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="gasSolicitanteForm.serviciosBasicos.errors.required">
-                                                        Servicios básicos es requerido
-                                                    </div>
-                                                    <div *ngIf="gasSolicitanteForm.serviciosBasicos.errors.pattern">
-                                                        Ingrese solo números
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Transporte</label>
+                                                    <input type="text" class="form-control" formControlName="trasporte">
+                                                    <div *ngIf="submittedPersona && gasSolicitanteForm.trasporte.errors"
+                                                         class="invalid-feedback" style="display: block;">
+                                                        <div *ngIf="gasSolicitanteForm.trasporte.errors.required">
+                                                            Transporte es requerido
+                                                        </div>
+                                                        <div *ngIf="gasSolicitanteForm.trasporte.errors.pattern">
+                                                            Ingrese solo números
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Medicina </label>
-                                                <input type="text" class="form-control" formControlName="medicina">
-                                                <div *ngIf="submittedPersona && gasSolicitanteForm.medicina.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="gasSolicitanteForm.medicina.errors.required">
-                                                        Medicina es requerido
-                                                    </div>
-                                                    <div *ngIf="gasSolicitanteForm.medicina.errors.pattern">
-                                                        Ingrese solo números
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Servicios básicos</label>
+                                                    <input type="text" class="form-control"
+                                                           formControlName="serviciosBasicos">
+                                                    <div *ngIf="submittedPersona && gasSolicitanteForm.serviciosBasicos.errors"
+                                                         class="invalid-feedback" style="display: block;">
+                                                        <div *ngIf="gasSolicitanteForm.serviciosBasicos.errors.required">
+                                                            Servicios básicos es requerido
+                                                        </div>
+                                                        <div *ngIf="gasSolicitanteForm.serviciosBasicos.errors.pattern">
+                                                            Ingrese solo números
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Educación</label>
-                                                <input type="text" class="form-control" formControlName="educacion">
-                                                <div *ngIf="submittedPersona && gasSolicitanteForm.educacion.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="gasSolicitanteForm.educacion.errors.required">
-                                                        Educación es requerido
-                                                    </div>
-                                                    <div *ngIf="gasSolicitanteForm.educacion.errors.pattern">
-                                                        Ingrese solo números
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Medicina </label>
+                                                    <input type="text" class="form-control" formControlName="medicina">
+                                                    <div *ngIf="submittedPersona && gasSolicitanteForm.medicina.errors"
+                                                         class="invalid-feedback" style="display: block;">
+                                                        <div *ngIf="gasSolicitanteForm.medicina.errors.required">
+                                                            Medicina es requerido
+                                                        </div>
+                                                        <div *ngIf="gasSolicitanteForm.medicina.errors.pattern">
+                                                            Ingrese solo números
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Otros préstamos (ingrese el valor mensual)</label>
-                                                <input type="text" class="form-control"
-                                                       formControlName="otrosPrestamos">
-                                                <div *ngIf="submittedPersona && gasSolicitanteForm.otrosPrestamos.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="gasSolicitanteForm.otrosPrestamos.errors.required">Otros
-                                                        préstamos es requerido
-                                                    </div>
-                                                    <div *ngIf="gasSolicitanteForm.otrosPrestamos.errors.pattern">
-                                                        Ingrese solo números
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Educación</label>
+                                                    <input type="text" class="form-control" formControlName="educacion">
+                                                    <div *ngIf="submittedPersona && gasSolicitanteForm.educacion.errors"
+                                                         class="invalid-feedback" style="display: block;">
+                                                        <div *ngIf="gasSolicitanteForm.educacion.errors.required">
+                                                            Educación es requerido
+                                                        </div>
+                                                        <div *ngIf="gasSolicitanteForm.educacion.errors.pattern">
+                                                            Ingrese solo números
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Otros gastos</label>
-                                                <input type="text" class="form-control" formControlName="otrosGastos">
-                                                <div *ngIf="submittedPersona && gasSolicitanteForm.otrosGastos.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="gasSolicitanteForm.otrosGastos.errors.required">Otros
-                                                        gastos es requerido
-                                                    </div>
-                                                    <div *ngIf="gasSolicitanteForm.otrosGastos.errors.pattern">
-                                                        Ingrese solo números
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Especifique otros gastos ejemplo: colegiaturas
-                                                    divididas, cuidados a terceras personas, etc.)
-                                                </label>
-                                                <input type="text" class="form-control" formControlName="descripcion">
-                                                <div *ngIf="submittedPersona && gasSolicitanteForm.descripcion.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="gasSolicitanteForm.descripcion.errors.required">
-                                                        Especifique otros gastos es requerido
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Otros préstamos (ingrese el valor mensual)</label>
+                                                    <input type="text" class="form-control"
+                                                           formControlName="otrosPrestamos">
+                                                    <div *ngIf="submittedPersona && gasSolicitanteForm.otrosPrestamos.errors"
+                                                         class="invalid-feedback" style="display: block;">
+                                                        <div *ngIf="gasSolicitanteForm.otrosPrestamos.errors.required">Otros
+                                                            préstamos es requerido
+                                                        </div>
+                                                        <div *ngIf="gasSolicitanteForm.otrosPrestamos.errors.pattern">
+                                                            Ingrese solo números
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Otros gastos</label>
+                                                    <input type="text" class="form-control" formControlName="otrosGastos">
+                                                    <div *ngIf="submittedPersona && gasSolicitanteForm.otrosGastos.errors"
+                                                         class="invalid-feedback" style="display: block;">
+                                                        <div *ngIf="gasSolicitanteForm.otrosGastos.errors.required">Otros
+                                                            gastos es requerido
+                                                        </div>
+                                                        <div *ngIf="gasSolicitanteForm.otrosGastos.errors.pattern">
+                                                            Ingrese solo números
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Especifique otros gastos ejemplo: colegiaturas
+                                                        divididas, cuidados a terceras personas, etc.)
+                                                    </label>
+                                                    <input type="text" class="form-control" formControlName="descripcion">
+                                                    <div *ngIf="submittedPersona && gasSolicitanteForm.descripcion.errors"
+                                                         class="invalid-feedback" style="display: block;">
+                                                        <div *ngIf="gasSolicitanteForm.descripcion.errors.required">
+                                                            Especifique otros gastos es requerido
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </form>
+
                                 <div class="row">
                                     <div class="col-12 d-flex flex-sm-row flex-column mt-2 d-flex justify-content-center">
                                         <a href="javascript:void(0)"
