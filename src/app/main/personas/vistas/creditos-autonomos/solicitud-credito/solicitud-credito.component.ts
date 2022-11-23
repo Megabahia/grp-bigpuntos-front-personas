@@ -26,12 +26,15 @@ export class SolicitudCreditoComponent implements OnInit {
     public gastosSolicitanteForm: FormGroup;
     public tipoNivelInstrucciones = [];
     public tipoViviendas = [];
+    public tipoPersona = [];
     public fecha;
     public tipoIdentificacion = [];
     public menorEdad = false;
     private _unsubscribeAll: Subject<any>;
     public nombreDueno = false;
+    public casado = false;
     public submittedPersona = false;
+    public estadoCivilOptions = [];
 
     public startDateOptions: FlatpickrOptions = {
         defaultDate: 'today',
@@ -74,30 +77,23 @@ export class SolicitudCreditoComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // this.paramService.obtenerListaPadres('GENERO').subscribe((info) => {
-        //     this.generos = info;
-        // });
-        this.paramService.obtenerListaPadres('TIPO_IDENTIFICACION').subscribe((info) => {
-            this.tipoIdentificacion = info;
-        });
-        this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
-            this.coreConfig = config;
-        });
-        const fechaSolicitud = moment().format('L');
 
+        const fechaSolicitud = moment().format('L');
         this.personaForm = this._formBuilder.group({
-                tipoIdentificacion: ['', [Validators.required]],
+                tipoIdentificacion: [this.usuario.tipoIdentificacion, [Validators.required]],
+                tipoPersona: [this.usuario.tipoPersona, [Validators.required]],
                 documento: [this.usuario.identificacion, Validators.required],
                 fechaSolicitud: [fechaSolicitud, Validators.required],
-                nombres: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){4,25}$')]],
-                apellidos: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){4,25}$')]],
-                fechaNacimiento: [Validators.required],
+                nombres: [this.usuario.nombres, [Validators.required, Validators.pattern('^([A-Za-z ]){4,25}$')]],
+                apellidos: [this.usuario.apellidos, [Validators.required, Validators.pattern('^([A-Za-z ]){4,25}$')]],
+                fechaNacimiento: [this.usuario.fechaNacimiento, [Validators.required]],
                 nivelInstruccion: [this.usuario.nivelInstruccion, Validators.required],
                 tipoVivienda: [this.usuario.tipoVivienda, Validators.required],
-                nombreDueno: [this.usuario.nombreDueno],
-                direccionDomicilio: [this.usuario.direccionDomicilio, Validators.required],
+                nombreDueno: [this.usuario.nombreDueno, [Validators.pattern('^([A-Za-z ]){8,50}$')]],
+                whatsappDueno: ['', [Validators.pattern('^([0-9])+$')]],
+                direccionDomicilio: [this.usuario.direccionDomicilio, [Validators.required, Validators.pattern('^([A-Za-z0-9 ]){20,50}$')]],
                 referenciaDomicilio: [this.usuario.referenciaDomicilio, Validators.required],
-                estadoCivil: [this.usuario.estadoCivil],
+                estadoCivil: [this.usuario.estadoCivil, Validators.required],
             }
         );
         this.ocupacionSolicitanteForm = this._formBuilder.group({
@@ -116,7 +112,7 @@ export class SolicitudCreditoComponent implements OnInit {
         });
         this.ingresosSolicitanteForm = this._formBuilder.group({
             sueldoMensual: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-            sueldoConyuge: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+            sueldoConyuge: ['', [Validators.pattern('^([0-9])+$')]],
             otrosIngresos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
             descripcion: ['', Validators.required],
         });
@@ -133,10 +129,12 @@ export class SolicitudCreditoComponent implements OnInit {
             descripcion: ['', Validators.required],
         });
         this.obtenerListas();
-        this.ocupacionSolicitanteForm.patchValue(this.usuario.ocupacionSolicitante);
-        this.referenciasSolicitanteForm.patchValue(this.usuario.referenciasSolicitante);
-        this.ingresosSolicitanteForm.patchValue(this.usuario.ingresosSolicitante);
-        this.gastosSolicitanteForm.patchValue(this.usuario.gastosSolicitante);
+        console.log('this.usuario.', this.usuario);
+        this.fecha = this.usuario.fechaNacimiento;
+        this.ocupacionSolicitanteForm.patchValue(JSON.parse(this.usuario.ocupacionSolicitante));
+        this.referenciasSolicitanteForm.patchValue(JSON.parse(this.usuario.referenciasSolicitante));
+        this.ingresosSolicitanteForm.patchValue(JSON.parse(this.usuario.ingresosSolicitante));
+        this.gastosSolicitanteForm.patchValue(JSON.parse(this.usuario.gastosSolicitante));
     }
 
 
@@ -156,6 +154,18 @@ export class SolicitudCreditoComponent implements OnInit {
         });
         this.paramService.obtenerListaPadres('TIPO_VIVIENDA').subscribe((info) => {
             this.tipoViviendas = info;
+        });
+        this.paramService.obtenerListaPadres('ESTADO_CIVIL').subscribe((info) => {
+            this.estadoCivilOptions = info;
+        });
+        this.paramService.obtenerListaPadres('TIPO_PERSONA').subscribe((info) => {
+            this.tipoPersona = info;
+        });
+        this.paramService.obtenerListaPadres('TIPO_IDENTIFICACION').subscribe((info) => {
+            this.tipoIdentificacion = info;
+        });
+        this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
+            this.coreConfig = config;
         });
     }
 
@@ -201,6 +211,14 @@ export class SolicitudCreditoComponent implements OnInit {
         }
     }
 
+    tipoEstadocivilSelected() {
+        if (this.personaForm.get('estadoCivil').value === 'Casado' || this.personaForm.get('estadoCivil').value === 'Unión libre') {
+            this.casado = true;
+        } else {
+            this.casado = false;
+        }
+    }
+
     validadorDePasaporte(pasaporte: String) {
         const ExpRegNumDec = '^([A-Za-z0-9]){4,25}$';
         if (pasaporte.match(ExpRegNumDec) != null) {
@@ -221,11 +239,15 @@ export class SolicitudCreditoComponent implements OnInit {
         }
         this.calcularEdad();
         this.submittedPersona = true;
+
+
         if (this.personaForm.invalid) {
+            console.log('no es valido', this.personaForm);
             return;
         }
         this.personaForm.value.fechaNacimiento = '' + new Date(this.personaForm.value.fechaNacimiento).getFullYear() + '-' + new Date(this.personaForm.value.fechaNacimiento).getMonth() + '-' + new Date(this.personaForm.value.fechaNacimiento).getDay();
         const persona = {
+            identificacion: this.personaForm.get('documento').value,
             ...this.personaForm.value,
             ocupacionSolicitante: JSON.stringify({...this.ocupacionSolicitanteForm.value}),
             referenciasSolicitante: JSON.stringify({...this.referenciasSolicitanteForm.value}),
@@ -234,6 +256,7 @@ export class SolicitudCreditoComponent implements OnInit {
             user_id: this.user_id,
             imagen: []
         };
+        console.log('----personas  ', persona);
         this._creditosAutonomosService.guardarInformacion(persona)
             .subscribe((info) => {
                 this.estado.emit(3);

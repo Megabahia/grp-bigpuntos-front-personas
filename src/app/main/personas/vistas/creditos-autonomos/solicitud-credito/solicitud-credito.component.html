@@ -29,18 +29,49 @@
 
                                 <form [formGroup]="personaForm">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label >Fecha de creación de solicitud</label>
+                                                <label>Fecha de creación de solicitud</label>
                                                 <input type="text" class="form-control" formControlName="fechaSolicitud"
                                                        disabled/>
                                             </div>
                                         </div>
 
 
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label style="color: red">Tipo de persona</label>
+                                                <select formControlName="tipoPersona" class="form-control" id="status"
+                                                        (change)="tipoViviendaSelected()">
+                                                    <option value="">- Seleccione -</option>
+                                                    <option *ngFor="let generoOp of tipoPersona"
+                                                            value="{{generoOp}}">
+                                                        {{generoOp.nombre}}</option>
+
+                                                </select>
+
+                                                <div *ngIf="submittedPersona && persForm.tipoPersona.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="persForm.tipoPersona.errors.required">Tipo de persona
+                                                        es requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <hr>
+                                        </div>
+<!--                                        &#45;&#45;&#45;&#45;-->
+
+                                            <div class="col-md-12 my-1">
+                                                <h4>Información:</h4>
+                                            </div>
+
+
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="nombres">Nombres</label>
+                                                <label >Nombres</label>
                                                 <input formControlName="nombres" type="text" class="form-control"
                                                        [ngClass]="{ 'is-invalid': submittedPersona && persForm.nombres.errors }">
                                                 <div *ngIf="submittedPersona && persForm.nombres.errors"
@@ -56,9 +87,9 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="form-group">
-                                                <label >Apellidos</label>
+                                                <label>Apellidos</label>
                                                 <input type="text" formControlName="apellidos" class="form-control">
                                                 <div *ngIf="submittedPersona && persForm.apellidos.errors"
                                                      class="invalid-feedback" style="display: block;">
@@ -72,9 +103,9 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="form-group">
-                                                <label >Fecha de nacimiento</label>
+                                                <label>Fecha de nacimiento</label>
                                                 <ng2-flatpickr [setDate]="fecha" formControlName="fechaNacimiento"
                                                                [config]="startDateOptions"
                                                                [ngClass]="{ 'is-invalid': submittedPersona && persForm.fechaNacimiento.errors }"
@@ -93,6 +124,27 @@
                                                     </div>
                                                 </div>
 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="estadoCivil">Estado civil</label>
+                                                <select formControlName="estadoCivil" class="form-control"
+                                                        id="estadoCivil"
+                                                        (change)="tipoEstadocivilSelected()"
+                                                        [ngClass]="{ 'is-invalid': submittedPersona && persForm.estadoCivil.errors }">
+                                                    <option>- Seleccionar -</option>
+                                                    <option *ngFor="let value of estadoCivilOptions">
+                                                        {{value.nombre}}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="submittedPersona && persForm.estadoCivil.errors"
+                                                     class="invalid-feedback">
+                                                    <div *ngIf="persForm.estadoCivil.errors.required">Estado civil es
+                                                        requerido
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -119,7 +171,7 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">Número de identificación</label>
+                                                <label>Número de identificación</label>
                                                 <input formControlName="documento" type="text" class="form-control"
                                                        [ngClass]="{ 'is-invalid': submittedPersona && persForm.documento.errors }">
 
@@ -143,7 +195,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Nivel de Instrucción</label>
+                                                <label>Nivel de Instrucción</label>
                                                 <select formControlName="nivelInstruccion" class="form-control"
                                                         id="status">
                                                     <option value="">- Seleccione -</option>
@@ -160,10 +212,39 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Dirección del domicilio</label>
+                                                <input formControlName="direccionDomicilio" type="text"
+                                                       class="form-control">
+                                                <div *ngIf="submittedPersona && persForm.direccionDomicilio.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="persForm.direccionDomicilio.errors.required">Dirección
+                                                        del domicilio es requerida
+                                                    </div>
+                                                    <div *ngIf="persForm.direccionDomicilio.errors.pattern">
+                                                        Ingrese mínimo 20 caracteres
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Tipo de vivienda</label>
+                                                <label>Referencia del domicilio</label>
+                                                <input formControlName="referenciaDomicilio" type="text"
+                                                       class="form-control">
+                                                <div *ngIf="submittedPersona && persForm.referenciaDomicilio.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="persForm.referenciaDomicilio.errors.required">Referencia
+                                                        del domicilio es requerida
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Tipo de vivienda</label>
                                                 <select formControlName="tipoVivienda" class="form-control" id="status"
                                                         (change)="tipoViviendaSelected()">
                                                     <option value="">- Seleccione -</option>
@@ -183,46 +264,33 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group" *ngIf="nombreDueno">
-                                                <label >Nombre del dueño</label>
+                                                <label>Nombre del dueño</label>
                                                 <input formControlName="nombreDueno" type="text" class="form-control">
                                                 <div *ngIf="submittedPersona && persForm.nombreDueno.errors"
                                                      class="invalid-feedback" style="display: block;">
                                                     <div *ngIf="persForm.nombreDueno.errors.required">Nombre del dueño
-                                                        es
-                                                        requerida
+                                                        es requerida
+                                                    </div>
+                                                    <div *ngIf="persForm.nombreDueno.errors.pattern">Mimimo 8 letras
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label >Direccioón del domicilio</label>
-                                                <input formControlName="direccionDomicilio" type="text"
-                                                       class="form-control">
-                                                <div *ngIf="submittedPersona && persForm.direccionDomicilio.errors"
+                                            <div class="form-group" *ngIf="nombreDueno">
+                                                <label>Whatsapp del dueño</label>
+                                                <input formControlName="whatsappDueno" type="text" class="form-control">
+                                                <div *ngIf="submittedPersona && persForm.whatsappDueno.errors"
                                                      class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="persForm.direccionDomicilio.errors.required">Direccioón
-                                                        del domicilio es requerida
+                                                    <div *ngIf="persForm.whatsappDueno.errors.required">Whatsapp del
+                                                        dueño es requerida
+                                                    </div>
+                                                    <div *ngIf="persForm.whatsappDueno.errors.pattern">Solo números
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label >Referencia del domicilio</label>
-                                                <input formControlName="referenciaDomicilio" type="text"
-                                                       class="form-control">
-                                                <div *ngIf="submittedPersona && persForm.referenciaDomicilio.errors"
-                                                     class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="persForm.referenciaDomicilio.errors.required">Referencia
-                                                        del domicilio es requerida
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <div class="col-md-12">
                                             <hr>
                                         </div>
@@ -238,7 +306,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Nombre del negocio o empresa en la que
+                                                <label>Nombre del negocio o empresa en la que
                                                     trabaja</label>
                                                 <input type="text" class="form-control" formControlName="nombreNegocio">
                                                 <div *ngIf="submittedPersona && ocuSolicitanteForm.nombreNegocio.errors"
@@ -256,7 +324,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Dirección del negocio o empresa en la que
+                                                <label>Dirección del negocio o empresa en la que
                                                     trabaja</label>
                                                 <input type="text" class="form-control"
                                                        formControlName="direccionNegocio">
@@ -274,7 +342,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Tiempo de trabajo en el negocio o empresa en la
+                                                <label>Tiempo de trabajo en el negocio o empresa en la
                                                     que trabaja (años)</label>
                                                 <input type="text" class="form-control"
                                                        formControlName="tiempoTrabajo">
@@ -293,7 +361,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Cargo que desempeña</label>
+                                                <label>Cargo que desempeña</label>
                                                 <input type="text" class="form-control"
                                                        formControlName="cargoDesempeno">
                                                 <div *ngIf="submittedPersona && ocuSolicitanteForm.cargoDesempeno.errors"
@@ -310,7 +378,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Sueldo que percibe</label>
+                                                <label>Sueldo que percibe</label>
                                                 <input type="text" class="form-control" formControlName="sueldoPercibe">
                                                 <div *ngIf="submittedPersona && ocuSolicitanteForm.sueldoPercibe.errors"
                                                      class="invalid-feedback" style="display: block;">
@@ -336,7 +404,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Ingrese el parentesco</label>
+                                                <label>Ingrese el parentesco</label>
                                                 <input type="text" class="form-control"
                                                        formControlName="referenciaSolicitante">
                                                 <div *ngIf="submittedPersona && refeSolicitanteForm.referenciaSolicitante.errors"
@@ -353,7 +421,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Nombre</label>
+                                                <label>Nombre</label>
                                                 <input type="text" class="form-control"
                                                        formControlName="nombre">
                                                 <div *ngIf="submittedPersona && refeSolicitanteForm.nombre.errors"
@@ -370,7 +438,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Apellido</label>
+                                                <label>Apellido</label>
                                                 <input type="text" class="form-control" formControlName="apellido">
                                                 <div *ngIf="submittedPersona && refeSolicitanteForm.apellido.errors"
                                                      class="invalid-feedback" style="display: block;">
@@ -386,7 +454,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Dirección</label>
+                                                <label>Dirección</label>
                                                 <input type="text" class="form-control" formControlName="direccion">
                                                 <div *ngIf="submittedPersona && refeSolicitanteForm.direccion.errors"
                                                      class="invalid-feedback" style="display: block;">
@@ -402,7 +470,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Teléfono celular</label>
+                                                <label>Teléfono celular</label>
                                                 <input type="text" class="form-control" formControlName="telefono">
                                                 <div *ngIf="submittedPersona && refeSolicitanteForm.telefono.errors"
                                                      class="invalid-feedback" style="display: block;">
@@ -428,7 +496,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Sueldo mensual</label>
+                                                <label>Sueldo mensual</label>
                                                 <input type="text" class="form-control" formControlName="sueldoMensual">
                                                 <div *ngIf="submittedPersona && ingreSolicitanteForm.sueldoMensual.errors"
                                                      class="invalid-feedback" style="display: block;">
@@ -442,9 +510,9 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
+                                        <div class="col-md-3" *ngIf="casado">
                                             <div class="form-group">
-                                                <label >Sueldo cónyuge</label>
+                                                <label>Sueldo cónyuge</label>
                                                 <input type="text" class="form-control"
                                                        formControlName="sueldoConyuge">
                                                 <div *ngIf="submittedPersona && ingreSolicitanteForm.sueldoConyuge.errors"
@@ -461,7 +529,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Otros ingresos</label>
+                                                <label>Otros ingresos</label>
                                                 <input type="text" class="form-control" formControlName="otrosIngresos">
                                                 <div *ngIf="submittedPersona && ingreSolicitanteForm.otrosIngresos.errors"
                                                      class="invalid-feedback" style="display: block;">
@@ -477,7 +545,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Especifique otros ingresos (ejemplo: vendo
+                                                <label>Especifique otros ingresos (ejemplo: vendo
                                                     artículos de revista en mi tiempo libre, etc.)</label>
                                                 <input type="text" class="form-control" formControlName="descripcion">
                                                 <div *ngIf="submittedPersona && ingreSolicitanteForm.descripcion.errors"
@@ -501,7 +569,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Alimentación</label>
+                                                <label>Alimentación</label>
                                                 <input type="text" class="form-control" formControlName="alimentacion">
                                                 <div *ngIf="submittedPersona && gasSolicitanteForm.alimentacion.errors"
                                                      class="invalid-feedback" style="display: block;">
@@ -517,7 +585,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Arriendo (ingrese 0 si es propia)</label>
+                                                <label>Arriendo (ingrese 0 si es propia)</label>
                                                 <input type="text" class="form-control"
                                                        formControlName="arriendo">
                                                 <div *ngIf="submittedPersona && gasSolicitanteForm.arriendo.errors"
@@ -534,7 +602,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Vestido</label>
+                                                <label>Vestido</label>
                                                 <input type="text" class="form-control" formControlName="vestido">
                                                 <div *ngIf="submittedPersona && gasSolicitanteForm.vestido.errors"
                                                      class="invalid-feedback" style="display: block;">
@@ -551,7 +619,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Transporte</label>
+                                                <label>Transporte</label>
                                                 <input type="text" class="form-control" formControlName="trasporte">
                                                 <div *ngIf="submittedPersona && gasSolicitanteForm.trasporte.errors"
                                                      class="invalid-feedback" style="display: block;">
@@ -567,7 +635,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Servicios básicos</label>
+                                                <label>Servicios básicos</label>
                                                 <input type="text" class="form-control"
                                                        formControlName="serviciosBasicos">
                                                 <div *ngIf="submittedPersona && gasSolicitanteForm.serviciosBasicos.errors"
@@ -584,7 +652,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Medicina </label>
+                                                <label>Medicina </label>
                                                 <input type="text" class="form-control" formControlName="medicina">
                                                 <div *ngIf="submittedPersona && gasSolicitanteForm.medicina.errors"
                                                      class="invalid-feedback" style="display: block;">
@@ -600,7 +668,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Educación</label>
+                                                <label>Educación</label>
                                                 <input type="text" class="form-control" formControlName="educacion">
                                                 <div *ngIf="submittedPersona && gasSolicitanteForm.educacion.errors"
                                                      class="invalid-feedback" style="display: block;">
@@ -616,7 +684,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Otros préstamos (ingrese el valor mensual)</label>
+                                                <label>Otros préstamos (ingrese el valor mensual)</label>
                                                 <input type="text" class="form-control"
                                                        formControlName="otrosPrestamos">
                                                 <div *ngIf="submittedPersona && gasSolicitanteForm.otrosPrestamos.errors"
@@ -633,7 +701,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Otros gastos</label>
+                                                <label>Otros gastos</label>
                                                 <input type="text" class="form-control" formControlName="otrosGastos">
                                                 <div *ngIf="submittedPersona && gasSolicitanteForm.otrosGastos.errors"
                                                      class="invalid-feedback" style="display: block;">
@@ -649,7 +717,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label >Especifique otros gastos ejemplo: colegiaturas
+                                                <label>Especifique otros gastos ejemplo: colegiaturas
                                                     divididas, cuidados a terceras personas, etc.)
                                                 </label>
                                                 <input type="text" class="form-control" formControlName="descripcion">
