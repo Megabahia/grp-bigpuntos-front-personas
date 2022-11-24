@@ -4,13 +4,23 @@
 <!--    </div>-->
     <div class="content-body">
         <!-- users list start -->
+        <div class="text-center mt-1 azul2  text-bold ">
+            <div class="col-md-12 text-center">
+                <h2 class="card-title azul2  text-bold " >
+                    Estás en el paso 2 de 3
+                    Llena tus datos. </h2>
+            </div>
+        </div>
         <section class="app-ecommerce-details">
+
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                     <div class="card">
                         <div class="m-2">
                             <ul class="list-group">
-                                <li class="list-group-item" *ngFor="let item of requisitos?.config">{{item}}</li>
+                                <li class="list-group-item" *ngFor="let item of requisitos?.config">
+                                    <div [innerHTML]="item"></div>
+                                 </li>
                             </ul>
                         </div>
                         <div class="card-footer text-center p-2">

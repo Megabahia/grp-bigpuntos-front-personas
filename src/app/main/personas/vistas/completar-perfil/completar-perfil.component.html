@@ -9,6 +9,15 @@
 
                 <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" width="300"/>
             </div>
+            <div class="text-center mt-1 azul2  text-bold ">
+                <div class="col-md-12 text-center">
+                    <p class="card-title azul2  text-bold " >
+                        Usted está ingresando al mundo de CrediCompra-Big Puntos para que pueda realizar compras con
+                        créditos otorgados por Entidades Financieras reguladas y pueda ganar Big Puntos para canjearlos en
+                        establecimientos afiliados.</p>
+                    <hr/>
+                </div>
+            </div>
 
             <!--/ profile cover photo -->
 
@@ -35,7 +44,7 @@
                     <!-- navbar -->
                     <div class="row card-body">
                         <div class="col-md-12 text-center">
-                            <p class="card-title " style="color:blue">
+                            <p class="card-title azul2 " >
                                 Al completar su perfil usted GANARA {{ganarMonedas?.valor}} Big Puntos para que haga uso
                                 en
                                 canje de magníficos
@@ -144,9 +153,27 @@
                             </div>
                         </div>
 
-                        <div class="col-md-8">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="whatsapp" class="font-weight-bold">Número WhatsApp
+                                <label class="font-weight-bold">Número de celular
+                                </label>
+                                <input formControlName="celular" type="text"
+                                       [ngClass]="{ 'is-invalid': submitted && f.celular.errors }" class="form-control"
+                                       placeholder="Ejemplo: 0987654321">
+                                <div *ngIf="submitted && f.celular.errors" class="invalid-feedback">
+                                    <div *ngIf="f.celular.errors.pattern">Solo se aceptan números</div>
+                                    <div *ngIf="f.celular.errors.required">Nro de celular requerido</div>
+                                    <div *ngIf="f.celular.errors.minlength || f.celular.errors.maxlength || f.celular.errors.min">
+                                        Ingrese un número de 10 dígitos
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label  class="font-weight-bold">Número WhatsApp
                                     <!--                  <small class="text-info">(Importante-->
                                     <!--                    para validar tu cuenta)</small>-->
                                 </label>
@@ -168,7 +195,7 @@
                             <hr/>
                             <button type="button" data-target="#whatsapp" data-toggle="modal"
                                     class="btn btn-primary mt-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-float waves-light"
-                                    (click)="guardarRegistro()">Validar cuenta
+                                    (click)="guardarRegistro()">Validar Cuenta y Continuar
                             </button>
                             <button type="button"
                                     class="btn btn-primary mt-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-float waves-light"

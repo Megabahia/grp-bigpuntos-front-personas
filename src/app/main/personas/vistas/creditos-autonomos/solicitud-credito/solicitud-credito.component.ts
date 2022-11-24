@@ -248,7 +248,7 @@ export class SolicitudCreditoComponent implements OnInit {
     }
 
     tipoViviendaSelected() {
-        if (this.personaForm.get('tipoVivienda').value === 'Propia') {
+        if (this.personaForm.get('tipoVivienda').value === 'Propia' || this.personaForm.get('tipoVivienda').value === '' ) {
             this.nombreDueno = false;
         } else {
             this.nombreDueno = true;

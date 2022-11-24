@@ -12,7 +12,7 @@
                         <!--                        <div class="card-body text-center">-->
                         <!--                            <img src="{{ coreConfig.app.appLogoImage }}" width="300">-->
                         <!--                        </div>-->
-                        <h4>Para solicitud de crédito por favor completa la siguiente información</h4>
+                        <h4>Para completar su solicitud de crédito, por favor complete la siguiente información</h4>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,57 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Nombres</label>
+                                                <label for="tipoIdentificacion">Tipo de identificación</label>
+                                                <select formControlName="tipoIdentificacion" class="form-control"
+                                                        id="tipoIdentificacion"
+                                                        [ngClass]="{ 'is-invalid': submittedPersona && persForm.tipoIdentificacion.errors }">
+                                                    <option>- Seleccionar -</option>
+                                                    <option value="{{value.nombre}}"
+                                                            *ngFor="let value of tipoIdentificacion">
+                                                        {{value.nombre}}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="submittedPersona && persForm.tipoIdentificacion.errors"
+                                                     class="invalid-feedback">
+                                                    <div *ngIf="persForm.tipoIdentificacion.errors.required">Tipo de
+                                                        identificación es
+                                                        requerido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Número de identificación</label>
+                                                <input formControlName="documento" type="text" class="form-control"
+                                                       [ngClass]="{ 'is-invalid': submittedPersona && persForm.documento.errors }">
+
+                                                <div *ngIf="submittedPersona && persForm.documento.errors"
+                                                     class="invalid-feedback">
+                                                    <div *ngIf="persForm.documento.errors.required">Identificación es
+                                                        requerida
+                                                    </div>
+                                                    <div *ngIf="persForm.documento.errors.pattern">Identificación es
+                                                        requerida
+                                                    </div>
+
+                                                </div>
+                                                <div *ngIf="!persForm.documento.errors?.validoCed"
+                                                     class="invalid-feedback">Documento no valido
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <p>
+                                                    Nombres 
+                                                    <span style="color: red">
+                                                        (COMPLETAR DOS NOMBRES)
+                                                    </span>
+                                                </p>
+                                                <!--                                                <label>Nombres</label>-->
                                                 <input formControlName="nombres" type="text" class="form-control"
                                                        [ngClass]="{ 'is-invalid': submittedPersona && persForm.nombres.errors }">
                                                 <div *ngIf="submittedPersona && persForm.nombres.errors"
@@ -89,7 +139,12 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Apellidos</label>
+                                                <p>
+                                                    Apellidos 
+                                                    <span style="color: red">
+                                                        (COMPLETAR APELLIDOS )
+                                                    </span>
+                                                </p>
                                                 <input type="text" formControlName="apellidos" class="form-control">
                                                 <div *ngIf="submittedPersona && persForm.apellidos.errors"
                                                      class="invalid-feedback" style="display: block;">
@@ -146,50 +201,6 @@
                                                         requerido
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="tipoIdentificacion">Tipo de identificación</label>
-                                                <select formControlName="tipoIdentificacion" class="form-control"
-                                                        id="tipoIdentificacion"
-                                                        [ngClass]="{ 'is-invalid': submittedPersona && persForm.tipoIdentificacion.errors }">
-                                                    <option>- Seleccionar -</option>
-                                                    <option value="{{value.nombre}}" *ngFor="let value of tipoIdentificacion">
-                                                        {{value.nombre}}
-                                                    </option>
-                                                </select>
-                                                <div *ngIf="submittedPersona && persForm.tipoIdentificacion.errors"
-                                                     class="invalid-feedback">
-                                                    <div *ngIf="persForm.tipoIdentificacion.errors.required">Tipo de
-                                                        identificación es
-                                                        requerido
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Número de identificación</label>
-                                                <input formControlName="documento" type="text" class="form-control"
-                                                       [ngClass]="{ 'is-invalid': submittedPersona && persForm.documento.errors }">
-
-                                                <div *ngIf="submittedPersona && persForm.documento.errors"
-                                                     class="invalid-feedback">
-                                                    <div *ngIf="persForm.documento.errors.required">Identificación es
-                                                        requerida
-                                                    </div>
-                                                    <div *ngIf="persForm.documento.errors.pattern">Identificación es
-                                                        requerida
-                                                    </div>
-
-                                                </div>
-                                                <div *ngIf="!persForm.documento.errors?.validoCed"
-                                                     class="invalid-feedback">Documento no valido
-                                                </div>
-
                                             </div>
                                         </div>
 

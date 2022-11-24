@@ -55,6 +55,13 @@ export class CompletarPerfilComponent implements OnInit {
      * Constructor
      *
      * @param {CoreConfigService} _coreConfigService
+     * @param _coreMenuService
+     * @param _completarPerfilService
+     * @param _bienvenidoService
+     * @param _router
+     * @param _formBuilder
+     * @param modalService
+     * @param paramService
      */
     constructor(
         private _coreConfigService: CoreConfigService,
@@ -129,7 +136,11 @@ export class CompletarPerfilComponent implements OnInit {
             genero: ['', Validators.required],
             fechaNacimiento: ['', Validators.required],
             edad: ['', Validators.required],
-            whatsapp: ['', [
+            whatsapp: ['', [Validators.required,
+                Validators.maxLength(10),
+                Validators.minLength(10),
+                Validators.pattern('^[0-9]*$')]],
+            celular: ['', [Validators.required,
                 Validators.maxLength(10),
                 Validators.minLength(10),
                 Validators.pattern('^[0-9]*$')]]
@@ -142,13 +153,14 @@ export class CompletarPerfilComponent implements OnInit {
             this.fecha = info.fechaNacimiento;
             this.imagen = info.imagen;
             this.registerForm.patchValue({
-                identificacion: info.identificacion,
+                documento: info.identificacion,
                 nombres: info.nombres,
                 apellidos: info.apellidos,
                 genero: info.genero,
                 // fechaNacimiento: [info.fechaNacimiento],
                 edad: info.edad,
-                // whatsapp: info.whatsapp ? info.whatsapp.replace('+593', 0) : 0
+                whatsapp: info.whatsapp ? info.whatsapp : '',
+                celular: info.celular,
             });
         });
         this.paramService.obtenerParametroNombreTipo('monedas_registro', 'GANAR_SUPERMONEDAS').subscribe((info) => {
