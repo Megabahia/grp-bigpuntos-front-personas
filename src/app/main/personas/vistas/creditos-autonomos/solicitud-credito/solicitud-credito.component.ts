@@ -23,6 +23,7 @@ export class SolicitudCreditoComponent implements OnInit {
     public tipoNivelInstrucciones = [];
     public tipoViviendas = [];
     public tipoPersona = [];
+    public tipoParentesco = [];
     public fecha;
     public tipoIdentificacion = [];
     public menorEdad = false;
@@ -31,6 +32,11 @@ export class SolicitudCreditoComponent implements OnInit {
     public casado = false;
     public submittedPersona = false;
     public estadoCivilOptions = [];
+    public estadoCivilStorage;
+    public tipoPersonaStorage;
+    public montoCreditoFinalStorage;
+    public coutaMensualStorage;
+    public montoInteresStorage;
 
     public startDateOptions: FlatpickrOptions = {
         defaultDate: 'today',
@@ -81,11 +87,11 @@ export class SolicitudCreditoComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
+        this.valoresLocalStorage();
         const fechaSolicitud = moment().format('L');
         this.personaForm = this._formBuilder.group({
                 tipoIdentificacion: [this.usuario.tipoIdentificacion, [Validators.required]],
-                tipoPersona: [this.usuario.tipoPersona, [Validators.required]],
+                tipoPersona: [this.tipoPersonaStorage, [Validators.required]],
                 documento: [this.usuario.identificacion, Validators.required],
                 fechaSolicitud: [fechaSolicitud, Validators.required],
                 nombres: [this.usuario.nombres, [Validators.required, Validators.pattern('^([A-Za-z ]){4,25}$')]],
@@ -97,7 +103,7 @@ export class SolicitudCreditoComponent implements OnInit {
                 whatsappDueno: ['', [Validators.pattern('^([0-9])+$')]],
                 direccionDomicilio: [this.usuario.direccionDomicilio, [Validators.required, Validators.pattern('^([A-Za-z0-9 ]){20,50}$')]],
                 referenciaDomicilio: [this.usuario.referenciaDomicilio, Validators.required],
-                estadoCivil: [this.usuario.estadoCivil, Validators.required],
+                estadoCivil: [this.estadoCivilStorage, Validators.required],
                 ocupacionSolicitante: this._formBuilder.group({
                     nombreNegocio: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9 ]){1,50}$')]],
                     direccionNegocio: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9 ]){1,50}$')]],
@@ -107,7 +113,7 @@ export class SolicitudCreditoComponent implements OnInit {
                 }),
                 referenciasSolicitante: this._formBuilder.array([
                     this._formBuilder.group({
-                        referenciaSolicitante: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){4,50}$')]],
+                        referenciaSolicitante: ['', [Validators.required]],
                         nombre: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){1,50}$')]],
                         apellido: ['', [Validators.required, Validators.pattern('^([A-Za-z ]){1,50}$')]],
                         direccion: ['', [Validators.required, Validators.pattern('^([A-Za-z0-9 ]){1,50}$')]],
@@ -155,6 +161,22 @@ export class SolicitudCreditoComponent implements OnInit {
         this.personaForm.get('referenciasSolicitante').patchValue(this.usuario.referenciasSolicitante);
         this.personaForm.get('ingresosSolicitante').patchValue(this.usuario.ingresosSolicitante);
         this.personaForm.get('gastosSolicitante').patchValue(this.usuario.gastosSolicitante);
+        this.tipoViviendaSelected();
+
+    }
+
+    valoresLocalStorage() {
+        this.estadoCivilStorage = localStorage.getItem('estadoCivil');
+        console.log('this.estadoCivilStorage', this.estadoCivilStorage);
+        if (this.estadoCivilStorage === 'Casado' || this.estadoCivilStorage === 'Unión libre') {
+            this.casado = true;
+        } else {
+            this.casado = false;
+        }
+        this.tipoPersonaStorage = localStorage.getItem('tipoPersona');
+        this.montoCreditoFinalStorage = localStorage.getItem('montoCreditoFinal');
+        this.coutaMensualStorage = localStorage.getItem('coutaMensual');
+        this.montoInteresStorage = localStorage.getItem('montoInteres');
     }
 
 
@@ -168,8 +190,12 @@ export class SolicitudCreditoComponent implements OnInit {
     }
 
     obtenerListas() {
+        // this.tipoParentesco = ['Padre', 'Madre', 'Tío', 'Tía'];
         this.paramService.obtenerListaPadres('NIVEL_INSTRUCCION').subscribe((info) => {
             this.tipoNivelInstrucciones = info;
+        });
+        this.paramService.obtenerListaPadres('TIPO_PARIENTE').subscribe((info) => {
+            this.tipoParentesco = info;
         });
         this.paramService.obtenerListaPadres('TIPO_VIVIENDA').subscribe((info) => {
             this.tipoViviendas = info;
@@ -222,7 +248,6 @@ export class SolicitudCreditoComponent implements OnInit {
     }
 
     tipoViviendaSelected() {
-        console.log(this.personaForm.get('tipoVivienda').value);
         if (this.personaForm.get('tipoVivienda').value === 'Propia') {
             this.nombreDueno = false;
         } else {

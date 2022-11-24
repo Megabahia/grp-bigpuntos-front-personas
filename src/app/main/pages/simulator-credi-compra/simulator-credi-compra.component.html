@@ -70,7 +70,7 @@
                                             <select class="form-control select2" formControlName="estadoCivil"
                                                     (change)="verificarEstadoCivil()">
                                                 <option value="">- Seleccione -</option>
-                                                <option [value]="item.valor"
+                                                <option [value]="item.nombre"
                                                         *ngFor="let item of  listEstadoCivil">{{item.nombre}}</option>
                                             </select>
                                             <div *ngIf="submittedSimulador && infoCredit.estadoCivil.errors"
