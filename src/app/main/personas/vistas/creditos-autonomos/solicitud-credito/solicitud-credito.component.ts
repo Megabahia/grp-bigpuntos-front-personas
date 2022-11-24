@@ -37,6 +37,8 @@ export class SolicitudCreditoComponent implements OnInit {
     public montoCreditoFinalStorage;
     public coutaMensualStorage;
     public montoInteresStorage;
+    public generos = [];
+
 
     public startDateOptions: FlatpickrOptions = {
         defaultDate: 'today',
@@ -93,6 +95,17 @@ export class SolicitudCreditoComponent implements OnInit {
                 tipoIdentificacion: [this.usuario.tipoIdentificacion, [Validators.required]],
                 tipoPersona: [this.tipoPersonaStorage, [Validators.required]],
                 documento: [this.usuario.identificacion, Validators.required],
+                email: [this.usuario.email],
+                whatsapp: [this.usuario.whatsapp, [Validators.required,
+                    Validators.maxLength(10),
+                    Validators.minLength(10),
+                    Validators.pattern('^[0-9]*$')]],
+                celular: [this.usuario.celular, [Validators.required,
+                    Validators.maxLength(10),
+                    Validators.minLength(10),
+                    Validators.pattern('^[0-9]*$')]],
+                genero: [this.usuario.genero, Validators.required],
+                edad: [this.usuario.edad],
                 fechaSolicitud: [fechaSolicitud, Validators.required],
                 nombres: [this.usuario.nombres, [Validators.required, Validators.pattern('^([A-Za-z ]){4,25}$')]],
                 apellidos: [this.usuario.apellidos, [Validators.required, Validators.pattern('^([A-Za-z ]){4,25}$')]],
@@ -181,15 +194,19 @@ export class SolicitudCreditoComponent implements OnInit {
 
 
     calcularEdad() {
-        const edad = moment().diff(this.persForm.fechaNacimiento.value[0], 'years');
-        let valido = false;
+        // console.log('--', this.personaForm.get('fechaNacimiento').value);
+        const edad = moment().diff(new Date(this.personaForm.get('fechaNacimiento').value), 'years');
+        // console.log('--', edad);
+        this.personaForm.get('edad').patchValue(edad);
         if (edad < 18) {
-            valido = true;
             this.personaForm.get('fechaNacimiento').setErrors({valid: false});
         }
     }
 
     obtenerListas() {
+        this.paramService.obtenerListaPadres('GENERO').subscribe((info) => {
+            this.generos = info;
+        });
         // this.tipoParentesco = ['Padre', 'Madre', 'Tío', 'Tía'];
         this.paramService.obtenerListaPadres('NIVEL_INSTRUCCION').subscribe((info) => {
             this.tipoNivelInstrucciones = info;
@@ -248,7 +265,7 @@ export class SolicitudCreditoComponent implements OnInit {
     }
 
     tipoViviendaSelected() {
-        if (this.personaForm.get('tipoVivienda').value === 'Propia' || this.personaForm.get('tipoVivienda').value === '' ) {
+        if (this.personaForm.get('tipoVivienda').value === 'Propia' || this.personaForm.get('tipoVivienda').value === '') {
             this.nombreDueno = false;
         } else {
             this.nombreDueno = true;
@@ -287,7 +304,7 @@ export class SolicitudCreditoComponent implements OnInit {
             console.log('no es valido', this.personaForm);
             return;
         }
-        this.personaForm.value.fechaNacimiento = '' + new Date(this.personaForm.value.fechaNacimiento).getFullYear() + '-' + new Date(this.personaForm.value.fechaNacimiento).getMonth() + '-' + new Date(this.personaForm.value.fechaNacimiento).getDay();
+        this.personaForm.value.fechaNacimiento = '' + new Date(this.personaForm.get('fechaNacimiento').value).getFullYear() + '-' + new Date(this.personaForm.get('fechaNacimiento').value).getMonth() + '-' + new Date(this.personaForm.get('fechaNacimiento').value).getDay();
         const persona = {
             identificacion: this.personaForm.get('documento').value,
             ...this.personaForm.value,

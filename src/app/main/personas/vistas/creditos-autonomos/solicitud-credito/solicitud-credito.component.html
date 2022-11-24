@@ -160,12 +160,62 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
+
+                                                    Correo electronico
+
+                                                <input type="text" formControlName="email" class="form-control" disabled>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="font-weight-bold">Número de celular
+                                                </label>
+                                                <input formControlName="celular" type="text"
+                                                       [ngClass]="{ 'is-invalid': submittedPersona && persForm.celular.errors }" class="form-control"
+                                                       placeholder="Ejemplo: 0987654321">
+                                                <div *ngIf="submittedPersona && persForm.celular.errors" class="invalid-feedback">
+                                                    <div *ngIf="persForm.celular.errors.pattern">Solo se aceptan números</div>
+                                                    <div *ngIf="persForm.celular.errors.required">Nro de celular requerido</div>
+                                                    <div *ngIf="persForm.celular.errors.minlength || persForm.celular.errors.maxlength || persForm.celular.errors.min">
+                                                        Ingrese un número de 10 dígitos
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label  class="font-weight-bold">Número WhatsApp
+                                                    <!--                  <small class="text-info">(Importante-->
+                                                    <!--                    para validar tu cuenta)</small>-->
+                                                </label>
+                                                <input formControlName="whatsapp" type="text"
+                                                       [ngClass]="{ 'is-invalid': submittedPersona && persForm.whatsapp.errors }" class="form-control"
+                                                       placeholder="Ejemplo: 0987654321">
+                                                <div *ngIf="submittedPersona && persForm.whatsapp.errors" class="invalid-feedback">
+                                                    <div *ngIf="persForm.whatsapp.errors.pattern">Solo se aceptan números</div>
+                                                    <div *ngIf="persForm.whatsapp.errors.required">Nro de WhatsApp requerido</div>
+                                                    <div *ngIf="persForm.whatsapp.errors.minlength || persForm.whatsapp.errors.maxlength || persForm.whatsapp.errors.min">
+                                                        Ingrese un número de 10 dígitos
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
                                                 <label>Fecha de nacimiento</label>
                                                 <ng2-flatpickr [setDate]="fecha" formControlName="fechaNacimiento"
                                                                [config]="startDateOptions"
                                                                [ngClass]="{ 'is-invalid': submittedPersona && persForm.fechaNacimiento.errors }"
                                                                (input)="calcularEdad()"
-                                                ></ng2-flatpickr>
+                                                >
+                                                </ng2-flatpickr>
                                                 <div *ngIf="submittedPersona && persForm.fechaNacimiento.errors"
                                                      class="invalid-feedback">
                                                     <div *ngIf="persForm.fechaNacimiento.errors.required">Fecha es
@@ -179,6 +229,21 @@
                                                     </div>
                                                 </div>
 
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                Edad
+                                                <input type="text" formControlName="edad" class="form-control" disabled>
+                                                <div *ngIf="submittedPersona && persForm.fechaNacimiento.errors"
+                                                     class="invalid-feedback" style="display: block;">
+
+                                                    <div *ngIf="!persForm.fechaNacimiento.errors?.valido">Menor de
+                                                        edad
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
 
@@ -221,6 +286,23 @@
                                                     <div *ngIf="persForm.nivelInstruccion.errors.required">Nivel de
                                                         Instrucción es requerido
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="genero">Género</label>
+                                                <select formControlName="genero" class="form-control" id="status"
+                                                        [ngClass]="{ 'is-invalid': submittedPersona && persForm.genero.errors }">
+                                                    <option value="">- Seleccionar -</option>
+                                                    <option value="{{value.nombre}}" *ngFor="let value of generos">
+                                                        {{value.nombre}}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="submittedPersona && persForm.genero.errors" class="invalid-feedback">
+                                                    <div *ngIf="persForm.genero.errors.required"> Genero es requerido</div>
                                                 </div>
                                             </div>
                                         </div>
