@@ -133,14 +133,14 @@ export class SolicitudCreditoComponent implements OnInit {
                         telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     }),
                     this._formBuilder.group({
-                        referenciaSolicitante: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
+                        referenciaSolicitante: ['', [Validators.required]],
                         nombre: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
                         apellido: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
                         direccion: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9]+')]],
                         telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     }),
                     this._formBuilder.group({
-                        referenciaSolicitante: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
+                        referenciaSolicitante: ['', [Validators.required]],
                         nombre: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
                         apellido: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
                         direccion: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9]+')]],
