@@ -91,7 +91,7 @@
                                        [ngClass]="{ 'is-invalid': submitted && f.nombres.errors }">
                                 <div *ngIf="submitted && f.nombres.errors" class="invalid-feedback">
                                     <div *ngIf="f.nombres.errors.required">Apellidos son requeridos</div>
-                                    <div *ngIf="f.nombres.errors.pattern">
+                                    <div *ngIf="f.nombres.errors.pattern || f.nombres.errors.minlength">
                                         Ingrese solo letras y mínimo 4
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                                        [ngClass]="{ 'is-invalid': submitted && f.apellidos.errors }">
                                 <div *ngIf="submitted && f.apellidos.errors" class="invalid-feedback">
                                     <div *ngIf="f.apellidos.errors.required">Apellidos son requeridos</div>
-                                    <div *ngIf="f.apellidos.errors.pattern">
+                                    <div *ngIf="f.apellidos.errors.pattern || f.apellidos.errors.minlength">
                                         Ingrese solo letras y mínimo 4
                                     </div>
                                 </div>

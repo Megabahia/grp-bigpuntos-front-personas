@@ -131,8 +131,8 @@ export class CompletarPerfilComponent implements OnInit {
         this.registerForm = this._formBuilder.group({
             tipoIdentificacion: ['', [Validators.required]],
             documento: ['', [Validators.required]],
-            nombres: ['', [Validators.required, Validators.pattern('^([A-Za-z]){4,25}$')]],
-            apellidos: ['', [Validators.required, Validators.pattern('^([A-Za-z]){4,25}$')]],
+            nombres: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
+            apellidos: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
             genero: ['', Validators.required],
             fechaNacimiento: ['', Validators.required],
             edad: ['', Validators.required],
