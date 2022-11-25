@@ -152,6 +152,7 @@ export class SolicitudCreditoComponent implements OnInit {
                     sueldoConyuge: ['', [Validators.pattern('^([0-9])*$')]],
                     otrosIngresos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     descripcion: ['', Validators.required],
+                    totalIngresos: [''],
                 }),
                 gastosSolicitante: this._formBuilder.group({
                     alimentacion: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
@@ -164,6 +165,7 @@ export class SolicitudCreditoComponent implements OnInit {
                     otrosPrestamos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     otrosGastos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     descripcion: ['', Validators.required],
+                    totalGastos: [''],
                 })
             }
         );
@@ -291,7 +293,34 @@ export class SolicitudCreditoComponent implements OnInit {
         }
     }
 
+    calculos() {
+        // Total de ingresos
+        this.personaForm.get('ingresosSolicitante').get('totalIngresos').setValue(
+            parseInt(this.personaForm.get('ingresosSolicitante').get('sueldoMensual').value) +
+            parseInt(this.personaForm.get('ingresosSolicitante').get('sueldoMensual').value) +
+            parseInt((this.personaForm.get('ingresosSolicitante').get('sueldoConyuge').value ? this.personaForm.get('ingresosSolicitante').get('sueldoConyuge').value : 0)) +
+            parseInt(this.personaForm.get('ingresosSolicitante').get('otrosIngresos').value)
+        );
+
+
+
+        for (const item in this.personaForm.get('ingresosSolicitante')['controls']) {
+
+            console.log('item', this.personaForm.get('ingresosSolicitante')['controls'][item].value);
+            console.log('item', item);
+        }
+        this.personaForm.get('ingresosSolicitante').get('totalIngresos').setValue(
+            parseInt(this.personaForm.get('ingresosSolicitante').get('sueldoMensual').value) +
+            parseInt(this.personaForm.get('ingresosSolicitante').get('sueldoMensual').value) +
+            parseInt((this.personaForm.get('ingresosSolicitante').get('sueldoConyuge').value ? this.personaForm.get('ingresosSolicitante').get('sueldoConyuge').value : 0)) +
+            parseInt(this.personaForm.get('ingresosSolicitante').get('otrosIngresos').value)
+        );
+    }
+
     continuar() {
+
+        // this.calculos();
+        // return;
         if (this.personaForm.value.tipoIdentificacion === 'Cédula') {
             this.validadorDeCedula(this.personaForm.value.documento);
         }

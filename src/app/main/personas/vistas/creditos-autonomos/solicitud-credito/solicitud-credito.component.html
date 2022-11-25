@@ -161,9 +161,10 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
 
-                                                    Correo electronico
+                                                Correo electronico
 
-                                                <input type="text" formControlName="email" class="form-control" disabled>
+                                                <input type="text" formControlName="email" class="form-control"
+                                                       disabled>
 
                                             </div>
                                         </div>
@@ -173,11 +174,17 @@
                                                 <label class="font-weight-bold">Número de celular
                                                 </label>
                                                 <input formControlName="celular" type="text"
-                                                       [ngClass]="{ 'is-invalid': submittedPersona && persForm.celular.errors }" class="form-control"
+                                                       [ngClass]="{ 'is-invalid': submittedPersona && persForm.celular.errors }"
+                                                       class="form-control"
                                                        placeholder="Ejemplo: 0987654321">
-                                                <div *ngIf="submittedPersona && persForm.celular.errors" class="invalid-feedback">
-                                                    <div *ngIf="persForm.celular.errors.pattern">Solo se aceptan números</div>
-                                                    <div *ngIf="persForm.celular.errors.required">Nro de celular requerido</div>
+                                                <div *ngIf="submittedPersona && persForm.celular.errors"
+                                                     class="invalid-feedback">
+                                                    <div *ngIf="persForm.celular.errors.pattern">Solo se aceptan
+                                                        números
+                                                    </div>
+                                                    <div *ngIf="persForm.celular.errors.required">Nro de celular
+                                                        requerido
+                                                    </div>
                                                     <div *ngIf="persForm.celular.errors.minlength || persForm.celular.errors.maxlength || persForm.celular.errors.min">
                                                         Ingrese un número de 10 dígitos
                                                     </div>
@@ -188,23 +195,28 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label  class="font-weight-bold">Número WhatsApp
+                                                <label class="font-weight-bold">Número WhatsApp
                                                     <!--                  <small class="text-info">(Importante-->
                                                     <!--                    para validar tu cuenta)</small>-->
                                                 </label>
                                                 <input formControlName="whatsapp" type="text"
-                                                       [ngClass]="{ 'is-invalid': submittedPersona && persForm.whatsapp.errors }" class="form-control"
+                                                       [ngClass]="{ 'is-invalid': submittedPersona && persForm.whatsapp.errors }"
+                                                       class="form-control"
                                                        placeholder="Ejemplo: 0987654321">
-                                                <div *ngIf="submittedPersona && persForm.whatsapp.errors" class="invalid-feedback">
-                                                    <div *ngIf="persForm.whatsapp.errors.pattern">Solo se aceptan números</div>
-                                                    <div *ngIf="persForm.whatsapp.errors.required">Nro de WhatsApp requerido</div>
+                                                <div *ngIf="submittedPersona && persForm.whatsapp.errors"
+                                                     class="invalid-feedback">
+                                                    <div *ngIf="persForm.whatsapp.errors.pattern">Solo se aceptan
+                                                        números
+                                                    </div>
+                                                    <div *ngIf="persForm.whatsapp.errors.required">Nro de WhatsApp
+                                                        requerido
+                                                    </div>
                                                     <div *ngIf="persForm.whatsapp.errors.minlength || persForm.whatsapp.errors.maxlength || persForm.whatsapp.errors.min">
                                                         Ingrese un número de 10 dígitos
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
 
 
                                         <div class="col-md-4">
@@ -301,8 +313,10 @@
                                                         {{value.nombre}}
                                                     </option>
                                                 </select>
-                                                <div *ngIf="submittedPersona && persForm.genero.errors" class="invalid-feedback">
-                                                    <div *ngIf="persForm.genero.errors.required"> Genero es requerido</div>
+                                                <div *ngIf="submittedPersona && persForm.genero.errors"
+                                                     class="invalid-feedback">
+                                                    <div *ngIf="persForm.genero.errors.required"> Genero es requerido
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -665,6 +679,7 @@
                                                 </div>
                                             </div>
 
+
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Especifique otros ingresos (ejemplo: vendo
@@ -677,6 +692,14 @@
                                                             Especifique otros ingresos es requerido
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Total de ingresos</label>
+                                                    <input type="text" class="form-control"
+                                                           formControlName="totalIngresos" disabled>
                                                 </div>
                                             </div>
 
@@ -855,6 +878,14 @@
                                                             Especifique otros gastos es requerido
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Total de ingresos</label>
+                                                    <input type="text" class="form-control"
+                                                           formControlName="totalGastos" disabled>
                                                 </div>
                                             </div>
 
