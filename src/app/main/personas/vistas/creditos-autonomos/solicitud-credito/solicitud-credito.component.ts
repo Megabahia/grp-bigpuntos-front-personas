@@ -295,32 +295,32 @@ export class SolicitudCreditoComponent implements OnInit {
 
     calculos() {
         // Total de ingresos
-        this.personaForm.get('ingresosSolicitante').get('totalIngresos').setValue(
-            parseInt(this.personaForm.get('ingresosSolicitante').get('sueldoMensual').value) +
-            parseInt(this.personaForm.get('ingresosSolicitante').get('sueldoMensual').value) +
-            parseInt((this.personaForm.get('ingresosSolicitante').get('sueldoConyuge').value ? this.personaForm.get('ingresosSolicitante').get('sueldoConyuge').value : 0)) +
-            parseInt(this.personaForm.get('ingresosSolicitante').get('otrosIngresos').value)
-        );
-
-
-
+        let total = 0;
+        let totalgastos = 0;
         for (const item in this.personaForm.get('ingresosSolicitante')['controls']) {
-
-            console.log('item', this.personaForm.get('ingresosSolicitante')['controls'][item].value);
-            console.log('item', item);
+            if (item !== 'descripcion') {
+                if (item !== 'totalIngresos') {
+                    total += parseInt((this.personaForm.get('ingresosSolicitante')['controls'][item].value) ? (this.personaForm.get('ingresosSolicitante')['controls'][item].value) : 0);
+                }
+            }
         }
-        this.personaForm.get('ingresosSolicitante').get('totalIngresos').setValue(
-            parseInt(this.personaForm.get('ingresosSolicitante').get('sueldoMensual').value) +
-            parseInt(this.personaForm.get('ingresosSolicitante').get('sueldoMensual').value) +
-            parseInt((this.personaForm.get('ingresosSolicitante').get('sueldoConyuge').value ? this.personaForm.get('ingresosSolicitante').get('sueldoConyuge').value : 0)) +
-            parseInt(this.personaForm.get('ingresosSolicitante').get('otrosIngresos').value)
-        );
+        this.personaForm.get('ingresosSolicitante').get('totalIngresos').setValue(total);
+
+        for (const item in this.personaForm.get('gastosSolicitante')['controls']) {
+            if (item !== 'descripcion') {
+                if (item !== 'totalGastos') {
+                    totalgastos += parseInt((this.personaForm.get('gastosSolicitante')['controls'][item].value) ? (this.personaForm.get('gastosSolicitante')['controls'][item].value) : 0);
+                }
+            }
+        }
+        this.personaForm.get('gastosSolicitante').get('totalGastos').setValue(totalgastos);
+
+
+
     }
 
     continuar() {
-
-        // this.calculos();
-        // return;
+        this.calculos();
         if (this.personaForm.value.tipoIdentificacion === 'Cédula') {
             this.validadorDeCedula(this.personaForm.value.documento);
         }
