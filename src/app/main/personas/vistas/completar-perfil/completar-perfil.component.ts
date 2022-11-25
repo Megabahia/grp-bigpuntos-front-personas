@@ -153,6 +153,7 @@ export class CompletarPerfilComponent implements OnInit {
             this.fecha = info.fechaNacimiento;
             this.imagen = info.imagen;
             this.registerForm.patchValue({
+                tipoIdentificacion: info.tipoIdentificacion,
                 documento: info.identificacion,
                 nombres: info.nombres,
                 apellidos: info.apellidos,
@@ -244,6 +245,8 @@ export class CompletarPerfilComponent implements OnInit {
         if (this.registerForm.invalid) {
             return;
         }
+        this.informacion.tipoIdentificacion = this.registerForm.get('tipoIdentificacion').value;
+        this.informacion.celular = this.f.celular.value;
         this.informacion.apellidos = this.f.apellidos.value;
         this.informacion.edad = this.f.edad.value;
         // this.informacion.fechaNacimiento = this.f.fechaNacimiento.value;;

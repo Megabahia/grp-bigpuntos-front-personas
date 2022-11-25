@@ -1,4 +1,6 @@
 export class CompletarPerfil {
+    tipoIdentificacion?: string;
+    celular?: string;
     identificacion: string;
     nombres: string;
     apellidos: string;
