@@ -115,12 +115,10 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <p>
                                                     Nombres 
                                                     <span style="color: red">
                                                         (COMPLETAR DOS NOMBRES)
                                                     </span>
-                                                </p>
                                                 <!--                                                <label>Nombres</label>-->
                                                 <input formControlName="nombres" type="text" class="form-control"
                                                        [ngClass]="{ 'is-invalid': submittedPersona && persForm.nombres.errors }">
@@ -139,12 +137,10 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <p>
                                                     Apellidos 
                                                     <span style="color: red">
                                                         (COMPLETAR APELLIDOS )
                                                     </span>
-                                                </p>
                                                 <input type="text" formControlName="apellidos" class="form-control">
                                                 <div *ngIf="submittedPersona && persForm.apellidos.errors"
                                                      class="invalid-feedback" style="display: block;">
