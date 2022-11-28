@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FlatpickrOptions} from 'ng2-flatpickr';
 import {CoreConfigService} from '../../../../../../@core/services/config.service';
@@ -127,7 +127,7 @@ export class SolicitudCreditoComponent implements OnInit {
                 fechaNacimiento: [this.usuario.fechaNacimiento, [Validators.required]],
                 nivelInstruccion: [this.usuario.nivelInstruccion, Validators.required],
                 tipoVivienda: [this.usuario.tipoVivienda, Validators.required],
-                nombreDueno: [this.usuario.nombreDueno, [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
+                nombreDueno: [this.usuario.nombreDueno, [ Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
                 whatsappDueno: ['', [Validators.pattern('^([0-9])+$')]],
                 direccionDomicilio: [this.usuario.direccionDomicilio, [Validators.required, Validators.minLength(20), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                 referenciaDomicilio: [this.usuario.referenciaDomicilio, Validators.required],
