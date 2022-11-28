@@ -132,7 +132,7 @@ export class CompletarPerfilComponent implements OnInit {
             tipoIdentificacion: ['', [Validators.required]],
             documento: ['', [Validators.required]],
             nombres: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
-            apellidos: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
+            apellidos: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
             genero: ['', Validators.required],
             fechaNacimiento: ['', Validators.required],
             edad: ['', Validators.required],

@@ -108,42 +108,42 @@ export class SolicitudCreditoComponent implements OnInit {
                 edad: [this.usuario.edad],
                 fechaSolicitud: [fechaSolicitud, Validators.required],
                 nombres: [this.usuario.nombres, [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
-                apellidos: [this.usuario.apellidos, [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
+                apellidos: [this.usuario.apellidos, [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
                 fechaNacimiento: [this.usuario.fechaNacimiento, [Validators.required]],
                 nivelInstruccion: [this.usuario.nivelInstruccion, Validators.required],
                 tipoVivienda: [this.usuario.tipoVivienda, Validators.required],
                 nombreDueno: [this.usuario.nombreDueno, [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
                 whatsappDueno: ['', [Validators.pattern('^([0-9])+$')]],
-                direccionDomicilio: [this.usuario.direccionDomicilio, [Validators.required, Validators.minLength(20), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
+                direccionDomicilio: [this.usuario.direccionDomicilio, [Validators.required, Validators.minLength(20), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                 referenciaDomicilio: [this.usuario.referenciaDomicilio, Validators.required],
                 estadoCivil: [this.estadoCivilStorage, Validators.required],
                 ocupacionSolicitante: this._formBuilder.group({
-                    nombreNegocio: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
-                    direccionNegocio: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
+                    nombreNegocio: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
+                    direccionNegocio: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                     tiempoTrabajo: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-                    cargoDesempeno: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
+                    cargoDesempeno: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                     sueldoPercibe: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                 }),
                 referenciasSolicitante: this._formBuilder.array([
                     this._formBuilder.group({
                         referenciaSolicitante: ['', [Validators.required]],
                         nombre: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
-                        apellido: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
-                        direccion: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9]+')]],
+                        apellido: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
+                        direccion: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]],
                         telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     }),
                     this._formBuilder.group({
                         referenciaSolicitante: ['', [Validators.required]],
                         nombre: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
-                        apellido: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
-                        direccion: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9]+')]],
+                        apellido: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
+                        direccion: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]],
                         telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     }),
                     this._formBuilder.group({
                         referenciaSolicitante: ['', [Validators.required]],
                         nombre: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
-                        apellido: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
-                        direccion: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9]+')]],
+                        apellido: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
+                        direccion: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]],
                         telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     })
                 ]),
@@ -320,6 +320,7 @@ export class SolicitudCreditoComponent implements OnInit {
     }
 
     continuar() {
+        console.log(this.personaForm);
         this.calculos();
         if (this.personaForm.value.tipoIdentificacion === 'Cédula') {
             this.validadorDeCedula(this.personaForm.value.documento);
