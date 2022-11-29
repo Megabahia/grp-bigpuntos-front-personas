@@ -127,14 +127,14 @@ export class SolicitudCreditoComponent implements OnInit {
                 fechaNacimiento: [this.usuario.fechaNacimiento, [Validators.required]],
                 nivelInstruccion: [this.usuario.nivelInstruccion, Validators.required],
                 tipoVivienda: [this.usuario.tipoVivienda, Validators.required],
-                nombreDueno: [this.usuario.nombreDueno, [ Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
+                nombreDueno: [this.usuario.nombreDueno, [Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
                 whatsappDueno: ['', [Validators.pattern('^([0-9])+$')]],
-                direccionDomicilio: [this.usuario.direccionDomicilio, [Validators.required, Validators.minLength(20), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
+                direccionDomicilio: [this.usuario.direccionDomicilio, [Validators.required, Validators.minLength(20), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]+')]],
                 referenciaDomicilio: [this.usuario.referenciaDomicilio, Validators.required],
                 estadoCivil: [this.estadoCivilStorage, Validators.required],
                 ocupacionSolicitante: this._formBuilder.group({
                     nombreNegocio: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
-                    direccionNegocio: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
+                    direccionNegocio: ['', [Validators.required, Validators.minLength(20), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]+')]],
                     tiempoTrabajo: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     cargoDesempeno: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                     sueldoPercibe: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
@@ -142,21 +142,21 @@ export class SolicitudCreditoComponent implements OnInit {
                 referenciasSolicitante: this._formBuilder.array([
                     this._formBuilder.group({
                         referenciaSolicitante: ['', [Validators.required]],
-                        nombre: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
+                        nombre: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                         apellido: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
                         direccion: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]],
                         telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     }),
                     this._formBuilder.group({
                         referenciaSolicitante: ['', [Validators.required]],
-                        nombre: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
+                        nombre: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                         apellido: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
                         direccion: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]],
                         telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     }),
                     this._formBuilder.group({
                         referenciaSolicitante: ['', [Validators.required]],
-                        nombre: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
+                        nombre: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                         apellido: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
                         direccion: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]],
                         telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
@@ -340,7 +340,7 @@ export class SolicitudCreditoComponent implements OnInit {
             if (item !== 'descripcion') {
                 if (item !== 'totalIngresos') {
                     // if (item !== 'sueldoConyuge') {
-                        total += parseInt((this.personaForm.get('ingresosSolicitante')['controls'][item].value) ? (this.personaForm.get('ingresosSolicitante')['controls'][item].value) : 0);
+                    total += parseInt((this.personaForm.get('ingresosSolicitante')['controls'][item].value) ? (this.personaForm.get('ingresosSolicitante')['controls'][item].value) : 0);
                     // }
                 }
             }
@@ -415,7 +415,33 @@ export class SolicitudCreditoComponent implements OnInit {
         // this._router.navigate(['/pages/requisitos-de-credito']);
     }
 
+    telefonoRepetido(event) {
+
+        // console.log('--referencias', this.personaForm.get('referenciasSolicitante'));
+        const referencias = this.personaForm.get('referenciasSolicitante').value;
+        // console.log('--referencias', referencias);
+        console.log('event', event);
+        const pociconrepetida = [];
+        referencias.forEach((value, index) => {
+            if (event.target.value === value.telefono) {
+                console.log('---iguales--', index);
+                pociconrepetida.push(index);
+            }
+            // this.personaForm.get('referenciasSolicitante')['controls'][index].get('telefono').setErrors({validoPas: true});
+
+        });
+        pociconrepetida.forEach(value => {
+            console.log('value', value);
+            this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('telefono').setErrors({validoPas: false});
+        });
+        // this.personaForm.get('referenciasSolicitante')['controls'][1].get('telefono').setErrors({validoPas: false});
+        console.log('pociconrepetida', this.personaForm.get('referenciasSolicitante'));
+
+
+    }
+
     continuar() {
+
         this.calculos();
         this.calcularCredito();
         // return;
