@@ -143,21 +143,21 @@ export class SolicitudCreditoComponent implements OnInit {
                     this._formBuilder.group({
                         referenciaSolicitante: ['', [Validators.required]],
                         nombre: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
-                        apellido: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
+                        apellido: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                         direccion: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]],
                         telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     }),
                     this._formBuilder.group({
                         referenciaSolicitante: ['', [Validators.required]],
                         nombre: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
-                        apellido: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
+                        apellido: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                         direccion: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]],
                         telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     }),
                     this._formBuilder.group({
                         referenciaSolicitante: ['', [Validators.required]],
                         nombre: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
-                        apellido: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
+                        apellido: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                         direccion: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]],
                         telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     })
@@ -415,6 +415,65 @@ export class SolicitudCreditoComponent implements OnInit {
         // this._router.navigate(['/pages/requisitos-de-credito']);
     }
 
+    nombreRepetido(event) {
+
+        // console.log('--referencias', this.personaForm.get('referenciasSolicitante'));
+        const referencias = this.personaForm.get('referenciasSolicitante').value;
+        // console.log('--referencias', referencias);
+        console.log('event', event);
+        const pociconrepetida = [];
+        referencias.forEach((value, index) => {
+            if (event.target.value === value.nombre) {
+                console.log('---iguales--', index);
+                pociconrepetida.push(index);
+            }
+            this.personaForm.get('referenciasSolicitante')['controls'][index].get('nombre').setErrors({validoPas2: null});
+
+        });
+        if (pociconrepetida.length > 1) {
+
+            pociconrepetida.forEach(value => {
+                console.log('value', value);
+
+                this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('nombre').setErrors({validoPas2: false});
+            });
+        }
+
+        // this.personaForm.get('referenciasSolicitante')['controls'][1].get('telefono').setErrors({validoPas: false});
+        console.log('pociconrepetida', this.personaForm.get('referenciasSolicitante'));
+
+
+    }
+    apellidoRepetido(event) {
+
+        // console.log('--referencias', this.personaForm.get('referenciasSolicitante'));
+        const referencias = this.personaForm.get('referenciasSolicitante').value;
+        // console.log('--referencias', referencias);
+        console.log('event', event);
+        const pociconrepetida = [];
+        referencias.forEach((value, index) => {
+            if (event.target.value === value.apellido) {
+                console.log('---iguales--', index);
+                pociconrepetida.push(index);
+            }
+            this.personaForm.get('referenciasSolicitante')['controls'][index].get('apellido').setErrors({validoPas3: true});
+
+        });
+        if (pociconrepetida.length > 1) {
+
+            pociconrepetida.forEach(value => {
+                console.log('value', value);
+
+                this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('apellido').setErrors({validoPas3: false});
+            });
+        }
+
+        // this.personaForm.get('referenciasSolicitante')['controls'][1].get('telefono').setErrors({validoPas: false});
+        console.log('pociconrepetida', this.personaForm.get('referenciasSolicitante'));
+
+
+    }
+
     telefonoRepetido(event) {
 
         // console.log('--referencias', this.personaForm.get('referenciasSolicitante'));
@@ -427,13 +486,16 @@ export class SolicitudCreditoComponent implements OnInit {
                 console.log('---iguales--', index);
                 pociconrepetida.push(index);
             }
-            // this.personaForm.get('referenciasSolicitante')['controls'][index].get('telefono').setErrors({validoPas: true});
+            this.personaForm.get('referenciasSolicitante')['controls'][index].get('telefono').setErrors({validoPas: true});
 
         });
-        pociconrepetida.forEach(value => {
-            console.log('value', value);
-            this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('telefono').setErrors({validoPas: false});
-        });
+        if (pociconrepetida.length > 1) {
+
+            pociconrepetida.forEach(value => {
+                console.log('value', value);
+                this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('telefono').setErrors({validoPas: false});
+            });
+        }
         // this.personaForm.get('referenciasSolicitante')['controls'][1].get('telefono').setErrors({validoPas: false});
         console.log('pociconrepetida', this.personaForm.get('referenciasSolicitante'));
 

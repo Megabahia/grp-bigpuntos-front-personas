@@ -543,9 +543,9 @@
 
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="nombre[{{i}}]">Nombre</label>
+                                                            <label for="nombre[{{i}}]">Nombre--</label>
                                                             <input type="text" class="form-control"
-
+                                                                   (change)="nombreRepetido($event)"
                                                                    formControlName="nombre">
                                                             <div *ngIf="submittedPersona && referencia.controls?.nombre?.errors"
                                                                  class="invalid-feedback" style="display: block;">
@@ -556,7 +556,11 @@
                                                                 <div *ngIf="referencia.controls?.nombre?.errors.pattern || referencia.controls?.nombre?.errors.minlength">
                                                                     Ingrese solo letras
                                                                 </div>
+                                                                <div *ngIf="!referencia.controls?.nombre?.errors?.validoPas2"
+                                                                >Nombre repetido
+                                                                </div>
                                                             </div>
+
                                                         </div>
                                                     </div>
 
@@ -564,6 +568,7 @@
                                                         <div class="form-group">
                                                             <label for="apellido[{{i}}]">Apellido</label>
                                                             <input type="text" class="form-control"
+                                                                   (change)="apellidoRepetido($event)"
                                                                    formControlName="apellido">
                                                             <div *ngIf="submittedPersona && referencia.controls?.apellido?.errors"
                                                                  class="invalid-feedback" style="display: block;">
@@ -573,6 +578,9 @@
                                                                 </div>
                                                                 <div *ngIf="referencia.controls?.apellido?.errors.pattern || referencia.controls?.apellido?.errors.minlength">
                                                                     Ingrese solo letras
+                                                                </div>
+                                                                <div *ngIf="!referencia.controls?.apellido?.errors?.validoPas3"
+                                                                >apellido repetido
                                                                 </div>
                                                             </div>
                                                         </div>
