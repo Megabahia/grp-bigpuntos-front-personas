@@ -413,6 +413,37 @@ export class SolicitudCreditoComponent implements OnInit {
         // this._router.navigate(['/pages/requisitos-de-credito']);
     }
 
+    parienteRepetido(event) {
+        const referencias = this.personaForm.get('referenciasSolicitante').value;
+        const padres = [];
+        const madres = [];
+
+        referencias.filter((value, index) => {
+            this.personaForm.get('referenciasSolicitante')['controls'][index].get('referenciaSolicitante').setErrors({validoPas5: true});
+
+            if (value.referenciaSolicitante === 'Padre') {
+                padres.push(index);
+            }
+        });
+        referencias.filter((value, index) => {
+            this.personaForm.get('referenciasSolicitante')['controls'][index].get('referenciaSolicitante').setErrors({validoPas5: true});
+
+            if (value.referenciaSolicitante === 'Madre') {
+                madres.push(index);
+            }
+        });
+        if (padres.length > 1) {
+            padres.forEach(value => {
+                this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('referenciaSolicitante').setErrors({validoPas5: false});
+            });
+        }
+        if (madres.length > 1) {
+            madres.forEach(value => {
+                this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('referenciaSolicitante').setErrors({validoPas5: false});
+            });
+        }
+    }
+
     nombreRepetido(event) {
 
         // console.log('--referencias', this.personaForm.get('referenciasSolicitante'));
@@ -424,8 +455,6 @@ export class SolicitudCreditoComponent implements OnInit {
             const errors = this.personaForm.get('referenciasSolicitante')['controls'][index].get('nombre').errors || {};
 
             this.personaForm.get('referenciasSolicitante')['controls'][index].get('nombre').setErrors({...errors, validoPas2: true});
-
-            // if (indexArray !== index) {
             let repidoMas2 = [];
             repidoMas2 = referencias.filter(position => {
                 console.log('position antes', position.nombre, value.nombre);
@@ -438,8 +467,6 @@ export class SolicitudCreditoComponent implements OnInit {
             if (repidoMas2.length > 1) {
                 pociconrepetida.push(index);
             }
-
-            // }
         });
         if (pociconrepetida.length > 1) {
 
@@ -449,18 +476,10 @@ export class SolicitudCreditoComponent implements OnInit {
                 this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('nombre').setErrors({validoPas2: false});
             });
         }
-
-        // this.personaForm.get('referenciasSolicitante')['controls'][1].get('telefono').setErrors({validoPas: false});
-        console.log('pociconrepetida', this.personaForm.get('referenciasSolicitante'));
-
-
     }
 
     apellidoRepetido(event) {
-
-        // console.log('--referencias', this.personaForm.get('referenciasSolicitante'));
         const referencias = this.personaForm.get('referenciasSolicitante').value;
-        // console.log('--referencias', referencias);
         console.log('event', event);
         const pociconrepetida = [];
         referencias.forEach((value, index) => {
@@ -479,11 +498,6 @@ export class SolicitudCreditoComponent implements OnInit {
                 this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('apellido').setErrors({validoPas3: false});
             });
         }
-
-        // this.personaForm.get('referenciasSolicitante')['controls'][1].get('telefono').setErrors({validoPas: false});
-        console.log('pociconrepetida', this.personaForm.get('referenciasSolicitante'));
-
-
     }
 
     telefonoRepetido(event) {
@@ -528,6 +542,9 @@ export class SolicitudCreditoComponent implements OnInit {
     }
 
     continuar() {
+        this.parienteRepetido(1);
+        this.nombreRepetido(1);
+        this.telefonoRepetido(1);
 
         this.calculos();
         this.calcularCredito();

@@ -525,6 +525,7 @@
                                                                 parentesco</label>
 
                                                             <select formControlName="referenciaSolicitante"
+                                                                    (change)="parienteRepetido($event)"
                                                                     class="form-control" id="status">
                                                                 <option value="">- Seleccione -</option>
                                                                 <option *ngFor="let tipo of tipoParentesco"
@@ -536,6 +537,9 @@
                                                                  class="invalid-feedback" style="display: block;">
                                                                 <div *ngIf="referencia.controls?.referenciaSolicitante?.errors.required">
                                                                     Referencia familiar es requerido
+                                                                </div>
+                                                                <div *ngIf="!referencia.controls?.referenciaSolicitante?.errors?.validoPas5"
+                                                                >Repetido
                                                                 </div>
                                                             </div>
                                                         </div>
