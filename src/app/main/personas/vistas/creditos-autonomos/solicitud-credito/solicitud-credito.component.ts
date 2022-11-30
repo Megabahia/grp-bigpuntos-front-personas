@@ -187,7 +187,7 @@ export class SolicitudCreditoComponent implements OnInit {
         this.obtenerListas();
         console.log('this.usuario.', this.usuario);
         this.fecha = this.usuario.fechaNacimiento;
-        this.personaForm.patchValue(this.usuario)
+        this.personaForm.patchValue(this.usuario);
 
         this.tipoViviendaSelected();
 
@@ -421,12 +421,25 @@ export class SolicitudCreditoComponent implements OnInit {
         console.log('event', event);
         const pociconrepetida = [];
         referencias.forEach((value, index) => {
-            if (event.target.value === value.nombre) {
-                console.log('---iguales--', index);
+            const errors = this.personaForm.get('referenciasSolicitante')['controls'][index].get('nombre').errors || {};
+
+            this.personaForm.get('referenciasSolicitante')['controls'][index].get('nombre').setErrors({...errors, validoPas2: true});
+
+            // if (indexArray !== index) {
+            let repidoMas2 = [];
+            repidoMas2 = referencias.filter(position => {
+                console.log('position antes', position.nombre, value.nombre);
+                if (position.nombre === value.nombre) {
+                    console.log('position if', position.nombre);
+                    return position;
+                    // pociconrepetida.push(index);
+                }
+            });
+            if (repidoMas2.length > 1) {
                 pociconrepetida.push(index);
             }
-            this.personaForm.get('referenciasSolicitante')['controls'][index].get('nombre').setErrors({validoPas2: null});
 
+            // }
         });
         if (pociconrepetida.length > 1) {
 
@@ -442,6 +455,7 @@ export class SolicitudCreditoComponent implements OnInit {
 
 
     }
+
     apellidoRepetido(event) {
 
         // console.log('--referencias', this.personaForm.get('referenciasSolicitante'));
@@ -480,12 +494,25 @@ export class SolicitudCreditoComponent implements OnInit {
         console.log('event', event);
         const pociconrepetida = [];
         referencias.forEach((value, index) => {
-            if (event.target.value === value.telefono) {
-                console.log('---iguales--', index);
+            const errors = this.personaForm.get('referenciasSolicitante')['controls'][index].get('telefono').errors || {};
+
+            this.personaForm.get('referenciasSolicitante')['controls'][index].get('telefono').setErrors({...errors, validoPas: true});
+
+            // if (indexArray !== index) {
+            let repidoMas2 = [];
+            repidoMas2 = referencias.filter(position => {
+                console.log('position antes', position.nombre, value.nombre);
+                if (position.telefono === value.telefono) {
+                    console.log('position if', position.nombre);
+                    return position;
+                    // pociconrepetida.push(index);
+                }
+            });
+            if (repidoMas2.length > 1) {
                 pociconrepetida.push(index);
             }
-            this.personaForm.get('referenciasSolicitante')['controls'][index].get('telefono').setErrors({validoPas: true});
 
+            // }
         });
         if (pociconrepetida.length > 2) {
 
