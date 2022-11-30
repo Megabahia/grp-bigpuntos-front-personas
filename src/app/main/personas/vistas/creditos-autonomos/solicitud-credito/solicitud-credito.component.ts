@@ -187,10 +187,8 @@ export class SolicitudCreditoComponent implements OnInit {
         this.obtenerListas();
         console.log('this.usuario.', this.usuario);
         this.fecha = this.usuario.fechaNacimiento;
-        this.personaForm.get('ocupacionSolicitante').patchValue(this.usuario.ocupacionSolicitante);
-        this.personaForm.get('referenciasSolicitante').patchValue(this.usuario.referenciasSolicitante);
-        this.personaForm.get('ingresosSolicitante').patchValue(this.usuario.ingresosSolicitante);
-        this.personaForm.get('gastosSolicitante').patchValue(this.usuario.gastosSolicitante);
+        this.personaForm.patchValue(this.usuario)
+
         this.tipoViviendaSelected();
 
     }
@@ -489,7 +487,7 @@ export class SolicitudCreditoComponent implements OnInit {
             this.personaForm.get('referenciasSolicitante')['controls'][index].get('telefono').setErrors({validoPas: true});
 
         });
-        if (pociconrepetida.length > 1) {
+        if (pociconrepetida.length > 2) {
 
             pociconrepetida.forEach(value => {
                 console.log('value', value);
