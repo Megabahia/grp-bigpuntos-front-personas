@@ -398,9 +398,7 @@ export class SolicitudCreditoComponent implements OnInit {
         localStorage.setItem('montoInteres', this.tasaInteres.toString());
         localStorage.setItem('coutaMensual', cuotaMensual.toString());
         localStorage.setItem('montoCreditoFinal', montoCreditoFinal.toString());
-        // localStorage.setItem('estadoCivil', this.infoCreditForm.value['estadoCivil']);
-        // localStorage.setItem('tipoPersona', this.infoCreditForm.value['tipoPersona']);
-        // this._router.navigate(['/pages/requisitos-de-credito']);
+
     }
 
     parienteRepetido(event) {
@@ -418,16 +416,11 @@ export class SolicitudCreditoComponent implements OnInit {
                 madres.push(index);
             }
         });
-        // referencias.filter((value, index) => {
-        //     this.personaForm.get('referenciasSolicitante')['controls'][index].get('referenciaSolicitante').setErrors(null);
-        //
-        //     if (value.referenciaSolicitante === 'Madre') {
-        //         madres.push(index);
-        //     }
-        // });
         if (padres.length > 1) {
             padres.forEach(value => {
-                this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('referenciaSolicitante').setErrors({validoPas5: false});
+                this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)]
+                    .get('referenciaSolicitante')
+                    .setErrors({validoPas5: false});
             });
         }
         if (madres.length > 1) {
@@ -487,7 +480,6 @@ export class SolicitudCreditoComponent implements OnInit {
     telefonoRepetido(event, indexArray) {
         const referencias = this.personaForm.get('referenciasSolicitante').value;
         referencias[indexArray].telefono = event.target?.value;
-        console.log('referencias', referencias);
         const pociconrepetida = [];
         referencias.filter((value, index) => {
             const errors = this.personaForm.get('referenciasSolicitante')['controls'][index].get('telefono').errors || {};
@@ -496,16 +488,13 @@ export class SolicitudCreditoComponent implements OnInit {
             this.personaForm.get('referenciasSolicitante')['controls'][index].get('telefono').setErrors({...errors});
 
             if (event.target?.value === value.telefono) {
-                console.log('index', index);
                 pociconrepetida.push(index);
             }
 
         });
-        console.log('posiscionRepetidos', pociconrepetida);
         if (pociconrepetida.length > 2) {
 
             pociconrepetida.forEach(value => {
-                console.log('value', value);
                 const errors = this.personaForm.get('referenciasSolicitante')['controls'][value].get('telefono').errors || {};
                 errors.validoPas = false;
 
@@ -513,14 +502,12 @@ export class SolicitudCreditoComponent implements OnInit {
             });
         }
         // this.personaForm.get('referenciasSolicitante')['controls'][1].get('telefono').setErrors({validoPas: false});
-        console.log('pociconrepetida', this.personaForm.get('referenciasSolicitante'));
 
 
     }
 
     continuar() {
         this.nombreRepetido(1);
-
         this.calculos();
         this.calcularCredito();
         // return;
@@ -533,10 +520,10 @@ export class SolicitudCreditoComponent implements OnInit {
         this.calcularEdad();
         this.submittedPersona = true;
         if (this.personaForm.invalid) {
-            console.log('no es valido', this.personaForm);
             return;
         }
-        this.personaForm.value.fechaNacimiento = '' + new Date(this.personaForm.get('fechaNacimiento').value).getFullYear() + '-' + new Date(this.personaForm.get('fechaNacimiento').value).getMonth() + '-' + new Date(this.personaForm.get('fechaNacimiento').value).getDay();
+
+        this.personaForm.get('fechaNacimiento').setValue(moment(this.personaForm.get('fechaNacimiento').value[0]).format('YYYY-MM-DD'));
         const persona = {
             identificacion: this.personaForm.get('documento').value,
             ...this.personaForm.value,
@@ -544,10 +531,8 @@ export class SolicitudCreditoComponent implements OnInit {
             imagen: []
         };
         const grpPersonasUser = JSON.parse(localStorage.getItem('grpPersonasUser'));
-        console.log('grpPersonasUser', grpPersonasUser);
         grpPersonasUser.persona = persona;
         localStorage.setItem('grpPersonasUser', JSON.stringify(grpPersonasUser));
-        console.log('----persona A GUARDAR ', persona);
         this._creditosAutonomosService.guardarInformacion(persona)
             .subscribe((info) => {
                 this.estado.emit(3);
