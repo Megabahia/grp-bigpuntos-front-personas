@@ -1,5 +1,4 @@
 import {AbstractControl, FormControl, ValidationErrors} from '@angular/forms';
-import {element} from 'protractor';
 
 export class ValidacionesPropias {
     static parientesTelefonos(control: AbstractControl) {
@@ -39,15 +38,13 @@ export class ValidacionesPropias {
         const madres = [];
 
         referencias.filter((value, index) => {
-            const errors = {...value['controls']['referenciaSolicitante']['errors']};
-            delete errors?.validoPas5;
+            let errors = value['controls']['referenciaSolicitante']['errors'] || {};
+            delete errors?.['validoPas5'];
             if (Object.entries(errors).length === 0) {
                 value['controls']['referenciaSolicitante']['errors'] = null;
             } else {
-                console.log('err', errors);
                 value['controls']['referenciaSolicitante']['errors'] = errors;
             }
-
 
             if (value['controls']['referenciaSolicitante']['value'] === 'Padre') {
                 padres.push(index);
@@ -59,15 +56,14 @@ export class ValidacionesPropias {
         if (padres.length > 1) {
             padres.forEach(index => {
                 let errors = control['controls'][index]['controls']['referenciaSolicitante']['errors'] || {};
-                errors.validoPas5 = true;
+                errors.validoPas5 = false;
                 control['controls'][index]['controls']['referenciaSolicitante']['errors'] = errors;
             });
         }
-        console.log('----s', control['controls']);
         if (madres.length > 1) {
             madres.forEach(index => {
                 let errors = control['controls'][index]['controls']['referenciaSolicitante']['errors'] || {};
-                errors.validoPas5 = true;
+                errors.validoPas5 = false;
                 control['controls'][index]['controls']['referenciaSolicitante']['errors'] = errors;
             });
         }
