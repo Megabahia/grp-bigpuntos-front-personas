@@ -1,111 +1,203 @@
 <!-- Error page-->
 <section class="">
-  <div class="container pb-5">
-    <div class="row align-items-center py-5">
-      <div class="col-md-12 text-center mb-4">
-        <img src="{{ coreConfig.app.appLogoImage }}" width="300">
-        <h1 class="yellow2 mt-4 text-bold">Big Puntos</h1>
-        <h4 class="azul2 mt-2">!Los puntos para vivir!</h4>
-      </div>
+    <div class="container pb-5">
+        <div class="row align-items-center py-2">
+            <div class="col-md-12 text-center ">
+                <img src="{{ coreConfig.app.appLogoImage }}" width="300">
+                <h4 class="azul2 mt-2">CON BIG PUNTOS</h4>
+                <h2 class="rojo ">PAGA MENOS</h2>
+                <h4 class="azul2 mt-2"> POR TUS PRODUCTOS FAVORITOS</h4>
 
-      <div class="col-md-12 mb-5">
-        <div class="m-1 row justify-content-center align-items-center">
-
-          <div class="col-md-3" *ngFor="let producto of productos">
-            <div class="card shadow">
-              <div class="card-header px-5">
-                <img src="{{producto.imagen}}" width="1000" height="200">
-              </div>
-              <div class="card-body">
-                <h5 class="azul">{{producto.nombre}}</h5>
-                <ul class="font-size-14">
-                  <li> Precio normal: {{producto.precioNormal}} </li>
-                  <li class="azul2"><b> Pague en efectivo solo: {{producto.efectivo}} </b> <br>+
-                    {{producto.precioSupermonedas}} Big Puntos</li>
-                  <li>Cód. descuento: {{producto.codigoDescuento}}</li>
-                </ul>
-              </div>
             </div>
-          </div>
+            <div class="d-flex justify-content-center m-1 col-12 text-center">
+                        <span class="azul2">
+                            Presenta cualquiera de estas imágenes en nuestros ESTABLECIMIENTOS AFILIADOS
+
+                                 <a href="https://walink.co/9e8a9d" target="_blank" style="font-size: 30px">
+                                    <i class="fa fa-whatsapp " style="color: #00cd00" size="300">
+                                    </i>
+                                </a>
+
+                                y
+                            <b style="color: red">
+                                 PAGA MENOS CON BIG PUNTOS
+                            </b>
+
+                        </span>
+            </div>
 
 
+            <div class="col-md-12 ">
 
+                <div class="m-1 row justify-content-center text-center">
+                    <h3 class="col-12 mb-1 " style="color: red">
+                        ¡APROVECHA ANTES DE QUE SE AGOTEN!
+                    </h3>
+
+                    <div class="col-md-3" *ngFor="let producto of productos">
+                        <div class="card shadow">
+                            <div class="card-header px-5">
+                                <img src="{{producto.imagen}}" width="1000" height="200">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="azul">{{producto.nombre}}</h5>
+                                <ul class="font-size-14">
+                                    <li> Precio normal: {{producto.precioNormal}} </li>
+                                    <li class="azul2"><b> Pague en efectivo solo: {{producto.efectivo}} </b> <br>+
+                                        {{producto.precioSupermonedas}} Big Puntos
+                                    </li>
+                                    <li>Cód. descuento: {{producto.codigoDescuento}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <a href="https://walink.co/9e8a9d" target="_blank" class="btn btn-outline-dark text-black">
+                            ¡Quiero más productos!
+                        </a>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="text-center col-md-12 m-1">
+                <h3 class="azul mt-5 text-bold">PUNTOS DE CANJE:
+                </h3>
+            </div>
+            <div class=" col-4 d-flex justify-content-center">
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center m-1">
+                        <img src="assets/images/direcciones/mega-bahia.png" width="150">
+                    </div>
+                    <div class="col-12 text-center">
+                        <h4>
+                            Dir: Av. 10 de Agosto N39-201 y José Arizaga, Sector La Y, frente al Hipermercado CORAL y
+                            junto
+                            a la Clínica AXXIS., Quito, Ecuador.
+                        </h4>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class=" col-4 d-flex justify-content-center">
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center m-1">
+                        <img src="assets/images/direcciones/vittoria.png" width="150">
+                    </div>
+                    <div class="col-12 text-center">
+                        <h4>
+                            Dir: Selva Alegre OE 4-65 y Gaspar de Carvajal 170521 Quito, Ecuador.
+
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-4 d-flex justify-content-center">
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center m-1">
+                        <img src="assets/images/direcciones/mega-barato.png" width="150">
+                    </div>
+                    <div class="col-12 text-center">
+                        <h4>
+                            Dir: Teniente Hugo Ortiz S25-79 y Av. Solanda, diagonal a la parada del trole Quimiag.
+                            170131 Quito, Ecuador.
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center col-md-12 mx-3">
+                <h3>Necesito ayuda:
+                    <a href="https://walink.co/9e8a9d" target="_blank" style="font-size: 50px">
+                        <i class="fa fa-whatsapp " style="color: #00cd00">
+                        </i>
+                    </a>
+                </h3>
+            </div>
+            <!--            <div class="text-center col-md-6">-->
+            <!--                <h3 class="azul mt-5 text-bold">¿Qué son las Big Puntos?</h3>-->
+            <!--                <p class="font-size-20 mt-4">Son monedas virtuales que acumulas por visitar un lugar y adquirir sus-->
+            <!--                    productos-->
+            <!--                </p>-->
+            <!--            </div>-->
+
+            <!--            <div class="text-center col-md-6">-->
+            <!--                <h3 class="azul mt-5 text-bold">¿Para qué Sirven las Big Puntos?</h3>-->
+            <!--                <p class="font-size-20 mt-4">Sirven para canjear tus productos pagando menos dinero en efectivo</p>-->
+            <!--            </div>-->
         </div>
-      </div>
-      <div class="text-center col-md-6">
-        <h3 class="azul mt-5 text-bold">¿Qué son las Big Puntos?</h3>
-        <p class="font-size-20 mt-4">Son monedas virtuales que acumulas por visitar un lugar y adquirir sus productos
-        </p>
-      </div>
-
-      <div class="text-center col-md-6">
-        <h3 class="azul mt-5 text-bold">¿Para qué Sirven las Big Puntos?</h3>
-        <p class="font-size-20 mt-4">Sirven para canjear tus productos pagando menos dinero en efectivo</p>
-      </div>
     </div>
-  </div>
 </section>
 
-<section class="section-footer-LP text-LP pt-5 pb-5">
-  <div class="container pt-5">
-    <h2 class="yellow2 text-center"><b>OBTENER MIS DESCUENTOS</b></h2>
-    <p class="text-white text-center font-size-20">Te enviaremos un código para que descubras tu premio</p>
-    <div class="row justify-content-center mt-5">
-      <div class="col-md-8">
-        <form class="auth-login-form mt-2" [formGroup]="email_code_Form" (ngSubmit)="enviarCodigo()">
-          <div class="form-group">
-            <label class="text-white">Ingresa tu correo electrónico para enviarte el código</label>
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="--------" formControlName="email">
-              <div class="input-group-append">
-                <button class="btn btn-warning">Quiero el premio</button>
-              </div>
-            </div>
-            <div *ngIf="submitted && f.email.errors" class="text-white">
+<!--<section class="section-footer-LP text-LP pt-5 pb-5">-->
+<!--    <div class="container pt-5">-->
+<!--        <h2 class="yellow2 text-center"><b>OBTENER MIS DESCUENTOS</b></h2>-->
+<!--        <p class="text-white text-center font-size-20">Te enviaremos un código para que descubras tu premio</p>-->
+<!--        <div class="row justify-content-center mt-5">-->
+<!--            <div class="col-md-8">-->
+<!--                <form class="auth-login-form mt-2" [formGroup]="email_code_Form" (ngSubmit)="enviarCodigo()">-->
+<!--                    <div class="form-group">-->
+<!--                        <label class="text-white">Ingresa tu correo electrónico para enviarte el código</label>-->
+<!--                        <div class="input-group">-->
+<!--                            <input type="text" class="form-control" placeholder="&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;" formControlName="email">-->
+<!--                            <div class="input-group-append">-->
+<!--                                <button class="btn btn-warning">Quiero el premio</button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div *ngIf="submitted && f.email.errors" class="text-white">-->
 
-              <div *ngIf="f.email.errors.required">Correo es requerido</div>
-              <div *ngIf="f.email.errors.email">Debe ingresar una dirección de correo válida </div>
-            </div>
-          </div>
-        </form>
-        <form class="auth-login-form mt-2" [formGroup]="confir_email_code_Form" (ngSubmit)="validarCodigo()">
-          <div class="form-group">
-            <label class="text-white">Ingresa el código que hemos enviado a tu correo electrónico (no olvides revisar tu
-              carpeta de SPAM)</label>
-            <div class="input-group">
-              <input type="text" class="form-control" formControlName="code" placeholder="*********">
-              <div class="input-group-append">
-                <button class="btn btn-warning">Enviar Código</button>
-              </div>
-            </div>
-            <div *ngIf="submitted2 && f2.code.errors" class="text-white">
+<!--                            <div *ngIf="f.email.errors.required">Correo es requerido</div>-->
+<!--                            <div *ngIf="f.email.errors.email">Debe ingresar una dirección de correo válida</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--                <form class="auth-login-form mt-2" [formGroup]="confir_email_code_Form" (ngSubmit)="validarCodigo()">-->
+<!--                    <div class="form-group">-->
+<!--                        <label class="text-white">Ingresa el código que hemos enviado a tu correo electrónico (no-->
+<!--                            olvides revisar tu-->
+<!--                            carpeta de SPAM)</label>-->
+<!--                        <div class="input-group">-->
+<!--                            <input type="text" class="form-control" formControlName="code" placeholder="*********">-->
+<!--                            <div class="input-group-append">-->
+<!--                                <button class="btn btn-warning">Enviar Código</button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div *ngIf="submitted2 && f2.code.errors" class="text-white">-->
 
-              <div *ngIf="f2.code.errors.required">Código es requerido</div>
-              <div *ngIf="f2.code.errors?.code">Código invalido</div>
-            </div>
-          </div>
-        </form>
+<!--                            <div *ngIf="f2.code.errors.required">Código es requerido</div>-->
+<!--                            <div *ngIf="f2.code.errors?.code">Código invalido</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
 
-      </div>
-    </div>
-  </div>
-</section>
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
 
 <div class="text-center my-3">
-  <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px" width="50px">
+    <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px" width="50px">
 </div>
 <ng-template #mensajeModal let-modal>
-  <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalCenterTitle">Mensaje</h5>
-    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body" tabindex="0" ngbAutofocus>
-    <div [innerHTML]="mensaje"></div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">Cerrar</button>
-  </div>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Mensaje</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+        <div [innerHTML]="mensaje"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">Cerrar</button>
+    </div>
 </ng-template>
 <!-- / Error page-->
+
+<!-- Buynow Button-->
+<div class="buy-now">
+    <a href="https://walink.co/9ba631" target="_blank">
+        <img src="assets/images/iconos-flotantes/whatsapp.png" width="50">
+    </a
+    >
+</div>

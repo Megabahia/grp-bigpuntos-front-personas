@@ -60,6 +60,9 @@ export class PagesViewsComponent implements OnInit {
                 },
                 customizer: false,
                 enableLocalStorage: false,
+                buyNow: {
+                    hidden: true
+                }
             },
         };
     }
