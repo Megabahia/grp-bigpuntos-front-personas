@@ -519,6 +519,8 @@ export class SolicitudCreditoComponent implements OnInit {
         }
         this.calcularEdad();
         this.submittedPersona = true;
+        console.log('antes de validar', this.personaForm);
+
         if (this.personaForm.invalid) {
             console.log('no valido ', this.personaForm);
             return;
