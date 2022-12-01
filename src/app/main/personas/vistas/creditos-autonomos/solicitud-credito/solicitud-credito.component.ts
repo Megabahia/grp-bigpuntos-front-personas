@@ -388,7 +388,7 @@ export class SolicitudCreditoComponent implements OnInit {
         if (montoCredito === 0) {
             this.mensaje = '¡Lo sentimos! Con los datos ingresados lamentamos informarte que no cuentas con capacidad de pago.';
             this.abrirModalLg(this.modalAviso);
-            return;
+            return false;
         }
         const resto = new Decimal(montoCredito.toString().substr(2, 4));
         const montoCreditoRedondeado = new Decimal(montoCredito).sub(resto).toNumber();
@@ -396,7 +396,7 @@ export class SolicitudCreditoComponent implements OnInit {
         if (montoCreditoRedondeado < this.montoMinimo) {
             this.mensaje = '¡Lo sentimos! Con los datos ingresados lamentamos informarte que no cuentas con capacidad de pago.';
             this.abrirModalLg(this.modalAviso);
-            return;
+            return false;
         } else if (montoCreditoRedondeado >= this.montoMaximo) {
             montoCreditoFinal = this.montoMaximo;
             cuotaMensual = new Decimal(this.montoMaximo / 12).toDecimalPlaces(2).toNumber();
@@ -407,118 +407,16 @@ export class SolicitudCreditoComponent implements OnInit {
         localStorage.setItem('montoInteres', this.tasaInteres.toString());
         localStorage.setItem('coutaMensual', cuotaMensual.toString());
         localStorage.setItem('montoCreditoFinal', montoCreditoFinal.toString());
-
+        return true;
     }
 
-    parienteRepetido(event) {
-        const referencias = this.personaForm.get('referenciasSolicitante').value;
-        const padres = [];
-        const madres = [];
-
-        referencias.filter((value, index) => {
-            this.personaForm.get('referenciasSolicitante')['controls'][index].get('referenciaSolicitante').setErrors(null);
-
-            if (value.referenciaSolicitante === 'Padre') {
-                padres.push(index);
-            }
-            if (value.referenciaSolicitante === 'Madre') {
-                madres.push(index);
-            }
-        });
-        if (padres.length > 1) {
-            padres.forEach(value => {
-                this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)]
-                    .get('referenciaSolicitante')
-                    .setErrors({validoPas5: false});
-            });
-        }
-        if (madres.length > 1) {
-            madres.forEach(value => {
-                this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('referenciaSolicitante').setErrors({validoPas5: false});
-            });
-        }
-    }
-
-    nombreRepetido(event) {
-
-        const referencias = this.personaForm.get('referenciasSolicitante').value;
-        const pociconrepetida = [];
-        referencias.forEach((value, index) => {
-            const errors = this.personaForm.get('referenciasSolicitante')['controls'][index].get('nombre').errors || {};
-
-            this.personaForm.get('referenciasSolicitante')['controls'][index].get('nombre').setErrors(null);
-            let repidoMas2 = [];
-            repidoMas2 = referencias.filter(position => {
-                if (position.nombre === value.nombre) {
-                    return position;
-                    // pociconrepetida.push(index);
-                }
-            });
-            if (repidoMas2.length > 1) {
-                pociconrepetida.push(index);
-            }
-        });
-        if (pociconrepetida.length > 1) {
-
-            pociconrepetida.forEach(value => {
-
-                this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('nombre').setErrors({validoPas2: false});
-            });
-        }
-    }
-
-    apellidoRepetido(event) {
-        const referencias = this.personaForm.get('referenciasSolicitante').value;
-        const pociconrepetida = [];
-        referencias.forEach((value, index) => {
-            if (event.target.value === value.apellido) {
-                pociconrepetida.push(index);
-            }
-            this.personaForm.get('referenciasSolicitante')['controls'][index].get('apellido').setErrors({validoPas3: true});
-
-        });
-        if (pociconrepetida.length > 1) {
-
-            pociconrepetida.forEach(value => {
-
-                this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('apellido').setErrors({validoPas3: false});
-            });
-        }
-    }
-
-    telefonoRepetido(event, indexArray) {
-        const referencias = this.personaForm.get('referenciasSolicitante').value;
-        referencias[indexArray].telefono = event.target?.value;
-        const pociconrepetida = [];
-        referencias.filter((value, index) => {
-            const errors = this.personaForm.get('referenciasSolicitante')['controls'][index].get('telefono').errors || {};
-            delete errors.validoPas;
-
-            this.personaForm.get('referenciasSolicitante')['controls'][index].get('telefono').setErrors({...errors});
-
-            if (event.target?.value === value.telefono) {
-                pociconrepetida.push(index);
-            }
-
-        });
-        if (pociconrepetida.length > 2) {
-
-            pociconrepetida.forEach(value => {
-                const errors = this.personaForm.get('referenciasSolicitante')['controls'][value].get('telefono').errors || {};
-                errors.validoPas = false;
-
-                this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('telefono').setErrors({...errors});
-            });
-        }
-        // this.personaForm.get('referenciasSolicitante')['controls'][1].get('telefono').setErrors({validoPas: false});
-
-
-    }
 
     continuar() {
-        this.nombreRepetido(1);
         this.calculos();
-        this.calcularCredito();
+        if (!this.calcularCredito()) {
+            return;
+        }
+
         // return;
         if (this.personaForm.value.tipoIdentificacion === 'Cédula') {
             this.validadorDeCedula(this.personaForm.value.documento);
@@ -528,7 +426,7 @@ export class SolicitudCreditoComponent implements OnInit {
         }
         this.calcularEdad();
         this.submittedPersona = true;
-        console.log('antes de validar', this.personaForm);
+        // console.log('antes de validar', this.personaForm);
 
         if (this.personaForm.invalid) {
             console.log('no valido ', this.personaForm);
