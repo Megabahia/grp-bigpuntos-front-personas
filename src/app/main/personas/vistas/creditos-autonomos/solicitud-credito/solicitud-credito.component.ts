@@ -10,6 +10,7 @@ import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import Decimal from 'decimal.js';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ValidacionesPropias} from '../../../../../../utils/customer.validators';
 
 @Component({
     selector: 'app-solicitud-credito',
@@ -74,10 +75,8 @@ export class SolicitudCreditoComponent implements OnInit {
         this.usuario = this._coreMenuService.grpPersonasUser.persona;
         this.user_id = this._coreMenuService.grpPersonasUser.id;
         this._creditosAutonomosService.obtenerInformacion(this.user_id).subscribe((info) => {
-            console.log('info', info);
             const grpPersonasUser = JSON.parse(localStorage.getItem('grpPersonasUser'));
             grpPersonasUser.persona = info;
-            console.log('grpPersonasUser', grpPersonasUser);
             localStorage.setItem('grpPersonasUser', JSON.stringify(grpPersonasUser));
 
         });
@@ -111,7 +110,7 @@ export class SolicitudCreditoComponent implements OnInit {
                 tipoPersona: [this.tipoPersonaStorage, [Validators.required]],
                 documento: [this.usuario.identificacion, Validators.required],
                 email: [this.usuario.email],
-                whatsapp: [this.usuario.whatsapp, [Validators.required,
+                whatsapp: ['', [Validators.required,
                     Validators.maxLength(10),
                     Validators.minLength(10),
                     Validators.pattern('^[0-9]*$')]],
@@ -161,7 +160,7 @@ export class SolicitudCreditoComponent implements OnInit {
                         direccion: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]],
                         telefono: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     })
-                ]),
+                ], [ValidacionesPropias.parientesTelefonos, ValidacionesPropias.padres]),
                 ingresosSolicitante: this._formBuilder.group({
                     sueldoMensual: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     sueldoConyuge: ['', [Validators.pattern('^([0-9])*$')]],
@@ -185,8 +184,8 @@ export class SolicitudCreditoComponent implements OnInit {
             }
         );
         this.obtenerListas();
-        console.log('this.usuario.', this.usuario);
         this.fecha = this.usuario.fechaNacimiento;
+        this.usuario.whatsapp = this.usuario.whatsapp.replace('+593', '0');
         this.personaForm.patchValue(this.usuario);
 
         this.tipoViviendaSelected();
@@ -195,7 +194,6 @@ export class SolicitudCreditoComponent implements OnInit {
 
     valoresLocalStorage() {
         this.estadoCivilStorage = localStorage.getItem('estadoCivil');
-        console.log('this.estadoCivilStorage', this.estadoCivilStorage);
         if (this.estadoCivilStorage === 'Casado' || this.estadoCivilStorage === 'Unión libre') {
             this.casado = true;
         } else {
@@ -209,9 +207,7 @@ export class SolicitudCreditoComponent implements OnInit {
 
 
     calcularEdad() {
-        // console.log('--', this.personaForm.get('fechaNacimiento').value);
         const edad = moment().diff(new Date(this.personaForm.get('fechaNacimiento').value), 'years');
-        // console.log('--', edad);
         this.personaForm.get('edad').patchValue(edad);
         if (edad < 18) {
             this.personaForm.get('fechaNacimiento').setErrors({valid: false});
@@ -322,10 +318,8 @@ export class SolicitudCreditoComponent implements OnInit {
     validadorDePasaporte(pasaporte: String) {
         const ExpRegNumDec = '^([A-Za-z0-9]){4,25}$';
         if (pasaporte.match(ExpRegNumDec) != null) {
-            // console.log(' Válido');
         }
         if (pasaporte.match(ExpRegNumDec) == null) {
-            // console.log('Invalido');
             this.personaForm.get('documento').setErrors({validoPas: false});
         }
     }
@@ -364,15 +358,11 @@ export class SolicitudCreditoComponent implements OnInit {
         const gastosTotal = this.personaForm.get('gastosSolicitante')['controls']['totalGastos'].value
             ? new Decimal(this.personaForm.get('gastosSolicitante')['controls']['totalGastos'].value).toNumber()
             : 0;
-        console.log(' gastos a calcular ', gastosTotal);
-        console.log(' compras a calcular ', ingresosTotal);
-        console.log(' compras a conyuge ', this.personaForm.get('ingresosSolicitante')['controls']['sueldoConyuge'].value ? new Decimal(this.personaForm.get('ingresosSolicitante')['controls']['sueldoConyuge'].value).toNumber() : 0);
         // Formula para el calculo interes
         const ingresosConyuge = new Decimal((this.personaForm.get('ingresosSolicitante')['controls']['sueldoConyuge'].value ? new Decimal(this.personaForm.get('ingresosSolicitante')['controls']['sueldoConyuge'].value).toNumber() : 0) / 2);
         const ingresosMensuales = new Decimal(ingresosTotal).sub(ingresosConyuge);
         const gastosMensuales = new Decimal(gastosTotal);
         const ingresoDisponible = ingresosMensuales.add(ingresosConyuge).sub(gastosMensuales).toDecimalPlaces(2).toNumber();
-        console.log('paso las solicitudes de precios', ingresosConyuge);
         if (ingresoDisponible === 0) {
             this.mensaje = '¡Lo sentimos! Con los datos ingresados lamentamos informarte que no cuentas con capacidad de pago.';
             this.abrirModalLg(this.modalAviso);
@@ -419,19 +409,22 @@ export class SolicitudCreditoComponent implements OnInit {
         const madres = [];
 
         referencias.filter((value, index) => {
-            this.personaForm.get('referenciasSolicitante')['controls'][index].get('referenciaSolicitante').setErrors({validoPas5: true});
+            this.personaForm.get('referenciasSolicitante')['controls'][index].get('referenciaSolicitante').setErrors(null);
 
             if (value.referenciaSolicitante === 'Padre') {
                 padres.push(index);
             }
-        });
-        referencias.filter((value, index) => {
-            this.personaForm.get('referenciasSolicitante')['controls'][index].get('referenciaSolicitante').setErrors({validoPas5: true});
-
             if (value.referenciaSolicitante === 'Madre') {
                 madres.push(index);
             }
         });
+        // referencias.filter((value, index) => {
+        //     this.personaForm.get('referenciasSolicitante')['controls'][index].get('referenciaSolicitante').setErrors(null);
+        //
+        //     if (value.referenciaSolicitante === 'Madre') {
+        //         madres.push(index);
+        //     }
+        // });
         if (padres.length > 1) {
             padres.forEach(value => {
                 this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('referenciaSolicitante').setErrors({validoPas5: false});
@@ -446,20 +439,15 @@ export class SolicitudCreditoComponent implements OnInit {
 
     nombreRepetido(event) {
 
-        // console.log('--referencias', this.personaForm.get('referenciasSolicitante'));
         const referencias = this.personaForm.get('referenciasSolicitante').value;
-        // console.log('--referencias', referencias);
-        console.log('event', event);
         const pociconrepetida = [];
         referencias.forEach((value, index) => {
             const errors = this.personaForm.get('referenciasSolicitante')['controls'][index].get('nombre').errors || {};
 
-            this.personaForm.get('referenciasSolicitante')['controls'][index].get('nombre').setErrors({...errors, validoPas2: true});
+            this.personaForm.get('referenciasSolicitante')['controls'][index].get('nombre').setErrors(null);
             let repidoMas2 = [];
             repidoMas2 = referencias.filter(position => {
-                console.log('position antes', position.nombre, value.nombre);
                 if (position.nombre === value.nombre) {
-                    console.log('position if', position.nombre);
                     return position;
                     // pociconrepetida.push(index);
                 }
@@ -471,7 +459,6 @@ export class SolicitudCreditoComponent implements OnInit {
         if (pociconrepetida.length > 1) {
 
             pociconrepetida.forEach(value => {
-                console.log('value', value);
 
                 this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('nombre').setErrors({validoPas2: false});
             });
@@ -480,11 +467,9 @@ export class SolicitudCreditoComponent implements OnInit {
 
     apellidoRepetido(event) {
         const referencias = this.personaForm.get('referenciasSolicitante').value;
-        console.log('event', event);
         const pociconrepetida = [];
         referencias.forEach((value, index) => {
             if (event.target.value === value.apellido) {
-                console.log('---iguales--', index);
                 pociconrepetida.push(index);
             }
             this.personaForm.get('referenciasSolicitante')['controls'][index].get('apellido').setErrors({validoPas3: true});
@@ -493,46 +478,38 @@ export class SolicitudCreditoComponent implements OnInit {
         if (pociconrepetida.length > 1) {
 
             pociconrepetida.forEach(value => {
-                console.log('value', value);
 
                 this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('apellido').setErrors({validoPas3: false});
             });
         }
     }
 
-    telefonoRepetido(event) {
-
-        // console.log('--referencias', this.personaForm.get('referenciasSolicitante'));
+    telefonoRepetido(event, indexArray) {
         const referencias = this.personaForm.get('referenciasSolicitante').value;
-        // console.log('--referencias', referencias);
-        console.log('event', event);
+        referencias[indexArray].telefono = event.target?.value;
+        console.log('referencias', referencias);
         const pociconrepetida = [];
-        referencias.forEach((value, index) => {
+        referencias.filter((value, index) => {
             const errors = this.personaForm.get('referenciasSolicitante')['controls'][index].get('telefono').errors || {};
+            delete errors.validoPas;
 
-            this.personaForm.get('referenciasSolicitante')['controls'][index].get('telefono').setErrors({...errors, validoPas: true});
+            this.personaForm.get('referenciasSolicitante')['controls'][index].get('telefono').setErrors({...errors});
 
-            // if (indexArray !== index) {
-            let repidoMas2 = [];
-            repidoMas2 = referencias.filter(position => {
-                console.log('position antes', position.nombre, value.nombre);
-                if (position.telefono === value.telefono) {
-                    console.log('position if', position.nombre);
-                    return position;
-                    // pociconrepetida.push(index);
-                }
-            });
-            if (repidoMas2.length > 1) {
+            if (event.target?.value === value.telefono) {
+                console.log('index', index);
                 pociconrepetida.push(index);
             }
 
-            // }
         });
+        console.log('posiscionRepetidos', pociconrepetida);
         if (pociconrepetida.length > 2) {
 
             pociconrepetida.forEach(value => {
                 console.log('value', value);
-                this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('telefono').setErrors({validoPas: false});
+                const errors = this.personaForm.get('referenciasSolicitante')['controls'][value].get('telefono').errors || {};
+                errors.validoPas = false;
+
+                this.personaForm.get('referenciasSolicitante')['controls'][parseInt(value)].get('telefono').setErrors({...errors});
             });
         }
         // this.personaForm.get('referenciasSolicitante')['controls'][1].get('telefono').setErrors({validoPas: false});
@@ -542,9 +519,7 @@ export class SolicitudCreditoComponent implements OnInit {
     }
 
     continuar() {
-        this.parienteRepetido(1);
         this.nombreRepetido(1);
-        this.telefonoRepetido(1);
 
         this.calculos();
         this.calcularCredito();

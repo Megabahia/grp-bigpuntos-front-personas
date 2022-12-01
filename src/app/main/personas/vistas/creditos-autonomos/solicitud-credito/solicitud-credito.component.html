@@ -525,7 +525,7 @@
                                                                 parentesco</label>
 
                                                             <select formControlName="referenciaSolicitante"
-                                                                    (change)="parienteRepetido($event)"
+
                                                                     class="form-control" id="status">
                                                                 <option value="">- Seleccione -</option>
                                                                 <option *ngFor="let tipo of tipoParentesco"
@@ -613,7 +613,7 @@
                                                             <label for="telefono[{{i}}]">Teléfono celular</label>
                                                             <input type="text" class="form-control"
                                                                    formControlName="telefono"
-                                                                   (change)="telefonoRepetido($event)"
+
                                                             >
                                                             <div *ngIf="submittedPersona && referencia.controls?.telefono?.errors"
                                                                  class="invalid-feedback" style="display: block;">
