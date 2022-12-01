@@ -1,10 +1,12 @@
 <section class="text-LP">
   <div class="container py-5">
     <div class="row align-items-center pb-5">
-      <div class="col-md-12 text-center mb-5 pb-3">
+      <div class="col-md-12 text-center mb-2">
         <img src="{{ coreConfig.app.appLogoImage }}" width="300">
-        <h1 class="yellow2 mt-4 text-bold">Por ser parte de nuestra familia</h1>
-        <h4 class="azul2 mt-2">Canjea los siguientes productos</h4>
+        <h4 class="azul2 mt-4 text-bold">POR SER PARTE DE NUESTRA FAMILIA, BIG PUNTOS TE PREMIA</h4>
+        <h4 class="azul2 mt-2">¡Big Puntos son los puntos para vivir!</h4>
+        <h4 class="azul2 mt-2">Por  <b style="color: red">XXX (cantidad) Big Puntos</b>, llévate gratis cualquiera de nuestros productos. Acércate a nuestros establecimientos afiliados y canjea tus Big Puntos.
+        </h4>
       </div>
       <div class="m-1 row justify-content-center align-items-center">
         <div class="col-lg-3" *ngFor="let producto of productos">
@@ -24,10 +26,18 @@
               <p>Aplica en:</p>
               <div class="text-center mb-2"><img src="{{producto.imagen_empresa}}" width="80"></div>
               <p><b>{{producto.empresa}}</b> <br>{{producto.local}}<br>{{producto.provincia}}- {{producto.pais}}</p>
-              <a href="#" class="text-facebook"><img
-                  src="https://th.bing.com/th/id/R.68c22e515a5712298552f4bbd4b1d8db?rik=XQrDxB9UT2dNwg&pid=ImgRaw&r=0"
-                  width="20">
-                Visitar página</a>
+
+                <a class="azul2 m-1" href="https://walink.co/72142f" target="_blank" >
+                    <i class="fa fa-whatsapp"  style="font-size: 20px; color: #00cd00">
+                    </i>
+                    Contáctanos para recibir tu premio
+                </a>
+                <br>
+                <a class="azul2" href="https://www.Facebook.com/bigpuntos" target="_blank" >
+                    <i class="fa fa-facebook" style="font-size: 20px">
+                    </i>
+                    Ver catálogo completo
+                </a>
             </div>
           </div>
         </div>
@@ -38,4 +48,10 @@
 </section>
 <div class="text-center mb-2">
   <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px" width="50px">
+</div>
+<div class="buy-now">
+  <a href="https://walink.co/9ba631" target="_blank">
+    <img src="assets/images/iconos-flotantes/whatsapp.png" width="50">
+  </a
+  >
 </div>
