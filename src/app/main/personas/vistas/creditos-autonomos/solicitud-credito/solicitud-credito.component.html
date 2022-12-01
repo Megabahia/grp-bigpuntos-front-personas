@@ -207,7 +207,7 @@
                                                     <div *ngIf="persForm.whatsapp.errors.required">Nro de WhatsApp
                                                         requerido
                                                     </div>
-                                                    <div *ngIf="persForm.whatsapp.errors.minlength || persForm.whatsapp.errors.maxlength || persForm.whatsapp.errors.min">
+                                                    <div *ngIf="persForm.whatsapp.errors.minlength || persForm.whatsapp.errors.maxlength ">
                                                         Ingrese un número de 10 dígitos
                                                     </div>
                                                 </div>
@@ -549,7 +549,7 @@
                                                         <div class="form-group">
                                                             <label for="nombre[{{i}}]">Nombre</label>
                                                             <input type="text" class="form-control"
-                                                                   (change)="nombreRepetido($event)"
+
                                                                    formControlName="nombre">
                                                             <div *ngIf="submittedPersona && referencia.controls?.nombre?.errors"
                                                                  class="invalid-feedback" style="display: block;">
@@ -560,9 +560,7 @@
                                                                 <div *ngIf="referencia.controls?.nombre?.errors.pattern || referencia.controls?.nombre?.errors.minlength">
                                                                     Ingrese solo letras
                                                                 </div>
-                                                                <div *ngIf="!referencia.controls?.nombre?.errors?.validoPas2"
-                                                                >Nombre repetido
-                                                                </div>
+
                                                             </div>
 
                                                         </div>
@@ -582,9 +580,6 @@
                                                                 <div *ngIf="referencia.controls?.apellido?.errors.pattern || referencia.controls?.apellido?.errors.minlength">
                                                                     Ingrese solo letras
                                                                 </div>
-<!--                                                                <div *ngIf="!referencia.controls?.apellido?.errors?.validoPas3"-->
-<!--                                                                >apellido repetido-->
-<!--                                                                </div>-->
                                                             </div>
                                                         </div>
                                                     </div>
@@ -623,11 +618,11 @@
                                                                 <div *ngIf="referencia.controls?.telefono?.errors.pattern">
                                                                     Ingrese solo números
                                                                 </div>
-                                                                <div *ngIf="personaForm.controls?.validatorRefencias">
-                                                                    Personalizada
-                                                                </div>
                                                                 <div *ngIf="!referencia.controls?.telefono.errors?.validoPas"
                                                                     >Teléfono repetido
+                                                                </div>
+                                                                <div *ngIf="referencia.controls?.telefono.errors?.minlength || referencia.controls?.telefono.errors?.maxlength ">
+                                                                    Ingrese un número de 10 dígitos
                                                                 </div>
                                                             </div>
                                                         </div>

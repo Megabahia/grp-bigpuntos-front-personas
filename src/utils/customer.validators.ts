@@ -56,14 +56,14 @@ export class ValidacionesPropias {
         if (padres.length > 1) {
             padres.forEach(index => {
                 let errors = control['controls'][index]['controls']['referenciaSolicitante']['errors'] || {};
-                errors.validoPas5 = false;
+                errors.validoPas5 = true;
                 control['controls'][index]['controls']['referenciaSolicitante']['errors'] = errors;
             });
         }
         if (madres.length > 1) {
             madres.forEach(index => {
                 let errors = control['controls'][index]['controls']['referenciaSolicitante']['errors'] || {};
-                errors.validoPas5 = false;
+                errors.validoPas5 = true;
                 control['controls'][index]['controls']['referenciaSolicitante']['errors'] = errors;
             });
         }
