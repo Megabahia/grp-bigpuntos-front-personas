@@ -23,7 +23,7 @@ export class ValidacionesPropias {
         if (repetidos.length > 2) {
             repetidos.forEach(index => {
                 let errors = control['controls'][index]['controls']['telefono']['errors'] || {};
-                errors.validoPas = false;
+                errors.validoPas = true;
                 control['controls'][index]['controls']['telefono']['errors'] = errors;
             });
             return {multiplo5: true};

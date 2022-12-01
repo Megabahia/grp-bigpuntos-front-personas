@@ -618,7 +618,8 @@
                                                                 <div *ngIf="referencia.controls?.telefono?.errors.pattern">
                                                                     Ingrese solo números
                                                                 </div>
-                                                                <div *ngIf="!referencia.controls?.telefono.errors?.validoPas"
+<!--                                                                <div *ngIf="!referencia.controls?.telefono.errors?.validoPas"-->
+                                                                <div *ngIf=" referencia.controls?.telefono.errors.validoPas"
                                                                     >Teléfono repetido
                                                                 </div>
                                                                 <div *ngIf="referencia.controls?.telefono.errors?.minlength || referencia.controls?.telefono.errors?.maxlength ">
