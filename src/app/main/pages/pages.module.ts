@@ -24,6 +24,7 @@ import { SimulatorCrediCompraComponent } from './simulator-credi-compra/simulato
 import { CreditRequirementsComponent } from './credit-requirements/credit-requirements.component';
 import { PreApprovedCreditConsumerComponent } from './pre-approved-credit-consumer/pre-approved-credit-consumer.component';
 import { ApprovedEndConsumerComponent } from './approved-end-consumer/approved-end-consumer.component';
+import { SociosEmpleadosComponent } from './socios-empleados/socios-empleados.component';
 
 // routing
 const routes: Routes = [
@@ -88,6 +89,11 @@ const routes: Routes = [
         data: {animation: 'misc'},
     },
     {
+        path: 'socios-empleados',
+        component: SociosEmpleadosComponent,
+        data: {animation: 'misc'},
+    },
+    {
         path: 'requisitos-de-credito',
         component: CreditRequirementsComponent,
         data: {animation: 'misc'},
@@ -109,6 +115,7 @@ const routes: Routes = [
         CreditRequirementsComponent,
         PreApprovedCreditConsumerComponent,
         ApprovedEndConsumerComponent,
+        SociosEmpleadosComponent,
     ],
 
     imports: [

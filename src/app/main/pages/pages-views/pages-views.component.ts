@@ -74,6 +74,9 @@ export class PagesViewsComponent implements OnInit {
      * On init
      */
     ngOnInit(): void {
+        this._pages_viewsService.obtenerLista('VALORES_CALCULAR_CREDITO_CREDICOMPRA').subscribe((info) => {
+
+                });
         this.email_code_Form = this._formBuilder.group({
             email: ['', [Validators.required, Validators.email]],
         });
