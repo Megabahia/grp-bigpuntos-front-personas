@@ -16,4 +16,8 @@ export class SociosEmpleadosService {
         {tipo}
     );
   }
+
+  obtenerListaParametrosEmpresas(url) {
+    return this._httpClient.get<any>(`${environment.apiUrl}/central/empresas/url/${url}`);
+  }
 }

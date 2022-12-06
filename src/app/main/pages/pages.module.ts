@@ -89,7 +89,7 @@ const routes: Routes = [
         data: {animation: 'misc'},
     },
     {
-        path: 'socios-empleados',
+        path: 'socios-empleados/:empresa',
         component: SociosEmpleadosComponent,
         data: {animation: 'misc'},
     },

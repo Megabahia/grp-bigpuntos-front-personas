@@ -5,6 +5,7 @@
             <div class="row text-center ">
                 <div class="col-4">
                     <img src="assets/images/logo/credi-big.jpeg" width="200">
+                    <img [src]="empresa?.logo" width="150" class="m-1">
                 </div>
                 <div class="col-5 text-center">
                     <h1 class="azul2 mt-4 ">PENSAMOS EN TI</h1>
@@ -17,9 +18,9 @@
             <div class="col-md-12 mt-2 ">
 
                 <div class=" row justify-content-center text-center">
-                        <h4 class="azul2" style="line-height: 30px">En  $$NOMBRE DE LA EMPRESA buscamos tu bienestar y por eso queremos motivarte con la innovadora forma de ganar Big Puntos y canjearlos por productos de varias categorías en establecimientos afiliados.
+                        <h4 class="azul2" style="line-height: 30px">En  {{empresa?.nombre}} buscamos tu bienestar y por eso queremos motivarte con la innovadora forma de ganar Big Puntos y canjearlos por productos de varias categorías en establecimientos afiliados.
                         </h4>
-                        <h4 class="rojo">Por ser empleado de $$NOMBRE DE LA EMPRESA te regalamos <b style="color: red"> XXXX </b> Big Puntos!
+                        <h4 class="rojo">Por ser empleado de {{empresa?.nombre}} te regalamos <b style="color: red"> {{empresa?.bigPuntos}} </b> Big Puntos!
                         </h4>
                         <h4 class="azul2">
                             Regístrate
