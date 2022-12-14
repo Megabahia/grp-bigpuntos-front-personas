@@ -5,8 +5,8 @@
         <img src="{{ coreConfig.app.appLogoImage }}" width="300">
         <h4 class="azul2 mt-4 text-bold">POR SER PARTE DE NUESTRA FAMILIA, BIG PUNTOS TE PREMIA</h4>
         <h4 class="azul2 mt-2">¡Big Puntos son los puntos para vivir!</h4>
-        <h4 class="azul2 mt-2">Por  <b style="color: red">{{puntos}}</b>, llévate gratis cualquiera de nuestros productos. Acércate a nuestros establecimientos afiliados y canjea tus Big Puntos.
-        </h4>
+        <h4 class="azul2 mt-2">Por  <b style="color: red">{{puntos}}</b>, llévate gratis cualquiera de nuestros productos.</h4>
+        <h4 class="azul2 mt-2">Acércate a nuestros establecimientos afiliados y canjea tus Big Puntos.</h4>
       </div>
       <div class="m-1 row justify-content-center align-items-center">
         <div class="col-lg-3" *ngFor="let producto of productos">
@@ -27,17 +27,21 @@
               <div class="text-center mb-2"><img src="{{producto.imagen_empresa}}" width="80"></div>
               <p><b>{{producto.empresa}}</b> <br>{{producto.local}}<br>{{producto.provincia}}- {{producto.pais}}</p>
 
-                <a class="azul2 m-1" href="https://walink.co/72142f" target="_blank" >
-                    <i class="fa fa-whatsapp"  style="font-size: 20px; color: #00cd00">
-                    </i>
-                    Contáctanos para recibir tu premio
-                </a>
-                <br>
-                <a class="azul2" href="https://www.Facebook.com/bigpuntos" target="_blank" >
-                    <i class="fa fa-facebook" style="font-size: 20px">
-                    </i>
-                    Ver catálogo completo
-                </a>
+
+            </div>
+            <div class="text-justify">
+              <a class="azul2 m-1" href="https://walink.co/72142f" target="_blank" >
+                <i class="fa fa-whatsapp"  style="font-size: 20px; color: #00cd00">
+                </i>
+                Contáctanos para recibir tu premio
+              </a>
+              <br>
+              <br>
+              <a class="azul2 m-1" href="https://www.Facebook.com/bigpuntos" target="_blank" >
+                <i class="fa fa-facebook" style="font-size: 20px">
+                </i>
+                Ver catálogo completo
+              </a>
             </div>
           </div>
         </div>
