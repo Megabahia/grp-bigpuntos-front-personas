@@ -50,7 +50,7 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'personas/supermonedas/mis-monedas'
+                url: 'personas/BigPuntos/mis-monedas'
             },
             {
                 id: 'apps',
@@ -66,7 +66,7 @@ export const menu: CoreMenu[] = [
                         // translate: 'MENU.APPS.EMAIL',
                         type: 'item',
                         icon: 'circle',
-                        url: 'personas/supermonedas/mis-facturas'
+                        url: 'personas/BigPuntos/mis-facturas'
                     },
                     {
                         id: 'calificarCompras',
@@ -74,7 +74,7 @@ export const menu: CoreMenu[] = [
                         // translate: 'MENU.APPS.EMAIL',
                         type: 'item',
                         icon: 'circle',
-                        url: 'personas/supermonedas/mis-calificaciones'
+                        url: 'personas/BigPuntos/mis-calificaciones'
                     },
                     {
                         id: 'compartirPublicacionesFacebook',
@@ -82,7 +82,7 @@ export const menu: CoreMenu[] = [
                         // translate: 'MENU.APPS.EMAIL',
                         type: 'item',
                         icon: 'circle',
-                        url: 'personas/supermonedas/compartir-publicaciones-facebook'
+                        url: 'personas/BigPuntos/compartir-publicaciones-facebook'
                     },
                     {
                         id: 'compartirPublicacionesWhatsapp',
@@ -90,7 +90,7 @@ export const menu: CoreMenu[] = [
                         // translate: 'MENU.APPS.EMAIL',
                         type: 'item',
                         icon: 'circle',
-                        url: 'personas/supermonedas/compartir-publicaciones-whatsapp'
+                        url: 'personas/BigPuntos/compartir-publicaciones-whatsapp'
                     },
                     {
                         id: 'monedasOtorgadas',
@@ -98,7 +98,7 @@ export const menu: CoreMenu[] = [
                         // translate: 'MENU.APPS.EMAIL',
                         type: 'item',
                         icon: 'circle',
-                        url: 'personas/supermonedas/monedas-otorgadas'
+                        url: 'personas/BigPuntos/monedas-otorgadas'
                     },
                 ]
             },
@@ -108,7 +108,7 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'personas/supermonedas/pagar-con-supermonedas'
+                url: 'personas/BigPuntos/pagar-con-supermonedas'
             },
             {
                 id: 'creditosAutonomos',

@@ -93,7 +93,7 @@ const routes = [
         // data: { animation: 'auth' }
     },
     {
-        path: 'supermonedas',
+        path: 'BigPuntos',
         children: [
             {path: '', redirectTo: 'mis-monedas', pathMatch: 'full'},
             {

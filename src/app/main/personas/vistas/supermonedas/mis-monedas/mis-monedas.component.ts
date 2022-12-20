@@ -15,7 +15,7 @@ import {MisMonedasService} from './mis-monedas.service';
 export class MisMonedasComponent implements OnInit {
     @ViewChild(NgbPagination) paginator: NgbPagination;
     public page = 1;
-    public page_size: any = 2;
+    public page_size: any = 5;
     public maxSize;
     public collectionSize;
     public monedas;
