@@ -1,10 +1,11 @@
 import {DatePipe} from '@angular/common';
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {CoreMenuService} from '@core/components/core-menu/core-menu.service';
 import {NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {User} from 'app/auth/models';
 import {Subject} from 'rxjs';
 import {MisMonedasService} from './mis-monedas.service';
+import {DatatableComponent} from '@swimlane/ngx-datatable';
 
 @Component({
     selector: 'app-mis-monedas',
@@ -12,7 +13,7 @@ import {MisMonedasService} from './mis-monedas.service';
     styleUrls: ['./mis-monedas.component.scss'],
     providers: [DatePipe]
 })
-export class MisMonedasComponent implements OnInit {
+export class MisMonedasComponent implements OnInit, AfterViewInit {
     @ViewChild(NgbPagination) paginator: NgbPagination;
     public page = 1;
     public page_size: any = 5;
@@ -22,6 +23,8 @@ export class MisMonedasComponent implements OnInit {
     public usuario: User;
     public cantidadMonedas;
     private _unsubscribeAll: Subject<any>;
+
+    @ViewChild('table', {static: false}) table: DatatableComponent;
 
     constructor(
         private _misMonedasService: MisMonedasService,
@@ -40,6 +43,10 @@ export class MisMonedasComponent implements OnInit {
     }
 
     ngAfterViewInit() {
+        // this.table.bodyHeight = 600;
+        // setTimeout(() => {
+        //     this.table.recalculate();
+        // }, 300);
         this.iniciarPaginador();
 
         this.obtenerListaMonedas();
@@ -50,6 +57,7 @@ export class MisMonedasComponent implements OnInit {
             page: this.page - 1, page_size: this.page_size, user_id: this.usuario.id
         }).subscribe(info => {
             this.monedas = info.info;
+            console.log(info.info);
             this.collectionSize = info.cont;
         });
     }

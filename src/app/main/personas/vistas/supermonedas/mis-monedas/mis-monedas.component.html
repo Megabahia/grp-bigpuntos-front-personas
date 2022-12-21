@@ -34,51 +34,159 @@
                 </div>
             </div>
 
-            <div class="card card-company-table">
-                <div class="card-datatable table-responsive pt-0">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Empresa</th>
-                                <th>Transacción</th>
-                                <th>Big Puntos</th>
-                                <th>Descripción</th>
-                                <th>Fecha</th>
-                                <th>Puntos disponibles</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let moneda of monedas">
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar rounded">
-                                            <div class="avatar-content">
-                                                <img src="assets/images/icons/toolbox.svg" alt="Toolbar svg" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="font-weight-bolder">{{moneda.empresa}}</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>{{moneda.tipo}}</td>
-                                <td class="text-nowrap">
-                                    <div class="d-flex flex-column">
-                                        <span class="font-weight-bolder mb-25">{{moneda.credito ?
-                                            '+' + moneda.credito: '-' + moneda.debito}}</span>
-                                    </div>
-                                </td>
-                                <td>{{moneda.descripcion}}</td>
-                                <td>{{transformarFecha(moneda.created_at)}}</td>
-                                <td>
-                                    <div class="iso-moneda"></div> {{moneda.saldo}}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <ngx-datatable
+                    style="height: 350px;"
+                    #table
+                    class="table table-striped"
+                    [rows]="monedas"
+                    [scrollbarV]="true"
+                    [rowHeight]="50"
+                    [headerHeight]="50"
+                    [footerHeight]="50"
+            >
+                <ngx-datatable-column
+                        name="trainingMonth"
+                        [resizeable]="false"
+                        [sortable]="false"
+                        [canAutoResize]="true"
+                        [width]="200"
+                >
+                    <ng-template ngx-datatable-header-template>
+                        <strong>Empresa</strong>
+                    </ng-template>
+                    <ng-template ngx-datatable-cell-template let-row="row">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar rounded">
+                                <div class="avatar-content">
+                                    <img src="assets/images/icons/toolbox.svg" alt="Toolbar svg" />
+                                </div>
+                            </div>
+                            <div>
+                                <div class="font-weight-bolder">{{row.empresa}}</div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                        name="trainingMonth"
+                        [resizeable]="false"
+                        [sortable]="false"
+                        [canAutoResize]="true"
+                        [width]="100"
+                >
+                    <ng-template ngx-datatable-header-template>
+                        <strong>Transacción</strong>
+                    </ng-template>
+                    <ng-template ngx-datatable-cell-template let-row="row">
+                        {{ row.tipo }}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                        name="trainingMonth"
+                        [resizeable]="false"
+                        [sortable]="false"
+                        [canAutoResize]="true"
+                        [width]="100"
+                >
+                    <ng-template ngx-datatable-header-template>
+                        <strong>Big Puntos</strong>
+                    </ng-template>
+                    <ng-template ngx-datatable-cell-template let-row="row">
+                        <div class="d-flex flex-column align-items-center">
+                            <span class="font-weight-bolder mb-25">{{row.credito ?
+                                '+' + row.credito: '-' + row.debito}}</span>
+                        </div>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                        name="trainingMonth"
+                        [resizeable]="false"
+                        [sortable]="false"
+                        [canAutoResize]="true"
+                        [width]="350"
+                >
+                    <ng-template ngx-datatable-header-template>
+                        <strong>Descripción</strong>
+                    </ng-template>
+                    <ng-template ngx-datatable-cell-template let-row="row">
+                        {{row.descripcion}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                        name="trainingMonth"
+                        [resizeable]="false"
+                        [sortable]="false"
+                        [canAutoResize]="true"
+                        [width]="150"
+                >
+                    <ng-template ngx-datatable-header-template>
+                        <strong>Fecha</strong>
+                    </ng-template>
+                    <ng-template ngx-datatable-cell-template let-row="row">
+                        {{transformarFecha(row.created_at)}}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                        name="trainingMonth"
+                        [resizeable]="false"
+                        [sortable]="false"
+                        [canAutoResize]="true"
+                        [width]="150"
+                >
+                    <ng-template ngx-datatable-header-template>
+                        <strong>Puntos disponibles</strong>
+                    </ng-template>
+                    <ng-template ngx-datatable-cell-template let-row="row">
+                        <div class="iso-moneda"></div> {{row.saldo}}
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+
+<!--            <div class="card card-company-table">-->
+<!--                <div class="card-datatable table-responsive pt-0">-->
+<!--                    <table class="table table-striped">-->
+<!--                        <thead>-->
+<!--                            <tr>-->
+<!--                                <th>Empresa</th>-->
+<!--                                <th>Transacción</th>-->
+<!--                                <th>Big Puntos</th>-->
+<!--                                <th>Descripción</th>-->
+<!--                                <th>Fecha</th>-->
+<!--                                <th>Puntos disponibles</th>-->
+<!--                            </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                            <tr *ngFor="let moneda of monedas">-->
+<!--                                <td>-->
+<!--                                    <div class="d-flex align-items-center">-->
+<!--                                        <div class="avatar rounded">-->
+<!--                                            <div class="avatar-content">-->
+<!--                                                <img src="assets/images/icons/toolbox.svg" alt="Toolbar svg" />-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div>-->
+<!--                                            <div class="font-weight-bolder">{{moneda.empresa}}</div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>{{moneda.tipo}}</td>-->
+<!--                                <td class="text-nowrap">-->
+<!--                                    <div class="d-flex flex-column">-->
+<!--                                        <span class="font-weight-bolder mb-25">{{moneda.credito ?-->
+<!--                                            '+' + moneda.credito: '-' + moneda.debito}}</span>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td>{{moneda.descripcion}}</td>-->
+<!--                                <td>{{transformarFecha(moneda.created_at)}}</td>-->
+<!--                                <td>-->
+<!--                                    <div class="iso-moneda"></div> {{moneda.saldo}}-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
                 <ngb-pagination #paginator [collectionSize]="collectionSize" [(page)]="page" [(pageSize)]="page_size" [maxSize]="5" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
-            </div>
+<!--            </div>-->
             <!-- list section end -->
         </section>
         <!-- users list ends -->

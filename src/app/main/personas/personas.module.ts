@@ -57,6 +57,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { SolicitudCreditoComponent } from './vistas/creditos-autonomos/solicitud-credito/solicitud-credito.component';
 import { ResumenRequisitosCreditoComponent } from './vistas/creditos-autonomos/resumen-requisitos-credito/resumen-requisitos-credito.component';
 import { ValidacionDatosComponent } from './vistas/creditos-autonomos/validacion-datos/validacion-datos.component';
+import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -316,6 +317,8 @@ const routes = [
         NgxPrintModule,
         // Mask
         NgxMaskModule.forRoot(maskConfig),
+        // NGX-datatable
+        NgxDatatableModule,
     ],
     exports: [
         BienvenidoComponent,
