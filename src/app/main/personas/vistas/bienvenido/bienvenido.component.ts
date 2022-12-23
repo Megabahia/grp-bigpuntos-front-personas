@@ -189,18 +189,22 @@ export class BienvenidoComponent implements OnInit {
         },
         breakpoints: {
           1024: {
+            width: 1024,
             slidesPerView: 3,
             spaceBetween: 40
           },
           768: {
+            width: 768,
             slidesPerView: 2,
             spaceBetween: 30
           },
           640: {
+            width: 640,
             slidesPerView: 1,
             spaceBetween: 20
           },
           320: {
+            width: 320,
             slidesPerView: 1,
             spaceBetween: 10
           }
