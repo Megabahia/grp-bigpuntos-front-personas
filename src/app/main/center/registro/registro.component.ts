@@ -32,6 +32,8 @@ export class RegistroComponent implements OnInit {
 
     // Private
     private _unsubscribeAll: Subject<any>;
+    public captcha: boolean;
+    public siteKey: string;
 
     /**
      * Constructor
@@ -46,6 +48,7 @@ export class RegistroComponent implements OnInit {
         private _router: Router,
         private _modalService: NgbModal,
     ) {
+        this.siteKey = '6Ld2gy4gAAAAAJB5lGmJDgjgOvhA34jp4iAWuPGk';
         this._unsubscribeAll = new Subject();
 
         // Configure the layout
@@ -86,8 +89,7 @@ export class RegistroComponent implements OnInit {
         this.submitted = true;
 
         // stop here if form is invalid
-        // if (this.registerForm.invalid || !this.passwordSimilar) {
-        if (this.registerForm.invalid) {
+        if (this.registerForm.invalid || !this.captcha) {
             return;
         }
 
@@ -191,5 +193,8 @@ export class RegistroComponent implements OnInit {
         this._unsubscribeAll.complete();
     }
 
+    captchaValidado(evento) {
+        this.captcha = true;
+    }
 
 }

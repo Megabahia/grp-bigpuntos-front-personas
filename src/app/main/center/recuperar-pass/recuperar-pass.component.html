@@ -4,7 +4,7 @@
         <div class="card mb-0">
             <div class="card-body">
                 <a href="javascript:void(0);" class="brand-logo">
-                    <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" width="250" />
+                    <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" width="250"/>
                 </a>
 
                 <h4 class="card-title mb-1">¿Olvidaste tu contraseña? 🔒</h4>
@@ -14,13 +14,27 @@
                         <p>{{ error}}</p>
                     </div>
                 </ngb-alert>
-                <form class="auth-forgot-password-form mt-2" [formGroup]="forgotPasswordForm" (ngSubmit)="resetearPassword()">
+                <form class="auth-forgot-password-form mt-2" [formGroup]="forgotPasswordForm"
+                      (ngSubmit)="resetearPassword()">
                     <div class="form-group">
                         <label for="forgot-password-email" class="form-label">Correo</label>
-                        <input type="text" class="form-control" placeholder="nombre@ejemplo.com" formControlName="email" aria-describedby="forgot-password-email" tabindex="1" autofocus [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                        <input type="text" class="form-control" placeholder="nombre@ejemplo.com" formControlName="email"
+                               aria-describedby="forgot-password-email" tabindex="1" autofocus
+                               [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
                         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                             <div *ngIf="f.email.errors.required">Correo es requerido</div>
                             <div *ngIf="f.email.errors.email">Debe ingresar una dirección de correo válida</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="d-flex justify-content-center">
+                            <ngx-recaptcha2 [(ngModel)]="captcha" [ngModelOptions]="{standalone: true}" [siteKey]=" siteKey"
+                                            (success)="captchaValidado($event) ">
+                            </ngx-recaptcha2>
+
+                        </div>
+                        <div *ngIf="submitted && !captcha" style="display: block;" class="invalid-feedback">
+                            <div>Captcha requerido</div>
                         </div>
                     </div>
                     <button class="btn btn-primary btn-block" tabindex="2" rippleEffect>Enviar</button>
