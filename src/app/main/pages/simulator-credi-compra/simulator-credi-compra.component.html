@@ -20,7 +20,7 @@
                     </div>
                     <div class="row mx-2">
                         <form [formGroup]="infoCreditForm" (ngSubmit)="calcular()">
-                            <div class="row">
+                            <div class="row text-center">
                                 <div class="col-md-6 col-12">
                                     <div class="form-group row">
                                         <div class="col-sm-3 col-form-label">
@@ -124,9 +124,19 @@
                                 <div class="col-12">
                                     <button type="submit" rippleEffect class="btn btn-outline-dark mr-1">Calcular
                                     </button>
-                                    <a href="https://credicompra.com/"type="reset" rippleEffect class="btn btn-outline-dark text-black">Cancelar
+                                    <a href="https://credicompra.com/" type="reset" rippleEffect
+                                       class="btn btn-outline-dark text-black">Cancelar
                                     </a>
+                                    <br>
+                                    <a class="btn text-center mt-5  pb-1 btn-social bg-whatsapp text-white"
+                                       href="https://wa.me/5591122334455 ">
+                                        <i class="fa fa-whatsapp"></i>      Whatsapp          
+                                    </a>
+
                                 </div>
+
+
+
                             </div>
                         </form>
                     </div>
@@ -139,6 +149,7 @@
 <!--<div class="footer-LP"></div>-->
 <div class="text-center">
     <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px" width="50px">
+
 </div>
 <ng-template #modalAviso let-modal>
     <div class="modal-header">
@@ -153,6 +164,6 @@
         </div>
     </div>
     <div class="modal-footer">
-            <button type="button" class="btn btn-light" (click)="modal.dismiss( 'Cross click')">Salir</button>
+        <button type="button" class="btn btn-light" (click)="modal.dismiss( 'Cross click')">Salir</button>
     </div>
 </ng-template>
