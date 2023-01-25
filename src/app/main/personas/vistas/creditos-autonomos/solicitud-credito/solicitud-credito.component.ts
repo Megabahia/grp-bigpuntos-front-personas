@@ -174,7 +174,7 @@ export class SolicitudCreditoComponent implements OnInit {
                     sueldoMensual: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     sueldoConyuge: ['', [Validators.pattern('^([0-9])*$')]],
                     otrosIngresos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-                    descripcion: ['', Validators.required],
+                    descripcion: [''],
                     totalIngresos: [''],
                 }),
                 gastosSolicitante: this._formBuilder.group({
@@ -196,7 +196,7 @@ export class SolicitudCreditoComponent implements OnInit {
         this.fecha = this.usuario.fechaNacimiento;
         this.usuario.whatsapp = this.usuario.whatsapp.replace('+593', '0');
         this.personaForm.patchValue(this.usuario);
-
+        console.log('.....--', this.usuario);
         this.tipoViviendaSelected();
 
     }
@@ -221,6 +221,15 @@ export class SolicitudCreditoComponent implements OnInit {
         if (edad < 18) {
             this.personaForm.get('fechaNacimiento').setErrors({valid: false});
         }
+    }
+
+    otroIngresos(value) {
+        console.log('value--', value);
+        if (value > 0) {
+            this.personaForm.controls['gastosSolicitante'].setValidators([Validators.required]);
+            console.log('....', this.personaForm.get('gastosSolicitante'));
+        }
+        console.log('  this.ingreSolicitanteForm', this.ingreSolicitanteForm);
     }
 
     obtenerListas() {
@@ -412,6 +421,7 @@ export class SolicitudCreditoComponent implements OnInit {
 
 
     continuar() {
+        console.log('no valido ', this.personaForm);
         this.calculos();
         if (!this.calcularCredito()) {
             return;

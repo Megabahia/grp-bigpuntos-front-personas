@@ -618,9 +618,9 @@
                                                                 <div *ngIf="referencia.controls?.telefono?.errors.pattern">
                                                                     Ingrese solo números
                                                                 </div>
-<!--                                                                <div *ngIf="!referencia.controls?.telefono.errors?.validoPas"-->
+                                                                <!--                                                                <div *ngIf="!referencia.controls?.telefono.errors?.validoPas"-->
                                                                 <div *ngIf=" referencia.controls?.telefono.errors.validoPas"
-                                                                    >Teléfono repetido
+                                                                >Teléfono repetido
                                                                 </div>
                                                                 <div *ngIf="referencia.controls?.telefono.errors?.minlength || referencia.controls?.telefono.errors?.maxlength ">
                                                                     Ingrese un número de 10 dígitos
@@ -680,6 +680,9 @@
                                                 <div class="form-group">
                                                     <label>Otros ingresos</label>
                                                     <input type="text" class="form-control"
+                                                           (change)="otroIngresos($event.target.value)"
+                                                           mask="99999999999"
+                                                           min="0"
                                                            formControlName="otrosIngresos">
                                                     <div *ngIf="submittedPersona && ingreSolicitanteForm.otrosIngresos.errors"
                                                          class="invalid-feedback" style="display: block;">
@@ -729,7 +732,7 @@
 
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label>Alimentación</label>
+                                                    <label>Alimentación Mensual</label>
                                                     <input type="text" class="form-control"
                                                            formControlName="alimentacion">
                                                     <div *ngIf="submittedPersona && gasSolicitanteForm.alimentacion.errors"
@@ -746,7 +749,7 @@
 
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label>Arriendo (ingrese 0 si es propia)</label>
+                                                    <label>Arriendo Mensual (ingrese 0 si no aplica)</label>
                                                     <input type="text" class="form-control"
                                                            formControlName="arriendo">
                                                     <div *ngIf="submittedPersona && gasSolicitanteForm.arriendo.errors"
@@ -763,7 +766,7 @@
 
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label>Vestido</label>
+                                                    <label>Vestido Mensual</label>
                                                     <input type="text" class="form-control" formControlName="vestido">
                                                     <div *ngIf="submittedPersona && gasSolicitanteForm.vestido.errors"
                                                          class="invalid-feedback" style="display: block;">
@@ -780,7 +783,7 @@
 
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label>Transporte</label>
+                                                    <label>Transporte Mensual (ingrese 0 si no aplica)</label>
                                                     <input type="text" class="form-control" formControlName="trasporte">
                                                     <div *ngIf="submittedPersona && gasSolicitanteForm.trasporte.errors"
                                                          class="invalid-feedback" style="display: block;">
@@ -796,7 +799,8 @@
 
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label>Servicios básicos</label>
+                                                    <label>Servicios Básicos Mensuales
+                                                    </label>
                                                     <input type="text" class="form-control"
                                                            formControlName="serviciosBasicos">
                                                     <div *ngIf="submittedPersona && gasSolicitanteForm.serviciosBasicos.errors"
@@ -813,7 +817,8 @@
 
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label>Medicina </label>
+                                                    <label>Medicina Mensual (ingrese 0 si no aplica)
+                                                    </label>
                                                     <input type="text" class="form-control" formControlName="medicina">
                                                     <div *ngIf="submittedPersona && gasSolicitanteForm.medicina.errors"
                                                          class="invalid-feedback" style="display: block;">

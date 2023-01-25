@@ -72,10 +72,10 @@
 <!--/ MENU -->
 
 <!-- FOOTER -->
-<ng-template #footer>
+<ng-template #footer class="text-center d-flex justify-content-center">
   <footer
     *ngIf="!coreConfig.layout.footer.hidden"
-    class="footer"
+    class="footer text-center"
     [ngClass]="
       coreConfig.layout.footer.customBackgroundColor === true
         ? coreConfig.layout.footer.background +
