@@ -171,13 +171,6 @@
                                                             <input formControlName="edad" type="text"
                                                                    class="form-control" value="30" disabled>
                                                         </div>
-                                                        <div *ngIf="PerfilSub && f.provincia.errors"
-                                                             class="invalid-feedback"
-                                                             style="display: block;">
-                                                            <div *ngIf="PerfilSub && f.provincia.errors.required">Es
-                                                                requerido
-                                                            </div>
-                                                        </div>
 
                                                     </div>
                                                     <div class="col-md-3">
@@ -191,10 +184,10 @@
                                                                         value="{{paisOp.nombre}}">{{paisOp.nombre}}
                                                                 </option>
                                                             </select>
-                                                            <div *ngIf="PerfilSub && f.provincia.errors"
+                                                            <div *ngIf="PerfilSub && f.pais.errors"
                                                                  class="invalid-feedback"
                                                                  style="display: block;">
-                                                                <div *ngIf="PerfilSub && f.provincia.errors.required">Es
+                                                                <div *ngIf="PerfilSub && f.pais.errors.required">Es
                                                                     requerido
                                                                 </div>
                                                             </div>
@@ -203,7 +196,8 @@
 
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="username">Provincia</label>
+                                                            <label for="username">Provincia de residencia
+                                                            </label>
                                                             <select class="form-control select2"
                                                                     formControlName="provincia"
                                                                     [(ngModel)]="informacionBasica.provincia"
@@ -225,7 +219,7 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="username">Ciudad</label>
+                                                            <label for="username">Ciudad de residencia                                                            </label>
                                                             <select class="form-control select2"
                                                                     formControlName="ciudad"
                                                                     [(ngModel)]="informacionBasica.ciudad">
