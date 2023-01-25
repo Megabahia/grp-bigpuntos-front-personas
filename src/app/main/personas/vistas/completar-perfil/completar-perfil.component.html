@@ -86,7 +86,7 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="nombres">Nombres completos (COMPLETAR DOS NOMBRES)</label>
+                                <label for="nombres">Nombres completos (Completar dos nombres)</label>
                                 <input formControlName="nombres" type="text" class="form-control"
                                        [ngClass]="{ 'is-invalid': submitted && f.nombres.errors }">
                                 <div *ngIf="submitted && f.nombres.errors" class="invalid-feedback">
@@ -196,7 +196,8 @@
                         <div class="col-12 text-center">
                             <hr/>
                             <button type="button" data-target="#whatsapp" data-toggle="modal"
-                                    class="btn btn-primary mt-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-float waves-light"
+                                    class="btn btn-primary mt-1 mb-sm-0 mr-0  mr-sm-1 waves-effect waves-float waves-light"
+                                    style="color:white!important;"
                                     (click)="guardarRegistro()">Validar Cuenta y Continuar
                             </button>
                             <a class="btn text-center mt-1  pb-1 btn-social bg-whatsapp text-white"
