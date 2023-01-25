@@ -126,7 +126,7 @@ export class SolicitudCreditoComponent implements OnInit {
                 fechaNacimiento: [this.usuario.fechaNacimiento, [Validators.required]],
                 nivelInstruccion: [this.usuario.nivelInstruccion, Validators.required],
                 tipoVivienda: [this.usuario.tipoVivienda, Validators.required],
-                nombreDueno: [this.usuario.nombreDueno, [Validators.minLength(8), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
+                nombreDueno: [this.usuario.nombreDueno, [Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]+')]],
                 whatsappDueno: ['', [Validators.pattern('^([0-9])+$')]],
                 direccionDomicilio: [this.usuario.direccionDomicilio, [Validators.required, Validators.minLength(20), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]+')]],
                 referenciaDomicilio: [this.usuario.referenciaDomicilio, Validators.required],
