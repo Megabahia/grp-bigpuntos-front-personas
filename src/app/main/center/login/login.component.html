@@ -47,7 +47,10 @@
                     <div class="form-group">
                         <label class="form-label" for="login-email">Email</label>
                         <input type="text" formControlName="email" class="form-control"
-                               [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="admin@demo.com"
+                               style="text-transform:lowercase;"
+
+                               [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                               placeholder="admin@demo.com"
                                aria-describedby="login-email" autofocus="" tabindex="1"/>
                         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                             <div *ngIf="f.email.errors.required">Correo es requerido</div>

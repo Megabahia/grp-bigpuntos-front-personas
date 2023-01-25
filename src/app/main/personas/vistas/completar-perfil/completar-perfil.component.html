@@ -86,13 +86,14 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="nombres">Nombres</label>
+                                <label for="nombres">Nombres completos (COMPLETAR DOS NOMBRES)</label>
                                 <input formControlName="nombres" type="text" class="form-control"
                                        [ngClass]="{ 'is-invalid': submitted && f.nombres.errors }">
                                 <div *ngIf="submitted && f.nombres.errors" class="invalid-feedback">
-                                    <div *ngIf="f.nombres.errors.required">Apellidos son requeridos</div>
+                                    <div *ngIf="f.nombres.errors.required">Nombres son requeridos</div>
                                     <div *ngIf="f.nombres.errors.pattern || f.nombres.errors.minlength">
-                                        Ingrese solo letras y mínimo 4
+                                        Ingrese solo letras, mínimo 4 y NOMBRES COMPLETOS (dos nombres)
+
                                     </div>
                                 </div>
                             </div>
@@ -100,13 +101,14 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="apellidos">Apellidos</label>
+                                <label for="apellidos">Apellidos completos (Completar dos apellidos)</label>
                                 <input formControlName="apellidos" type="text" class="form-control"
                                        [ngClass]="{ 'is-invalid': submitted && f.apellidos.errors }">
                                 <div *ngIf="submitted && f.apellidos.errors" class="invalid-feedback">
                                     <div *ngIf="f.apellidos.errors.required">Apellidos son requeridos</div>
                                     <div *ngIf="f.apellidos.errors.pattern || f.apellidos.errors.minlength">
-                                        Ingrese solo letras y mínimo 4
+                                        Ingrese solo letras, mínimo 4 y APELLIDOS COMPLETOS (dos nombres)
+
                                     </div>
                                 </div>
                             </div>
