@@ -149,7 +149,7 @@ export const menu: CoreMenu[] = [
             // },
             {
                 id: 'creditosPreAprobados',
-                title: 'Créditos Pre Aprobados',
+                title: 'Consulta de Solicitud de Crédito',
                 role: [Role.BigPuntos],
                 // translate: 'MENU.PAGES.SECTION',
                 type: 'collapsible',
@@ -157,7 +157,7 @@ export const menu: CoreMenu[] = [
                 children: [
                     {
                         id: 'listadoCreditosPre',
-                        title: 'Listado de créditos Pre Aprobados',
+                        title: 'Estado de Solicitud de Crédito',
                         // translate: 'MENU.APPS.EMAIL',
                         type: 'item',
                         icon: 'circle',
