@@ -173,7 +173,7 @@ export class SolicitudCreditoComponent implements OnInit {
                 ingresosSolicitante: this._formBuilder.group({
                     sueldoMensual: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     sueldoConyuge: ['', [Validators.pattern('^([0-9])*$')]],
-                    otrosIngresos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+                    otrosIngresos: ['', [Validators.pattern('^([0-9])+$')]],
                     descripcion: [''],
                     totalIngresos: [''],
                 }),
@@ -228,6 +228,15 @@ export class SolicitudCreditoComponent implements OnInit {
         if (value > 0) {
             this.personaForm.controls['gastosSolicitante'].setValidators([Validators.required]);
             console.log('....', this.personaForm.get('gastosSolicitante'));
+        }
+
+        if (value > 0) {
+            console.log('validar');
+            (this.personaForm.get('ingresosSolicitante') as FormGroup).setControl('descripcion',
+                new FormControl(this.personaForm.get('ingresosSolicitante')['controls']?.descripcion.value, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]));
+        } else {
+            (this.personaForm.get('ingresosSolicitante') as FormGroup).setControl('descripcion',
+                new FormControl(this.personaForm.get('ingresosSolicitante')['controls']?.descripcion.value));
         }
         console.log('  this.ingreSolicitanteForm', this.ingreSolicitanteForm);
     }

@@ -708,6 +708,9 @@
                                                         <div *ngIf="ingreSolicitanteForm.descripcion.errors.required">
                                                             Especifique otros ingresos es requerido
                                                         </div>
+                                                        <div *ngIf="ingreSolicitanteForm.descripcion.errors.pattern">
+                                                            Ingrese solo numeros
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

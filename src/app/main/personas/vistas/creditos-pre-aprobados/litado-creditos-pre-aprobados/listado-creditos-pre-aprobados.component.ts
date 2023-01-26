@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -23,7 +23,7 @@ import {ParametrizacionesService} from '../../../servicios/parametrizaciones.ser
     providers: [DatePipe]
 
 })
-export class ListadoCreditosPreAprobadosComponent implements OnInit {
+export class ListadoCreditosPreAprobadosComponent implements OnInit, AfterViewInit {
     @ViewChild('establecimientoSeleccionadoMdl') establecimientoSeleccionadoMdl;
     @ViewChild('datosContactoMdl') datosContactoMdl;
     @ViewChild('startDatePicker') startDatePicker;
@@ -196,12 +196,11 @@ export class ListadoCreditosPreAprobadosComponent implements OnInit {
         });
         this.obtenerGeneroOpciones();
         this.obtenerListaCreditos();
-
+        this.iniciarPaginador();
     }
 
     transformarFecha(fecha) {
-        let nuevaFecha = this.datePipe.transform(fecha, 'yyyy-MM-dd');
-        return nuevaFecha;
+        return this.datePipe.transform(fecha, 'yyyy-MM-dd');
     }
 
     obtenerPaisOpciones() {
