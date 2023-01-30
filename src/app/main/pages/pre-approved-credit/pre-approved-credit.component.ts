@@ -6,6 +6,8 @@ import Decimal from 'decimal.js';
 import { ParametrizacionesService } from '../../personas/servicios/parametrizaciones.service';
 import { PreArpovedCreditService } from './pre-arpoved-credit.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'app-pre-approved-credit',
@@ -18,6 +20,8 @@ export class PreApprovedCreditComponent implements OnInit {
     public pathSent;
     @ViewChild('mensajeModal') mensajeModal;
     public mensaje = '';
+    public coreConfig: any;
+    private _unsubscribeAll: Subject<any>;
 
     constructor(
         private _coreConfigService: CoreConfigService,
@@ -53,6 +57,13 @@ export class PreApprovedCreditComponent implements OnInit {
                 enableLocalStorage: false,
             },
         };
+        this._unsubscribeAll = new Subject();
+
+        this._coreConfigService.config
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((config) => {
+                this.coreConfig = config;
+            });
     }
 
     get getsimuladorForm() {
@@ -80,7 +91,7 @@ export class PreApprovedCreditComponent implements OnInit {
                     `/pages/approvedCredit`], {queryParams: data}
                 );
             }, (error: any) => {
-                this.mensaje = 'Usted No tiene un Crédito Pre-Aprobado pero puede acceder un a Crédito para realizar su compra';
+                this.mensaje = 'Lo sentimos! <br> Parece que ha ocurrido un error, por favor verifica el código y número de identificación ingresado y vuelve a intentar.';
                 this.abrirModal(this.mensajeModal);
             });
 
