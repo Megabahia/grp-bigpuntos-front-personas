@@ -69,7 +69,7 @@ export class PreApprovedCreditConsumerComponent implements OnInit {
             this.abrirModal(this.mensajeModal);
             return;
         }
-        const code = new Decimal(this.envioForm.value.code).toNumber();
+        const code = this.envioForm.value.code.toString();
         const document = new Decimal(this.envioForm.value.document).toNumber();
         //    ingresar if de validación antes de redireccionar
         localStorage.setItem('preApproved', 'true');
