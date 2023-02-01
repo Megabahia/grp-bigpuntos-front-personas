@@ -30,6 +30,13 @@ export class PagesViewsService {
         );
     }
 
+    getlistaProductosfreeLanding(datos) {
+        return this._httpClient.post<any>(
+            `${environment.apiUrl}/central/productos/list-free-landing/`,
+            datos
+        );
+    }
+
     getlistaProductos(datos) {
         return this._httpClient.post<any>(
             `${environment.apiUrl}/central/productos/list/`,

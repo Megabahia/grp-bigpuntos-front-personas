@@ -22,8 +22,11 @@
     <section class="app-user-list">
       <div class="card">
         <div class="card-header">
-          <h4 class="text-primary d-block">Califica aquí tus compras, por cada compra que califiques reciben
-            {{ganarMonedas ? ganarMonedas.valor:0}} Big Puntos.</h4>
+          <h4 class="text-primary d-block">
+            Califica aquí tus compras y recibe {{ganarMonedas ? ganarMonedas.valor:0}} Big Puntos.
+            Recuerda que para que puedas calificar tus compras, primero tienes que haber cargado tus facturas
+            en la pestaña <b>CARGAR MIS FACTURAS</b>
+          </h4>
         </div>
       </div>
       <div class="card">
@@ -75,7 +78,6 @@
                   </div>
                 </th>
                 <th>Fecha de carga</th>
-                <th>Factura No.</th>
                 <th>Archivo</th>
                 <th>Estado</th>
                 <th>Acciones</th>
@@ -90,8 +92,6 @@
                   </div>
                 </td>
                 <td>{{transformarFecha(factura.created_at)}}</td>
-                <td>{{factura.numeroFactura}}</td>
-
                 <td>
                   <a class="text-primary" target="_blank"
                     href="{{factura.urlArchivo ? factura.urlArchivo: (factura.urlFoto ? factura.urlFoto:'')}}">{{factura.urlArchivo

@@ -29,7 +29,7 @@ import { SociosEmpleadosComponent } from './socios-empleados/socios-empleados.co
 // routing
 const routes: Routes = [
     {
-        path: 'pages-views',
+        path: 'pages-news',
         component: PagesViewsComponent,
         data: {roles: 'BigPuntos'},
     },
@@ -90,6 +90,11 @@ const routes: Routes = [
     },
     {
         path: 'socios-empleados/:empresa',
+        component: SociosEmpleadosComponent,
+        data: {animation: 'misc'},
+    },
+    {
+        path: 'clientes/:empresa',
         component: SociosEmpleadosComponent,
         data: {animation: 'misc'},
     },

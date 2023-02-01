@@ -50,7 +50,7 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'personas/BigPuntos/mis-monedas'
+                url: 'personas/BigPuntos/mis-bigpuntos'
             },
             {
                 id: 'apps',
@@ -93,12 +93,12 @@ export const menu: CoreMenu[] = [
                         url: 'personas/BigPuntos/compartir-publicaciones-whatsapp'
                     },
                     {
-                        id: 'monedasOtorgadas',
-                        title: 'Monedas por compras en locales afiliados',
+                        id: 'Big_Puntos-otorgados',
+                        title: 'Big Puntos por compras',
                         // translate: 'MENU.APPS.EMAIL',
                         type: 'item',
                         icon: 'circle',
-                        url: 'personas/BigPuntos/monedas-otorgadas'
+                        url: 'personas/BigPuntos/Big_Puntos-otorgados'
                     },
                 ]
             },

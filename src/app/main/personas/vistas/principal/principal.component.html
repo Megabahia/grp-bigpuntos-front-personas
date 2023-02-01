@@ -80,7 +80,7 @@
               <a (click)="obtenerProducto(producto._id)">
                 <div class="item-heading">
                   <h5 class="text-truncate mb-0">{{ producto.nombre }}</h5>
-                  <small class="text-body">by {{ producto.marca }}</small>
+                  <small class="text-body">{{ producto.empresa }}</small>
                 </div>
                 <div class="img-container mx-auto py-75">
                   <img width="100px" [src]="producto.imagen" class="img-fluid" alt="image" />

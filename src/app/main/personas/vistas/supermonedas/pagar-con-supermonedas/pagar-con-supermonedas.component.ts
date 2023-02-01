@@ -14,6 +14,7 @@ import {ParametrizacionesService} from '../../../servicios/parametrizaciones.ser
 
 import {jsPDF} from 'jspdf';
 import html2canvas from 'html2canvas';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-pagar-con-supermonedas',
@@ -25,6 +26,8 @@ export class PagarConSuperMonedasComponent implements OnInit {
     @ViewChild(NgbPagination) paginator: NgbPagination;
     @ViewChild('comprobanteCompraSuperMonedasMdl')
     comprobanteCompraSuperMonedasMdl;
+    @ViewChild('finalizacionMdl')
+    finalizacionMdl;
     @ViewChild('mensajeModal') mensajeModal;
     public page = 1;
     public page_size: any = 10;
@@ -55,7 +58,8 @@ export class PagarConSuperMonedasComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private _modalService: NgbModal,
         private _misMonedasService: MisMonedasService,
-        private paramService: ParametrizacionesService
+        private paramService: ParametrizacionesService,
+        private _router: Router,
     ) {
         this._unsubscribeAll = new Subject();
         this.usuario = this._coreMenuService.grpPersonasUser;
@@ -183,13 +187,14 @@ export class PagarConSuperMonedasComponent implements OnInit {
     }
 
     transformarFecha(fecha) {
-        let nuevaFecha = this.datePipe.transform(fecha, 'yyyy-MM-dd');
-        return nuevaFecha;
+        return this.datePipe.transform(fecha, 'yyyy-MM-dd');
     }
 
     abrirModalLg(modal) {
         this._modalService.open(modal, {
             size: 'lg',
+            backdrop: 'static',
+            keyboard: false,
         });
     }
 
@@ -229,5 +234,15 @@ export class PagarConSuperMonedasComponent implements OnInit {
 
             doc.save('comprobante.pdf');
         });
+    }
+
+    modalFinalizar() {
+        this.cerrarModal();
+        this.abrirModalLg(this.finalizacionMdl);
+    }
+
+    cerrarModalFinalizar() {
+        this.cerrarModal();
+        this._router.navigate(['/personas/BigPuntos/mis-bigpuntos']);
     }
 }

@@ -13,6 +13,7 @@ import {Router} from '@angular/router';
 export class SociosEmpleadosComponent implements OnInit {
     public productos;
     public empresa;
+    public tipo = 'empleados';
 
     constructor(
         private _coreConfigService: CoreConfigService,
@@ -22,13 +23,15 @@ export class SociosEmpleadosComponent implements OnInit {
     ) {
         console.log('after');
         const separador = window.location.href.split('/');
+        this.tipo = separador[5] === 'clientes' ? 'clientes' : 'empleados';
         this._sociosEmpleados.obtenerListaParametrosEmpresas(separador.pop()).subscribe(info => {
             this.empresa = info;
+            this.listarProductos();
         }, error => {
             this._router.navigate(['/']);
         });
 
-        this.listarProductos();
+
         this._coreConfigService.config = {
             layout: {
                 navbar: {
@@ -55,7 +58,7 @@ export class SociosEmpleadosComponent implements OnInit {
 
     listarProductos() {
         this._pages_viewsService
-            .getlistaProductosfree({tipo: 'producto-nuestra-familia-sm'})
+            .getlistaProductosfreeLanding({tipo: this.tipo, empresa_id: this.empresa._id})
             .subscribe(
                 (data) => {
                     this.productos = data.info;

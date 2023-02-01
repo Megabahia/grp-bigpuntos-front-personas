@@ -60,6 +60,7 @@ export class PrincipalComponent implements OnInit {
         tipo: "bienvenida"
       }
     ).subscribe(info => {
+      console.log(info);
       this.productos = info;
       this.swiperResponsive = {
         slidesPerView: 3,

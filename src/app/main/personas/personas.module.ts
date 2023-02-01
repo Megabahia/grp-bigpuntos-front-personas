@@ -98,7 +98,7 @@ const routes = [
         children: [
             {path: '', redirectTo: 'mis-monedas', pathMatch: 'full'},
             {
-                path: 'mis-monedas',
+                path: 'mis-bigpuntos',
                 component: MisMonedasComponent,
                 data: {roles: [Role.BigPuntos]},
                 canActivate: [AuthGuard]
@@ -140,7 +140,7 @@ const routes = [
                 // data: { animation: 'auth' }
             },
             {
-                path: 'monedas-otorgadas',
+                path: 'Big_Puntos-otorgados',
                 component: MonedasOtorgadasComponent,
                 data: {roles: [Role.BigPuntos]},
                 canActivate: [AuthGuard]
