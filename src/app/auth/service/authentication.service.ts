@@ -122,6 +122,7 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         this.signOut();
         localStorage.removeItem('grpPersonasUser');
+        localStorage.clear();
         // notify
         this.grpPersonasUserSubject.next(null);
     }
