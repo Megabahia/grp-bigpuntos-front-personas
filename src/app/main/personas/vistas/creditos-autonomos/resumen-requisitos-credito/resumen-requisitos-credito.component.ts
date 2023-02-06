@@ -50,7 +50,7 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
         const casados = ['UNIÓN LIBRE', 'CASADO'];
         let tipoPersona;
         let estadoCivil;
-        if (localStorage.getItem('tipoPersona') === 'Empleado') {
+        if (localStorage.getItem('tipoPersona') === 'Soy Empleado') {
             tipoPersona = 'EMPLEADO';
         } else {
             tipoPersona = 'NEGOCIOS';
@@ -84,7 +84,7 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
             plazo: 12,
             user_id: this.usuario.id,
             canal: localStorage.getItem('pagina'),
-            tipoCredito: localStorage.getItem('tipoPersona') === 'Empleado' ? 'Empleado' : 'Negocio propio',
+            tipoCredito: localStorage.getItem('tipoPersona') === 'Soy Empleado' ? 'Soy Empleado' : 'Con Negocio propio',
             concepto: 'Negocio propio',
             nombres: '',
             apellidos: '',

@@ -80,6 +80,7 @@ export class SolicitudCreditoComponent implements OnInit {
             localStorage.setItem('grpPersonasUser', JSON.stringify(grpPersonasUser));
 
         });
+        this.obtenerListas();
     }
 
     get persForm() {
@@ -122,7 +123,7 @@ export class SolicitudCreditoComponent implements OnInit {
                 edad: [this.usuario.edad],
                 fechaSolicitud: [fechaSolicitud, Validators.required],
                 nombres: [this.usuario.nombres, [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
-                apellidos: [this.usuario.apellidos, [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+')]],
+                apellidos: [this.usuario.apellidos, [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]*')]],
                 fechaNacimiento: [this.usuario.fechaNacimiento, [Validators.required]],
                 nivelInstruccion: [this.usuario.nivelInstruccion, Validators.required],
                 tipoVivienda: [this.usuario.tipoVivienda, Validators.required],
@@ -136,7 +137,7 @@ export class SolicitudCreditoComponent implements OnInit {
                     direccionNegocio: ['', [Validators.required, Validators.minLength(20), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]+')]],
                     tiempoTrabajo: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     cargoDesempeno: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
-                    sueldoPercibe: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
+                    // sueldoPercibe: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                 }),
                 referenciasSolicitante: this._formBuilder.array([
                     this._formBuilder.group({
@@ -186,13 +187,12 @@ export class SolicitudCreditoComponent implements OnInit {
                     medicina: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     educacion: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     otrosPrestamos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-                    otrosGastos: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
-                    descripcion: ['', Validators.required],
+                    otrosGastos: ['', [Validators.pattern('^([0-9])+$')]],
+                    descripcion: [''],
                     totalGastos: [''],
                 })
             }
         );
-        this.obtenerListas();
         this.fecha = this.usuario.fechaNacimiento;
         this.usuario.whatsapp = this.usuario.whatsapp.replace('+593', '0');
         this.personaForm.patchValue(this.usuario);
@@ -475,4 +475,15 @@ export class SolicitudCreditoComponent implements OnInit {
         });
     }
 
+    comprobarOtrosGastos(event) {
+        if (event.target.value > 0) {
+            console.log('validar');
+            (this.personaForm as FormGroup).setControl('especificaGastos',
+                new FormControl(this.personaForm.value?.descripcion,
+                    [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]));
+        } else {
+            (this.personaForm as FormGroup).setControl('especificaGastos',
+                new FormControl(this.personaForm.value?.descripcion));
+        }
+    }
 }

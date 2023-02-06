@@ -22,10 +22,17 @@
                             <button type="submit" rippleEffect class="btn btn-outline-dark mr-1" routerLink="/"
                                     (click)="simulador()">Continuar
                             </button>
-                            <a type="reset" rippleEffect class="btn btn-outline-dark text-black" href="https://credicompra.com/"
-                               (click)="cancelar()">Cancelar
+                            <a href="https://credicompra.com/">
+                                <button (click)="cancelar()"
+                                        rippleEffect class="btn btn-outline-dark mr-1">
+                                    Cancelar
+                                </button>
                             </a>
                         </div>
+                        <a class="btn mx-3 mt-4 text-center pb-1 btn-social bg-whatsapp text-white"
+                           href="https://wa.link/bqfcnh" target="_blank">
+                            <i class="fa fa-whatsapp"></i>      Whatsapp          
+                        </a>
                     </div>
                 </div>
             </div>
@@ -36,4 +43,13 @@
 <!--<div class="footer-LP"></div>-->
 <div class="text-center">
     <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px" width="50px">
+</div>
+
+<!-- Buynow Button-->
+<div class="buy-now">
+    <a href="https://wa.link/bqfcnh" target="_blank" class="text-bold color-black">
+        Necesito ayuda
+        <img src="assets/images/iconos-flotantes/whatsapp.png" width="50">
+    </a
+    >
 </div>

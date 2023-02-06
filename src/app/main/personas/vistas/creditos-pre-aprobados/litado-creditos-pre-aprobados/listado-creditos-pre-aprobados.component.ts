@@ -26,6 +26,9 @@ import {ParametrizacionesService} from '../../../servicios/parametrizaciones.ser
 export class ListadoCreditosPreAprobadosComponent implements OnInit, AfterViewInit {
     @ViewChild('establecimientoSeleccionadoMdl') establecimientoSeleccionadoMdl;
     @ViewChild('datosContactoMdl') datosContactoMdl;
+    @ViewChild('estadoAprobadoMdl') estadoAprobadoMdl;
+    @ViewChild('estadoNegadoMdl') estadoNegadoMdl;
+    @ViewChild('estadoProcesoMdl') estadoProcesoMdl;
     @ViewChild('startDatePicker') startDatePicker;
     @ViewChild('whatsapp') whatsapp;
     @ViewChild(NgbPagination) paginator: NgbPagination;
@@ -67,6 +70,7 @@ export class ListadoCreditosPreAprobadosComponent implements OnInit, AfterViewIn
     public tipoGeneroOpciones;
     // Private
     private _unsubscribeAll: Subject<any>;
+    public observacion;
 
     /**
      * Constructor
@@ -336,6 +340,19 @@ export class ListadoCreditosPreAprobadosComponent implements OnInit, AfterViewIn
 
     cerrarModal() {
         this.modalService.dismissAll();
+    }
+
+    mostarModal(estado, observacion) {
+        this.observacion = observacion;
+        if (estado === 'Aprobado') {
+            this.abrirModal(this.estadoAprobadoMdl);
+        }
+        if (estado === 'Negado') {
+            this.abrirModal(this.estadoNegadoMdl);
+        }
+        if (estado === 'Nuevo') {
+            this.abrirModal(this.estadoProcesoMdl);
+        }
     }
 
     /**

@@ -149,7 +149,7 @@ export const menu: CoreMenu[] = [
             // },
             {
                 id: 'creditosPreAprobados',
-                title: 'Consulta de Solicitud de Crédito',
+                title: 'Solicitudes de Crédito',
                 role: [Role.BigPuntos],
                 // translate: 'MENU.PAGES.SECTION',
                 type: 'collapsible',
