@@ -106,7 +106,7 @@ export class LoginComponent implements OnInit {
         this.submitted = true;
 
         // stop here if form is invalid
-        if (this.loginForm.invalid) {
+        if (this.loginForm.invalid || !this.captcha) {
             return;
         }
 
