@@ -5,6 +5,8 @@ import {Router} from '@angular/router';
 import {PreArpovedCreditService} from '../pre-approved-credit/pre-arpoved-credit.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import Decimal from 'decimal.js';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
     selector: 'app-pre-approved-credit-consumer',
@@ -17,6 +19,9 @@ export class PreApprovedCreditConsumerComponent implements OnInit {
     public pathSent;
     @ViewChild('mensajeModal') mensajeModal;
     public mensaje = '';
+    public coreConfig: any;
+    // Private
+    private _unsubscribeAll: Subject<any>;
 
     constructor(
         private _coreConfigService: CoreConfigService,
@@ -114,6 +119,11 @@ export class PreApprovedCreditConsumerComponent implements OnInit {
                     Validators.min(1),
                 ],
             ],
+        });
+        // Subscribe to config changes
+        this._unsubscribeAll = new Subject();
+        this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
+            this.coreConfig = config;
         });
     }
 

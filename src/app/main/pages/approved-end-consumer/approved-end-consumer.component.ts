@@ -5,6 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {PreArpovedCreditService} from '../pre-approved-credit/pre-arpoved-credit.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import Decimal from 'decimal.js';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'app-approved-end-consumer',
@@ -19,6 +21,9 @@ export class ApprovedEndConsumerComponent implements OnInit {
     public mensaje = '';
     public monto;
     public usuario;
+    public coreConfig: any;
+    // Private
+    private _unsubscribeAll: Subject<any>;
 
     constructor(
         private _coreConfigService: CoreConfigService,
@@ -32,18 +37,18 @@ export class ApprovedEndConsumerComponent implements OnInit {
         const host = document.location.host;
         this._router.queryParams.subscribe((params) => {
             this.monto = params.monto;
-            this.usuario = params.nombreCompleto;
+            this.usuario = params.nombresCompleto;
         });
 
-        if (localStorage.getItem('preApproved')) {
-            this._router.queryParams.subscribe((params) => {
-                this.monto = params.monto;
-                this.usuario = params.nombresCompleto;
-            });
-            localStorage.removeItem('preApproved');
-        } else {
-            this.actionContinue();
-        }
+        // if (localStorage.getItem('preApproved')) {
+        //     this._router.queryParams.subscribe((params) => {
+        //         this.monto = params.monto;
+        //         this.usuario = params.nombresCompleto;
+        //     });
+        //     localStorage.removeItem('preApproved');
+        // } else {
+        //     this.actionContinue();
+        // }
 
         this._coreConfigService.config = {
             layout: {
@@ -85,6 +90,11 @@ export class ApprovedEndConsumerComponent implements OnInit {
                     Validators.min(1),
                 ],
             ],
+        });
+        // Subscribe to config changes
+        this._unsubscribeAll = new Subject();
+        this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
+            this.coreConfig = config;
         });
     }
 

@@ -1,35 +1,31 @@
 <!-- Error page-->
 <div>
-    <section class="head-LP text-LP">
+    <section class="text-LP">
         <div class="container pb-5">
-            <div class="row">
-                <div class="col-4">
-                    <img src="../../../../assets/images/logo/logo.png" class="" width="120" alt="" >
-                    <img src="../../../../assets/images/logo/sanjose.jpeg" width="120" alt="" align="let">
-                </div>
-                <div class="col-8">
-                    <h1 class="yellow2 mt-4 text-bold">GRP Personas CrediCompra</h1>
+            <div class="row justify-content-center align-items-center py-5">
+                <div class="col-md-12 text-center mb-4">
+                    <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" width="300px"/>
+                    <h1 class="yellow2 mt-4 text-bold">CrediCompra - Big Puntos</h1>
                 </div>
             </div>
-            <div class="row justify-content-center align-items-center py-5">
-
+            <div class="align-items-center " style="text-align: center;">
                 <div class="col-md-12 text-center">
                     <h2 class="user-name font-weight-bolder text-center"> ¡FELICIDADES! </h2>
                     <h3 class="user-name font-weight-bolder text-center">
-                        Tienes un crédito Pre-Aprobado de: {{monto}}
+                        {{usuario}}
                         <br>
-                        Nombre del Cliente: {{usuario}}
+                        Tienes un crédito Pre-Aprobado de {{monto}}
                     </h3>
                     <h3 class="user-name font-weight-bolder text-center">
-                        Tú crédito pre-paprobado puedes hacer uso en 2 simples pasos.
+                        Puedes acceder a tu crédito en dos simples pasos:
                     </h3>
                     <h3 class="user-name font-weight-bolder text-center">
-                        1.- Completa tu información en la Solicitud de Crédito dentro del portal, si no tienes acceso
-                        debes crear cuenta
+                        1.- Completa tu información en la Solicitud de Crédito (primero debes crear tu cuenta a través
+                        de la siguiente pantalla que te mostraremos) y enviar tus documentos.
                     </h3>
                     <h3 class="user-name font-weight-bolder text-center">
-                        2.- Visita las tiendas en las que podrás usar tu dinero, y listo!.
-
+                        2.- Visita las tiendas en las que podrás usar tu crédito a través de www.credicompra.com y,
+                        listo!
                     </h3>
 
 
@@ -39,6 +35,7 @@
                     <div class="col-md-12 text-center">
                         <a class=" btn btn-primary "
                            (click)="actionContinue()"
+                           style="color: black !important;"
                         >
                             Continuar
                         </a>
@@ -52,7 +49,9 @@
 
 </div>
 
-<div class="footer-LP"></div>
+<div class="text-center">
+    <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px" width="50px">
+</div>
 
 <ng-template #mensajeModal let-modal>
     <div class="modal-header">

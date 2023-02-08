@@ -224,21 +224,13 @@ export class SolicitudCreditoComponent implements OnInit {
     }
 
     otroIngresos(value) {
-        console.log('value--', value);
         if (value > 0) {
-            this.personaForm.controls['gastosSolicitante'].setValidators([Validators.required]);
-            console.log('....', this.personaForm.get('gastosSolicitante'));
-        }
-
-        if (value > 0) {
-            console.log('validar');
-            (this.personaForm.get('ingresosSolicitante') as FormGroup).setControl('descripcion',
-                new FormControl(this.personaForm.get('ingresosSolicitante')['controls']?.descripcion.value, [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]));
+            this.ingreSolicitanteForm['descripcion'].setValidators([Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]*')]);
+            this.ingreSolicitanteForm['descripcion'].setValue(this.ingreSolicitanteForm?.['descripcion'].value);
         } else {
-            (this.personaForm.get('ingresosSolicitante') as FormGroup).setControl('descripcion',
-                new FormControl(this.personaForm.get('ingresosSolicitante')['controls']?.descripcion.value));
+            this.ingreSolicitanteForm['descripcion'].setValidators(null);
+            this.ingreSolicitanteForm['descripcion'].setValue(this.ingreSolicitanteForm?.['descripcion'].value);
         }
-        console.log('  this.ingreSolicitanteForm', this.ingreSolicitanteForm);
     }
 
     obtenerListas() {

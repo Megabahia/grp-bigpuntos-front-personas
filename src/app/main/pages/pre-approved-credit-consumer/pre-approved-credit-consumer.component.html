@@ -1,30 +1,37 @@
 <!-- Error page-->
 <div>
-    <section class="head-LP text-LP">
+    <section class="text-LP">
         <div class="container pb-5">
             <div class="row justify-content-center align-items-center py-5">
                 <div class="col-md-12 text-center mb-4">
-                    <img src="../../../../assets/images/logo/logo.png" width="120" alt="">
-                    <h1 class="yellow2 mt-4 text-bold">GRP Personas CrediCompra</h1>
-                    <!--                    <h2 class="azul2 mt-2">{{banner1}}</h2>-->
+                    <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" width="30%"/>
+                    <h1 class="yellow2 mt-4 text-bold">CrediCompra - Big Puntos</h1>
+                    <h3 class="user-name font-weight-bolder text-center">
+                        Con CrediCompra, realiza compras con créditos otorgados por Entidades Financieras reguladas en
+                        las mejores Casas Comerciales del país.
+                    </h3>
+                    <h3 class="user-name font-weight-bolder text-center">
+                        Y, gana Big Puntos con los que puedes canjear tus productos favoritos en establecimientos
+                        afiliados.
+                    </h3>
                 </div>
                 <div class="col-md-12 text-center">
                     <h2 class="user-name font-weight-bolder text-center"> ¡FELICIDADES! </h2>
 
 
-
-                        <h3 class="user-name font-weight-bolder text-center">
-                            INGRESA EL CÓDIGO QUE RECIBISTE EN TU CELULAR AQUÍ:
-                        </h3>
+                    <h3 class="user-name font-weight-bolder text-center">
+                        Ingresa el código enviado a tu correo para acceder a tu crédito pre aprobado y realizar compras
+                        en las mejores Casas Comerciales del país
+                    </h3>
 
                 </div>
                 <div class="align-items-center " style="text-align: center;  ">
 
                     <form [formGroup]="envioForm" (ngSubmit)="sentCode()">
-                        <div class="row align-items-center " >
+                        <div class="row align-items-center ">
                             <div class="form-group align-items-center">
                                 <span class="user-name font-weight-bolder">Código:</span>
-                                <input size="50" formControlName="code" type="text" class="form-control"  name="code">
+                                <input size="50" formControlName="code" type="text" class="form-control" name="code">
                                 <div *ngIf="submittedSimulador && getsimuladorForm.code.errors"
                                      class="invalid-feedback" style="display: block;">
                                     <div *ngIf="getsimuladorForm.code.errors.required">Código es requerido</div>
