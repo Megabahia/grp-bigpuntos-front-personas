@@ -140,14 +140,14 @@ const routes = [
                 // data: { animation: 'auth' }
             },
             {
-                path: 'Big_Puntos-otorgados',
+                path: 'Big_Puntos_otorgados_por_compras_en_establecimientos_afiliados',
                 component: MonedasOtorgadasComponent,
                 data: {roles: [Role.BigPuntos]},
                 canActivate: [AuthGuard]
                 // data: { animation: 'auth' }
             },
             {
-                path: 'pagar-con-supermonedas',
+                path: 'pagar-con-big-puntos',
                 component: PagarConSuperMonedasComponent,
                 data: {roles: [Role.BigPuntos]},
                 canActivate: [AuthGuard]

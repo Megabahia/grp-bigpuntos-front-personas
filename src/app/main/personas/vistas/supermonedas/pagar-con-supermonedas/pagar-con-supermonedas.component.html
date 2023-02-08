@@ -141,7 +141,7 @@
           <div class="card plan-card border-primary">
             <div class="card-body">
               <div class="item-heading">
-                <h6 class="text-truncate mb-0 text-info text-center">{{nombreTienda}}</h6>
+                <h6 class="text-truncate mb-0 azul2 text-center">{{nombreTienda}}</h6>
               </div>
               <div class="img-container w-50 mx-auto py-50">
                 <img [src]="imagenTienda" class="img-fluid" alt="image" />
@@ -149,11 +149,11 @@
               <hr />
               <div class="item-meta">
                 <h6 class="mt-1">Direccion:</h6>
-                <h6 class="mt-1 text-info">
+                <h6 class="mt-1 azul2">
                   {{direccionTienda}}
                 </h6>
                 <h6 class="mt-1">Monto Big Puntos:</h6>
-                <h6 class="mt-1 text-info">
+                <h6 class="mt-1 azul2">
                   <div class="iso-moneda"></div>
                   Big Puntos (equivalente a: ${{pagoMonto.monto}})
                 </h6>
@@ -162,8 +162,13 @@
           </div>
         </div>
         <div class="col-md-6">
-          <p class="text-primary">Descarga o imprime este documento y acércate al local para que puedas cajear tu
-            producto. <span class="text-info">Escaneé 1 vez el código QR o de barras, sus puntos serán descontados automáticamente.</span></p>
+          <p class="azul2 text-justify">
+            Descargue o Imprima este documentos y preséntelo al establecimiento afiliado para canjear su producto.
+          </p>
+          <p class="azul2 text-justify">
+            Para realizar el pago con Big Puntos, usted debe escanear 1 vez el código QR o el código de barras.
+            <b style="color: black !important;">Sus Big Puntos serán descontados de manera automática.</b>
+          </p>
 
           <hr />
           <div class="text-center">

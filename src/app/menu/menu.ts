@@ -98,7 +98,7 @@ export const menu: CoreMenu[] = [
                         // translate: 'MENU.APPS.EMAIL',
                         type: 'item',
                         icon: 'circle',
-                        url: 'personas/BigPuntos/Big_Puntos-otorgados'
+                        url: 'personas/BigPuntos/Big_Puntos_otorgados_por_compras_en_establecimientos_afiliados'
                     },
                 ]
             },
@@ -108,7 +108,7 @@ export const menu: CoreMenu[] = [
                 // translate: 'MENU.APPS.EMAIL',
                 type: 'item',
                 icon: 'circle',
-                url: 'personas/BigPuntos/pagar-con-supermonedas'
+                url: 'personas/BigPuntos/pagar-con-big-puntos'
             },
             {
                 id: 'creditosAutonomos',
