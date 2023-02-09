@@ -161,7 +161,7 @@ export class CompletarPerfilComponent implements OnInit {
                 // fechaNacimiento: [info.fechaNacimiento],
                 edad: info.edad,
                 whatsapp: info.whatsapp ? info.whatsapp : '',
-                celular: info.celular,
+                celular: info.celular ? info.celular : info.telefono,
             });
         });
         this.paramService.obtenerParametroNombreTipo('monedas_registro', 'GANAR_SUPERMONEDAS').subscribe((info) => {
