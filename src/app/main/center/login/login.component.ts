@@ -189,7 +189,6 @@ export class LoginComponent implements OnInit {
         this._coreConfigService.config
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((config) => {
-                console.log('confi', config);
                 // config.app.appLogoImage = 'assets/images/logo/credicompra.png';
                 this.coreConfig = config;
             });
