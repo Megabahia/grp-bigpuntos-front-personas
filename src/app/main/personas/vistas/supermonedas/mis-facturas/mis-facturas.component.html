@@ -22,16 +22,21 @@
       <!-- users filter start -->
       <div class="card card-app-design">
         <div class="card-body pb-1">
-          <h4 class="text-primary">Registra aquí tus facturas de cualquier compra. Al cargar tus facturas recibes
-            puntos gratis</h4>
+          <h4 class="">
+            Registre aquí las facturas de sus compras. Al hacerlo, usted
+            <b style="color: #385e8c !important;">GANA {{ganarMonedasFacElec ? ganarMonedasFacElec.valor:0}} BIG PUNTOS</b>
+            que podrá canjear por productos de varias categorías en establecimientos afiliados
+            <b style="color: #385e8c !important;">PAGANDO MENOS DINERO EN EFECTIVO</b>
+          </h4>
           <div class="design-planning-wrapper pt-1">
             <div class="design-planning bg-light-info p-2">
-              <small class="card-text mb-25">Por facturas electrónicas recibes:</small>
-              <h6 class="mb-0"><b>{{ganarMonedasFacElec ? ganarMonedasFacElec.valor:0}}</b> Big Puntos por factura
-              </h6>
+              <p class="card-text mb-25" style="color: black !important;">Por cada factura electrónica cargada usted
+                <b style="color: #385e8c !important;">GANA {{ganarMonedasFacElec ? ganarMonedasFacElec.valor:0}} BIG PUNTOS</b>
+              </p>
               <button class="btn btn-primary mt-1" tabindex="0" aria-controls="DataTables_Table_0" type="button"
+                      style="color: black !important;"
                 data-toggle="modal" data-target="#modals-slide-in" (click)="toggleSidebar('factura-electronica')">
-                Añadir factura
+                CARGAR FACTURA
               </button>
             </div>
 <!--            <div class="design-planning bg-light-success p-2">-->

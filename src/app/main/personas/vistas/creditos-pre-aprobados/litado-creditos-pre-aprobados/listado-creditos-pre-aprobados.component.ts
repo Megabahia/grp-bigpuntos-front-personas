@@ -49,7 +49,7 @@ export class ListadoCreditosPreAprobadosComponent implements OnInit, AfterViewIn
     public submitted = false;
     public usuario: User;
     public idEmpresa = '';
-    public listaCreditos;
+    public listaCreditos: [] = [];
     public listaConvenios;
     public idCredito = '';
     public idEmpresaFinanciera = '';
@@ -244,7 +244,7 @@ export class ListadoCreditosPreAprobadosComponent implements OnInit, AfterViewIn
             estado: ['Nuevo', 'Aprobado', 'Negado'],
             user_id: this.usuario.id
         }).subscribe((info) => {
-            this.listaCreditos = info.info;
+            // this.listaCreditos = info.info;
             this.collectionSize = info.cont;
         });
     }

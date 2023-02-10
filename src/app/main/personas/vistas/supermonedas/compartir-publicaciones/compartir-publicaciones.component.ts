@@ -85,7 +85,7 @@ export class CompartirPublicacionesComponent implements OnInit {
     obtenerIdEm() {
         this._bienvenidoService
             .obtenerEmpresa({
-                nombreComercial: 'Global Red Pyme',
+                nombreComercial: 'Global RedPyme',
             })
             .subscribe(
                 (info) => {

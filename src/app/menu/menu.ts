@@ -37,6 +37,30 @@ export const menu: CoreMenu[] = [
         url: 'personas/donde-canjear'
     },
     {
+        id: 'que-es-credicompra',
+        title: '¿Qué es CrediCompra?',
+        // translate: 'MENU.SAMPLE',
+        type: 'item',
+        icon: 'info',
+        url: 'personas/donde-canjear'
+    },
+    {
+        id: 'como-funciona-credicompra',
+        title: '¿Cómo funciona CrediCompra?',
+        // translate: 'MENU.SAMPLE',
+        type: 'item',
+        icon: 'info',
+        url: 'personas/donde-canjear'
+    },
+    {
+        id: 'como-acceder-a-credicompra',
+        title: '¿Cómo acceder a CrediCompra?',
+        // translate: 'MENU.SAMPLE',
+        type: 'item',
+        icon: 'info',
+        url: 'personas/donde-canjear'
+    },
+    {
         id: 'apps',
         type: 'section',
         title: 'Administración',
@@ -83,14 +107,6 @@ export const menu: CoreMenu[] = [
                         type: 'item',
                         icon: 'circle',
                         url: 'personas/BigPuntos/compartir-publicaciones-facebook'
-                    },
-                    {
-                        id: 'compartirPublicacionesWhatsapp',
-                        title: 'Compartir publicaciones en Whatsapp',
-                        // translate: 'MENU.APPS.EMAIL',
-                        type: 'item',
-                        icon: 'circle',
-                        url: 'personas/BigPuntos/compartir-publicaciones-whatsapp'
                     },
                     {
                         id: 'Big_Puntos-otorgados',

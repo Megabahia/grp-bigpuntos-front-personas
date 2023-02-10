@@ -19,7 +19,7 @@
     <div class="content-body">
         <!-- users list start -->
         <section class="app-user-list">
-            <div class="card card-company-table">
+            <div class="card card-company-table" *ngIf="listaCreditos.length > 0;else other_content">
                 <div class="row m-75">
                     <div class="col-lg-12 col-xl-6">
                         <label>Mostrar</label>
@@ -92,6 +92,22 @@
                 <ngb-pagination #paginator [collectionSize]="collectionSize" [(page)]="page" [pageSize]="page_size"
                                 [maxSize]="5" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
             </div>
+            <ng-template #other_content>
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">
+                            Está a un paso de acceder a un crédito con una cooperativa de ahorro y crédito regulada
+                            para realizar compras en las mejores Casas Comerciales del país
+                        </h5>
+                        <p class="card-text">
+                            Haga click en el botón y complete sus datos
+                        </p>
+                        <a [routerLink]="['/pages/solicitud-credito']" class="btn btn-primary">
+                            SOLICITAR CRÉDITO
+                        </a>
+                    </div>
+                </div>
+            </ng-template>
         </section>
         <!-- users list ends -->
     </div>

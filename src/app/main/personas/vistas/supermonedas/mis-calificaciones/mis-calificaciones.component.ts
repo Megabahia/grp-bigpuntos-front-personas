@@ -96,7 +96,7 @@ export class MisCalificacionesComponent implements OnInit {
 
     obtenerEmpresaId() {
         this._bienvenidoService.obtenerEmpresa({
-            nombreComercial: 'Global Red Pyme'
+            nombreComercial: 'Global RedPyme'
         }).subscribe((info) => {
             this.empresaId = info._id;
 

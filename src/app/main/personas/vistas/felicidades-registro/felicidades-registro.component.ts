@@ -82,7 +82,7 @@ export class FelicidadesRegistroComponent implements OnInit {
 
     obtenerEmpresaId() {
         this._bienvenidoService.obtenerEmpresa({
-            nombreComercial: 'Global Red Pyme'
+            nombreComercial: 'Global RedPyme'
         }).subscribe((info) => {
             this.superMonedas.empresa_id = info._id;
         }, (error) => {
