@@ -58,6 +58,9 @@ import { SolicitudCreditoComponent } from './vistas/creditos-autonomos/solicitud
 import { ResumenRequisitosCreditoComponent } from './vistas/creditos-autonomos/resumen-requisitos-credito/resumen-requisitos-credito.component';
 import { ValidacionDatosComponent } from './vistas/creditos-autonomos/validacion-datos/validacion-datos.component';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
+import { QueEsCredicompraComponent } from './vistas/que-es-credicompra/que-es-credicompra.component';
+import { ComoFuncionaCredicompraComponent } from './vistas/como-funciona-credicompra/como-funciona-credicompra.component';
+import { ComoAccederACredicompraComponent } from './vistas/como-acceder-a-credicompra/como-acceder-a-credicompra.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -89,6 +92,27 @@ const routes = [
     {
         path: 'donde-canjear',
         component: DondeCanjearComponent,
+        data: {roles: [Role.BigPuntos]},
+        canActivate: [AuthGuard]
+        // data: { animation: 'auth' }
+    },
+    {
+        path: 'que-es-credicompra',
+        component: QueEsCredicompraComponent,
+        data: {roles: [Role.BigPuntos]},
+        canActivate: [AuthGuard]
+        // data: { animation: 'auth' }
+    },
+    {
+        path: 'como-funciona-credicompra',
+        component: ComoFuncionaCredicompraComponent,
+        data: {roles: [Role.BigPuntos]},
+        canActivate: [AuthGuard]
+        // data: { animation: 'auth' }
+    },
+    {
+        path: 'como-acceder-credicompra',
+        component: ComoAccederACredicompraComponent,
         data: {roles: [Role.BigPuntos]},
         canActivate: [AuthGuard]
         // data: { animation: 'auth' }
@@ -297,6 +321,9 @@ const routes = [
         SolicitudCreditoComponent,
         ResumenRequisitosCreditoComponent,
         ValidacionDatosComponent,
+        QueEsCredicompraComponent,
+        ComoFuncionaCredicompraComponent,
+        ComoAccederACredicompraComponent,
     ],
     imports: [
         CoreCommonModule,

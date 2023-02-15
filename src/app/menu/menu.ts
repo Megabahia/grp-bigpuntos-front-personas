@@ -42,7 +42,7 @@ export const menu: CoreMenu[] = [
         // translate: 'MENU.SAMPLE',
         type: 'item',
         icon: 'info',
-        url: 'personas/donde-canjear'
+        url: 'personas/que-es-credicompra'
     },
     {
         id: 'como-funciona-credicompra',
@@ -50,7 +50,7 @@ export const menu: CoreMenu[] = [
         // translate: 'MENU.SAMPLE',
         type: 'item',
         icon: 'info',
-        url: 'personas/donde-canjear'
+        url: 'personas/como-funciona-credicompra'
     },
     {
         id: 'como-acceder-a-credicompra',
@@ -58,7 +58,7 @@ export const menu: CoreMenu[] = [
         // translate: 'MENU.SAMPLE',
         type: 'item',
         icon: 'info',
-        url: 'personas/donde-canjear'
+        url: 'personas/como-acceder-credicompra'
     },
     {
         id: 'apps',
