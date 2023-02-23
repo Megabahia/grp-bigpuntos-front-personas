@@ -134,9 +134,11 @@ export class RegistroComponent implements OnInit {
     }
 
     redirigir() {
-        setTimeout(() => {
-            window.location.href = '/';
-        }, 1000);
+        // setTimeout(() => {
+        //     window.location.href = '/';
+        // }, 1000);
+        this._router.navigate(['/grp/login']);
+        this.cerrarModal();
     }
 
     // Lifecycle Hooks

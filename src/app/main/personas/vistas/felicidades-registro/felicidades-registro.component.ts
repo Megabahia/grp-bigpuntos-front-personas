@@ -102,9 +102,12 @@ export class FelicidadesRegistroComponent implements OnInit {
             localStorage.setItem('grpPersonasUser', JSON.stringify(this.usuario));
             setTimeout(() => {
                 const simulador = localStorage.getItem('simulador');
+                console.log(simulador);
                 if (simulador === 'ok') {
+                    console.log('if');
                     this._router.navigate(['/personas/creditos-autonomos/solicitar-credito']);
                 } else {
+                    console.log('else');
                     this._router.navigate(['/']);
                 }
             }, 100);

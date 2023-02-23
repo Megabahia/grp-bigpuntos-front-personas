@@ -146,9 +146,11 @@ export class ReseteoPasswordComponent implements OnInit {
     }
 
     redirigir() {
-        setTimeout(() => {
-            window.location.href = '/';
-        }, 1000);
+        // setTimeout(() => {
+        //     window.location.href = '/';
+        // }, 1000);
+        this._router.navigate(['/grp/login']);
+        this.cerrarModal();
     }
 
     compararPassword() {
