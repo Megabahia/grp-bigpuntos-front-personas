@@ -39,7 +39,7 @@ const routes: Routes = [
         data: {animation: 'misc'},
     },
     {
-        path: 'mensajes-productos-free',
+        path: 'familia_big_puntos',
         component: MensajeProductosFreeComponent,
         data: {animation: 'misc'},
     },
