@@ -9,6 +9,7 @@ export class CompletarPerfil {
     edad: number;
     whatsapp: string;
     user_id: string;
+    codigoUsuario?: string;
 }
 export class InformacionBasica {
     genero: string;

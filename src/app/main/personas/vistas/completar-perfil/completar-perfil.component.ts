@@ -257,6 +257,10 @@ export class CompletarPerfilComponent implements OnInit {
         wppAux += '+593' + this.f.whatsapp.value.substring(1, 10);
         this.informacion.whatsapp = wppAux;
         this.informacion.user_id = this.usuario.id;
+        const letrasNombre = this.informacion.nombres.toUpperCase().substring(0, 2);
+        const numerosCedula = this.informacion.identificacion.substring(0, 5);
+        const letrasApellido = this.informacion.apellidos.toUpperCase().substring(0, 2);
+        this.informacion.codigoUsuario = letrasNombre + numerosCedula + letrasApellido;
 
         this._completarPerfilService.guardarInformacion(this.informacion).subscribe(info => {
                 this._bienvenidoService.cambioDeEstado(

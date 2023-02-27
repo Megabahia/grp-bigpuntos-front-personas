@@ -22,7 +22,7 @@
       <div class="card">
         <div class="card-header">
           <h4 class="text-primary text-center d-block">
-            Comparta nuestras publicaciones y, por cada compra que se realice con su código $$código_único_del_usuario,
+            Comparta nuestras publicaciones y, por cada compra que se realice con su código {{usuario.persona.codigoUsuario}},
             usted <b>GANA {{ganarMonedasFacElec ? ganarMonedasFacElec.valor:0}} BIG PUNTOS</b> para canjearlos por
             productos de varias categorías en establecimientos afiliados <b>PAGANDO MENOS DINERO EN EFECTIVO</b>
           </h4>
@@ -50,10 +50,10 @@
               <h6>Compartir</h6>
               <div class="btn-group" role="group" aria-label="Basic example">
                 <!-- <share-buttons theme="modern-light" show="11"></share-buttons> -->
-                <button type="button" shareButton="facebook" [url]="publicacion.url" class="btn btn-primary"
+                <button type="button" shareButton="facebook" [url]="publicacion.url" class="btn btn-primary" [description]="usuario.persona.codigoUsuario"
                   (opened)="obtenerEvento($eventm,publicacion._id)" (closed)="obtenerEvento($event,publicacion._id)"><i
                     data-feather="facebook"></i></button>
-                <button type="button" shareButton="whatsapp" [url]="publicacion.url" class="btn btn-primary"
+                <button type="button" shareButton="whatsapp" [url]="publicacion.url" class="btn btn-primary" [description]="usuario.persona.codigoUsuario"
                         (opened)="obtenerEvento($eventm,publicacion._id)" (closed)="obtenerEvento($event,publicacion._id)"><i
                     data-feather="message-circle"></i></button>
                 <!--  <button type="button" shareButton="twitter" [url]="'https://www.twitter.com/'"
