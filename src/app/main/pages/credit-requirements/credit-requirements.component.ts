@@ -61,7 +61,7 @@ export class CreditRequirementsComponent implements OnInit {
         const casados = ['UNIÓN LIBRE', 'CASADO'];
         let tipoPersona;
         let estadoCivil;
-        if (localStorage.getItem('tipoPersona') === 'Soy Empleado') {
+        if (localStorage.getItem('tipoPersona') === 'Empleado') {
             tipoPersona = 'EMPLEADO';
         } else {
             tipoPersona = 'NEGOCIOS';
