@@ -949,12 +949,11 @@
         </button>
     </div>
     <div class="modal-body">
-        <div>
-            <h4>{{mensaje}}</h4>
+        <div style="text-align: center;" [innerHTML]="mensaje">
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-light" (click)="modal.dismiss( 'Cross click')">Salir</button>
+        <a type="button" class="btn btn-light" [routerLink]="['/pages/simulador-de-credito']" (click)="modal.dismiss( 'Cross click')">Salir</a>
     </div>
 </ng-template>
 

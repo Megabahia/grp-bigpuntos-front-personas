@@ -383,7 +383,7 @@ export class SolicitudCreditoComponent implements OnInit {
         const gastosMensuales = new Decimal(gastosTotal);
         const ingresoDisponible = ingresosMensuales.add(ingresosConyuge).sub(gastosMensuales).toDecimalPlaces(2).toNumber();
         if (ingresoDisponible === 0) {
-            this.mensaje = '¡Lo sentimos! Con los datos ingresados lamentamos informarte que no cuentas con capacidad de pago.';
+            this.mensaje = '<b>¡Lo sentimos!</b><br> Con los datos ingresados en el simulador, lamentamos informarle que no cuenta con Capacidad de Pago. Actualice los datos e intente de nuevo';
             this.abrirModalLg(this.modalAviso);
             return;
         }
@@ -396,7 +396,7 @@ export class SolicitudCreditoComponent implements OnInit {
         const montoCredito = new Decimal(cuotaMensual).mul(12).toNumber();
 
         if (montoCredito === 0) {
-            this.mensaje = '¡Lo sentimos! Con los datos ingresados lamentamos informarte que no cuentas con capacidad de pago.';
+            this.mensaje = '<b>¡Lo sentimos!</b><br> Con los datos ingresados en el simulador, lamentamos informarle que no cuenta con Capacidad de Pago. Actualice los datos e intente de nuevo';
             this.abrirModalLg(this.modalAviso);
             return false;
         }
@@ -404,7 +404,7 @@ export class SolicitudCreditoComponent implements OnInit {
         const montoCreditoRedondeado = new Decimal(montoCredito).sub(resto).toNumber();
         let montoCreditoFinal = 0;
         if (montoCreditoRedondeado < this.montoMinimo) {
-            this.mensaje = '¡Lo sentimos! Con los datos ingresados lamentamos informarte que no cuentas con capacidad de pago.';
+            this.mensaje = '<b>¡Lo sentimos!</b><br> Con los datos ingresados en el simulador, lamentamos informarle que no cuenta con Capacidad de Pago. Actualice los datos e intente de nuevo';
             this.abrirModalLg(this.modalAviso);
             return false;
         } else if (montoCreditoRedondeado >= this.montoMaximo) {

@@ -41,7 +41,7 @@
 <!--                            <th>Logo</th>-->
 <!--                            <th>Entidad financiera</th>-->
 <!--                            <th>Concepto de crédito</th>-->
-                            <th>Monto $</th>
+                            <th>Monto solicitado</th>
 <!--                            <th>Plazo del crédito (meses)</th>-->
 <!--                            <th>% interés</th>-->
                             <th>Estado</th>
@@ -62,7 +62,7 @@
 <!--                            <td>{{credito.plazo}}</td>-->
 <!--                            <td>{{credito.interes}}%</td>-->
                             <td>
-                                <div class="badge {{credito.estado =='Aprobado' ? 'badge-light-success':(credito.estado =='Negado'?'badge-light-danger':'badge-light-warning')}} ">{{credito.estado === 'Nuevo' ? 'En proceso' : credito.estado}}</div>
+                                <div class="badge {{credito.estado =='Aprobado' ? 'badge-light-success':(credito.estado =='Negado'?'badge-light-danger':'badge-light-warning')}} ">{{credito.estado === 'Nuevo' ? 'En revisión de documentos' : credito.estado}}</div>
                             </td>
 <!--                            <td>-->
 <!--                                <a href="javascript:void(0)" class="avatar bg-info mr-1"-->
@@ -432,7 +432,7 @@
                             <p>
                                 {{observacion}}
                             </p><br>
-                            <a  href="https://wa.link/e0u3jr ">
+                            <a  href="https://wa.link/e0u3jr">
                                 <i class="fa fa-whatsapp"
                                    style=" color: lawngreen;font-size: 40pt">
                                 </i>
@@ -460,16 +460,22 @@
                     <div class="row">
                         <div class="text text-center col-md-12">
                             <p>Revisa el catálogo de casas comerciales en donde puedes aplicar a tu crédito a través
-                                de www.credicompra.com <a href="https://credicompra.com/">Enlace</a>
+                                de www.credicompra.com<a href="https://credicompra.com/">Enlace</a>
                             </p><br>
                             <p>Acércate a la casa comercial</p><br>
-                            <p>Concreta tu compra con tu crédito APROBADO</p><br/>
-                            <a  href="https://wa.link/e0u3jr ">
+                            <p>Concreta tu compra con tu crédito <b style="color: black !important;">APROBADO</b></p><br/>
+                            <a  href="https://wa.link/e0u3jr">
                                 <i class="fa fa-whatsapp"
                                    style=" color: lawngreen;font-size: 40pt">
                                 </i>
                             </a>
-                            <p style="color: black !important;">Para más información, consulte a:</p>
+                            <p style="color: black !important;">Para más información, consulte a:
+                                <a  href="https://wa.link/e0u3jr" target="_blank">
+                                    <i class="fa fa-whatsapp"
+                                       style=" color: lawngreen;font-size: 40pt">
+                                    </i>
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
