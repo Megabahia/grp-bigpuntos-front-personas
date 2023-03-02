@@ -451,7 +451,7 @@ export class SolicitudCreditoComponent implements OnInit {
             user_id: this.user_id,
             imagen: []
         };
-        let grpPersonasUser = this.usuario;
+        let grpPersonasUser = this._coreMenuService.grpPersonasUser;
         grpPersonasUser.persona = persona;
         localStorage.setItem('grpPersonasUser', JSON.stringify(grpPersonasUser));
         this._creditosAutonomosService.guardarInformacion(persona)
