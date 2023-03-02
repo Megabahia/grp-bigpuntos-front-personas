@@ -109,6 +109,7 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
         this.solicitarCredito.nombres = this.usuario.persona.nombres;
         this.solicitarCredito.apellidos = this.usuario.persona.apellidos;
         this.solicitarCredito.numeroIdentificacion = this.usuario.persona.identificacion;
+        this.solicitarCredito.estadoCivil = this.usuario.persona.estadoCivil;
         console.log('this.usuario.persona', this.usuario.persona);
         this.solicitarCredito.user = this.usuario.persona ? this.usuario.persona : JSON.parse(localStorage.getItem('grpPersonasUser')).persona;
         // this.solicitarCredito.empresaComercial_id = localStorage.getItem('pagina');
