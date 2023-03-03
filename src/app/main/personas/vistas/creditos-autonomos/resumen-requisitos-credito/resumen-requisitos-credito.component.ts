@@ -35,6 +35,37 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
     };
     public tipoPersona;
     private usuario: any;
+    public checksNegocio = [
+        {'label': 'Identificacion', 'valor': false},
+        {'label': 'Foto Carnet', 'valor': false},
+        {'label': 'Papeleta votacion', 'valor': false},
+        {'label': 'Identificacion conyuge', 'valor': false},
+        {'label': 'Papeleta votacion conyuge', 'valor': false},
+        {'label': 'Planilla luz negocio', 'valor': false},
+        {'label': 'Planilla luz domicilio', 'valor': false},
+        {'label': 'Facturas', 'valor': false},
+        {'label': 'Matricula vehiculo', 'valor': false},
+        {'label': 'Impuesto predial', 'valor': false},
+        {'label': 'Buro credito', 'valor': false},
+        {'label': 'Calificacion buro', 'valor': false},
+        {'label': 'Observación', 'valor': false},
+    ];
+    public checksEmpleado = [
+        {'label': 'Identificacion', 'valor': false},
+        {'label': 'Foto Carnet', 'valor': false},
+        {'label': 'Papeleta votacion', 'valor': false},
+        {'label': 'Identificacion conyuge', 'valor': false},
+        {'label': 'Papeleta votacion conyuge', 'valor': false},
+        {'label': 'Planilla luz domicilio', 'valor': false},
+        {'label': 'Mecanizado Iess', 'valor': false},
+        {'label': 'Matricula vehiculo', 'valor': false},
+        {'label': 'Impuesto predial', 'valor': false},
+        {'label': 'Buro credito', 'valor': false},
+        {'label': 'Calificacion buro', 'valor': false},
+        {'label': 'Observación', 'valor': false},
+    ];
+    public checks;
+    public soltero = false;
 
     constructor(
         private _router: Router,
@@ -52,13 +83,16 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
         let estadoCivil;
         if (localStorage.getItem('tipoPersona') === 'Empleado') {
             tipoPersona = 'EMPLEADO';
+            this.checks = this.checksEmpleado;
         } else {
             tipoPersona = 'NEGOCIOS';
+            this.checks = this.checksNegocio;
         }
         if (casados.find(item => item === localStorage.getItem('estadoCivil').toUpperCase())) {
             estadoCivil = 'CASADO';
         } else {
             estadoCivil = 'SOLTERO';
+            this.soltero = true;
         }
         this.tipoPersona = `REQUISITOS_${tipoPersona}_${estadoCivil}_CREDICOMPRA`;
     }
@@ -112,6 +146,10 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
         this.solicitarCredito.estadoCivil = this.usuario.persona.estadoCivil;
         console.log('this.usuario.persona', this.usuario.persona);
         this.solicitarCredito.user = this.usuario.persona ? this.usuario.persona : JSON.parse(localStorage.getItem('grpPersonasUser')).persona;
+        if (this.soltero) {
+            this.checks.splice(3, 2);
+        }
+        this.solicitarCredito.checks = this.checks;
         // this.solicitarCredito.empresaComercial_id = localStorage.getItem('pagina');
         if (localStorage.getItem('credito')) {
             this._creditosAutonomosService.updateCredito(this.solicitarCredito).subscribe((info) => {
