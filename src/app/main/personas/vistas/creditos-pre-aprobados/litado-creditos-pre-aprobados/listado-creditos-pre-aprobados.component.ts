@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewInit} from '@angular/core';
+import {Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewInit, OnDestroy} from '@angular/core';
 import {Subject} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -23,10 +23,11 @@ import {ParametrizacionesService} from '../../../servicios/parametrizaciones.ser
     providers: [DatePipe]
 
 })
-export class ListadoCreditosPreAprobadosComponent implements OnInit, AfterViewInit {
+export class ListadoCreditosPreAprobadosComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild('establecimientoSeleccionadoMdl') establecimientoSeleccionadoMdl;
     @ViewChild('datosContactoMdl') datosContactoMdl;
     @ViewChild('estadoAprobadoMdl') estadoAprobadoMdl;
+    @ViewChild('estadoPorCompletarMdl') estadoPorCompletarMdl;
     @ViewChild('estadoNegadoMdl') estadoNegadoMdl;
     @ViewChild('estadoProcesoMdl') estadoProcesoMdl;
     @ViewChild('startDatePicker') startDatePicker;
@@ -71,6 +72,7 @@ export class ListadoCreditosPreAprobadosComponent implements OnInit, AfterViewIn
     // Private
     private _unsubscribeAll: Subject<any>;
     public observacion;
+    private montoAprobado: any;
 
     /**
      * Constructor
@@ -251,16 +253,16 @@ export class ListadoCreditosPreAprobadosComponent implements OnInit, AfterViewIn
 
     subirImagen(event: any) {
         if (event.target.files && event.target.files[0]) {
-            let nuevaImagen = event.target.files[0];
+            const nuevaImagen = event.target.files[0];
 
-            let reader = new FileReader();
+            const reader = new FileReader();
 
             reader.onload = (event: any) => {
                 this.imagen = event.target.result;
             };
 
             reader.readAsDataURL(event.target.files[0]);
-            let imagen = new FormData();
+            const imagen = new FormData();
             imagen.append('imagen', nuevaImagen, nuevaImagen.name);
 
         }
@@ -342,10 +344,14 @@ export class ListadoCreditosPreAprobadosComponent implements OnInit, AfterViewIn
         this.modalService.dismissAll();
     }
 
-    mostarModal(estado, observacion) {
+    mostarModal(estado, observacion, montoAprobado?) {
         this.observacion = observacion;
         if (estado === 'Aprobado') {
+            this.montoAprobado = montoAprobado;
             this.abrirModal(this.estadoAprobadoMdl);
+        }
+        if (estado === 'Por Completar') {
+            this.abrirModal(this.estadoPorCompletarMdl);
         }
         if (estado === 'Negado') {
             this.abrirModal(this.estadoNegadoMdl);

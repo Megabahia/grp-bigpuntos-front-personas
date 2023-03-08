@@ -83,7 +83,7 @@
 <!--                                </a>-->
 <!--                            </td>-->
                             <td>{{credito.estado === 'Enviado' || credito.estado === 'En proceso' ? 'En revisión de documentos' : ''}}
-                                <button class="btn btn-primary" (click)="mostarModal(credito.estado, credito.observacion)">Ver</button>
+                                <button class="btn btn-primary" (click)="mostarModal(credito.estado, credito.observacion, credito.monto)">Ver</button>
                             </td>
                         </tr>
                         </tbody>
@@ -429,15 +429,19 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="text text-center col-md-12">
+                            <h2>Ups!</h2>
                             <p>
-                                {{observacion}}
+                                Su solicitud de crédito para realizar compras en las mejores Casas Comerciales con un
+                                crédito otorgado por una Cooperativa de Ahorro y Crédito regulada ha sido NEGADA.
+                                La razón por la que se devolvió su solicitud es {{observacion}}
+                                por favor haga click en el siguiente enlace y actualice su información.
                             </p><br>
-                            <a  href="https://wa.link/e0u3jr">
-                                <i class="fa fa-whatsapp"
-                                   style=" color: lawngreen;font-size: 40pt">
-                                </i>
+                            <p>
+                                Haga click en el botón y actualice su información
+                            </p>
+                            <a  href="https://wa.link/e8b3sa">
+                                Contactar a mi asesor
                             </a>
-                            <p style="color: black !important;">Para más información, consulte a:</p>
                         </div>
                     </div>
                 </div>
@@ -459,23 +463,50 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="text text-center col-md-12">
-                            <p>Revisa el catálogo de casas comerciales en donde puedes aplicar a tu crédito a través
-                                de www.credicompra.com<a href="https://credicompra.com/">Enlace</a>
+                            <h1>Felicidades!</h1>
+                            <p>Su crédito para realizar compras en las mejores Casas Comerciales del país ha sido aprobado por un monto de
+                                {{montoAprobado}}
+                                ha sido <b style="color: black !important;">APROBADA</b>. Ingrese a <a href="https://credicompra.com/">www.credicompra.com</a>
+                                y revise el catálogo de nuestras Casas Comerciales afiliadas.
                             </p><br>
-                            <p>Acércate a la casa comercial</p><br>
-                            <p>Concreta tu compra con tu crédito <b style="color: black !important;">APROBADO</b></p><br/>
-                            <a  href="https://wa.link/e0u3jr">
-                                <i class="fa fa-whatsapp"
-                                   style=" color: lawngreen;font-size: 40pt">
-                                </i>
-                            </a>
-                            <p style="color: black !important;">Para más información, consulte a:
-                                <a  href="https://wa.link/e0u3jr" target="_blank">
-                                    <i class="fa fa-whatsapp"
-                                       style=" color: lawngreen;font-size: 40pt">
-                                    </i>
-                                </a>
+                            <p>
+                                Haga click en el botón y acceda a su crédito
                             </p>
+                            <br>
+                            <a  href="https://credicompra.com/">
+                                CrediCompra
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</ng-template>
+<ng-template #estadoPorCompletarMdl let-modal>
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss( 'Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="text text-center col-md-12">
+                            <h1>Ups!</h1>
+                            <p>
+                                Parece que existe un error con los datos o documentos registrados. La razón por la
+                                que se devolvió su solicitud es {{observacion}} por favor haga click en el siguiente
+                                enlace y actualice su información.
+                            </p>
+                            <br>
+                            <a  href="https://wa.link/szsyad">
+                                Contactar a mi asesor
+                            </a>
                         </div>
                     </div>
                 </div>
