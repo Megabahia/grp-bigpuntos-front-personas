@@ -13,61 +13,37 @@ export const menu: CoreMenu[] = [
 
     },
     {
-        id: 'que-es',
-        title: '¿Qué es Big Puntos?',
-        // translate: 'MENU.SAMPLE',
-        type: 'item',
-        icon: 'info',
-        url: 'personas/que-es'
-    },
-    {
-        id: 'como-funciona',
-        title: '¿Cómo funciona?',
-        // translate: 'MENU.SAMPLE',
-        type: 'item',
-        icon: 'info',
-        url: 'personas/como-funciona'
-    },
-    {
-        id: 'en-donde-canjear',
-        title: '¿En dónde canjear?',
-        // translate: 'MENU.SAMPLE',
-        type: 'item',
-        icon: 'info',
-        url: 'personas/donde-canjear'
-    },
-    {
-        id: 'que-es-credicompra',
-        title: '¿Qué es CrediCompra?',
-        // translate: 'MENU.SAMPLE',
-        type: 'item',
-        icon: 'info',
-        url: 'personas/que-es-credicompra'
-    },
-    {
-        id: 'como-funciona-credicompra',
-        title: '¿Cómo funciona CrediCompra?',
-        // translate: 'MENU.SAMPLE',
-        type: 'item',
-        icon: 'info',
-        url: 'personas/como-funciona-credicompra'
-    },
-    {
-        id: 'como-acceder-a-credicompra',
-        title: '¿Cómo acceder a CrediCompra?',
-        // translate: 'MENU.SAMPLE',
-        type: 'item',
-        icon: 'info',
-        url: 'personas/como-acceder-credicompra'
-    },
-    {
-        id: 'apps',
+        id: 'bigpuntos',
         type: 'section',
-        title: 'Administración',
+        title: 'BIG PUNTOS',
         role: [Role.BigPuntos],
         // translate: 'MENU.APPS.SECTION',
         icon: 'package',
         children: [
+            {
+                id: 'que-es',
+                title: '¿Qué es Big Puntos?',
+                // translate: 'MENU.SAMPLE',
+                type: 'item',
+                icon: 'info',
+                url: 'personas/que-es'
+            },
+            {
+                id: 'como-funciona',
+                title: '¿Cómo funciona?',
+                // translate: 'MENU.SAMPLE',
+                type: 'item',
+                icon: 'info',
+                url: 'personas/como-funciona'
+            },
+            {
+                id: 'en-donde-canjear',
+                title: '¿En dónde canjear?',
+                // translate: 'MENU.SAMPLE',
+                type: 'item',
+                icon: 'info',
+                url: 'personas/donde-canjear'
+            },
             {
                 id: 'misSuperMonedas',
                 title: 'Mis Big Puntos',
@@ -127,6 +103,67 @@ export const menu: CoreMenu[] = [
                 url: 'personas/BigPuntos/pagar-con-big-puntos'
             },
             {
+                id: 'reclamosRequerimientos',
+                title: 'Reclamos y Requerimientos',
+                role: [Role.BigPuntos],
+                // translate: 'MENU.PAGES.SECTION',
+                type: 'item',
+                icon: 'message-circle',
+                url: 'personas/reclamos-y-requerimientos',
+            },
+        ],
+    },
+    {
+        id: 'credicompra',
+        type: 'section',
+        title: 'CREDICOMPRA',
+        role: [Role.BigPuntos],
+        // translate: 'MENU.APPS.SECTION',
+        icon: 'package',
+        children: [
+            {
+                id: 'que-es-credicompra',
+                title: '¿Qué es CrediCompra?',
+                // translate: 'MENU.SAMPLE',
+                type: 'item',
+                icon: 'info',
+                url: 'personas/que-es-credicompra'
+            },
+            {
+                id: 'como-funciona-credicompra',
+                title: '¿Cómo funciona CrediCompra?',
+                // translate: 'MENU.SAMPLE',
+                type: 'item',
+                icon: 'info',
+                url: 'personas/como-funciona-credicompra'
+            },
+            {
+                id: 'creditosPreAprobados',
+                title: 'Solicitudes de Crédito',
+                role: [Role.BigPuntos],
+                // translate: 'MENU.PAGES.SECTION',
+                type: 'collapsible',
+                icon: 'credit-card',
+                children: [
+                    {
+                        id: 'listadoCreditosPre',
+                        title: 'Estado de Solicitud de Crédito',
+                        // translate: 'MENU.APPS.EMAIL',
+                        type: 'item',
+                        icon: 'circle',
+                        url: 'personas/creditos-pre-aprobados/listado'
+                    }
+                ]
+            },
+            // {
+            //     id: 'como-acceder-a-credicompra',
+            //     title: '¿Cómo acceder a CrediCompra?',
+            //     // translate: 'MENU.SAMPLE',
+            //     type: 'item',
+            //     icon: 'info',
+            //     url: 'personas/como-acceder-credicompra'
+            // },
+            {
                 id: 'creditosAutonomos',
                 title: 'Créditos para Autónomos',
                 role: [Role.BigPuntos],
@@ -163,24 +200,6 @@ export const menu: CoreMenu[] = [
             //     }
             //   ]
             // },
-            {
-                id: 'creditosPreAprobados',
-                title: 'Solicitudes de Crédito',
-                role: [Role.BigPuntos],
-                // translate: 'MENU.PAGES.SECTION',
-                type: 'collapsible',
-                icon: 'credit-card',
-                children: [
-                    {
-                        id: 'listadoCreditosPre',
-                        title: 'Estado de Solicitud de Crédito',
-                        // translate: 'MENU.APPS.EMAIL',
-                        type: 'item',
-                        icon: 'circle',
-                        url: 'personas/creditos-pre-aprobados/listado'
-                    }
-                ]
-            },
             // {
             //   id: 'misCreditos',
             //   title: 'Mis créditos',
@@ -207,15 +226,6 @@ export const menu: CoreMenu[] = [
             //     }
             //   ]
             // },
-            {
-                id: 'reclamosRequerimientos',
-                title: 'Reclamos y Requerimientos',
-                role: [Role.BigPuntos],
-                // translate: 'MENU.PAGES.SECTION',
-                type: 'item',
-                icon: 'message-circle',
-                url: 'personas/reclamos-y-requerimientos',
-            },
             {
                 id: 'misPremios',
                 title: 'Mis premios',
