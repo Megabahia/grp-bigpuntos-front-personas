@@ -68,6 +68,7 @@ export class SolicitarCredito {
     user?: string;
     cuota: number;
     checks?: any;
+    cargarOrigen?: string;
 }
 export class RucPersona {
     actividadComercial: string;
