@@ -117,7 +117,7 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
             cuota: this.coutaMensual,
             plazo: 12,
             user_id: this.usuario.id,
-            canal: localStorage.getItem('pagina'),
+            canal: localStorage.getItem('tipoPersona') === 'Empleado' ? 'Empleado' : 'Negocio propio',
             tipoCredito: localStorage.getItem('tipoPersona') === 'Empleado' ? 'Empleado' : 'Negocio propio',
             concepto: 'Negocio propio',
             cargarOrigen: 'BIGPUNTOS',
@@ -146,6 +146,7 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
         this.solicitarCredito.numeroIdentificacion = this.usuario.persona.identificacion;
         this.solicitarCredito.estadoCivil = this.usuario.persona.estadoCivil;
         this.solicitarCredito.empresaInfo = {};
+        this.solicitarCredito.cuota = this.solicitarCredito.cuota ? this.solicitarCredito.cuota : this.coutaMensual;
         console.log('this.usuario.persona', this.usuario.persona);
         this.solicitarCredito.user = this.usuario.persona ? this.usuario.persona : JSON.parse(localStorage.getItem('grpPersonasUser')).persona;
         if (this.soltero) {

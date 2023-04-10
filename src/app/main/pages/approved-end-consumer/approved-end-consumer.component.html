@@ -2,30 +2,31 @@
 <div>
     <section class="text-LP">
         <div class="container pb-5">
-            <div class="row justify-content-center align-items-center py-5">
-                <div class="col-md-12 text-center mb-4">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-12 text-center mb-3">
                     <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" width="300px"/>
-                    <h1 class="yellow2 mt-4 text-bold">CrediCompra - Big Puntos</h1>
+                    <h1 class="azul2 mt-4 text-bold">CrediCompra - Big Puntos</h1>
                 </div>
             </div>
             <div class="align-items-center " style="text-align: center;">
                 <div class="col-md-12 text-center">
                     <h2 class="user-name font-weight-bolder text-center"> ¡FELICIDADES! </h2>
-                    <h3 class="user-name font-weight-bolder text-center">
+                    <h3 class="user-name text-center">
                         {{usuario}}
                         <br>
-                        Tienes un crédito Pre-Aprobado de {{monto}}
+                        Tienes un crédito Preaprobado de $ {{monto}} para realizar compras en los mejores Locales Comerciales del país.
                     </h3>
-                    <h3 class="user-name font-weight-bolder text-center">
-                        Puedes acceder a tu crédito en dos simples pasos:
+                    <br>
+                    <h3 class="user-name text-center">
+                        Para acceder a su Crédito de Consumo, realice los siguientes pasos:
                     </h3>
-                    <h3 class="user-name font-weight-bolder text-center">
-                        1.- Completa tu información en la Solicitud de Crédito (primero debes crear tu cuenta a través
-                        de la siguiente pantalla que te mostraremos) y enviar tus documentos.
+                    <h3 class="user-name text-center">
+                        1.- Complete sus datos a través de la Solicitud de Crédito. Recuerde que primero debe crear su cuenta (en la siguiente pantalla)
                     </h3>
-                    <h3 class="user-name font-weight-bolder text-center">
-                        2.- Visita las tiendas en las que podrás usar tu crédito a través de www.credicompra.com y,
-                        listo!
+                    <h3 class="user-name text-center">
+                        2.- Visite www.credicompra.com (enlace para www.credicompra.com: https://credicompra.com/)
+                        para conocer los Locales Comerciales en los que podrá realizar compras con su Crédito
+                        otorgado por una Cooperativa de Ahorro y Crédito regulada. Listo!
                     </h3>
 
 
@@ -50,7 +51,9 @@
 </div>
 
 <div class="text-center">
-    <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px" width="50px">
+    <span class="azul2"><b>Powered by</b></span>
+    <br>
+    <img src="../assets/images/logo/logo.jpeg" height="50px">
 </div>
 
 <ng-template #mensajeModal let-modal>
