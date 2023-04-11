@@ -3,7 +3,7 @@
         <div class="container pb-5">
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-12 text-center">
-                    <img src="../../../../assets/images/logo/credicompra.png" width="250" alt="">
+                    <img class="my-3" src="../../../../assets/images/logo/credi-big.png" width="250" alt="">
                 </div>
                 <div class="col-md-12 text-center">
                     <div class="row mx-2 justify-content-center align-items-center py-2">
@@ -19,20 +19,29 @@
                     </div>
                     <div class="row mx-2 justify-content-center align-items-center py-2">
                         <div class="col-12">
-                            <button type="submit" rippleEffect class="btn btn-outline-dark mr-1" routerLink="/"
+                            <button type="submit" rippleEffect class="btn btn-primary mr-1" routerLink="/"
+                                    style="color: black !important;"
                                     (click)="simulador()">Continuar
                             </button>
                             <a href="https://credicompra.com/">
                                 <button (click)="cancelar()"
-                                        rippleEffect class="btn btn-outline-dark mr-1">
+                                        rippleEffect class="btn btn-primary mr-1"
+                                        style="color: black !important;"
+                                >
                                     Cancelar
                                 </button>
                             </a>
                         </div>
-                        <a class="btn mx-3 mt-4 text-center pb-1 btn-social bg-whatsapp text-white"
-                           href="https://wa.link/bqfcnh" target="_blank">
-                            <i class="fa fa-whatsapp"></i>      Whatsapp          
-                        </a>
+                        <div class="col-12">
+                            <h3 class="mt-5">
+                                Si necesita ayuda o requiere información personalizada, contáctenos a nuestro WhatsApp.
+                            </h3>
+                            <br>
+                            <a class="btn mx-3 mt-4 text-center pb-1 btn-social bg-whatsapp text-white"
+                               href="https://wa.link/bqfcnh" target="_blank">
+                                <i class="fa fa-whatsapp"></i>      Whatsapp          
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
