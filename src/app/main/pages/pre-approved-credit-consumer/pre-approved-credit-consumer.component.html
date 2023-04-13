@@ -7,8 +7,8 @@
                     <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" width="30%"/>
                     <h1 class="azul2 mt-4 text-bold">CrediCompra - Big Puntos</h1>
                     <h3 class="user-name text-center">
-                        Con CrediCompra, realiza compras con créditos otorgados por Entidades Financieras reguladas en
-                        las mejores Casas Comerciales del país.
+                        Con CrediCompra puedes realizar tus compras con Créditos otorgador por Cooperativas de Ahorro
+                        y Crédito reguladas en los mejores Locales Comerciales del país.
                     </h3>
                     <h3 class="user-name text-center">
                         Y, gana Big Puntos con los que puedes canjear tus productos favoritos en establecimientos
@@ -30,7 +30,7 @@
                     <form [formGroup]="envioForm" (ngSubmit)="sentCode()">
                         <div class="row align-items-center ">
                             <div class="form-group align-items-center">
-                                <span class="user-name font-weight-bolder">Código:</span>
+                                <span class="user-name font-weight-bolder">Ingresa el código que recibiste:</span>
                                 <input size="50" formControlName="code" type="text" class="form-control" name="code">
                                 <div *ngIf="submittedSimulador && getsimuladorForm.code.errors"
                                      class="invalid-feedback" style="display: block;">
@@ -41,7 +41,7 @@
                         </div>
                         <div class="row align-items-center">
                             <div class="form-group ">
-                                <span class="user-name font-weight-bolder">#Cédula:</span>
+                                <span class="user-name font-weight-bolder">Ingresa tu número de cédula:</span>
                                 <input size="50" formControlName="document" type="text" class="form-control"
                                        name="document">
                                 <div *ngIf="submittedSimulador && getsimuladorForm.document.errors"
@@ -84,7 +84,7 @@
 <div class="text-center">
     <span style="color: black !important;"><b>Powered by</b></span>
     <br>
-    <img src="../assets/images/logo/logo.jpeg" height="50px">
+    <img src="../assets/images/logo/red-pyme.png" height="50px">
 </div>
 
 <ng-template #mensajeModal let-modal>
