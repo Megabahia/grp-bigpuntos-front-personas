@@ -7,6 +7,7 @@ import {RecuperarPassService} from '../recuperar-pass/recuperar-pass.service';
 import {Subject} from 'rxjs';
 import {ReseteoPasswordService} from './reseteo-password.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {environment} from "../../../../environments/environment";
 
 @Component({
     selector: 'app-reseteo-password',
@@ -49,7 +50,7 @@ export class ReseteoPasswordComponent implements OnInit {
         private _activatedRoute: ActivatedRoute,
         private _modalService: NgbModal,
     ) {
-        this.siteKey = '6Ld2gy4gAAAAAJB5lGmJDgjgOvhA34jp4iAWuPGk';
+        this.siteKey = environment.setKey;
         this._unsubscribeAll = new Subject();
 
         // Configure the layout
