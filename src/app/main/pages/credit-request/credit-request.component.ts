@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-credit-request',
   templateUrl: './credit-request.component.html',
-  styleUrls: ['../simulador/simulador.component.scss']
+  styleUrls: ['credit-request.component.scss']
 })
 export class CreditRequestComponent implements OnInit {
 
