@@ -61,6 +61,7 @@ import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import { QueEsCredicompraComponent } from './vistas/que-es-credicompra/que-es-credicompra.component';
 import { ComoFuncionaCredicompraComponent } from './vistas/como-funciona-credicompra/como-funciona-credicompra.component';
 import { ComoAccederACredicompraComponent } from './vistas/como-acceder-a-credicompra/como-acceder-a-credicompra.component';
+import {SharedModule} from "../shared/shared.module";
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -346,6 +347,7 @@ const routes = [
         NgxMaskModule.forRoot(maskConfig),
         // NGX-datatable
         NgxDatatableModule,
+        SharedModule,
     ],
     exports: [
         BienvenidoComponent,

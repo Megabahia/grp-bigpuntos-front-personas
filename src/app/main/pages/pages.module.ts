@@ -25,6 +25,7 @@ import { CreditRequirementsComponent } from './credit-requirements/credit-requir
 import { PreApprovedCreditConsumerComponent } from './pre-approved-credit-consumer/pre-approved-credit-consumer.component';
 import { ApprovedEndConsumerComponent } from './approved-end-consumer/approved-end-consumer.component';
 import { SociosEmpleadosComponent } from './socios-empleados/socios-empleados.component';
+import {SharedModule} from "../shared/shared.module";
 
 // routing
 const routes: Routes = [
@@ -133,6 +134,7 @@ const routes: Routes = [
         FormsModule,
         AuthenticationModule,
         MiscellaneousModule,
+        SharedModule,
     ],
 
     providers: [],
