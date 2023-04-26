@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {NeedHelpComponent} from "./need-help/need-help.component";
 import { NeedInfoComponent } from './need-info/need-info.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -9,11 +10,13 @@ import { NeedInfoComponent } from './need-info/need-info.component';
   declarations: [
     NeedHelpComponent,
     NeedInfoComponent,
+    FooterComponent,
   ],
 
   exports: [
     NeedHelpComponent,
-    NeedInfoComponent
+    NeedInfoComponent,
+    FooterComponent,
   ],
 
   imports: [
