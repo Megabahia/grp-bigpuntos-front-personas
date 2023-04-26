@@ -36,19 +36,18 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
     public tipoPersona;
     private usuario: any;
     public checksNegocio = [
-        {'label': 'Identificacion', 'valor': false},
-        {'label': 'Foto Carnet', 'valor': false},
-        {'label': 'Papeleta votacion', 'valor': false},
+        {'label': 'Copia de cédula', 'valor': false},
+        {'label': 'Copia de Ruc', 'valor': false},
+        {'label': 'Papeleta de votación', 'valor': false},
         {'label': 'Identificacion conyuge', 'valor': false},
         {'label': 'Papeleta votacion conyuge', 'valor': false},
-        {'label': 'Planilla luz negocio', 'valor': false},
-        {'label': 'Planilla luz domicilio', 'valor': false},
-        {'label': 'Facturas', 'valor': false},
-        {'label': 'Matricula vehiculo', 'valor': false},
-        {'label': 'Impuesto predial', 'valor': false},
-        {'label': 'Buro credito', 'valor': false},
-        {'label': 'Calificacion buro', 'valor': false},
-        {'label': 'Observación', 'valor': false},
+        {'label': 'Copia de planilla de luz del Negocio, Oficina o de la Asociación', 'valor': false},
+        {'label': 'Copia de planilla de luz del Domicilio', 'valor': false},
+        {'label': 'Copia de Factura de venta del último mes (factura de hace 1 mes)', 'valor': false},
+        {'label': 'Copia de Factura de venta del penúltimo mes (factura de hace 2 meses)', 'valor': false},
+        {'label': 'Certificado de la Asociación (es opcional y aplica si usted es transportista: Bus o Taxi)', 'valor': false},
+        {'label': 'Copia de matrícula del vehículo (opcional)', 'valor': false},
+        {'label': 'Copia de pago de impuesto predial (opcional)', 'valor': false},
     ];
     public checksEmpleado = [
         {'label': 'Identificacion', 'valor': false},
