@@ -8,6 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class NeedHelpComponent implements OnInit {
 
   @Input() href: string;
+
   constructor() {
     console.log("href",this.href)
   }
