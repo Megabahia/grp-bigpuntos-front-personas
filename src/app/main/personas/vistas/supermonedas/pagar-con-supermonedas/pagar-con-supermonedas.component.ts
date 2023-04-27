@@ -11,7 +11,6 @@ import {PagoMonto} from '../../../models/supermonedas';
 import moment from 'moment';
 import {MisMonedasService} from '../mis-monedas/mis-monedas.service';
 import {ParametrizacionesService} from '../../../servicios/parametrizaciones.service';
-
 import {jsPDF} from 'jspdf';
 import html2canvas from 'html2canvas';
 import {Router} from '@angular/router';
@@ -109,6 +108,7 @@ export class PagarConSuperMonedasComponent implements OnInit {
 
     buscarEmpresa() {
     }
+
 
     toggleSidebar(name, id): void {
         this.pagoMonto.empresa_id = id;
@@ -238,7 +238,9 @@ export class PagarConSuperMonedasComponent implements OnInit {
 
     modalFinalizar() {
         this.cerrarModal();
-        this.abrirModalLg(this.finalizacionMdl);
+        //this.abrirModalLg(this.finalizacionMdl);
+
+            this._router.navigate(['personas/BigPuntos/mis-facturas']);
     }
 
     cerrarModalFinalizar() {

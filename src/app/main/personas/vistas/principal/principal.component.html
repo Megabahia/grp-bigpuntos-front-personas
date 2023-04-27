@@ -19,7 +19,7 @@
             <div class="text-center mb-2">
               <h3 class="mb-0" style="color: #385e8c !important">Felicidades {{usuario.persona.nombres}},</h3>
               <p class="card-text" style="color: #385e8c !important">
-                Tienes <strong>{{cantidadMonedas}}</strong> Big Puntos acumuladas en tu cuenta Big Puntos
+                Usted tiene <strong>{{cantidadMonedas}}</strong> Big Puntos acumulados en su cuenta Big Puntos
               </p>
               <br>
             </div>
@@ -47,7 +47,7 @@
                 </div>
               </div>
               <div class="col-xl-6 col-sm-6 col-12">
-                <a routerLink="/personas/BigPuntos/mis-monedas">
+                <a routerLink="/personas/BigPuntos/mis-bigpuntos">
                   <div class="media">
                     <div class="avatar bg-white mr-2">
                       <div class="avatar-content">
@@ -71,7 +71,7 @@
     <div class="card">
       <div class="card-body">
         <div class="mt-4 mb-2 text-center">
-          <h4>Premios que puedes canjear</h4>
+          <h4>Usted puede canjear sus Big Puntos por los siguientes productos</h4>
         </div>
         <div class="swiper-responsive-breakpoints swiper-container px-4 py-2" [swiper]="swiperResponsive">
           <div class="swiper-wrapper mb-2">
@@ -81,7 +81,7 @@
                   <h5 class="text-truncate mb-0">{{ producto.nombre }}</h5>
                   <small class="text-body">{{ producto.empresa }}</small>
                 </div>
-                <div class="img-container mx-auto py-75">
+                <div class="mx-auto my-2 py-75">
                   <img width="100px" [src]="producto.imagen" class="img-fluid" alt="image" />
 
                 </div>
@@ -310,7 +310,7 @@
 </div>
 <ng-template #DetalleProducto let-modal>
   <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalCenterTitle">Detalle de producto</h5>
+    <h5 class="modal-title" id="exampleModalCenterTitle">Canje de Big Puntos </h5>
     <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -321,8 +321,8 @@
         <div class="card plan-card border-primary">
           <div class="card-body">
             <div class="item-heading">
-              <h6 class="text-truncate mb-0 text-info">{{producto.nombre}}</h6>
-              <small class="text-body d-block">by {{producto.marca}}</small>
+              <h6 class="azul2 text-truncate mb-0 text-info">{{producto.nombre}}</h6>
+              <small class="text-body d-block">de {{producto.empresa}}</small>
             </div>
             <div class="img-container w-50 mx-auto py-50">
               <img width="200px" [src]="producto.imagen" class="img-fluid" alt="image" />
@@ -330,10 +330,10 @@
             <hr />
             <div class="item-meta">
               <p class="card-text text-secondary small mb-0">Precio normal: ${{producto.precioNormal}}</p>
-              <h6 class="mt-1">Precio Big Puntos:</h6>
-              <h6 class="mt-1 text-info">
+              <h6 class="mt-1">Precio Big Puntos: ${{ producto.efectivo }}</h6>
+              <h6 class="azul2 mt-1 text-info">
                 <div class="iso-moneda"></div>
-                {{ producto.precioSupermonedas }} Big Puntos + ${{ producto.efectivo }}
+                {{ producto.precioSupermonedas }} Big Puntos
               </h6>
 
             </div>
@@ -341,7 +341,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <h6 class="mb-2">Donde aplica</h6>
+        <h6 class="mb-2">Aplica en el establecimiento</h6>
         <h4 class="mb-2 text-primary">{{producto.empresa}}</h4>
         <p class="card-text mb-0">Local: {{producto.local}}</p>
         <p class="card-text mb-0">Ciudad: {{producto.ciudad}}</p>
@@ -349,7 +349,7 @@
         <hr />
         <div class="text-center">
           <button class="btn btn-primary" type="button" data-target="#buy" data-toggle="modal" data-dismiss="modal"
-            aria-label="Close" (click)="comprarProducto()">Comprar</button>
+            aria-label="Close" (click)="comprarProducto()">Canjear</button>
         </div>
       </div>
     </div>
@@ -359,7 +359,7 @@
 </ng-template>
 <ng-template #CanjearProducto let-modal>
   <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalCenterTitle">Detalle de producto</h5>
+    <h5 class="modal-title" id="exampleModalCenterTitle">Canje de Big Puntos</h5>
     <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>

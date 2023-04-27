@@ -55,7 +55,7 @@ export const menu: CoreMenu[] = [
             {
                 id: 'apps',
                 type: 'collapsible',
-                title: 'Ganar BP',
+                title: 'Ganar Big Puntos',
                 role: [Role.BigPuntos],
                 // translate: 'MENU.APPS.SECTION',
                 icon: 'package',

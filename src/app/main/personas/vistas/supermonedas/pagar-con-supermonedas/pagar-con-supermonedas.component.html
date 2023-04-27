@@ -4,9 +4,12 @@
       <div class="row breadcrumbs-top">
         <div class="col-12">
           <h2 class="content-header-title float-left mb-0">Pagar con Big Puntos</h2>
+          <br>
           <div class="breadcrumb-wrapper">
+            <br>
+            <div>Estos son los Establecimientos afiliados en los que usted podrá realizar compras con Big Puntos,<strong class="azul2"> PAGANDO MENOS DINERO EN EFECTIVO</strong> </div>
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a class="text-primary" href="index.html">Inicio</a>
+              <li class="breadcrumb-item"><a class="text-primary azul2" href="index.html">Inicio</a>
               </li>
               <li class="breadcrumb-item"><a class="text-primary" href="mis-premios.html">Pagar con Big Puntos</a>
               </li>
@@ -163,12 +166,9 @@
         </div>
         <div class="col-md-6">
           <p class="azul2 text-justify">
-            Descargue o Imprima este documentos y preséntelo al establecimiento afiliado para canjear su producto.
+            Descargue o Imprima este documento y preséntelo al establecimiento afiliado para canjear su producto.
           </p>
-          <p class="azul2 text-justify">
-            Para realizar el pago con Big Puntos, usted debe escanear 1 vez el código QR o el código de barras.
-            <b style="color: black !important;">Sus Big Puntos serán descontados de manera automática.</b>
-          </p>
+
 
           <hr />
           <div class="text-center">
@@ -182,7 +182,7 @@
               [errorCorrectionLevel]="'M'"></qrcode>
           </div>
           <div class="text-center">
-            <button class="btn btn-primary" type="button" [useExistingCss]="true" printSectionId="print-section"
+            <button class="btn btn-primary black" type="button" [useExistingCss]="true" printSectionId="print-section"
               ngxPrint>Imprimir</button>
             <button class="btn btn-info" type="button" (click)="exportHtmlToPDF()">Descargar</button>
           </div>
