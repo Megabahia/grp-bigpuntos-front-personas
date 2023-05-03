@@ -118,7 +118,7 @@ export class PagarConSuperMonedasComponent implements OnInit {
             this.imagenTienda = empresa[0].imagen;
             this.direccionTienda = empresa[0].direccion;
 
-            /* this._pagarConSuperMonedasService
+            /*this._pagarConSuperMonedasService
               .imageUrlToBase64(empresa[0].imagen)
               .subscribe((base64) => {
                 console.log(base64);
