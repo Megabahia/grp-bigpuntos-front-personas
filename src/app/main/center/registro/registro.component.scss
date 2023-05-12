@@ -28,3 +28,22 @@
 .azul2 {
     color: #385e8c !important;
 }
+
+.boton-fb{
+    text-align: center;
+}
+.appear{
+    display: none;
+}
+
+@media all and (max-width: 992px) {
+    /*Dropdown Automatic*/
+    .brand-logo.disapear {
+        display: none !important;
+    }
+    .appear{
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+    }
+}
