@@ -11,9 +11,13 @@
         <div class="d-none d-lg-flex col-lg-8 align-items-center p-5 mt-5">
             <div class="d-block">
                 <br>
-                <div class="text-center pl-5">
+                <div class="text-center pl-5 mt-4">
                     <h1 class="pl-5 text-primary"><b>Big Puntos son los puntos para vivir.</b></h1>
-                    <h2 class="pl-5 text-primary">Realiza compras pagando menos dinero en efectivo y, ganando premios.</h2>
+                    <h2 class="pl-5 text-primary">
+                        Usted está ingresando al mundo de CrediCompra-Big Puntos para que pueda realizar <strong>COMPRAS CON CRÉDITOS</strong> otorgados por Cooperativas de Ahorro y Crédito reguladas.
+                        <br>
+                        Y, <strong>ACUMULAR BIG PUNTOS</strong> para canjearlos por productos de varias categorías en establecimientos afiliados <strong>PAGANDO MENOS DINERO EN EFECTIVO.</strong>
+                    </h2>
                     <img [src]="
                   coreConfig.layout.skin === 'dark'
                     ? '/assets/images/logo/login-2.png'
@@ -43,6 +47,12 @@
                 </div>
 
                 <h2 class="card-title font-weight-bold text-center">Bienvenido</h2>
+
+                <div class="text-center mb-2">
+                    Usted está ingresando al mundo de CrediCompra-Big Puntos para que pueda realizar <strong>COMPRAS CON CRÉDITOS</strong> otorgados por Cooperativas de Ahorro y Crédito reguladas.
+                    <br>
+                    Y, <strong>ACUMULAR BIG PUNTOS</strong> para canjearlos por productos de varias categorías en establecimientos afiliados <strong>PAGANDO MENOS DINERO EN EFECTIVO.</strong>
+                </div>
                 <p class="text-center ">
                     <span style="font-size: 16px;">¿Aun no tienes cuenta?</span><a class="text-primary"
                                                                                    style="font-size: 16px;"
@@ -58,7 +68,7 @@
 
                 <form class="auth-login-form mt-2" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="form-group">
-                        <label class="form-label" for="login-email">Email</label>
+                        <label class="form-label h5" for="login-email">Email</label>
                         <input type="text" formControlName="email" class="form-control"
                                style="text-transform:lowercase;"
 
@@ -71,8 +81,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="d-flex justify-content-between">
-                            <label for="login-password">Contraseña</label><a class="text-primary"
+                        <div class="d-flex justify-content-between ">
+                            <label class="h5" for="login-password">Contraseña</label><a class="text-primary"
                                                                              routerLink="/grp/recuperarPass"><small>
                             ¿Olvidaste tu contraseña?</small></a>
                         </div>

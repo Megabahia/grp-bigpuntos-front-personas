@@ -423,10 +423,6 @@ export class SolicitudCreditoComponent implements OnInit {
 
     continuar() {
         console.log('no valido ', this.personaForm);
-        this.calculos();
-        if (!this.calcularCredito()) {
-            return;
-        }
 
         // return;
         if (this.personaForm.value.tipoIdentificacion === 'Cédula') {
@@ -441,6 +437,11 @@ export class SolicitudCreditoComponent implements OnInit {
 
         if (this.personaForm.invalid) {
             console.log('no valido ', this.personaForm);
+            return;
+        }
+
+        this.calculos();
+        if (!this.calcularCredito()) {
             return;
         }
 
