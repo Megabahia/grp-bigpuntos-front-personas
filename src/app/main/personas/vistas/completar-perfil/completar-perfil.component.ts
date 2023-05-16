@@ -15,6 +15,7 @@ import {User} from '../../../../auth/models/user';
 import {GanarSuperMoneda} from '../../models/supermonedas';
 import {ParametrizacionesService} from '../../servicios/parametrizaciones.service';
 import {log} from 'util';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'app-completar-perfil',
@@ -72,6 +73,7 @@ export class CompletarPerfilComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private modalService: NgbModal,
         private paramService: ParametrizacionesService,
+        private toastr: ToastrService,
     ) {
 
         this.usuario = this._coreMenuService.grpPersonasUser;
@@ -243,6 +245,8 @@ export class CompletarPerfilComponent implements OnInit {
         this.submitted = true;
         // stop here if form is invalid
         if (this.registerForm.invalid) {
+            this.toastr.warning('Al parecer existe un error con la información que ingresó, por favor revise y vuelva a intentar.',
+                'Alerta');
             return;
         }
         this.informacion.tipoIdentificacion = this.registerForm.get('tipoIdentificacion').value;

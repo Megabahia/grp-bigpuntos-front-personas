@@ -62,6 +62,7 @@ import { QueEsCredicompraComponent } from './vistas/que-es-credicompra/que-es-cr
 import { ComoFuncionaCredicompraComponent } from './vistas/como-funciona-credicompra/como-funciona-credicompra.component';
 import { ComoAccederACredicompraComponent } from './vistas/como-acceder-a-credicompra/como-acceder-a-credicompra.component';
 import {SharedModule} from "../shared/shared.module";
+import { TerminosComponent } from './vistas/terminos/terminos.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -285,6 +286,13 @@ const routes = [
         canActivate: [AuthGuard]
         // data: { animation: 'auth' }
     },
+    {
+        path: 'terminos',
+        component: TerminosComponent,
+        // data: {activacion: [4]},
+        canActivate: [AuthGuard]
+        // data: { animation: 'auth' }
+    },
 
 
 ];
@@ -325,6 +333,7 @@ const routes = [
         QueEsCredicompraComponent,
         ComoFuncionaCredicompraComponent,
         ComoAccederACredicompraComponent,
+        TerminosComponent,
     ],
     imports: [
         CoreCommonModule,

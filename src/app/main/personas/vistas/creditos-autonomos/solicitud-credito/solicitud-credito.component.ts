@@ -11,6 +11,7 @@ import {Subject} from 'rxjs';
 import Decimal from 'decimal.js';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ValidacionesPropias} from '../../../../../../utils/customer.validators';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'app-solicitud-credito',
@@ -70,6 +71,7 @@ export class SolicitudCreditoComponent implements OnInit {
         private _coreConfigService: CoreConfigService,
         private _formBuilder: FormBuilder,
         private modalService: NgbModal,
+        private toastr: ToastrService,
     ) {
         this._unsubscribeAll = new Subject();
         this.usuario = this._coreMenuService.grpPersonasUser.persona;
@@ -190,7 +192,8 @@ export class SolicitudCreditoComponent implements OnInit {
                     otrosGastos: ['', [Validators.pattern('^([0-9])+$')]],
                     descripcion: [''],
                     totalGastos: [''],
-                })
+                }),
+                autorizacion: [false, [Validators.requiredTrue]],
             }
         );
         this.fecha = this.usuario.fechaNacimiento;
@@ -436,6 +439,8 @@ export class SolicitudCreditoComponent implements OnInit {
         // console.log('antes de validar', this.personaForm);
 
         if (this.personaForm.invalid) {
+            this.toastr.warning('Al parecer existe un error con la información que ingresó, por favor revise y vuelva a intentar.',
+                'Alerta');
             console.log('no valido ', this.personaForm);
             return;
         }
