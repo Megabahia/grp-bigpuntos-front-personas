@@ -66,13 +66,13 @@ export class AuthenticationService {
                         localStorage.setItem('grpPersonasUser', JSON.stringify(user));
                         // Display welcome toast!
                         setTimeout(() => {
-                            this._toastrService.success(
+                            // this._toastrService.success(
                                 // 'You have successfully logged in as an ' +
                                 //   user.role +
                                 //   ' user to Vuexy. Now you can start to explore. Enjoy! 🎉',
                                 // '👋 Welcome, ' + user.firstName + '!',
                                 // { toastClass: 'toast ngx-toastr', closeButton: true }
-                            );
+                            // );
                         }, 2500);
 
                         // notify

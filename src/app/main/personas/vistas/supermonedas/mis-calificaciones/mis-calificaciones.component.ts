@@ -9,6 +9,7 @@ import {FacturaFisica, FacturaFisicaCalificaciones, GanarSuperMoneda} from '../.
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import {ParametrizacionesService} from '../../../servicios/parametrizaciones.service';
 import {BienvenidoService} from '../../bienvenido/bienvenido.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'app-mis-calificaciones',
@@ -50,6 +51,7 @@ export class MisCalificacionesComponent implements OnInit {
         private paramService: ParametrizacionesService,
         private _bienvenidoService: BienvenidoService,
         private modalService: NgbModal,
+        private toastr: ToastrService,
     ) {
         this._unsubscribeAll = new Subject();
         this.usuario = this._coreMenuService.grpPersonasUser;
@@ -192,6 +194,8 @@ export class MisCalificacionesComponent implements OnInit {
     guardarFacturaFisica() {
         this.submittedFactura = true;
         if (this.facFisiForm.invalid) {
+            this.toastr.warning('Al parecer existe un error con la información que ingresó, por favor revise y vuelva a intentar.',
+                'Alerta');
             return;
         }
 
