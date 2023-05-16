@@ -12,7 +12,9 @@
                         <!--                        <div class="card-body text-center">-->
                         <!--                            <img src="{{ coreConfig.app.appLogoImage }}" width="300">-->
                         <!--                        </div>-->
-                        <h4>Para acceder a su Crédito, por favor complete la siguiente información:</h4>
+                        <h4>
+                            Para acceder a su Crédito, por favor complete la SOLICITUD DE CRÉDITO
+                        </h4>
                     </div>
                 </div>
             </div>
@@ -643,13 +645,13 @@
 
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label>Sueldo mensual</label>
+                                                    <label>Sueldo o Ingresos mensuales</label>
                                                     <input type="text" class="form-control"
                                                            formControlName="sueldoMensual">
                                                     <div *ngIf="submittedPersona && ingreSolicitanteForm.sueldoMensual.errors"
                                                          class="invalid-feedback" style="display: block;">
                                                         <div *ngIf="ingreSolicitanteForm.sueldoMensual.errors.required">
-                                                            Sueldo mensual es requerido
+                                                            Sueldo o Ingresos mensuales es requerido
                                                         </div>
                                                         <div *ngIf="ingreSolicitanteForm.sueldoMensual.errors.pattern">
                                                             Ingrese solo números
