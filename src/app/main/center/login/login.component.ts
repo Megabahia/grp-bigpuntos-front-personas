@@ -15,6 +15,7 @@ import {
 import {RegistroService} from '../registro/registro.service';
 import {Role} from 'app/auth/models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'app-login',
@@ -65,7 +66,8 @@ export class LoginComponent implements OnInit {
         private _authenticationService: AuthenticationService,
         private socialAuthService: SocialAuthService,
         private _registroService: RegistroService,
-        private _modalService: NgbModal
+        private _modalService: NgbModal,
+        private toastr: ToastrService,
     ) {
         this.siteKey = environment.setKey;
         this.captcha = false;
@@ -108,6 +110,8 @@ export class LoginComponent implements OnInit {
 
         // stop here if form is invalid
         if (this.loginForm.invalid || !this.captcha) {
+            this.toastr.warning('Al parecer existe un error con la información que ingresó, por favor revise y vuelva a intentar.',
+                'Alerta');
             return;
         }
 
