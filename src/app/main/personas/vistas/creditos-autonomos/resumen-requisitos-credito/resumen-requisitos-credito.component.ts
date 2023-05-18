@@ -124,7 +124,7 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
             user_id: this.usuario.id,
             canal: localStorage.getItem('tipoPersona') === 'Empleado' ? 'Empleado' : 'Negocio propio',
             tipoCredito: localStorage.getItem('tipoPersona') === 'Empleado' ? 'Empleado' : 'Negocio propio',
-            concepto: 'Negocio propio',
+            concepto: localStorage.getItem('tipoPersona') === 'Empleado' ? 'Empleado' : 'Negocio propio',
             cargarOrigen: 'BIGPUNTOS',
             nombres: '',
             apellidos: '',
