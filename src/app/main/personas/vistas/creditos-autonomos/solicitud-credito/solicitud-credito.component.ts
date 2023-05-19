@@ -474,6 +474,13 @@ export class SolicitudCreditoComponent implements OnInit {
         });
     }
 
+    mostrarTerminos(event: Event, modal: any) {
+        event.preventDefault();
+        this.modalService.open(modal, {
+            size: 'lg'
+        });
+    }
+
     comprobarOtrosGastos(event) {
         if (event.target.value > 0) {
             console.log('validar');
