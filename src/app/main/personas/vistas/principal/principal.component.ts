@@ -6,6 +6,7 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { Subject } from 'rxjs';
 import { PrincipalService } from './principal.service';
 import { ParametrizacionesService } from '../../servicios/parametrizaciones.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-principal',
@@ -41,6 +42,7 @@ export class PrincipalComponent implements OnInit {
     private _coreMenuService: CoreMenuService,
     private modalService: NgbModal,
     private paramService: ParametrizacionesService,
+    private _router: Router,
   ) {
     this._unsubscribeAll = new Subject();
     this.usuario = this._coreMenuService.grpPersonasUser;
@@ -52,6 +54,10 @@ export class PrincipalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const simulador = localStorage.getItem('simulador');
+    if (simulador === 'ok') {
+      this._router.navigate(['/personas/creditos-autonomos/solicitar-credito']);
+    }
     this._principalService.obtenerCantidadMonedas(this.usuario.id).subscribe(info => {
       this.cantidadMonedas = info.saldo;
     });

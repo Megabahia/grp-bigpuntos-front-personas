@@ -8,6 +8,7 @@ import {Parser} from '@angular/compiler';
 import {takeUntil} from 'rxjs/operators';
 import {CoreConfigService} from '../../../../../../@core/services/config.service';
 import {Subject} from 'rxjs';
+import {jsPDF} from 'jspdf';
 
 @Component({
     selector: 'app-resumen-requisitos-credito',
@@ -48,6 +49,7 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
         {'label': 'Certificado de la Asociación (es opcional y aplica si usted es transportista: Bus o Taxi)', 'valor': false},
         {'label': 'Copia de matrícula del vehículo (opcional)', 'valor': false},
         {'label': 'Copia de pago de impuesto predial (opcional)', 'valor': false},
+        {'label': 'Autorización y validación de información', 'valor': true},
     ];
     public checksEmpleado = [
         {'label': 'Identificacion', 'valor': false},
@@ -62,6 +64,7 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
         {'label': 'Buro credito', 'valor': false},
         {'label': 'Calificacion buro', 'valor': false},
         {'label': 'Observación', 'valor': false},
+        {'label': 'Autorización y validación de información', 'valor': true},
     ];
     public checks;
     public soltero = false;
@@ -161,24 +164,39 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
         // this.solicitarCredito.empresaComercial_id = localStorage.getItem('pagina');
         if (localStorage.getItem('credito')) {
             this._creditosAutonomosService.updateCredito(this.solicitarCredito).subscribe((info) => {
-                // localStorage.clear();
-                // this._router.navigate(['/']);
-                this.continue();
+                this.continue(info._id);
             });
         } else {
             this._creditosAutonomosService.crearCredito(this.solicitarCredito).subscribe((info) => {
-
-                this.continue();
-                // localStorage.clear();
-                // this._router.navigate(['/']);
+                this.continue(info._id);
             });
         }
     }
 
-    continue() {
-        localStorage.clear();
-        this._router.navigate([
-            `/personas/creditos-autonomos/validacion-datos`,
-        ]);
+    continue(_id: any) {
+        const doc = new jsPDF();
+
+        const text = `Al autorizar el tratamiento de su información, usted acepta que la empresa Corporación OmniGlobal y todas sus marcas y/o productos a validar su información en las plataformas pertinentes.
+        Al autorizar el tratamiento de su información, usted acepta que la empresa revise su información de Buró de Crédito para confirmar su estado crediticio.`;
+
+        const x = 10;
+        const y = 10;
+        const maxWidth = 180; // Ancho máximo del párrafo
+
+        doc.text(text, x, y, { maxWidth });
+
+        // Convierte el documento en un archivo Blob
+        const pdfBlob = doc.output('blob');
+
+        // Crea un objeto FormData y agrega el archivo Blob
+        const formData: FormData = new FormData();
+        formData.append('autorizacion', pdfBlob, 'autorizacion.pdf');
+        formData.append('_id', _id);
+        this._creditosAutonomosService.updateCreditoFormData(formData).subscribe((info) => {
+            localStorage.clear();
+            this._router.navigate([
+                `/personas/creditos-autonomos/validacion-datos`,
+            ]);
+        });
     }
 }

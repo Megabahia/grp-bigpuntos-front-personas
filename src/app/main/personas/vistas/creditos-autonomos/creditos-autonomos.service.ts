@@ -46,4 +46,8 @@ export class CreditosAutonomosService {
     return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoPersonas/update/${datos._id}`, datos);
   }
 
+  updateCreditoFormData(datos) {
+    return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoPersonas/update/${datos.get('_id')}`, datos);
+  }
+
 }

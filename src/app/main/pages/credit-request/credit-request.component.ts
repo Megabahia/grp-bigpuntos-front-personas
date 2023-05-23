@@ -29,19 +29,19 @@ export class CreditRequestComponent implements OnInit {
       },
     };
     // Verificar dominio pagina
-    // const ref = document.referrer;
-    // const host = document.location.host;
-    // if (ref !== 'https://credicompra.com/') {
-    //   if (host !== '209.145.61.41:4201') {
-    //     this._router.navigate([
-    //       `/grp/login`,
-    //     ]);
-    //     localStorage.clear();
-    //     return;
-    //   }
-    // }
-    // localStorage.setItem('pagina', ref);
-    localStorage.setItem('pagina', 'https://credicompra.com/');
+    const ref = document.referrer;
+    const host = document.location.host;
+    if (ref !== 'https://credicompra.com/') {
+      if (host !== '209.145.61.41:4201') {
+        this._router.navigate([
+          `/grp/login`,
+        ]);
+        localStorage.clear();
+        return;
+      }
+    }
+    localStorage.setItem('pagina', ref);
+    // localStorage.setItem('pagina', 'https://credicompra.com/');
   }
 
   ngOnInit(): void {
