@@ -392,7 +392,14 @@
                                                     <div *ngIf="persForm.whatsappDueno.errors.required">Whatsapp del
                                                         dueño es requerida
                                                     </div>
-                                                    <div *ngIf="persForm.whatsappDueno.errors.pattern">Solo números
+                                                    <div *ngIf="persForm.whatsappDueno.errors.pattern">
+                                                        Solo números
+                                                    </div>
+                                                    <div *ngIf="persForm.whatsappDueno.errors.minlength">
+                                                        Minimo 10 números
+                                                    </div>
+                                                    <div *ngIf="persForm.whatsappDueno.errors.maxlength">
+                                                        Maximo 10 números
                                                     </div>
                                                 </div>
                                             </div>
@@ -770,7 +777,9 @@
 
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label>Vestido Mensual</label>
+                                                    <label>
+                                                        Vestimenta mensual (ingrese 0 si no aplica)
+                                                    </label>
                                                     <input type="text" class="form-control" formControlName="vestido">
                                                     <div *ngIf="submittedPersona && gasSolicitanteForm.vestido.errors"
                                                          class="invalid-feedback" style="display: block;">
@@ -803,7 +812,8 @@
 
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label>Servicios Básicos Mensuales
+                                                    <label>
+                                                        Servicios básicos mensuales (ingrese 0 si no aplica)
                                                     </label>
                                                     <input type="text" class="form-control"
                                                            formControlName="serviciosBasicos">
@@ -838,7 +848,9 @@
 
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label>Educación</label>
+                                                    <label>
+                                                        Pago de educación mensual (ingrese 0 si no aplica)
+                                                    </label>
                                                     <input type="text" class="form-control" formControlName="educacion">
                                                     <div *ngIf="submittedPersona && gasSolicitanteForm.educacion.errors"
                                                          class="invalid-feedback" style="display: block;">

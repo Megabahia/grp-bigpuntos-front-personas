@@ -130,7 +130,7 @@ export class SolicitudCreditoComponent implements OnInit {
                 nivelInstruccion: [this.usuario.nivelInstruccion, Validators.required],
                 tipoVivienda: [this.usuario.tipoVivienda, Validators.required],
                 nombreDueno: [this.usuario.nombreDueno, [Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]+')]],
-                whatsappDueno: ['', [Validators.pattern('^([0-9])+$')]],
+                whatsappDueno: ['', []],
                 direccionDomicilio: [this.usuario.direccionDomicilio, [Validators.required, Validators.minLength(20), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]+')]],
                 referenciaDomicilio: [this.usuario.referenciaDomicilio, Validators.required],
                 estadoCivil: [this.estadoCivilStorage, Validators.required],
@@ -193,7 +193,7 @@ export class SolicitudCreditoComponent implements OnInit {
                     descripcion: [''],
                     totalGastos: [''],
                 }),
-                autorizacion: [false, [Validators.requiredTrue]],
+                autorizacion: ['', [Validators.requiredTrue]],
             }
         );
         this.fecha = this.usuario.fechaNacimiento;
@@ -324,8 +324,15 @@ export class SolicitudCreditoComponent implements OnInit {
     tipoViviendaSelected() {
         if (this.personaForm.get('tipoVivienda').value === 'Propia' || this.personaForm.get('tipoVivienda').value === '') {
             this.nombreDueno = false;
+            (this.personaForm as FormGroup).setControl('whatsappDueno', new FormControl());
         } else {
             this.nombreDueno = true;
+            (this.personaForm as FormGroup).setControl('whatsappDueno',
+                new FormControl(this.personaForm.value?.whatsappDueno,
+                    [
+                        Validators.required, Validators.minLength(10),
+                        Validators.maxLength(10), Validators.pattern('^([0-9])+$')
+                    ]));
         }
     }
 

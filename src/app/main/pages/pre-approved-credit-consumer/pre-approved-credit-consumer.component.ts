@@ -80,7 +80,7 @@ export class PreApprovedCreditConsumerComponent implements OnInit {
         localStorage.setItem('preApproved', 'true');
         this._preArpovedCreditService.validateCredit({'codigo': code, 'cedula': document})
             .subscribe((data: any) => {
-                localStorage.setItem('coutaMensual', data.cuota);
+                localStorage.setItem('coutaMensual', new Decimal(data.monto).div(12).toNumber().toString());
                 localStorage.setItem('montoCreditoFinal', data.monto);
                 localStorage.setItem('tipoPersona', data.tipoPersona);
                 localStorage.setItem('estadoCivil', data.estadoCivil);
