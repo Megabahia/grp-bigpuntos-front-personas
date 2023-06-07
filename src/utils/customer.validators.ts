@@ -1,5 +1,7 @@
 import {AbstractControl, FormControl, ValidationErrors} from '@angular/forms';
 
+const validateDocument = require('validate-document-ecuador');
+
 export class ValidacionesPropias {
     static parientesTelefonos(control: AbstractControl) {
         let repetidos = [];
@@ -74,6 +76,29 @@ export class ValidacionesPropias {
         }
     }
 
+    static rucValido(control: AbstractControl) {
+        const valido = validateDocument.getValidateDocument('ruc', control.value);
+        let errors = control['errors'] || {};
+        if (valido.status === 'SUCCESS') {
+            delete errors?.['rucInvalid'];
+            return null;
+        } else {
+            control.setErrors({...errors, rucInvalid: true});
+            return {rucInvalid: true};
+        }
+    }
+
+    static cedulaValido(control: AbstractControl) {
+        const valido = validateDocument.getValidateDocument('cedula', control.value);
+        let errors = control['errors'] || {};
+        if (valido.status === 'SUCCESS') {
+            delete errors?.['cedulaInvalid'];
+            return null;
+        } else {
+            control.setErrors({...errors, cedulaInvalid: true});
+            return {cedulaInvalid: true};
+        }
+    }
 }
 
 // control['controls'].filter((value2, index2) => {

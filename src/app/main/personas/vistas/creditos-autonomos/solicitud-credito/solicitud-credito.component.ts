@@ -63,6 +63,14 @@ export class SolicitudCreditoComponent implements OnInit {
         altFormat: 'Y-n-j',
         altInputClass: 'form-control flat-picker flatpickr-input invoice-edit-input',
     };
+    public paisOpciones;
+    public provinciaOpciones;
+    public ciudadOpciones;
+    public paisTipoPersonaOpciones;
+    public provinciaTipoPersonaOpciones;
+    public ciudadTipoPersonaOpciones;
+    public garanteNegocio = false;
+    public alfa = false;
 
     constructor(
         private _creditosAutonomosService: CreditosAutonomosService,
@@ -105,6 +113,10 @@ export class SolicitudCreditoComponent implements OnInit {
         return this.personaForm.get('gastosSolicitante')['controls'];
     }
 
+    get garanteForm() {
+        return this.personaForm.get('garante')['controls'];
+    }
+
     ngOnInit(): void {
         this.valoresLocalStorage();
         const fechaSolicitud = moment().format('L');
@@ -136,7 +148,9 @@ export class SolicitudCreditoComponent implements OnInit {
                 estadoCivil: [this.estadoCivilStorage, Validators.required],
                 ocupacionSolicitante: this._formBuilder.group({
                     nombreNegocio: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
-                    direccionNegocio: ['', [Validators.required, Validators.minLength(20), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]+')]],
+                    direccionNegocio: ['', [
+                        Validators.required, Validators.minLength(20), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]+')
+                    ]],
                     tiempoTrabajo: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
                     cargoDesempeno: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                     // sueldoPercibe: ['', [Validators.required, Validators.pattern('^([0-9])+$')]],
@@ -194,6 +208,23 @@ export class SolicitudCreditoComponent implements OnInit {
                     totalGastos: [''],
                 }),
                 autorizacion: ['', [Validators.requiredTrue]],
+                garante: this._formBuilder.group({
+                    tipoIdentificacion: ['', []],
+                    identificacion: ['', []],
+                    nombres: ['', []],
+                    apellidos: ['', []],
+                    pais: ['', []],
+                    provincia: ['', []],
+                    ciudad: ['', []],
+                    direccion: ['', []],
+                    tipoPersona: ['', []],
+                    paisTipoPersona: ['', []],
+                    provinciaTipoPersona: ['', []],
+                    ciudadTipoPersona: ['', []],
+                    direccionTipoPersona: ['', []],
+                    rucGarante: ['', []],
+                    nombreNegocioGarante: ['', []],
+                }),
             }
         );
         this.fecha = this.usuario.fechaNacimiento;
@@ -201,7 +232,134 @@ export class SolicitudCreditoComponent implements OnInit {
         this.personaForm.patchValue(this.usuario);
         console.log('.....--', this.usuario);
         this.tipoViviendaSelected();
+        this.obtenerPaisOpciones();
+        this.obtenerProvinciaOpciones();
+        this.obtenerCiudadOpciones();
+        this.obtenerPaisTipoPersonaOpciones();
+        this.obtenerProvinciaTipoPersonaOpciones();
+        this.obtenerCiudadTipoPersonaOpciones();
+        this.alfa = (this.tipoPersonaStorage === 'Alfa');
+    }
 
+    obtenerPaisOpciones() {
+        this.paramService.obtenerListaPadres('PAIS').subscribe((info) => {
+            this.paisOpciones = info;
+        });
+    }
+
+    obtenerProvinciaOpciones() {
+        this.paramService
+            .obtenerListaHijos(this.personaForm.value.garante.pais, 'PAIS')
+            .subscribe((info) => {
+                this.provinciaOpciones = info;
+            });
+    }
+
+    obtenerCiudadOpciones() {
+        this.paramService
+            .obtenerListaHijos(this.personaForm.value.garante.provincia, 'PROVINCIA')
+            .subscribe((info) => {
+                this.ciudadOpciones = info;
+            });
+    }
+
+    obtenerPaisTipoPersonaOpciones() {
+        this.paramService.obtenerListaPadres('PAIS').subscribe((info) => {
+            this.paisTipoPersonaOpciones = info;
+        });
+    }
+
+    obtenerProvinciaTipoPersonaOpciones() {
+        this.paramService
+            .obtenerListaHijos(this.personaForm.value.garante.paisTipoPersona, 'PAIS')
+            .subscribe((info) => {
+                this.provinciaTipoPersonaOpciones = info;
+            });
+    }
+
+    obtenerCiudadTipoPersonaOpciones() {
+        this.paramService
+            .obtenerListaHijos(this.personaForm.value.garante.provinciaTipoPersona, 'PROVINCIA')
+            .subscribe((info) => {
+                this.ciudadTipoPersonaOpciones = info;
+            });
+    }
+
+    obtenerTipoIdentificacion() {
+        if (this.personaForm.value.garante.tipoIdentificacion === 'Ruc') {
+            this.personaForm.get('garante')['controls']['identificacion'].setValidators(
+                [Validators.required, ValidacionesPropias.rucValido]
+            );
+            this.personaForm.get('garante')['controls']['identificacion'].updateValueAndValidity();
+        } else {
+            this.personaForm.get('garante')['controls']['identificacion'].setValidators(
+                [Validators.required, ValidacionesPropias.cedulaValido]
+            );
+            this.personaForm.get('garante')['controls']['identificacion'].updateValueAndValidity();
+        }
+    }
+
+    tipoPersonaGarante($event) {
+        if ($event.target.value === 'negocio') {
+            this.garanteNegocio = true;
+            this.personaForm.get('garante')['controls']['rucGarante'].setValidators(
+                [Validators.required, ValidacionesPropias.rucValido]
+            );
+            this.personaForm.get('garante')['controls']['nombreNegocioGarante'].setValidators(
+                [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]
+            );
+            this.personaForm.get('garante')['controls']['rucGarante'].updateValueAndValidity();
+            this.personaForm.get('garante')['controls']['nombreNegocioGarante'].updateValueAndValidity();
+        } else {
+            this.garanteNegocio = false;
+            this.personaForm.get('garante')['controls']['rucGarante'].clearValidators();
+            this.personaForm.get('garante')['controls']['nombreNegocioGarante'].clearValidators();
+            this.personaForm.get('garante')['controls']['rucGarante'].updateValueAndValidity();
+            this.personaForm.get('garante')['controls']['nombreNegocioGarante'].updateValueAndValidity();
+        }
+    }
+
+    seleccionarTipoPersona($event) {
+        if ($event.target.value !== 'Alfa') {
+            this.alfa = false;
+            (this.personaForm as FormGroup).setControl('garante', this._formBuilder.group({
+                tipoIdentificacion: ['', []],
+                identificacion: ['', []],
+                nombres: ['', []],
+                apellidos: ['', []],
+                pais: ['', []],
+                provincia: ['', []],
+                ciudad: ['', []],
+                direccion: ['', []],
+                tipoPersona: ['', []],
+                paisTipoPersona: ['', []],
+                provinciaTipoPersona: ['', []],
+                ciudadTipoPersona: ['', []],
+                direccionTipoPersona: ['', []],
+                rucGarante: ['', []],
+                nombreNegocioGarante: ['', []],
+            }));
+        } else {
+            this.alfa = true;
+            (this.personaForm as FormGroup).setControl('garante', this._formBuilder.group({
+                tipoIdentificacion: [this.usuario.garante?.tipoIdentificacion, [Validators.required]],
+                identificacion: [this.usuario.garante?.identificacion, [Validators.required, ValidacionesPropias]],
+                nombres: [this.usuario.garante?.nombres, [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
+                apellidos: [this.usuario.garante?.apellidos, [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
+                pais: [this.usuario.garante?.pais, [Validators.required]],
+                provincia: [this.usuario.garante?.provincia, [Validators.required]],
+                ciudad: [this.usuario.garante?.ciudad, [Validators.required]],
+                direccion: [this.usuario.garante?.direccion, [Validators.required, Validators.minLength(20), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]],
+                tipoPersona: [this.usuario.garante?.tipoPersona, [Validators.required]],
+                paisTipoPersona: [this.usuario.garante?.paisTipoPersona, [Validators.required]],
+                provinciaTipoPersona: [this.usuario.garante?.provinciaTipoPersona, [Validators.required]],
+                ciudadTipoPersona: [this.usuario.garante?.ciudadTipoPersona, [Validators.required]],
+                direccionTipoPersona: [this.usuario.garante?.direccionTipoPersona, [Validators.required,
+                    Validators.minLength(20), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]],
+                rucGarante: [this.usuario.garante?.rucGarante, []],
+                nombreNegocioGarante: [this.usuario.garante?.nombreNegocioGarante, []],
+            }));
+        }
     }
 
     valoresLocalStorage() {

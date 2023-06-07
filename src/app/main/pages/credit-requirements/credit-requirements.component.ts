@@ -63,8 +63,10 @@ export class CreditRequirementsComponent implements OnInit {
         let estadoCivil;
         if (localStorage.getItem('tipoPersona') === 'Empleado') {
             tipoPersona = 'EMPLEADO';
-        } else {
+        } if (localStorage.getItem('tipoPersona') === 'Negocio propio') {
             tipoPersona = 'NEGOCIOS';
+        } else {
+            tipoPersona = 'ALFA';
         }
         if (casados.find(item => item === localStorage.getItem('estadoCivil').toUpperCase())) {
             estadoCivil = 'CASADO';

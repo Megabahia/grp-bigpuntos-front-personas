@@ -26,6 +26,7 @@ import { PreApprovedCreditConsumerComponent } from './pre-approved-credit-consum
 import { ApprovedEndConsumerComponent } from './approved-end-consumer/approved-end-consumer.component';
 import { SociosEmpleadosComponent } from './socios-empleados/socios-empleados.component';
 import {SharedModule} from "../shared/shared.module";
+import { ConfirmacionGaranteComponent } from './confirmacion-garante/confirmacion-garante.component';
 
 // routing
 const routes: Routes = [
@@ -104,6 +105,11 @@ const routes: Routes = [
         component: CreditRequirementsComponent,
         data: {animation: 'misc'},
     },
+    {
+        path: 'confirmacion-garante/:id',
+        component: ConfirmacionGaranteComponent,
+        data: {animation: 'misc'},
+    },
 ];
 
 @NgModule({
@@ -122,6 +128,7 @@ const routes: Routes = [
         PreApprovedCreditConsumerComponent,
         ApprovedEndConsumerComponent,
         SociosEmpleadosComponent,
+        ConfirmacionGaranteComponent,
     ],
 
     imports: [

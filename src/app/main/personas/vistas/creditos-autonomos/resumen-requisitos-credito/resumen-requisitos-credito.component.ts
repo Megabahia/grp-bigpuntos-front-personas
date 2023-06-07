@@ -68,6 +68,14 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
     ];
     public checks;
     public soltero = false;
+    public tiposNormales = {
+        'Empleado': 'Empleado',
+        'Alfa': 'null'
+    };
+    public tiposPreaprobados = {
+        'Empleado': 'Empleado-PreAprobado',
+        'Alfa': 'null'
+    };
 
     constructor(
         private _router: Router,
@@ -86,9 +94,21 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
         if (localStorage.getItem('tipoPersona') === 'Empleado') {
             tipoPersona = 'EMPLEADO';
             this.checks = this.checksEmpleado;
-        } else {
+        } if (localStorage.getItem('tipoPersona') === 'Negocio propio') {
             tipoPersona = 'NEGOCIOS';
             this.checks = this.checksNegocio;
+        } else {
+            tipoPersona = 'ALFA';
+            this.checks = [
+                {'label': 'Cédula de identidad', 'valor': false},
+                {'label': 'Papeleta de votación', 'valor': false},
+                {'label': 'Selfie (Foto) con Cédula', 'valor': false},
+                {'label': 'Planilla de luz del domicilio', 'valor': false},
+                {'label': 'Matricula del vehículo (en caso de aplicar)', 'valor': false},
+                {'label': 'Impuesto predial (en caso de aplicar)', 'valor': false},
+                {'label': 'Referencias de Tu Madrina o Padrino', 'valor': false},
+                {'label': 'Autorización y validación de información', 'valor': false},
+            ];
         }
         if (casados.find(item => item === localStorage.getItem('estadoCivil').toUpperCase())) {
             estadoCivil = 'CASADO';
@@ -103,8 +123,8 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
         this.getInfo();
         if (localStorage.getItem('credito') !== null) {
             this.solicitarCredito = JSON.parse(localStorage.getItem('credito'));
-            this.solicitarCredito.canal = localStorage.getItem('tipoPersona') === 'Empleado' ? 'Empleado-PreAprobado' : 'Negocio-PreAprobado';
-            this.solicitarCredito.tipoCredito = localStorage.getItem('tipoPersona') === 'Empleado' ? 'Empleado-PreAprobado' : 'Negocio-PreAprobado';
+            this.solicitarCredito.canal = this.tiposPreaprobados[localStorage.getItem('tipoPersona')] || 'Negocio-PreAprobado';
+            this.solicitarCredito.tipoCredito = this.tiposPreaprobados[localStorage.getItem('tipoPersona')] || 'Negocio-PreAprobado';
         } else {
             this.solicitarCredito = this.inicialidarSolicitudCredito();
         }
@@ -125,9 +145,9 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
             cuota: this.coutaMensual,
             plazo: 12,
             user_id: this.usuario.id,
-            canal: localStorage.getItem('tipoPersona') === 'Empleado' ? 'Empleado' : 'Negocio propio',
-            tipoCredito: localStorage.getItem('tipoPersona') === 'Empleado' ? 'Empleado' : 'Negocio propio',
-            concepto: localStorage.getItem('tipoPersona') === 'Empleado' ? 'Empleado' : 'Negocio propio',
+            canal: this.tiposNormales[localStorage.getItem('tipoPersona')] || 'Negocio propio',
+            tipoCredito: this.tiposNormales[localStorage.getItem('tipoPersona')] || 'Negocio propio',
+            concepto: this.tiposNormales[localStorage.getItem('tipoPersona')] || 'Negocio propio',
             cargarOrigen: 'BIGPUNTOS',
             nombres: '',
             apellidos: '',
