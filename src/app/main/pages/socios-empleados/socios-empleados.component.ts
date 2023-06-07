@@ -24,7 +24,8 @@ export class SociosEmpleadosComponent implements OnInit {
         console.log('after');
         const separador = window.location.href.split('/');
         this.tipo = separador[5] === 'clientes' ? 'clientes' : 'empleados';
-        this._sociosEmpleados.obtenerListaParametrosEmpresas(separador.pop()).subscribe(info => {
+        this._sociosEmpleados[this.tipo === 'clientes' ? 'obtenerListaParametrosEmpresasClientes' : 'obtenerListaParametrosEmpresas']
+        (separador.pop()).subscribe(info => {
             this.empresa = info;
             this.listarProductos();
         }, error => {
