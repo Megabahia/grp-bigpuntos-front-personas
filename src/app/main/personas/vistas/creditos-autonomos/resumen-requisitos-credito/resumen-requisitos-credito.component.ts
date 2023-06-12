@@ -94,7 +94,7 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
         if (localStorage.getItem('tipoPersona') === 'Empleado') {
             tipoPersona = 'EMPLEADO';
             this.checks = this.checksEmpleado;
-        } if (localStorage.getItem('tipoPersona') === 'Negocio propio') {
+        } else if (localStorage.getItem('tipoPersona') === 'Negocio propio') {
             tipoPersona = 'NEGOCIOS';
             this.checks = this.checksNegocio;
         } else {
