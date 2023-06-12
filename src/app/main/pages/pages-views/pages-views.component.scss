@@ -7892,3 +7892,15 @@ category-result .card-header {
 .bg-azul2 {
   background-color: #385e8c !important;
 }
+
+.visible-phone {
+  @media (min-width: 992px) {
+    display: none;
+  }
+}
+
+.text-phone {
+  @media (max-width: 767px) {
+    font-size: 28px;
+  }
+}
