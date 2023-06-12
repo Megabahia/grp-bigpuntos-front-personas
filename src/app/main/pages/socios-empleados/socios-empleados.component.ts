@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 @Component({
     selector: 'app-socios-empleados',
     templateUrl: './socios-empleados.component.html',
-    styleUrls: ['../pages-views/pages-views.component.scss'],
+    styleUrls: ['./socios-empleados.component.scss'],
 })
 export class SociosEmpleadosComponent implements OnInit {
     public productos;
