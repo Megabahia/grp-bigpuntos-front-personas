@@ -66,6 +66,9 @@ export class SolicitudCreditoComponent implements OnInit {
     public paises;
     public provincias;
     public ciudades;
+    public paisGarante;
+    public provinciaGarante;
+    public ciudadGarante;
     public paisEmpresa;
     public provinciaEmpresa;
     public ciudadEmpresa;
@@ -284,13 +287,13 @@ export class SolicitudCreditoComponent implements OnInit {
 
     obtenerArrays() {
         this.paramService.obtenerListaTipo('PAIS').subscribe((info) => {
-            this.paises = this.paisEmpresa = this.paisReferido1 = this.paisReferido2 = this.paisReferido3 = info;
+            this.paises = this.paisGarante = this.paisEmpresa = this.paisReferido1 = this.paisReferido2 = this.paisReferido3 = info;
         });
         this.paramService.obtenerListaTipo('PROVINCIA').subscribe((info) => {
-            this.provincias = this.provinciaEmpresa = this.provinciaReferido1 = this.provinciaReferido2 = this.provinciaReferido3 = info;
+            this.provincias = this.provinciaGarante = this.provinciaEmpresa = this.provinciaReferido1 = this.provinciaReferido2 = this.provinciaReferido3 = info;
         });
         this.paramService.obtenerListaTipo('Ciudad').subscribe((info) => {
-            this.ciudades = this.ciudadEmpresa = this.ciudadReferido1 = this.ciudadReferido2 = this.ciudadReferido3 = info;
+            this.ciudades = this.ciudadGarante = this.ciudadEmpresa = this.ciudadReferido1 = this.ciudadReferido2 = this.ciudadReferido3 = info;
         });
     }
     obtenerPaisOpciones(event = null, variablePais) {

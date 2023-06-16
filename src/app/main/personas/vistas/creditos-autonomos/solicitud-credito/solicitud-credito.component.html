@@ -160,9 +160,9 @@
                                                     <div class="form-group">
                                                         <label>País de residencia</label>
                                                         <select class="form-control select2" formControlName="pais"
-                                                                (change)="obtenerProvinciaOpciones()">
+                                                                (change)="obtenerProvinciaOpciones($event, 'paisGarante') ">
                                                             <option value="">- Seleccione -</option>
-                                                            <option *ngFor="let paisOp of paisOpciones"
+                                                            <option *ngFor="let paisOp of paisGarante"
                                                                     value="{{paisOp.nombre}}">{{paisOp.nombre}}
                                                             </option>
                                                         </select>
@@ -182,9 +182,9 @@
                                                         </label>
                                                         <select class="form-control select2"
                                                                 formControlName="provincia"
-                                                                (change)="obtenerCiudadOpciones() ">
+                                                                (change)="obtenerCiudadOpciones($event, 'provinciaGarante') ">
                                                             <option value="">- Seleccione -</option>
-                                                            <option *ngFor="let provinciaOp of provinciaOpciones"
+                                                            <option *ngFor="let provinciaOp of provinciaGarante"
                                                                     value="{{provinciaOp.nombre}}">
                                                                 {{provinciaOp.nombre}}</option>
 
@@ -205,7 +205,7 @@
                                                         <select class="form-control select2"
                                                                 formControlName="ciudad">
                                                             <option value="">- Seleccione -</option>
-                                                            <option *ngFor="let ciudadOp of ciudadOpciones"
+                                                            <option *ngFor="let ciudadOp of ciudadGarante"
                                                                     value="{{ciudadOp.nombre}}">
                                                                 {{ciudadOp.nombre}}</option>
                                                         </select>
