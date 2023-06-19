@@ -158,6 +158,23 @@
 
                                                 <div class="col-md-3">
                                                     <div class="form-group">
+                                                        <label>Correo Madrina/Padrino</label>
+                                                        <input formControlName="correoGarante" type="text" class="form-control"
+                                                               [ngClass]="{ 'is-invalid': submittedPersona && garanteForm.correoGarante.errors }">
+
+                                                        <div *ngIf="submittedPersona && garanteForm.correoGarante.errors"
+                                                             class="invalid-feedback">
+                                                            <div *ngIf="garanteForm.correoGarante.errors.required"> Se requiere el correo
+                                                            </div>
+                                                            <div *ngIf="garanteForm.correoGarante.errors?.email">
+                                                                Correo invalido
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
                                                         <label>País de residencia</label>
                                                         <select class="form-control select2" formControlName="pais"
                                                                 (change)="obtenerProvinciaOpciones($event, 'paisGarante') ">

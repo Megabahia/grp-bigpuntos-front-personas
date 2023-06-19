@@ -8,6 +8,7 @@ import Decimal from 'decimal.js';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
+
 @Component({
     selector: 'app-approved-end-consumer',
     templateUrl: './approved-end-consumer.component.html',

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {CoreConfigService} from '../../../../@core/services/config.service';
 import {ConfirmacionGaranteService} from './confirmacion-garante.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -21,7 +21,8 @@ export class ConfirmacionGaranteComponent implements OnInit {
         private _route: ActivatedRoute,
         private modalService: NgbModal,
         private _coreConfigService: CoreConfigService,
-        private _confirmacionService: ConfirmacionGaranteService
+        private _confirmacionService: ConfirmacionGaranteService,
+        private router: Router
     ) {
         this._coreConfigService.config = {
             layout: {
@@ -50,7 +51,7 @@ export class ConfirmacionGaranteComponent implements OnInit {
             });
     }
 
-    confirmarGarante() {
+    confirmarGarante(event: Event, modal: any) {
         if (!this.autorizacion) {
             return;
         }
@@ -61,6 +62,15 @@ export class ConfirmacionGaranteComponent implements OnInit {
                 console.log('si hay');
             }
         });
+        event.preventDefault();
+        this.modalService.open(modal, {
+            size: 'lg'
+        });
+    }
+
+    redcredicompra() {
+        window.location.href = 'https://credicompra.com/';
+        this.cerrarModal();
     }
 
     mostrarTerminos(event: Event, modal: any) {
@@ -69,4 +79,14 @@ export class ConfirmacionGaranteComponent implements OnInit {
             size: 'lg'
         });
     }
+
+    abrirModal(modal) {
+        this.modalService.open(modal);
+    }
+    cerrarModal() {
+        this.modalService.dismissAll();
+    }
+
 }
+
+

@@ -270,6 +270,7 @@ export class SolicitudCreditoComponent implements OnInit {
                     direccionTipoPersona: [this.usuario.garante?.direccionTipoPersona, []],
                     rucGarante: [this.usuario.garante?.rucGarante, []],
                     nombreNegocioGarante: [this.usuario.garante?.nombreNegocioGarante, []],
+                    correoGarante: [this.usuario.garante?.correoGarante, []],
                 }),
             }
         );
@@ -387,6 +388,7 @@ export class SolicitudCreditoComponent implements OnInit {
                 direccionTipoPersona: ['', []],
                 rucGarante: ['', []],
                 nombreNegocioGarante: ['', []],
+                correoGarante: ['', []],
             }));
         } else {
             this.alfa = true;
@@ -407,6 +409,7 @@ export class SolicitudCreditoComponent implements OnInit {
                     Validators.minLength(20), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]],
                 rucGarante: [this.usuario.garante?.rucGarante, []],
                 nombreNegocioGarante: [this.usuario.garante?.nombreNegocioGarante, []],
+                correoGarante: [this.usuario.garante?.correoGarante, [Validators.required, Validators.email]],
             }));
         }
     }
