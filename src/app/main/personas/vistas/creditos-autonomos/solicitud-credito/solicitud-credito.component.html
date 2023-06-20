@@ -659,7 +659,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="pais">País</label>
+                                                <label for="pais"> País de residencia</label>
                                                 <select class="form-control select2" id="pais"
                                                         formControlName="pais"
                                                         (change)="obtenerProvinciaOpciones($event, 'provinciaEmpresa')">
@@ -677,7 +677,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="provincia">Provincia</label>
+                                                <label for="provincia">Provincia de residencia</label>
                                                 <select class="form-control select2" formControlName="provincia"
                                                         id="provincia" (change)="obtenerCiudadOpciones($event, 'ciudadEmpresa') ">
                                                     <option value="">- Seleccione -</option>
@@ -695,7 +695,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="ciudad">Ciudad</label>
+                                                <label for="ciudad">Ciudad de residencia</label>
                                                 <select class="form-control select2" formControlName="ciudad"
                                                         id="ciudad">
                                                     <option value="">- Seleccione -</option>
@@ -988,7 +988,7 @@
 
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label for="pais">País</label>
+                                                            <label for="pais">País de domicilio</label>
                                                             <select class="form-control select2" id="pais1"
                                                                     formControlName="pais"
                                                                     (change)="obtenerProvinciaOpciones($event, 'provinciaReferido{{i+1}}')">
@@ -1006,7 +1006,7 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label for="provincia">Provincia</label>
+                                                            <label for="provincia">Provincia de domicilio</label>
                                                             <select class="form-control select2" formControlName="provincia"
                                                                     id="provincia" (change)="obtenerCiudadOpciones($event, 'ciudadReferido' + (i+1)) ">
                                                                 <option value="">- Seleccione -</option>
@@ -1024,7 +1024,7 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label for="ciudad">Ciudad</label>
+                                                            <label for="ciudad">Ciudad de domicilio</label>
                                                             <select class="form-control select2" formControlName="ciudad"
                                                                     id="ciudad">
                                                                 <option value="">- Seleccione -</option>
@@ -1052,7 +1052,7 @@
 
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="direccion[{{i}}]">Dirección</label>
+                                                            <label for="direccion[{{i}}]">Dirección de domicilio</label>
                                                             <input type="text" class="form-control"
                                                                    formControlName="direccion">
                                                             <div *ngIf="submittedPersona && referencia.controls?.direccion?.errors"
