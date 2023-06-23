@@ -27,6 +27,7 @@ import { ApprovedEndConsumerComponent } from './approved-end-consumer/approved-e
 import { SociosEmpleadosComponent } from './socios-empleados/socios-empleados.component';
 import {SharedModule} from "../shared/shared.module";
 import { ConfirmacionGaranteComponent } from './confirmacion-garante/confirmacion-garante.component';
+import { ClienteComponent } from './cliente/cliente.component';
 
 // routing
 const routes: Routes = [
@@ -97,7 +98,7 @@ const routes: Routes = [
     },
     {
         path: 'clientes/:empresa',
-        component: SociosEmpleadosComponent,
+        component: ClienteComponent,
         data: {animation: 'misc'},
     },
     {
@@ -129,6 +130,7 @@ const routes: Routes = [
         ApprovedEndConsumerComponent,
         SociosEmpleadosComponent,
         ConfirmacionGaranteComponent,
+        ClienteComponent,
     ],
 
     imports: [
