@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FlatpickrOptions} from 'ng2-flatpickr';
 import {CoreConfigService} from '../../../../../../@core/services/config.service';
@@ -18,7 +18,7 @@ import {ToastrService} from 'ngx-toastr';
     templateUrl: './solicitud-credito.component.html',
     styleUrls: ['./solicitud-credito.component.scss']
 })
-export class SolicitudCreditoComponent implements OnInit {
+export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
     @Output() estado = new EventEmitter<number>();
     @ViewChild('modalAviso') modalAviso;
 
@@ -284,6 +284,10 @@ export class SolicitudCreditoComponent implements OnInit {
         this.obtenerProvinciaTipoPersonaOpciones();
         this.obtenerCiudadTipoPersonaOpciones();
         this.alfa = (this.tipoPersonaStorage === 'Alfa');
+    }
+
+    ngAfterViewInit() {
+        this.calculos();
     }
 
     obtenerArrays() {
