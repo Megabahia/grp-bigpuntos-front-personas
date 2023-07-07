@@ -178,8 +178,8 @@
                                                         <label>País de residencia</label>
                                                         <select class="form-control select2" formControlName="pais"
                                                                 (change)="obtenerProvinciaOpciones($event, 'paisGarante') ">
-                                                            <option value="">- Seleccione -</option>
-                                                            <option *ngFor="let paisOp of paisGarante"
+                                                            <option value="">-Seleccione-</option>
+                                                            <option *ngFor="let paisOp of paisGarante "
                                                                     value="{{paisOp.nombre}}">{{paisOp.nombre}}
                                                             </option>
                                                         </select>
