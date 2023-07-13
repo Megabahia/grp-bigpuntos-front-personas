@@ -141,11 +141,13 @@ export class CompletarPerfilComponent implements OnInit {
             whatsapp: ['', [Validators.required,
                 Validators.maxLength(10),
                 Validators.minLength(10),
-                Validators.pattern('^[0-9]*$')]],
+                Validators.pattern('^09\\d{8}$')]
+            ],
             celular: ['', [Validators.required,
                 Validators.maxLength(10),
                 Validators.minLength(10),
-                Validators.pattern('^[0-9]*$')]]
+                Validators.pattern('^09\\d{8}$')]
+            ]
         });
         // Subscribe to config changes
         this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
