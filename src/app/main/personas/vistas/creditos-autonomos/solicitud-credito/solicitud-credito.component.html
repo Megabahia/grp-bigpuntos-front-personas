@@ -99,6 +99,7 @@
                                                     <div class="form-group">
                                                         <label>Número de identificación</label>
                                                         <input formControlName="identificacion" type="text" class="form-control"
+                                                               (change)="validarRucGarante()"
                                                                [ngClass]="{ 'is-invalid': submittedPersona && garanteForm.identificacion.errors }">
 
                                                         <div *ngIf="submittedPersona && garanteForm.identificacion.errors"
@@ -111,6 +112,9 @@
                                                             </div>
                                                             <div *ngIf="garanteForm.identificacion.errors?.rucInvalid">
                                                                 Ruc invalido
+                                                            </div>
+                                                            <div *ngIf="garanteForm.identificacion.errors?.repetidoGarante">
+                                                                Numero identificación repetido
                                                             </div>
                                                         </div>
                                                     </div>
@@ -160,6 +164,7 @@
                                                     <div class="form-group">
                                                         <label>Correo Madrina/Padrino</label>
                                                         <input formControlName="correoGarante" type="text" class="form-control"
+                                                               (change)="validarCorreoGarante($event)"
                                                                [ngClass]="{ 'is-invalid': submittedPersona && garanteForm.correoGarante.errors }">
 
                                                         <div *ngIf="submittedPersona && garanteForm.correoGarante.errors"
@@ -168,6 +173,9 @@
                                                             </div>
                                                             <div *ngIf="garanteForm.correoGarante.errors?.email">
                                                                 Correo invalido
+                                                            </div>
+                                                            <div *ngIf="garanteForm.correoGarante.errors?.repetidoGarante">
+                                                                Correo repetido
                                                             </div>
                                                         </div>
                                                     </div>
@@ -559,25 +567,25 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Fecha de nacimiento</label>
-                                                <ng2-flatpickr [setDate]="fecha" formControlName="fechaNacimiento"
-                                                               [config]="startDateOptions"
-                                                               [ngClass]="{ 'is-invalid': submittedPersona && persForm.fechaNacimiento.errors }"
-                                                               (input)="calcularEdad()"
-                                                >
-                                                </ng2-flatpickr>
+                                                <input
+                                                        type="date"
+                                                        formControlName="fechaNacimiento"
+                                                        placeholder="Datepicker"
+                                                        class="form-control"
+                                                        [ngClass]="{ 'is-invalid': submittedPersona && persForm.fechaNacimiento.errors }"
+                                                        >
+<!--                                                <ng2-flatpickr [setDate]="fecha" formControlName="fechaNacimiento"-->
+<!--                                                               [config]="startDateOptions"-->
+<!--                                                               [ngClass]="{ 'is-invalid': submittedPersona && persForm.fechaNacimiento.errors }"-->
+<!--                                                               (input)="calcularEdad()"-->
+<!--                                                >-->
+<!--                                                </ng2-flatpickr>-->
                                                 <div *ngIf="submittedPersona && persForm.fechaNacimiento.errors"
                                                      class="invalid-feedback">
                                                     <div *ngIf="persForm.fechaNacimiento.errors.required">Fecha es
                                                         requerida
                                                     </div>
                                                 </div>
-                                                <div *ngIf="submittedPersona && persForm.fechaNacimiento.errors"
-                                                     class="invalid-feedback">
-                                                    <div *ngIf="!persForm.fechaNacimiento.errors?.valido">Menor de
-                                                        edad
-                                                    </div>
-                                                </div>
-
                                             </div>
                                         </div>
 
@@ -910,7 +918,7 @@
 
                                     <div class="row">
                                         <div class="col-md-12 my-1">
-                                            <h4>EREFERENCIAS DEL SOLICITANTE</h4>
+                                            <h4>REFERENCIAS DEL SOLICITANTE</h4>
                                         </div>
                                     </div>
                                     <div formArrayName="referenciasSolicitante">
@@ -1058,11 +1066,13 @@
                                                             <div *ngIf="submittedPersona && referencia.controls?.direccion?.errors"
                                                                  class="invalid-feedback" style="display: block;">
                                                                 <div *ngIf="referencia.controls?.direccion?.errors.required">
-                                                                    Dirección
-                                                                    es requerido
+                                                                    Dirección de domicilio es requerido
                                                                 </div>
                                                                 <div *ngIf="referencia.controls?.direccion?.errors.pattern">
                                                                     Ingrese solo letras y números
+                                                                </div>
+                                                                <div *ngIf="referencia.controls?.direccion?.errors.minlength">
+                                                                    Ingrese minimo 20 caracteres
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1175,7 +1185,7 @@
                                                             Especifique otros ingresos es requerido
                                                         </div>
                                                         <div *ngIf="ingreSolicitanteForm.descripcion.errors.pattern">
-                                                            Ingrese solo numeros
+                                                            Ingrese solo letras
                                                         </div>
                                                     </div>
                                                 </div>

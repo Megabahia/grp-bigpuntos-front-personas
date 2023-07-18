@@ -184,7 +184,7 @@ export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
                             Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]
                         ],
                         direccion: [this.usuario.referenciasSolicitante[0]?.direccion, [
-                            Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]
+                            Validators.required, Validators.minLength(20), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]
                         ],
                         telefono: [this.usuario.referenciasSolicitante[0]?.telefono, [Validators.required,
                             Validators.maxLength(10),
@@ -203,7 +203,7 @@ export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
                             Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]
                         ],
                         direccion: [this.usuario.referenciasSolicitante[1]?.direccion, [
-                            Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]
+                            Validators.required, Validators.minLength(20), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]
                         ],
                         telefono: [this.usuario.referenciasSolicitante[1]?.telefono, [Validators.required,
                             Validators.maxLength(10),
@@ -222,7 +222,7 @@ export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
                             Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]
                         ],
                         direccion: [this.usuario.referenciasSolicitante[2]?.direccion, [
-                            Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]
+                            Validators.required, Validators.minLength(20), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]
                         ],
                         telefono: [this.usuario.referenciasSolicitante[2]?.telefono, [Validators.required,
                             Validators.maxLength(10),
@@ -351,6 +351,7 @@ export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
             );
             this.personaForm.get('garante')['controls']['identificacion'].updateValueAndValidity();
         }
+        this.validarRucGarante();
     }
 
     tipoPersonaGarante($event) {
@@ -671,7 +672,7 @@ export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
             return;
         }
 
-        this.personaForm.get('fechaNacimiento').setValue(moment(this.personaForm.get('fechaNacimiento').value[0]).format('YYYY-MM-DD'));
+        this.personaForm.get('fechaNacimiento').setValue(moment(this.personaForm.get('fechaNacimiento').value).format('YYYY-MM-DD'));
         const persona = {
             identificacion: this.personaForm.get('documento').value,
             ...this.personaForm.value,
@@ -684,6 +685,7 @@ export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
         this._creditosAutonomosService.guardarInformacion(persona)
             .subscribe((info) => {
                 localStorage.setItem('tipoPersona', this.personaForm.get('tipoPersona').value);
+                localStorage.setItem('estadoCivil', this.personaForm.get('estadoCivil').value);
                 this.estado.emit(3);
 
             });
@@ -703,14 +705,31 @@ export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
     }
 
     comprobarOtrosGastos(event) {
+        // Obtener referencia al control 'descripcion'
+        const descripcionControl = this.gasSolicitanteForm.descripcion;
         if (event.target.value > 0) {
-            console.log('validar');
-            (this.personaForm as FormGroup).setControl('especificaGastos',
-                new FormControl(this.personaForm.value?.descripcion,
-                    [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]));
+            // Agregar validación al control 'descripcion'
+            descripcionControl.setValidators(Validators.required);
         } else {
-            (this.personaForm as FormGroup).setControl('especificaGastos',
-                new FormControl(this.personaForm.value?.descripcion));
+            // Agregar validación al control 'descripcion'
+            descripcionControl.clearValidators();
         }
+        descripcionControl.updateValueAndValidity();
+    }
+
+    validarCorreoGarante(event) {
+        const garanteControl = this.garanteForm['correoGarante'];
+        if (garanteControl.value === this.usuario.email) {
+            garanteControl.setErrors({repetidoGarante: true});
+        }
+    }
+
+    validarRucGarante() {
+        const garanteControl = this.garanteForm['identificacion'];
+        const errors = garanteControl['errors'];
+        if (garanteControl.value === this.personaForm.get('documento').value) {
+            garanteControl.setErrors({...errors, repetidoGarante: true});
+        }
+        console.log('garanteControl', garanteControl);
     }
 }
