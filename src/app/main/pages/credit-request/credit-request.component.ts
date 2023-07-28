@@ -29,8 +29,8 @@ export class CreditRequestComponent implements OnInit {
       },
     };
     // Verificar dominio pagina
-    // const ref = document.referrer;
-    // const host = document.location.host;
+    const ref = document.referrer;
+    const host = document.location.host;
     // if (ref !== 'https://credicompra.com/') {
     //   if (host !== '209.145.61.41:4201') {
     //     this._router.navigate([
@@ -40,7 +40,8 @@ export class CreditRequestComponent implements OnInit {
     //     return;
     //   }
     // }
-    // localStorage.setItem('pagina', ref);
+    localStorage.setItem('ref', ref);
+    localStorage.setItem('host', host);
     localStorage.setItem('pagina', 'https://credicompra.com/');
   }
 
