@@ -225,15 +225,15 @@ export class PagarConSuperMonedasComponent implements OnInit {
     }
 
     exportHtmlToPDF() {
-        let data = document.getElementById('print-section');
+        const data = document.getElementById('print-section');
 
         html2canvas(data).then((canvas) => {
-            let docWidth = 208;
-            let docHeight = (canvas.height * docWidth) / canvas.width;
+            const docWidth = 208;
+            const docHeight = (canvas.height * docWidth) / canvas.width;
 
             const contentDataURL = canvas.toDataURL('image/png');
-            let doc = new jsPDF('p', 'mm', 'a4');
-            let position = 0;
+            const doc = new jsPDF('p', 'mm', 'a4');
+            const position = 0;
             doc.addImage(contentDataURL, 'PNG', 0, position, docWidth, docHeight);
 
             doc.save('comprobante.pdf');

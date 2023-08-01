@@ -120,27 +120,22 @@ export class CompartirPublicacionesComponent implements OnInit {
     }
 
     obtenerEvento(evento, id) {
-        this._bienvenidoService
-            .guardarSuperMonedas(this.superMonedasElec)
-            .subscribe(
-                (infoSM) => {
-                    //  this.loading = false;
-
-                    this.mensaje =
-                        'Compartido con éxito, ud ha ganado ' +
-                        this.ganarMonedasFacElec.valor +
-                        ' Big Puntos';
-                    this.abrirModal(this.mensajeModal);
-                },
-                (error) => {
-                    /*  this.loading = false; */
-                }
-            );
-
-        //
-        this.compartirPublicacion(id);
-
-        console.log(evento);
+        // this._bienvenidoService
+        //     .guardarSuperMonedas(this.superMonedasElec)
+        //     .subscribe(
+        //         (infoSM) => {
+        //             //  this.loading = false;
+        //             this.mensaje =
+        //                 'Compartido con éxito, ud ha ganado ' +
+        //                 this.ganarMonedasFacElec.valor +
+        //                 ' Big Puntos';
+        //             this.abrirModal(this.mensajeModal);
+        //         },
+        //         (error) => {
+        //             /*  this.loading = false; */
+        //         }
+        //     );
+        // this.compartirPublicacion(id);
     }
 
     abrirModal(modal) {
