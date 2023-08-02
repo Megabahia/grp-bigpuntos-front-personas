@@ -71,11 +71,11 @@ export class CompartirPublicacionesComponent implements OnInit {
             });
         this.obtenerIdEm();
         this.route
-          .data
-          .subscribe(data => {
-              this.tipo = data.tipo;
+            .data
+            .subscribe(data => {
+                this.tipo = data.tipo;
 
-          });
+            });
     }
 
     cerrarModal() {
@@ -166,5 +166,9 @@ export class CompartirPublicacionesComponent implements OnInit {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
+    }
+
+    mensajeWhatsapp(): string {
+        return `Compra más y Paga menos con Big Puntos. Realiza tus compras en los locales comerciales afiliados a Big Puntos presentando el código ${this.usuario.persona.codigoUsuario} y PAGA MENOS DINERO POR TUS COMPRAS. \nPara más información, visita`;
     }
 }
