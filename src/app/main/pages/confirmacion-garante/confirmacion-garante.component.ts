@@ -55,7 +55,9 @@ export class ConfirmacionGaranteComponent implements OnInit {
         if (!this.autorizacion) {
             return;
         }
-        this._confirmacionService.updateCreditoPersona({_id: this.creditoId, tipoCredito: 'Alfa'}).subscribe((data) => {
+        this._confirmacionService.updateCreditoPersona({
+            _id: this.creditoId, tipoCredito: 'Alfa', concepto: 'Alfa', canal: 'Alfa'
+        }).subscribe((data) => {
             if (data) {
                 this.credito = data;
                 console.log(data);
