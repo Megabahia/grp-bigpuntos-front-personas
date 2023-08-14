@@ -97,14 +97,14 @@
 
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label>Número de identificación</label>
+                                                        <label>Número de identificación del solicitante</label>
                                                         <input formControlName="identificacion" type="text" class="form-control"
                                                                (change)="validarRucGarante()"
                                                                [ngClass]="{ 'is-invalid': submittedPersona && garanteForm.identificacion.errors }">
 
                                                         <div *ngIf="submittedPersona && garanteForm.identificacion.errors"
                                                              class="invalid-feedback">
-                                                            <div *ngIf="garanteForm.identificacion.errors.required">Identificación es
+                                                            <div *ngIf="garanteForm.identificacion.errors.required">Número de identificación del solicitante es
                                                                 requerida
                                                             </div>
                                                             <div *ngIf="garanteForm.identificacion.errors?.cedulaInvalid">
@@ -114,7 +114,7 @@
                                                                 Ruc invalido
                                                             </div>
                                                             <div *ngIf="garanteForm.identificacion.errors?.repetidoGarante">
-                                                                Numero identificación repetido
+                                                                Número de identificación del solicitante repetido
                                                             </div>
                                                         </div>
                                                     </div>
@@ -516,7 +516,7 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label class="font-weight-bold">Número de celular
+                                                <label class="font-weight-bold">Número de celular del solicitante
                                                 </label>
                                                 <input formControlName="celular" type="text"
                                                        [ngClass]="{ 'is-invalid': submittedPersona && persForm.celular.errors }"
@@ -540,7 +540,7 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label class="font-weight-bold">Número WhatsApp
+                                                <label class="font-weight-bold">Número de WhatsApp del solicitante
                                                     <!--                  <small class="text-info">(Importante-->
                                                     <!--                    para validar tu cuenta)</small>-->
                                                 </label>
@@ -566,7 +566,7 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Fecha de nacimiento</label>
+                                                <label>Fecha de nacimiento del solicitante</label>
                                                 <input
                                                         type="date"
                                                         formControlName="fechaNacimiento"
@@ -606,7 +606,7 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="estadoCivil">Estado civil</label>
+                                                <label for="estadoCivil">Estado civil del solicitante</label>
                                                 <select formControlName="estadoCivil" class="form-control"
                                                         id="estadoCivil"
                                                         (change)="tipoEstadocivilSelected()"
@@ -619,7 +619,7 @@
                                                 </select>
                                                 <div *ngIf="submittedPersona && persForm.estadoCivil.errors"
                                                      class="invalid-feedback">
-                                                    <div *ngIf="persForm.estadoCivil.errors.required">Estado civil es
+                                                    <div *ngIf="persForm.estadoCivil.errors.required">Estado civil del solicitante es
                                                         requerido
                                                     </div>
                                                 </div>
@@ -629,7 +629,7 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Nivel de Instrucción</label>
+                                                <label>Nivel de instrucción del solicitante</label>
                                                 <select formControlName="nivelInstruccion" class="form-control"
                                                         id="status">
                                                     <option value="">- Seleccione -</option>
@@ -650,8 +650,8 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="genero">Género</label>
-                                                <select formControlName="genero" class="form-control" id="status"
+                                                <label for="genero">Género del solicitante</label>
+                                                <select formControlName="genero" class="form-control" id="genero"
                                                         [ngClass]="{ 'is-invalid': submittedPersona && persForm.genero.errors }">
                                                     <option value="">- Seleccionar -</option>
                                                     <option value="{{value.nombre}}" *ngFor="let value of generos">
@@ -667,7 +667,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="pais"> País de residencia</label>
+                                                <label for="pais">País de residencia del solicitante</label>
                                                 <select class="form-control select2" id="pais"
                                                         formControlName="pais"
                                                         (change)="obtenerProvinciaOpciones($event, 'provinciaEmpresa')">
@@ -685,7 +685,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="provincia">Provincia de residencia</label>
+                                                <label for="provincia">Provincia de residencia del solicitante</label>
                                                 <select class="form-control select2" formControlName="provincia"
                                                         id="provincia" (change)="obtenerCiudadOpciones($event, 'ciudadEmpresa') ">
                                                     <option value="">- Seleccione -</option>
@@ -703,7 +703,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="ciudad">Ciudad de residencia</label>
+                                                <label for="ciudad">Ciudad de residencia del solicitante</label>
                                                 <select class="form-control select2" formControlName="ciudad"
                                                         id="ciudad">
                                                     <option value="">- Seleccione -</option>
@@ -721,7 +721,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Dirección del domicilio</label>
+                                                <label>Dirección del domicilio del solicitante</label>
                                                 <input formControlName="direccionDomicilio" type="text"
                                                        class="form-control">
                                                 <div *ngIf="submittedPersona && persForm.direccionDomicilio.errors"
