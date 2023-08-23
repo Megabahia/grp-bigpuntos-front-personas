@@ -1,15 +1,51 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {CoreConfigService} from '../../../../@core/services/config.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-procesando-credito',
-  templateUrl: './procesando-credito.component.html',
-  styleUrls: ['./procesando-credito.component.scss']
+    selector: 'app-procesando-credito',
+    templateUrl: './procesando-credito.component.html',
+    styleUrls: ['./procesando-credito.component.scss']
 })
 export class ProcesandoCreditoComponent implements OnInit {
+    @ViewChild('establecimientoSeleccionadoMdl') establecimientoSeleccionadoMdl;
+    email = '';
 
-  constructor() { }
+    constructor(
+        private _coreConfigService: CoreConfigService,
+        private modalService: NgbModal,
+    ) {
+        this._coreConfigService.config = {
+            layout: {
+                navbar: {
+                    hidden: true,
+                },
+                footer: {
+                    hidden: true,
+                },
+                menu: {
+                    hidden: true,
+                },
+                customizer: false,
+                enableLocalStorage: false,
+            },
+        };
+        const grpPersonasUser = JSON.parse(localStorage.getItem('grpPersonasUser'));
+        this.email = grpPersonasUser.email;
+    }
 
-  ngOnInit(): void {
-  }
+    abrirModal() {
+        this.abrirModalLg(this.establecimientoSeleccionadoMdl);
+    }
+
+    abrirModalLg(modal) {
+        this.modalService.open(modal, {
+            size: 'lg'
+        });
+    }
+
+    ngOnInit(): void {
+
+    }
 
 }
