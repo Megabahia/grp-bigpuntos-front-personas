@@ -165,6 +165,8 @@ export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
                 direccionDomicilio: [this.usuario.direccionDomicilio, [Validators.required, Validators.minLength(20), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]+')]],
                 referenciaDomicilio: [this.usuario.referenciaDomicilio, Validators.required],
                 estadoCivil: [this.estadoCivilStorage, Validators.required],
+                nombreApellidosConyuge: [this.usuario.nombreApellidosConyuge, Validators.required],
+                cedulaConyuge: [this.usuario.cedulaConyuge, Validators.required],
                 ocupacionSolicitante: this._formBuilder.group({
                     nombreNegocio: [this.usuario.ocupacionSolicitante?.nombreNegocio, [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                     direccionNegocio: [this.usuario.ocupacionSolicitante?.direccionNegocio, [
@@ -554,7 +556,15 @@ export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
     tipoEstadocivilSelected() {
         if (this.personaForm.get('estadoCivil').value === 'Casado' || this.personaForm.get('estadoCivil').value === 'Unión libre') {
             this.casado = true;
+            this.personaForm.get('nombreApellidosConyuge').setValidators(Validators.required);
+            this.personaForm.get('cedulaConyuge').setValidators(Validators.required);
+            this.personaForm.get('nombreApellidosConyuge').updateValueAndValidity(); // Actualizando la validez del campo
+            this.personaForm.get('cedulaConyuge').updateValueAndValidity(); // Actualizando la validez del campo
         } else {
+            this.personaForm.get('nombreApellidosConyuge').clearValidators();
+            this.personaForm.get('cedulaConyuge').clearValidators();
+            this.personaForm.get('nombreApellidosConyuge').updateValueAndValidity(); // Actualizando la validez del campo
+            this.personaForm.get('cedulaConyuge').updateValueAndValidity(); // Actualizando la validez del campo
             this.casado = false;
         }
     }

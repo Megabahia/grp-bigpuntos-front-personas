@@ -1,0 +1,49 @@
+<div>
+
+    <section class="head-LP text-LP">
+        <div class="container pb-5">
+            <div class="align-items-center py-5">
+                <div class="col-md-12 text-center mb-4 ">
+                    <img src="../../../../assets/images/logo/logos-png-grande.png" width="320" alt="">
+                    <h2 class="azul2 mt-2 p-5">
+                        Su <strong>SOLICITUD DE CRÉDITO DE CONSUMO </strong> está siendo <strong>PROCESADA</strong>. Le
+                        mantendremos informado a través del
+                        correo electrónico registrado: <strong> {{email}}</strong>
+                    </h2>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button
+                                class="btn-icon btn btn-primary btn-round"
+                                type="button"
+                                (click)="abrirModal()"
+                        >
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+<ng-template #establecimientoSeleccionadoMdl let-modal>
+
+    <div class="modal-body">
+        <div class="row text-center">
+            <div class="p-3">
+                Mientras espera la respuesta por su Crédito de Consumo, puede ganar premios y realizar compras PAGANDO
+                MENOS DINERO EN EFECTIVO a través de Big Puntos. Para continuar, presione en el botón.
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer d-flex justify-content-center">
+        <div class="text-center">
+            <a class="btn-icon btn btn-primary btn-round"
+               type="button"
+               href="/">
+                Continuar
+            </a>
+        </div>
+    </div>
+</ng-template>

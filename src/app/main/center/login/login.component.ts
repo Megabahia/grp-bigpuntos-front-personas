@@ -6,7 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subject, Subscription} from 'rxjs';
 import {AuthenticationService} from '../../../auth/service/authentication.service';
 import {ReCaptchaV3Service} from 'ngx-captcha';
-import {environment} from "../../../../environments/environment";
+import {environment} from '../../../../environments/environment';
 import {
     FacebookLoginProvider,
     SocialAuthService,
@@ -130,6 +130,13 @@ export class LoginComponent implements OnInit {
                     // this._router.navigate([this.returnUrl]);
                     const semilla = JSON.parse(localStorage.getItem('semillaPago'));
                     const simulador = localStorage.getItem('simulador');
+
+                    const grpPersonasUser = JSON.parse(localStorage.getItem('grpPersonasUser'));
+                    if (grpPersonasUser.noPuedeSolicitar) {
+                        this._router.navigate(['/personas/procesandoCredito']);
+                        return;
+                    }
+
                     if (semilla) {
                         if (semilla.pantalla === 'verPremios') {
                             this._router.navigate(['/personas/mis-premios']);

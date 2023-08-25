@@ -627,6 +627,36 @@
                                         </div>
 
 
+                                        <div class="col-md-4" *ngIf="casado">
+                                            <div class="form-group">
+                                                <label>Nombre y Apellido del conyuge</label>
+                                                <input type="text" formControlName="nombreApellidosConyuge" class="form-control">
+
+                                                <div *ngIf="submittedPersona && persForm.nombreApellidosConyuge.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="!persForm.nombreApellidosConyuge.errors?.valido">Nombre y Apellido del conyuge es requerido
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-4" *ngIf="casado">
+                                            <div class="form-group">
+                                                <label>Número de cédula del conyuge</label>
+                                                <input type="text" formControlName="cedulaConyuge" class="form-control">
+
+                                                <div *ngIf="submittedPersona && persForm.cedulaConyuge.errors"
+                                                     class="invalid-feedback" style="display: block;">
+                                                    <div *ngIf="!persForm.cedulaConyuge.errors?.valido">Cédula del conyuge es requerido
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Nivel de instrucción del solicitante</label>
