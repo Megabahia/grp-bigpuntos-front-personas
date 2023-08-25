@@ -83,13 +83,13 @@ export class SimulatorCrediCompraComponent implements OnInit {
     }
 
     listCombosbox() {
-        this.paramService.obtenerListaPadresSinToken('TIPO_PERSONA').subscribe((info) => {
+        this.paramService.obtenerListaPadresSinToken('TIPO_PERSONA_PILOTO').subscribe((info) => {
             this.listTipoPersona = info;
         });
-        this.paramService.obtenerListaPadresSinToken('ESTADO_CIVIL').subscribe((info) => {
+        this.paramService.obtenerListaPadresSinToken('ESTADO_CIVIL_PILOTO').subscribe((info) => {
             this.listEstadoCivil = info;
         });
-        this.paramService.obtenerListaPadresSinToken('VALORES_CALCULAR_CREDITO_CREDICOMPRA').subscribe((info) => {
+        this.paramService.obtenerListaPadresSinToken('VALORES_CALCULAR_CREDITO_CREDICOMPRA_PILOTO').subscribe((info) => {
             info.map(item => {
                 if (item.nombre === 'PORCENTAJE_CONYUGE') {
                     this.porcentajeConyuge = new Decimal(item.valor).toNumber();

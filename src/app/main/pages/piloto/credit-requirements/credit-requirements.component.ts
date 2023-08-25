@@ -73,7 +73,7 @@ export class CreditRequirementsComponent implements OnInit {
         } else {
             estadoCivil = 'SOLTERO';
         }
-        this.tipoPersona = `REQUISITOS_${tipoPersona}_${estadoCivil}_CREDICOMPRA`;
+        this.tipoPersona = `REQUISITOS_${tipoPersona}_${estadoCivil}_CREDICOMPRA_PILOTO`;
         this.getInfo();
     }
 
@@ -87,7 +87,7 @@ export class CreditRequirementsComponent implements OnInit {
             //     return item.replace(/'/g, '');
             // });
         });
-        this.paramService.obtenerListaPadresSinToken('DESCRIPCION_REQUISITOS_CREDICOMPRA').subscribe((info) => {
+        this.paramService.obtenerListaPadresSinToken('DESCRIPCION_REQUISITOS_CREDICOMPRA_PILOTO').subscribe((info) => {
             this.descripcion = info[0];
             this.descripcion.valor = this.descripcion.valor.replace('${{montoCreditoFinal}}', this.montoCreditoFinal);
             this.descripcion.valor = this.descripcion.valor.replace('${{coutaMensual}}', this.coutaMensual);
