@@ -32,6 +32,11 @@ import { ClienteComponent } from './cliente/cliente.component';
 // routing
 const routes: Routes = [
     {
+        path: 'piloto',
+        loadChildren: () =>
+            import('../pages/piloto/piloto.module').then((m) => m.PilotoModule),
+    },
+    {
         path: 'pages-news',
         component: PagesViewsComponent,
         data: {roles: 'BigPuntos'},

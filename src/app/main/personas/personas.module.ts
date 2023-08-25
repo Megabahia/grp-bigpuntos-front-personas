@@ -72,7 +72,7 @@ const maskConfig: Partial<IConfig> = {
 };
 
 const routes = [
-    {path: '', redirectTo: 'inicio', pathMatch: 'full'},
+      {path: '', redirectTo: 'inicio', pathMatch: 'full'},
     {
         path: 'inicio',
         component: PrincipalComponent,
