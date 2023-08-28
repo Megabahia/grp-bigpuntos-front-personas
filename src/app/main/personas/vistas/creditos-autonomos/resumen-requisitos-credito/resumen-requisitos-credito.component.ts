@@ -39,6 +39,7 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
     public checksNegocio = [
         {'label': 'Copia de cédula', 'valor': false},
         {'label': 'Copia de Ruc', 'valor': false},
+        {'label': 'Foto Carnet', 'valor': false},
         {'label': 'Papeleta de votación', 'valor': false},
         {'label': 'Identificacion conyuge', 'valor': false},
         {'label': 'Papeleta votacion conyuge', 'valor': false},
