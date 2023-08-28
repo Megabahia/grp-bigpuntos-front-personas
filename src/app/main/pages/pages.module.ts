@@ -111,6 +111,11 @@ const routes: Routes = [
         component: ConfirmacionGaranteComponent,
         data: {animation: 'misc'},
     },
+    {
+        path: 'credito-automotriz',
+        loadChildren: () =>
+            import('./simulador-automotriz/similador-automotriz.module').then((m) => m.SimiladorAutomotrizModule)
+    },
 ];
 
 @NgModule({
