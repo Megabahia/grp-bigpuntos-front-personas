@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import Decimal from 'decimal.js';
-import {ParametrizacionesService} from '../../personas/servicios/parametrizaciones.service';
-import {CoreConfigService} from '../../../../@core/services/config.service';
 import {Router} from '@angular/router';
+import {CoreConfigService} from '../../../../../@core/services/config.service';
+import {ParametrizacionesService} from '../../../personas/servicios/parametrizaciones.service';
 
 @Component({
     selector: 'app-credit-requirements',
     templateUrl: './credit-requirements.component.html',
-    styleUrls: ['../simulador/simulador.component.scss']
+    styleUrls: ['./credit-requirements.component.scss']
 })
 export class CreditRequirementsComponent implements OnInit {
 
@@ -73,7 +73,7 @@ export class CreditRequirementsComponent implements OnInit {
         } else {
             estadoCivil = 'SOLTERO';
         }
-        this.tipoPersona = `REQUISITOS_${tipoPersona}_${estadoCivil}_CREDICOMPRA`;
+        this.tipoPersona = `REQUISITOS_${tipoPersona}_${estadoCivil}_CREDICOMPRA_PILOTO`;
         this.getInfo();
     }
 
@@ -87,7 +87,7 @@ export class CreditRequirementsComponent implements OnInit {
             //     return item.replace(/'/g, '');
             // });
         });
-        this.paramService.obtenerListaPadresSinToken('DESCRIPCION_REQUISITOS_CREDICOMPRA').subscribe((info) => {
+        this.paramService.obtenerListaPadresSinToken('DESCRIPCION_REQUISITOS_CREDICOMPRA_PILOTO').subscribe((info) => {
             this.descripcion = info[0];
             this.descripcion.valor = this.descripcion.valor.replace('${{montoCreditoFinal}}', this.montoCreditoFinal);
             this.descripcion.valor = this.descripcion.valor.replace('${{coutaMensual}}', this.coutaMensual);

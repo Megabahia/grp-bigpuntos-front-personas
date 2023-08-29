@@ -49,27 +49,30 @@ import {CreditosPreAprobadosEmpComponent} from './vistas/creditos-empleados/cred
 import {ListadoComponent as listadoEstadoCreditos} from './vistas/mis-creditos/vistas/estado-creditos/listado/listado.component';
 import {ListadoComponent as listadoPagoCuotas} from './vistas/mis-creditos/vistas/registrar-pagos-cuotas/listado/listado.component';
 import {MisPremiosComponent} from './vistas/mis-premios/mis-premios.component';
-import { ComoFuncionaComponent } from './vistas/como-funciona/como-funciona.component';
-import { DondeCanjearComponent } from './vistas/donde-canjear/donde-canjear.component';
-import { ReclamosRequerimientosComponent } from './vistas/reclamos-requerimientos/reclamos-requerimientos.component';
+import {ComoFuncionaComponent} from './vistas/como-funciona/como-funciona.component';
+import {DondeCanjearComponent} from './vistas/donde-canjear/donde-canjear.component';
+import {ReclamosRequerimientosComponent} from './vistas/reclamos-requerimientos/reclamos-requerimientos.component';
 
-import { NgxMaskModule, IConfig } from 'ngx-mask';
-import { SolicitudCreditoComponent } from './vistas/creditos-autonomos/solicitud-credito/solicitud-credito.component';
-import { ResumenRequisitosCreditoComponent } from './vistas/creditos-autonomos/resumen-requisitos-credito/resumen-requisitos-credito.component';
-import { ValidacionDatosComponent } from './vistas/creditos-autonomos/validacion-datos/validacion-datos.component';
+import {NgxMaskModule, IConfig} from 'ngx-mask';
+import {SolicitudCreditoComponent} from './vistas/creditos-autonomos/solicitud-credito/solicitud-credito.component';
+import {
+    ResumenRequisitosCreditoComponent
+} from './vistas/creditos-autonomos/resumen-requisitos-credito/resumen-requisitos-credito.component';
+import {ValidacionDatosComponent} from './vistas/creditos-autonomos/validacion-datos/validacion-datos.component';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
-import { QueEsCredicompraComponent } from './vistas/que-es-credicompra/que-es-credicompra.component';
-import { ComoFuncionaCredicompraComponent } from './vistas/como-funciona-credicompra/como-funciona-credicompra.component';
-import { ComoAccederACredicompraComponent } from './vistas/como-acceder-a-credicompra/como-acceder-a-credicompra.component';
-import {SharedModule} from "../shared/shared.module";
-import { TerminosComponent } from './vistas/terminos/terminos.component';
+import {QueEsCredicompraComponent} from './vistas/que-es-credicompra/que-es-credicompra.component';
+import {ComoFuncionaCredicompraComponent} from './vistas/como-funciona-credicompra/como-funciona-credicompra.component';
+import {ComoAccederACredicompraComponent} from './vistas/como-acceder-a-credicompra/como-acceder-a-credicompra.component';
+import {SharedModule} from '../shared/shared.module';
+import {TerminosComponent} from './vistas/terminos/terminos.component';
+import {ProcesandoCreditoComponent} from './procesando-credito/procesando-credito.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
 };
 
 const routes = [
-    {path: '', redirectTo: 'inicio', pathMatch: 'full'},
+      {path: '', redirectTo: 'inicio', pathMatch: 'full'},
     {
         path: 'inicio',
         component: PrincipalComponent,
@@ -257,6 +260,14 @@ const routes = [
         // data: { animation: 'auth' }
     },
     {
+        path: 'procesandoCredito',
+        component: ProcesandoCreditoComponent,
+        data: {noPuedeSolicitar: true},
+        canActivate: [AuthGuard]
+
+        // data: { animation: 'auth' }
+    },
+    {
         path: 'completarPerfil',
         component: CompletarPerfilComponent,
         data: {activacion: [2, 3], animation: 'flatpickr'},
@@ -334,6 +345,7 @@ const routes = [
         ComoFuncionaCredicompraComponent,
         ComoAccederACredicompraComponent,
         TerminosComponent,
+        ProcesandoCreditoComponent,
     ],
     imports: [
         CoreCommonModule,

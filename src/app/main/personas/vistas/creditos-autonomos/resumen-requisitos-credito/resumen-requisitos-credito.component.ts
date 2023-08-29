@@ -39,6 +39,7 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
     public checksNegocio = [
         {'label': 'Copia de cédula', 'valor': false},
         {'label': 'Copia de Ruc', 'valor': false},
+        {'label': 'Foto Carnet', 'valor': false},
         {'label': 'Papeleta de votación', 'valor': false},
         {'label': 'Identificacion conyuge', 'valor': false},
         {'label': 'Papeleta votacion conyuge', 'valor': false},
@@ -70,11 +71,11 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
     public soltero = false;
     public tiposNormales = {
         'Empleado': 'Empleado',
-        'Alfa': 'null'
+        'Alfa': 'Alfa'
     };
     public tiposPreaprobados = {
         'Empleado': 'Empleado-PreAprobado',
-        'Alfa': 'null'
+        'Alfa': 'Alfa'
     };
 
     constructor(
@@ -175,13 +176,11 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
         this.solicitarCredito.estadoCivil = this.usuario.persona.estadoCivil;
         this.solicitarCredito.empresaInfo = {};
         this.solicitarCredito.cuota = this.solicitarCredito.cuota ? this.solicitarCredito.cuota : this.coutaMensual;
-        console.log('this.usuario.persona', this.usuario.persona);
         this.solicitarCredito.user = this.usuario.persona ? this.usuario.persona : JSON.parse(localStorage.getItem('grpPersonasUser')).persona;
         if (this.soltero) {
             this.checks.splice(3, 2);
         }
         this.solicitarCredito.checks = this.checks;
-        // this.solicitarCredito.empresaComercial_id = localStorage.getItem('pagina');
         if (localStorage.getItem('credito')) {
             this._creditosAutonomosService.updateCredito(this.solicitarCredito).subscribe((info) => {
                 this.continue(info._id);
@@ -195,19 +194,14 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
 
     continue(_id: any) {
         const doc = new jsPDF();
-
         const text = `Al autorizar el tratamiento de su información, usted acepta que la empresa Corporación OmniGlobal y todas sus marcas y/o productos a validar su información en las plataformas pertinentes.
         Al autorizar el tratamiento de su información, usted acepta que la empresa revise su información de Buró de Crédito para confirmar su estado crediticio.`;
-
         const x = 10;
         const y = 10;
         const maxWidth = 180; // Ancho máximo del párrafo
-
-        doc.text(text, x, y, { maxWidth });
-
+        doc.text(text, x, y, {maxWidth});
         // Convierte el documento en un archivo Blob
         const pdfBlob = doc.output('blob');
-
         // Crea un objeto FormData y agrega el archivo Blob
         const formData: FormData = new FormData();
         formData.append('autorizacion', pdfBlob, 'autorizacion.pdf');

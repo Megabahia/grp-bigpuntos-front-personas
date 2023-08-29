@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   hmr: false,
-  apiUrl: 'http://209.145.61.41:8000',
+  apiUrl: 'https://api-bp-test.bigpuntos.com',
+  // apiUrl: 'http://127.0.0.1:8000',
   setKey: '6Le0JqglAAAAAL4wda7_QYx0b7YyqjAPmNz1YW7a'
 };
 
