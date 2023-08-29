@@ -286,6 +286,7 @@ export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
         this.obtenerProvinciaTipoPersonaOpciones();
         this.obtenerCiudadTipoPersonaOpciones();
         this.alfa = (this.tipoPersonaStorage === 'Alfa');
+        this.tipoEstadocivilSelected();
     }
 
     ngAfterViewInit() {
