@@ -146,8 +146,10 @@ export class LoginComponent implements OnInit {
                     } else {
                         if (simulador === 'ok') {
                             this._router.navigate(['/personas/creditos-autonomos/solicitar-credito']);
+                        } else if (simulador === 'credito-automotriz') {
+                            this._router.navigate(['/personas/creditos-automotriz/solicitar-credito']);
                         } else {
-                            this._router.navigate(['/']);
+                            this._router.navigate(['/grp/login']);
                         }
                     }
                 },
@@ -267,7 +269,7 @@ export class LoginComponent implements OnInit {
                     if (simulador === 'ok') {
                         this._router.navigate(['/personas/creditos-autonomos/solicitar-credito']);
                     } else {
-                        this._router.navigate(['/']);
+                        this._router.navigate(['/grp/login']);
                     }
                 }
             });
