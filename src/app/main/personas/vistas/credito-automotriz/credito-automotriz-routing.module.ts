@@ -1,27 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {InicioComponent} from '../../../pages/simulador-automotriz/inicio/inicio.component';
-import {SimuladorComponent as SimuladorCreditoAutomotriz} from '../../../pages/simulador-automotriz/simulador/simulador.component';
-import {RequisitosComponent} from '../../../pages/simulador-automotriz/requisitos/requisitos.component';
-import {ExplicacionCreditoAutomotrizComponent} from './explicacion-credito-automotriz/explicacion-credito-automotriz.component';
+import {CreditoAutomotrizComponent} from './credito-automotriz.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'explicacion', pathMatch: 'full'},
+  {path: '', redirectTo: 'solicitar-credito', pathMatch: 'full'},
   {
-    path: 'explicacion',
-    component: ExplicacionCreditoAutomotrizComponent,
-    data: {animation: 'misc'},
-  },
-  {
-    path: 'solicitud',
-    component: SimuladorCreditoAutomotriz,
-    data: {animation: 'misc'},
-  },
-  {
-    path: 'requisitos',
-    component: RequisitosComponent,
-    data: {animation: 'misc'},
+    path: 'solicitar-credito',
+    component: CreditoAutomotrizComponent,
+    // data: {animation: 'misc'},
   },
 ];
 

@@ -72,7 +72,7 @@ export class RequisitosComponent implements OnInit {
         } else {
             estadoCivil = 'SOLTERO';
         }
-        this.tipoPersona = `REQUISITOS_${tipoPersona}_${estadoCivil}_CREDICOMPRA`;
+        this.tipoPersona = `CREDITO_AUTOMOTRIZ_REQUISITOS_${tipoPersona}_${estadoCivil}_CREDICOMPRA`;
         this.getInfo();
     }
 

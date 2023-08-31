@@ -67,6 +67,7 @@ import {SharedModule} from '../shared/shared.module';
 import {TerminosComponent} from './vistas/terminos/terminos.component';
 import {ProcesandoCreditoComponent} from './procesando-credito/procesando-credito.component';
 import { CreditoAutomotrizComponent } from './vistas/credito-automotriz/credito-automotriz.component';
+import {CreditoAutomotrizModule} from './vistas/credito-automotriz/credito-automotriz.module';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -306,9 +307,13 @@ const routes = [
         // data: { animation: 'auth' }
     },
     {
-        path: 'credito-automotriz',
+        path: 'creditos-automotriz',
         loadChildren: () =>
             import('./vistas/credito-automotriz/credito-automotriz.module').then((m) => m.CreditoAutomotrizModule)
+    },
+    {
+        path: '**',
+        redirectTo: '/pages/miscellaneous/error', // Error 404 - Page not found
     },
 ];
 

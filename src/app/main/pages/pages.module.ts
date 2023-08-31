@@ -28,6 +28,10 @@ import { SociosEmpleadosComponent } from './socios-empleados/socios-empleados.co
 import {SharedModule} from "../shared/shared.module";
 import { ConfirmacionGaranteComponent } from './confirmacion-garante/confirmacion-garante.component';
 import { ClienteComponent } from './cliente/cliente.component';
+import {
+    PreApprovedCreditConsumerAutomotiveComponent
+} from './pre-approved-credit-consumer-automotive/pre-approved-credit-consumer-automotive.component';
+import {ApprovedEndConsumerAutomitiveComponent} from './approved-end-consumer-automitive/approved-end-consumer-automitive.component';
 
 // routing
 const routes: Routes = [
@@ -116,6 +120,16 @@ const routes: Routes = [
         loadChildren: () =>
             import('./simulador-automotriz/similador-automotriz.module').then((m) => m.SimiladorAutomotrizModule)
     },
+    {
+        path: 'preApprovedCreditConsumerAutomotive',
+        component: PreApprovedCreditConsumerAutomotiveComponent,
+        data: {animation: 'misc'},
+    },
+    {
+        path: 'preApprovedEndConsumerAutomotive',
+        component: ApprovedEndConsumerAutomitiveComponent,
+        data: {animation: 'misc'},
+    },
 ];
 
 @NgModule({
@@ -136,6 +150,8 @@ const routes: Routes = [
         SociosEmpleadosComponent,
         ConfirmacionGaranteComponent,
         ClienteComponent,
+        PreApprovedCreditConsumerAutomotiveComponent,
+        ApprovedEndConsumerAutomitiveComponent,
     ],
 
     imports: [
