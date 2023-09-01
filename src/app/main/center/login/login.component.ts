@@ -149,7 +149,7 @@ export class LoginComponent implements OnInit {
                         } else if (simulador === 'credito-automotriz') {
                             this._router.navigate(['/personas/creditos-automotriz/solicitar-credito']);
                         } else {
-                            this._router.navigate(['/grp/login']);
+                            this._router.navigate(['/']);
                         }
                     }
                 },
