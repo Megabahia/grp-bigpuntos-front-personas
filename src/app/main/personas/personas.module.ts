@@ -66,6 +66,16 @@ import {ComoAccederACredicompraComponent} from './vistas/como-acceder-a-credicom
 import {SharedModule} from '../shared/shared.module';
 import {TerminosComponent} from './vistas/terminos/terminos.component';
 import {ProcesandoCreditoComponent} from './procesando-credito/procesando-credito.component';
+import { CreditoAutomotrizComponent } from './vistas/credito-automotriz/credito-automotriz.component';
+import {
+    ExplicacionCreditoAutomotrizComponent
+} from './vistas/credito-automotriz/explicacion-credito-automotriz/explicacion-credito-automotriz.component';
+import {
+    SolicitudCreditoAutomotrizComponent
+} from './vistas/credito-automotriz/solicitud-credito-automotriz/solicitud-credito-automotriz.component';
+import {
+    ResumenRequisitosCreditoAutomotrizComponent
+} from './vistas/credito-automotriz/resumen-requisitos-credito-automotriz/resumen-requisitos-credito-automotriz.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -304,8 +314,17 @@ const routes = [
         canActivate: [AuthGuard]
         // data: { animation: 'auth' }
     },
-
-
+    {
+        path: 'creditos-automotriz/solicitar-credito',
+        component: CreditoAutomotrizComponent,
+        // data: {activacion: [4]},
+        canActivate: [AuthGuard]
+        // data: { animation: 'auth' }
+    },
+    {
+        path: '**',
+        redirectTo: '/pages/miscellaneous/error', // Error 404 - Page not found
+    },
 ];
 
 @NgModule({
@@ -346,6 +365,10 @@ const routes = [
         ComoAccederACredicompraComponent,
         TerminosComponent,
         ProcesandoCreditoComponent,
+        CreditoAutomotrizComponent,
+        ExplicacionCreditoAutomotrizComponent,
+        SolicitudCreditoAutomotrizComponent,
+        ResumenRequisitosCreditoAutomotrizComponent,
     ],
     imports: [
         CoreCommonModule,
@@ -394,6 +417,9 @@ const routes = [
         CreditosPreAprobadosEmpComponent,
         listadoEstadoCreditos,
         listadoPagoCuotas,
+        ExplicacionCreditoAutomotrizComponent,
+        SolicitudCreditoAutomotrizComponent,
+        ResumenRequisitosCreditoAutomotrizComponent,
     ],
 })
 export class PersonasModule {
