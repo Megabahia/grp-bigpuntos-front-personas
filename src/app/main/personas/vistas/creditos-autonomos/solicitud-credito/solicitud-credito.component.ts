@@ -543,6 +543,7 @@ export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
         if (this.personaForm.get('tipoVivienda').value === 'Propia' || this.personaForm.get('tipoVivienda').value === '') {
             this.nombreDueno = false;
             (this.personaForm as FormGroup).setControl('whatsappDueno', new FormControl());
+            (this.personaForm as FormGroup).setControl('nombreDueno', new FormControl());
         } else {
             this.nombreDueno = true;
             (this.personaForm as FormGroup).setControl('whatsappDueno',
@@ -551,6 +552,10 @@ export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
                         Validators.required, Validators.minLength(10),
                         Validators.maxLength(10), Validators.pattern('^([0-9])+$')
                     ]));
+            (this.personaForm as FormGroup).setControl('nombreDueno',
+                new FormControl(this.personaForm.value?.nombreDueno,
+                    [Validators.required, Validators.minLength(8), Validators.pattern('[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\\s]+')]
+                ));
         }
     }
 

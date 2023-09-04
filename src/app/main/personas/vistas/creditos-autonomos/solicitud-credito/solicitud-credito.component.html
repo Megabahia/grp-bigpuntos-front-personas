@@ -1152,6 +1152,7 @@
                                                 <div class="form-group">
                                                     <label>Sueldo o Ingresos mensuales</label>
                                                     <input type="text" class="form-control"
+                                                           (change)="calculos()"
                                                            formControlName="sueldoMensual">
                                                     <div *ngIf="submittedPersona && ingreSolicitanteForm.sueldoMensual.errors"
                                                          class="invalid-feedback" style="display: block;">
@@ -1169,6 +1170,7 @@
                                                 <div class="form-group">
                                                     <label>Sueldo cónyuge</label>
                                                     <input type="text" class="form-control"
+                                                           (change)="calculos()"
                                                            formControlName="sueldoConyuge">
                                                     <div *ngIf="submittedPersona && ingreSolicitanteForm.sueldoConyuge.errors"
                                                          class="invalid-feedback" style="display: block;">
@@ -1187,6 +1189,7 @@
                                                     <label>Otros ingresos</label>
                                                     <input type="text" class="form-control"
                                                            (change)="otroIngresos($event.target.value)"
+                                                           (change)="calculos()"
                                                            mask="99999999999"
                                                            min="0"
                                                            formControlName="otrosIngresos">
@@ -1208,6 +1211,7 @@
                                                     <label>Especifique otros ingresos (ejemplo: vendo
                                                         artículos de revista en mi tiempo libre, etc.)</label>
                                                     <input type="text" class="form-control"
+                                                           (change)="calculos()"
                                                            formControlName="descripcion">
                                                     <div *ngIf="submittedPersona && ingreSolicitanteForm.descripcion.errors"
                                                          class="invalid-feedback" style="display: block;">
@@ -1243,6 +1247,7 @@
                                                 <div class="form-group">
                                                     <label>Alimentación Mensual</label>
                                                     <input type="text" class="form-control"
+                                                           (change)="calculos()"
                                                            formControlName="alimentacion">
                                                     <div *ngIf="submittedPersona && gasSolicitanteForm.alimentacion.errors"
                                                          class="invalid-feedback" style="display: block;">
@@ -1260,6 +1265,7 @@
                                                 <div class="form-group">
                                                     <label>Arriendo Mensual (ingrese 0 si no aplica)</label>
                                                     <input type="text" class="form-control"
+                                                           (change)="calculos()"
                                                            formControlName="arriendo">
                                                     <div *ngIf="submittedPersona && gasSolicitanteForm.arriendo.errors"
                                                          class="invalid-feedback" style="display: block;">
@@ -1278,7 +1284,7 @@
                                                     <label>
                                                         Vestimenta mensual (ingrese 0 si no aplica)
                                                     </label>
-                                                    <input type="text" class="form-control" formControlName="vestido">
+                                                    <input type="text" class="form-control" formControlName="vestido" (change)="calculos()">
                                                     <div *ngIf="submittedPersona && gasSolicitanteForm.vestido.errors"
                                                          class="invalid-feedback" style="display: block;">
                                                         <div *ngIf="gasSolicitanteForm.vestido.errors.required">
@@ -1295,7 +1301,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Transporte Mensual (ingrese 0 si no aplica)</label>
-                                                    <input type="text" class="form-control" formControlName="trasporte">
+                                                    <input type="text" class="form-control" formControlName="trasporte" (change)="calculos()">
                                                     <div *ngIf="submittedPersona && gasSolicitanteForm.trasporte.errors"
                                                          class="invalid-feedback" style="display: block;">
                                                         <div *ngIf="gasSolicitanteForm.trasporte.errors.required">
@@ -1314,7 +1320,7 @@
                                                         Servicios básicos mensuales (ingrese 0 si no aplica)
                                                     </label>
                                                     <input type="text" class="form-control"
-                                                           formControlName="serviciosBasicos">
+                                                           formControlName="serviciosBasicos" (change)="calculos()">
                                                     <div *ngIf="submittedPersona && gasSolicitanteForm.serviciosBasicos.errors"
                                                          class="invalid-feedback" style="display: block;">
                                                         <div *ngIf="gasSolicitanteForm.serviciosBasicos.errors.required">
@@ -1331,7 +1337,7 @@
                                                 <div class="form-group">
                                                     <label>Medicina Mensual (ingrese 0 si no aplica)
                                                     </label>
-                                                    <input type="text" class="form-control" formControlName="medicina">
+                                                    <input type="text" class="form-control" formControlName="medicina" (change)="calculos()">
                                                     <div *ngIf="submittedPersona && gasSolicitanteForm.medicina.errors"
                                                          class="invalid-feedback" style="display: block;">
                                                         <div *ngIf="gasSolicitanteForm.medicina.errors.required">
@@ -1349,7 +1355,7 @@
                                                     <label>
                                                         Pago de educación mensual (ingrese 0 si no aplica)
                                                     </label>
-                                                    <input type="text" class="form-control" formControlName="educacion">
+                                                    <input type="text" class="form-control" formControlName="educacion" (change)="calculos()">
                                                     <div *ngIf="submittedPersona && gasSolicitanteForm.educacion.errors"
                                                          class="invalid-feedback" style="display: block;">
                                                         <div *ngIf="gasSolicitanteForm.educacion.errors.required">
@@ -1366,7 +1372,7 @@
                                                 <div class="form-group">
                                                     <label>Otros préstamos (ingrese el valor mensual)</label>
                                                     <input type="text" class="form-control"
-                                                           formControlName="otrosPrestamos">
+                                                           formControlName="otrosPrestamos" (change)="calculos()">
                                                     <div *ngIf="submittedPersona && gasSolicitanteForm.otrosPrestamos.errors"
                                                          class="invalid-feedback" style="display: block;">
                                                         <div *ngIf="gasSolicitanteForm.otrosPrestamos.errors.required">
@@ -1384,6 +1390,7 @@
                                                 <div class="form-group">
                                                     <label>Otros gastos</label>
                                                     <input [allowNegativeNumbers]="true" mask="separator.0" type="text" class="form-control"
+                                                           (change)="calculos()"
                                                            formControlName="otrosGastos" (change)="comprobarOtrosGastos($event)">
                                                     <div *ngIf="submittedPersona && gasSolicitanteForm.otrosGastos.errors"
                                                          class="invalid-feedback" style="display: block;">
