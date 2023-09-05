@@ -16,7 +16,7 @@ import { ParametrizacionesService } from '../../../servicios/parametrizaciones.s
   selector: 'app-establecimientos-comerciales-aut',
   templateUrl: './establecimientos-comerciales.component.html',
   styleUrls: ['./establecimientos-comerciales.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.None,
   host: { class: 'ecommerce-application' }
 })
 export class EstablecimientosComercialesAutComponent implements OnInit {
