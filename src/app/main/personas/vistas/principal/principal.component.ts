@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
   selector: 'app-principal',
   templateUrl: './principal.component.html',
   styleUrls: ['./principal.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.None,
   host: { class: 'ecommerce-application' }
 })
 export class PrincipalComponent implements OnInit {

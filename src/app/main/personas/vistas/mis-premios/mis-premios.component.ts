@@ -207,7 +207,14 @@ export class MisPremiosComponent implements OnInit {
 
         html2canvas(data).then((canvas) => {
             const docWidth = 208;
-            const docHeight = (canvas.height * docWidth) / canvas.width;
+            let docHeight = 0;
+
+            if (canvas.width > 0 && canvas.height > 0) {
+                docHeight = (canvas.height * docWidth) / canvas.width;
+            } else {
+                // Si el objeto de lienzo tiene dimensiones inválidas, establecer dimensiones predeterminadas
+                docHeight = (800 * docWidth) / 800;
+            }
 
             const contentDataURL = canvas.toDataURL('image/png');
             const doc = new jsPDF('p', 'mm', 'a4');
@@ -215,6 +222,9 @@ export class MisPremiosComponent implements OnInit {
             doc.addImage(contentDataURL, 'PNG', 0, position, docWidth, docHeight);
 
             doc.save('comprobante.pdf');
+        }).catch((error) => {
+            // Manejar errores, por ejemplo, mostrar un mensaje de error al usuario
+            console.error('Error al generar el PDF:', error);
         });
     }
 }
