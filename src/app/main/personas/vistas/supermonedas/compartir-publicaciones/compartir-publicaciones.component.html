@@ -50,7 +50,7 @@
               <h6>Compartir</h6>
               <div class="btn-group" role="group" aria-label="Basic example">
                 <!-- <share-buttons theme="modern-light" show="11"></share-buttons> -->
-                <button type="button" shareButton="facebook" (click)="actualizarMetaEtiquetas('producto 1')" [url]="'https://credicompra-personas.netlify.app/#/personas/BigPuntos/compartir-publicaciones-facebook'" class="btn btn-primary" [description]="mensajeWhatsapp()"><i
+                <button type="button" shareButton="facebook" [url]="actualizarMetaEtiquetas(publicacion._id)" class="btn btn-primary" [description]="mensajeWhatsapp()"><i
                     data-feather="facebook"></i></button>
                 <button type="button" shareButton="whatsapp" (click)="actualizarMetaEtiquetas('producto 2')" [url]="'https://credicompra-personas.netlify.app/#/personas/BigPuntos/compartir-publicaciones-facebook'" class="btn btn-primary" [description]="mensajeWhatsapp()"><i
                     data-feather="message-circle"></i></button>

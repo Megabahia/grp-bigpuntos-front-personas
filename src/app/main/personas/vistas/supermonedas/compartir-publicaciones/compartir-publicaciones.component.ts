@@ -48,11 +48,12 @@ export class CompartirPublicacionesComponent implements OnInit {
         this.meta.updateTag({ name: 'description', content: 'Nueva descripción para la página' });
     }
 
-    actualizarMetaEtiquetas(content) {
+    actualizarMetaEtiquetas(url): string {
         // Cambiar la descripción
-        this.meta.updateTag({ name: 'description', content });
+        this.meta.updateTag({ name: 'description', url });
 
         // Puedes actualizar otras metaetiquetas de la misma manera
+        return `https://publicaciones-bigpuntos.netlify.app/#/inicio?parametro1=${url}`;
     }
 
     inicializarSuperMoneda(): GanarSuperMoneda {
