@@ -8,6 +8,7 @@ import {GanarSuperMoneda} from 'app/main/personas/models/supermonedas';
 import {BienvenidoService} from '../../bienvenido/bienvenido.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute} from '@angular/router';
+import {Meta} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-compartir-publicaciones',
@@ -32,6 +33,7 @@ export class CompartirPublicacionesComponent implements OnInit {
     public tipo: string;
 
     constructor(
+        private meta: Meta,
         private modalService: NgbModal,
         private _coreMenuService: CoreMenuService,
         private paramService: ParametrizacionesService,
@@ -43,6 +45,15 @@ export class CompartirPublicacionesComponent implements OnInit {
         this._unsubscribeAll = new Subject();
         this.usuario = this._coreMenuService.grpPersonasUser;
         this.superMonedasElec = this.inicializarSuperMoneda();
+        this.meta.updateTag({ name: 'description', content: 'Nueva descripción para la página' });
+    }
+
+    actualizarMetaEtiquetas(url): string {
+        // Cambiar la descripción
+        this.meta.updateTag({ name: 'description', url });
+
+        // Puedes actualizar otras metaetiquetas de la misma manera
+        return `https://publicaciones-bigpuntos.netlify.app/#/inicio?parametro1=${url}`;
     }
 
     inicializarSuperMoneda(): GanarSuperMoneda {
