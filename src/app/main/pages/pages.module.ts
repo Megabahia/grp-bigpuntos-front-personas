@@ -19,13 +19,10 @@ import {SimuladorComponent} from './simulador/simulador.component';
 import {TableSimuladorComponent} from './table-simulador/table-simulador.component';
 import { PreApprovedCreditComponent } from './pre-approved-credit/pre-approved-credit.component';
 import { CreditAprovedComponent } from './credit-aproved/credit-aproved.component';
-import { CreditRequestComponent } from './credit-request/credit-request.component';
-import { SimulatorCrediCompraComponent } from './simulator-credi-compra/simulator-credi-compra.component';
-import { CreditRequirementsComponent } from './credit-requirements/credit-requirements.component';
 import { PreApprovedCreditConsumerComponent } from './pre-approved-credit-consumer/pre-approved-credit-consumer.component';
 import { ApprovedEndConsumerComponent } from './approved-end-consumer/approved-end-consumer.component';
 import { SociosEmpleadosComponent } from './socios-empleados/socios-empleados.component';
-import {SharedModule} from "../shared/shared.module";
+import {SharedModule} from '../shared/shared.module';
 import { ConfirmacionGaranteComponent } from './confirmacion-garante/confirmacion-garante.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import {
@@ -91,14 +88,9 @@ const routes: Routes = [
         data: {animation: 'misc'},
     },
     {
-        path: 'solicitud-credito',
-        component: CreditRequestComponent,
-        data: {animation: 'misc'},
-    },
-    {
-        path: 'simulador-de-credito',
-        component: SimulatorCrediCompraComponent,
-        data: {animation: 'misc'},
+        path: 'credito-consumo',
+        loadChildren: () =>
+            import('./simulador-consumo/similador-conusmo.module').then((m) => m.SimiladorConusmoModule)
     },
     {
         path: 'socios-empleados/:empresa',
@@ -110,11 +102,7 @@ const routes: Routes = [
         component: ClienteComponent,
         data: {animation: 'misc'},
     },
-    {
-        path: 'requisitos-de-credito',
-        component: CreditRequirementsComponent,
-        data: {animation: 'misc'},
-    },
+
     {
         path: 'confirmacion-garante/:id',
         component: ConfirmacionGaranteComponent,
@@ -147,9 +135,6 @@ const routes: Routes = [
         TableSimuladorComponent,
         PreApprovedCreditComponent,
         CreditAprovedComponent,
-        CreditRequestComponent,
-        SimulatorCrediCompraComponent,
-        CreditRequirementsComponent,
         PreApprovedCreditConsumerComponent,
         ApprovedEndConsumerComponent,
         SociosEmpleadosComponent,
@@ -158,7 +143,6 @@ const routes: Routes = [
         PreApprovedCreditConsumerAutomotiveComponent,
         ApprovedEndConsumerAutomitiveComponent,
     ],
-
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
