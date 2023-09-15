@@ -59,8 +59,7 @@
                                         class="btn btn-primary" [description]="mensajeWhatsapp()"><i
                                         data-feather="facebook"></i></button>
                                 <button type="button" shareButton="whatsapp"
-                                        (click)="actualizarMetaEtiquetas('producto 2')"
-                                        [url]="'https://credicompra-personas.netlify.app/#/personas/BigPuntos/compartir-publicaciones-facebook'"
+                                        [url]="actualizarMetaEtiquetas(publicacion.imagen,publicacion.titulo,publicacion.descripcion)"
                                         class="btn btn-primary" [description]="mensajeWhatsapp()"><i
                                         data-feather="message-circle"></i></button>
                                 <!--  <button type="button" shareButton="twitter" [url]="'https://www.twitter.com/'"

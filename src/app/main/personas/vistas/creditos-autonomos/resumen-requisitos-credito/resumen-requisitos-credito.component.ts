@@ -71,11 +71,11 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
     public soltero = false;
     public tiposNormales = {
         'Empleado': 'Empleado',
-        'Alfa': 'Alfa'
+        'Alfa': 'null'
     };
     public tiposPreaprobados = {
         'Empleado': 'Empleado-PreAprobado',
-        'Alfa': 'Alfa'
+        'Alfa': 'null'
     };
 
     constructor(
