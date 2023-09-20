@@ -10,6 +10,18 @@
                         <p [innerHTML]="descripcion.valor"></p>
                     </div>
                     <div class="row mx-2 justify-content-center align-items-center py-2">
+                        <img src="/assets/images/alerta.png">
+                        <div class="justify-content">
+                            <p><b>Nota: Usted puede realizar UNA SOLA COMPRA con el Crédito Aprobado en cualquiera de los Locales Comerciales Afiliados a:</b></p>
+                            <a href="https://credicompra.com/locales-afiliados/" target="_blank" class="mt-2">https://credicompra.com/locales-afiliados/</a>
+                        </div>
+                        <div class="justify-content">
+                            <p style="color: red">Usted puede acceder a un Crédito de HASTA {{montoCreditoFinal}}</p>
+                            <label>Ingrese el Monto al que desea aplicar:</label>
+                            <input class="">
+                        </div>
+                    </div>
+                    <div class="row mx-2 justify-content-center align-items-center py-2">
                         <div class="col-12">
                             <button type="submit" rippleEffect class="btn btn-primary mr-1" (click)="guardarCredito()" style="color: black !important;">ENVIAR SOLICITUD
                             </button>
