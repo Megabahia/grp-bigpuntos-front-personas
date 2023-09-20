@@ -8,6 +8,7 @@ import {GanarSuperMoneda} from 'app/main/personas/models/supermonedas';
 import {BienvenidoService} from '../../bienvenido/bienvenido.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute} from '@angular/router';
+import {Meta} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-compartir-publicaciones',
@@ -32,6 +33,7 @@ export class CompartirPublicacionesComponent implements OnInit {
     public tipo: string;
 
     constructor(
+        private meta: Meta,
         private modalService: NgbModal,
         private _coreMenuService: CoreMenuService,
         private paramService: ParametrizacionesService,
@@ -43,6 +45,17 @@ export class CompartirPublicacionesComponent implements OnInit {
         this._unsubscribeAll = new Subject();
         this.usuario = this._coreMenuService.grpPersonasUser;
         this.superMonedasElec = this.inicializarSuperMoneda();
+        this.meta.updateTag({name: 'description', content: 'Nueva descripción para la página'});
+    }
+
+    actualizarMetaEtiquetas(image, title, description): string {
+        // const encodedUrl = encodeURIComponent('https://credicompra.com/wp-content/uploads/2013/06/sombrilla-parasol-extra-grande-v3.webp');
+        // const encodedUrl = encodeURIComponent(image);
+        // console.log('encodedUrl', encodedUrl);
+        // image = 'https%3A%2F%2Fglobalredpymes-test.s3.amazonaws.com%2FCENTRAL%2FimgPublicaciones%2FNone_1674855390686_Screenshot_6.jpg';
+        // Cambiar la descripción
+        // Puedes actualizar otras metaetiquetas de la misma manera
+        return `https://ganarpremios.bigpuntos.com/?title=${this.usuario.persona.codigoUsuario}&description=${description}&image=${image}`;
     }
 
     inicializarSuperMoneda(): GanarSuperMoneda {
