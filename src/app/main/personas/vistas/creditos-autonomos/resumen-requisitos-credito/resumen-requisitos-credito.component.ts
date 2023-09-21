@@ -10,6 +10,7 @@ import {CoreConfigService} from '../../../../../../@core/services/config.service
 import {Subject} from 'rxjs';
 import {jsPDF} from 'jspdf';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-resumen-requisitos-credito',
@@ -81,6 +82,14 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
         'Empleado': 'Empleado-PreAprobado',
         'Alfa': 'null'
     };
+    public valorMinimo;
+    public loading = false;
+    public formulario: FormGroup;
+    public plazo = 12;
+
+    get Form() {
+        return this.formulario.controls;
+    }
 
     constructor(
         private _router: Router,
@@ -125,6 +134,11 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
             this.soltero = true;
         }
         this.tipoPersona = `REQUISITOS_${tipoPersona}_${estadoCivil}_CREDICOMPRA`;
+        this.formulario = new FormGroup({
+            monto: new FormControl(this.montoCreditoFinal, [
+                Validators.required, Validators.pattern('^([0-9])+$'), Validators.max(this.montoCreditoFinal)
+            ]),
+        });
     }
 
     ngOnInit(): void {
@@ -173,9 +187,28 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
             this.descripcion.valor = this.descripcion.valor.replace('${{montoCreditoFinal}}', this.montoCreditoFinal);
             this.descripcion.valor = this.descripcion.valor.replace('${{coutaMensual}}', this.coutaMensual);
         });
+        this.paramService.obtenerListaPadresSinToken('VALOR_MINIMO_SOLICITAR_CREDITO_CONSUMO').subscribe((info) => {
+            this.valorMinimo = info[0].valor;
+            this.formulario.get('monto').setValidators([
+                Validators.required, Validators.pattern('^([0-9])+$'),
+                Validators.max(this.montoCreditoFinal), Validators.min(this.valorMinimo)
+            ]);
+            this.formulario.get('monto').updateValueAndValidity();
+        });
+        this.paramService.obtenerParametroNombreTipo('TIEMPO_PLAZO', 'VALORES_CALCULAR_CREDITO_CREDICOMPRA').subscribe((info) => {
+            this.plazo = info.valor;
+        });
     }
 
     guardarCredito() {
+        // to do poner la parametrización por el 2000 y el 1000
+        if (this.formulario.invalid) {
+            this.mensaje = 'El valor ingresado no es permitido';
+            this.abrirModalLg(this.modalAviso);
+            return;
+        }
+        // to do  asiganar el nuevo valor  soliciatdo al credito
+        this.solicitarCredito.monto = this.valorSolicitado;
         // Agregar informacion al credito
         this.solicitarCredito.nombres = this.usuario.persona.nombres;
         this.solicitarCredito.apellidos = this.usuario.persona.apellidos;
@@ -188,16 +221,6 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
             this.checks.splice(3, 2);
         }
         this.solicitarCredito.checks = this.checks;
-        console.log('this.valorSolicitado', this.valorSolicitado);
-        console.log('this.valorSolicitado', this.solicitarCredito);
-
-// to do poner la parametrización por el 2000 y el 1000
-        if (this.valorSolicitado > 2000 || this.valorSolicitado < 1000) {
-            this.mensaje = 'El valor ingresado no es permitido';
-            this.abrirModalLg(this.modalAviso);
-            return;
-        }
-// to do  asiganar el nuevo valor  soliciatdo al credito
 
         if (localStorage.getItem('credito')) {
             this._creditosAutonomosService.updateCredito(this.solicitarCredito).subscribe((info) => {

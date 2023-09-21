@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ParametrizacionesService} from '../../../servicios/parametrizaciones.service';
 import {SolicitarCredito} from '../../../models/persona';
 import {CoreMenuService} from '../../../../../../@core/components/core-menu/core-menu.service';
@@ -9,6 +9,8 @@ import {CoreConfigService} from '../../../../../../@core/services/config.service
 import {Subject} from 'rxjs';
 import {jsPDF} from 'jspdf';
 import {CreditosAutonomosService} from '../../creditos-autonomos/creditos-autonomos.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-resumen-requisitos-credito-automotriz',
@@ -16,6 +18,7 @@ import {CreditosAutonomosService} from '../../creditos-autonomos/creditos-autono
     styleUrls: ['./resumen-requisitos-credito-automotriz.component.scss']
 })
 export class ResumenRequisitosCreditoAutomotrizComponent implements OnInit {
+    @ViewChild('modalAviso') modalAviso;
 
     public coreConfig: any;
     private _unsubscribeAll: Subject<any>;
@@ -40,12 +43,22 @@ export class ResumenRequisitosCreditoAutomotrizComponent implements OnInit {
     public soltero = false;
     public tiposNormales = {
         'Credito Automotriz Empleado': 'Credito Automotriz Empleado',
-        'Credito Automotriz Alfa': 'Credito Automotriz Alfa'
+        'Credito Automotriz Alfa': 'null'
     };
     public tiposPreaprobados = {
         'Credito Automotriz Empleado': 'Credito Automotriz Empleado-PreAprobado',
-        'Credito Automotriz Alfa': 'Credito Automotriz Alfa'
+        'Credito Automotriz Alfa': 'null'
     };
+    public valorSolicitado: number;
+    public valorMinimo;
+    public loading = false;
+    public formulario: FormGroup;
+    public plazo = 12;
+    public mensaje: string;
+
+    get Form() {
+        return this.formulario.controls;
+    }
 
     constructor(
         private _router: Router,
@@ -53,6 +66,7 @@ export class ResumenRequisitosCreditoAutomotrizComponent implements OnInit {
         private _creditosAutomotrizService: CreditosAutonomosService,
         private _coreMenuService: CoreMenuService,
         private _coreConfigService: CoreConfigService,
+        private modalService: NgbModal,
     ) {
         this._unsubscribeAll = new Subject();
         this.usuario = this._coreMenuService.grpPersonasUser;
@@ -75,6 +89,11 @@ export class ResumenRequisitosCreditoAutomotrizComponent implements OnInit {
             this.soltero = true;
         }
         this.tipoPersona = `CREDITO_AUTOMOTRIZ_REQUISITOS_${tipoPersona}_${estadoCivil}_CREDICOMPRA`;
+        this.formulario = new FormGroup({
+            monto: new FormControl(this.montoCreditoFinal, [
+                Validators.required, Validators.pattern('^([0-9])+$'), Validators.max(this.montoCreditoFinal)
+            ]),
+        });
     }
 
     ngOnInit(): void {
@@ -130,9 +149,28 @@ export class ResumenRequisitosCreditoAutomotrizComponent implements OnInit {
             this.descripcion.valor = this.descripcion.valor.replace('${{montoCreditoFinal}}', this.montoCreditoFinal);
             this.descripcion.valor = this.descripcion.valor.replace('${{coutaMensual}}', this.coutaMensual);
         });
+        this.paramService.obtenerListaPadresSinToken('VALOR_MINIMO_SOLICITAR_CREDITO_AUTOMOTRIZ').subscribe((info) => {
+            this.valorMinimo = info[0].valor;
+            this.formulario.get('monto').setValidators([
+                Validators.required, Validators.pattern('^([0-9])+$'),
+                Validators.max(this.montoCreditoFinal), Validators.min(this.valorMinimo)
+            ]);
+            this.formulario.get('monto').updateValueAndValidity();
+        });
+        this.paramService.obtenerParametroNombreTipo('TIEMPO_PLAZO', 'CREDITO_AUTOMOTRIZ_VALORES_CALCULAR_CREDITO_CREDICOMPRA').subscribe((info) => {
+            this.plazo = info.valor;
+        });
     }
 
     guardarCredito() {
+        // to do poner la parametrización por el 2000 y el 1000
+        if (this.formulario.invalid) {
+            this.mensaje = 'El valor ingresado no es permitido';
+            this.abrirModalLg(this.modalAviso);
+            return;
+        }
+        // to do  asiganar el nuevo valor  soliciatdo al credito
+        this.solicitarCredito.monto = this.valorSolicitado;
         // Agregar informacion al credito
         this.solicitarCredito.nombres = this.usuario.persona.nombres;
         this.solicitarCredito.apellidos = this.usuario.persona.apellidos;
@@ -151,6 +189,12 @@ export class ResumenRequisitosCreditoAutomotrizComponent implements OnInit {
                 this.continue(info._id);
             });
         }
+    }
+
+    abrirModalLg(modal) {
+        this.modalService.open(modal, {
+            size: 'lg'
+        });
     }
 
     continue(_id: any) {

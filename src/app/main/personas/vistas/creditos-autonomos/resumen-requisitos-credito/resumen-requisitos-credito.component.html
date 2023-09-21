@@ -5,7 +5,8 @@
                 <div class="col-md-12 text-center">
                     <img src="/assets/images/logo/logos-png.png" alt="brand-logo" width="300"/>
                 </div>
-                <div class="col-md-12 text-center">
+                <form [formGroup]="formulario">
+                <div class="col-md-12 text-center" >
                     <div class="row mx-2 justify-content-center align-items-center py-2">
                         <p [innerHTML]="descripcion.valor"></p>
                     </div>
@@ -17,10 +18,27 @@
                             <a href="https://credicompra.com/locales-afiliados/" target="_blank" class="mt-2">https://credicompra.com/locales-afiliados/</a>
                         </div>
                         <div class="justify-content">
-                            <p style="color: red">Usted puede acceder a un Crédito de HASTA {{montoCreditoFinal}}</p>
+                            <p style="color: red">Usted puede acceder a un Crédito de Consumo HASTA {{montoCreditoFinal}}</p>
                             <label>Ingrese el Monto al que desea aplicar:</label>
 
-                            <input type="number" class="form-control " [(ngModel)]="valorSolicitado"/>
+                            <input type="number" class="form-control " formControlName="monto"/>
+                            <div *ngIf="Form?.monto.errors"
+                                 class="invalid-feedback" style="display: block;">
+                                <div *ngIf="Form.monto.errors.required">
+                                    Ingrese monto es requerido
+                                </div>
+                                <div *ngIf="Form.monto.errors.pattern">
+                                    Ingrese solo numeros
+                                </div>
+                                <div *ngIf="Form.monto.errors.max">
+                                    El valor es mayor a {{this.montoCreditoFinal}}
+                                </div>
+                                <div *ngIf="Form.monto.errors.min">
+                                    El valor es menor a {{this.valorMinimo}}
+                                </div>
+                            </div>
+                            <p>A un Plazo de {{ plazo }} meses</p>
+
                         </div>
                     </div>
                     <div class="row mx-2 justify-content-center align-items-center py-2">
@@ -58,16 +76,8 @@
                         </div>
                     </div>
                 </div>
-                <!--                <div class="row mx-2 justify-content-center align-items-center py-2">-->
-                <!--                    <div class="col-12">-->
-                <!--                        <button type="submit" rippleEffect class="btn btn-outline-dark mr-1" (click)="continue()">Continuar-->
-                <!--                        </button>-->
-                <!--                    </div>-->
-                <!--                </div>-->
+                </form>
             </div>
-            <!--            <div class="text-center">-->
-            <!--                <img src="../../../../assets/images/pages/logoCrediCompra.svg" height="50px" width="50px">-->
-            <!--            </div>-->
         </div>
     </section>
 </div>
