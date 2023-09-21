@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ParametrizacionesService} from '../../../servicios/parametrizaciones.service';
 import {CreditosAutonomosService} from '../creditos-autonomos.service';
 import {SolicitarCredito} from '../../../models/persona';
@@ -9,6 +9,7 @@ import {takeUntil} from 'rxjs/operators';
 import {CoreConfigService} from '../../../../../../@core/services/config.service';
 import {Subject} from 'rxjs';
 import {jsPDF} from 'jspdf';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-resumen-requisitos-credito',
@@ -16,12 +17,15 @@ import {jsPDF} from 'jspdf';
     styleUrls: ['./resumen-requisitos-credito.component.scss']
 })
 export class ResumenRequisitosCreditoComponent implements OnInit {
+    @ViewChild('modalAviso') modalAviso;
 
+    public mensaje;
     public coreConfig: any;
     private _unsubscribeAll: Subject<any>;
     public solicitarCredito;
     public coutaMensual;
     public montoCreditoFinal;
+    public valorSolicitado: number;
     public requisitos = {
         valor: '',
         config: [],
@@ -83,12 +87,15 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
         private paramService: ParametrizacionesService,
         private _creditosAutonomosService: CreditosAutonomosService,
         private _coreMenuService: CoreMenuService,
+        private modalService: NgbModal,
         private _coreConfigService: CoreConfigService,
     ) {
+
         this._unsubscribeAll = new Subject();
         this.usuario = this._coreMenuService.grpPersonasUser;
         this.coutaMensual = localStorage.getItem('coutaMensual');
         this.montoCreditoFinal = localStorage.getItem('montoCreditoFinal');
+        this.valorSolicitado = +localStorage.getItem('montoCreditoFinal');
         const casados = ['UNIÓN LIBRE', 'CASADO'];
         let tipoPersona;
         let estadoCivil;
@@ -181,6 +188,17 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
             this.checks.splice(3, 2);
         }
         this.solicitarCredito.checks = this.checks;
+        console.log('this.valorSolicitado', this.valorSolicitado);
+        console.log('this.valorSolicitado', this.solicitarCredito);
+
+// to do poner la parametrización por el 2000 y el 1000
+        if (this.valorSolicitado > 2000 || this.valorSolicitado < 1000) {
+            this.mensaje = 'El valor ingresado no es permitido';
+            this.abrirModalLg(this.modalAviso);
+            return;
+        }
+// to do  asiganar el nuevo valor  soliciatdo al credito
+
         if (localStorage.getItem('credito')) {
             this._creditosAutonomosService.updateCredito(this.solicitarCredito).subscribe((info) => {
                 this.continue(info._id);
@@ -190,6 +208,12 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
                 this.continue(info._id);
             });
         }
+    }
+
+    abrirModalLg(modal) {
+        this.modalService.open(modal, {
+            size: 'lg'
+        });
     }
 
     continue(_id: any) {
