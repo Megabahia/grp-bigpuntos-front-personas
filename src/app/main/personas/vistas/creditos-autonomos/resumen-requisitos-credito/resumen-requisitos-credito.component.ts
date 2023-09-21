@@ -104,7 +104,6 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
         this.usuario = this._coreMenuService.grpPersonasUser;
         this.coutaMensual = localStorage.getItem('coutaMensual');
         this.montoCreditoFinal = localStorage.getItem('montoCreditoFinal');
-        this.valorSolicitado = +localStorage.getItem('montoCreditoFinal');
         const casados = ['UNIÓN LIBRE', 'CASADO'];
         let tipoPersona;
         let estadoCivil;
@@ -208,7 +207,7 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
             return;
         }
         // to do  asiganar el nuevo valor  soliciatdo al credito
-        this.solicitarCredito.monto = this.valorSolicitado;
+        this.solicitarCredito.monto = this.Form.monto.value;
         // Agregar informacion al credito
         this.solicitarCredito.nombres = this.usuario.persona.nombres;
         this.solicitarCredito.apellidos = this.usuario.persona.apellidos;

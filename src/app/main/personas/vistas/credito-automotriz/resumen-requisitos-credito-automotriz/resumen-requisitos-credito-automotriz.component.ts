@@ -49,7 +49,6 @@ export class ResumenRequisitosCreditoAutomotrizComponent implements OnInit {
         'Credito Automotriz Empleado': 'Credito Automotriz Empleado-PreAprobado',
         'Credito Automotriz Alfa': 'null'
     };
-    public valorSolicitado: number;
     public valorMinimo;
     public loading = false;
     public formulario: FormGroup;
@@ -170,7 +169,7 @@ export class ResumenRequisitosCreditoAutomotrizComponent implements OnInit {
             return;
         }
         // to do  asiganar el nuevo valor  soliciatdo al credito
-        this.solicitarCredito.monto = this.valorSolicitado;
+        this.solicitarCredito.monto = this.Form.monto.value;
         // Agregar informacion al credito
         this.solicitarCredito.nombres = this.usuario.persona.nombres;
         this.solicitarCredito.apellidos = this.usuario.persona.apellidos;
