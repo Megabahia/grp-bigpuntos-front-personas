@@ -215,7 +215,6 @@ export class ResumenRequisitosCreditoComponent implements OnInit {
         this.solicitarCredito.estadoCivil = this.usuario.persona.estadoCivil;
         this.solicitarCredito.empresaInfo = {};
         this.solicitarCredito.cuota = this.solicitarCredito.cuota ? this.solicitarCredito.cuota : this.coutaMensual;
-        this.solicitarCredito.empresasAplican = JSON.stringify(this.solicitarCredito.empresasAplican);
         this.solicitarCredito.user = this.usuario.persona ? this.usuario.persona : JSON.parse(localStorage.getItem('grpPersonasUser')).persona;
         if (this.soltero) {
             this.checks.splice(3, 2);
