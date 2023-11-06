@@ -8,6 +8,13 @@ import Decimal from 'decimal.js';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
+/**
+ * Bigpuntos
+ * Personas
+ * Este metodo sirve para mostrar la informacion final de la solicitud del credito
+ * Rutas:
+ * no llama a ninguna ruta
+ */
 
 @Component({
     selector: 'app-approved-end-consumer',

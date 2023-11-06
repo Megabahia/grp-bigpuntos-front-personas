@@ -6,6 +6,14 @@ import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {stringify} from 'querystring';
 
+/**
+ * Bigpuntos
+ * Personas
+ * Esta pantalla sirve para mostrar las opciones de la empresa para pagar con bigpuntos o ver premios
+ * Ruta:
+ *
+ */
+
 @Component({
     selector: 'app-pagina-empresa',
     templateUrl: './pagina-empresa.component.html',

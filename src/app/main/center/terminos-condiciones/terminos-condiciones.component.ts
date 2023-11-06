@@ -3,6 +3,14 @@ import {CoreConfigService} from '../../../../@core/services/config.service';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 
+/**
+ * Bigpuntos
+ * PErsonas
+ * Esta pantalla sirve para mostrar los terminos y condiciones
+ * Rutas:
+ * No tiene llamado de rutas
+ */
+
 @Component({
     selector: 'app-terminos-condiciones',
     templateUrl: './terminos-condiciones.component.html',

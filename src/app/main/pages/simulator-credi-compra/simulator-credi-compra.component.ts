@@ -6,6 +6,14 @@ import Decimal from 'decimal.js';
 import {Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
+/**
+ * Bigpuntos
+ * Personas
+ * Esta pantalla sirve para simular el credito
+ * Rutas:
+ * `${environment.apiUrl}/central/param/list/tipo/todos/free`,
+ */
+
 @Component({
     selector: 'app-simulator-credi-compra',
     templateUrl: './simulator-credi-compra.component.html',

@@ -16,6 +16,20 @@ import {CreditosAutonomosService} from '../../creditos-autonomos/creditos-autono
 import {DatePipe} from '@angular/common';
 import {ParametrizacionesService} from '../../../servicios/parametrizaciones.service';
 
+/**
+ * Bigpuntos
+ * PErsonas
+ * Esta pantalla sirve para listar los creditos preaprobados
+ * Rutas:
+ * `${environment.apiUrl}/personas/personas/listOne/${id}`
+ * `${environment.apiUrl}/central/param/list/tipo/todos/`,
+ * `${environment.apiUrl}/central/param/list/filtro/nombre`,
+ * `${environment.apiUrl}/corp/creditoPersonas/list/`,
+ * `${environment.apiUrl}/personas/personas/updateSinImagen/${datos.user_id}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos.id}`,
+ * `${environment.apiUrl}/corp/empresas/list/empresas/array/`,
+ */
+
 @Component({
     selector: 'app-listado-creditos-pre-aprobados',
     templateUrl: './listado-creditos-pre-aprobados.component.html',

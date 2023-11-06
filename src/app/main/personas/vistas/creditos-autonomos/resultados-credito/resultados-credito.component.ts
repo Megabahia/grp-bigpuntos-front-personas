@@ -10,6 +10,14 @@ import { CoreConfigService } from '../../../../../../@core/services/config.servi
 import { DomSanitizer } from '@angular/platform-browser';
 import { CreditosAutonomosService } from '../creditos-autonomos.service';
 
+/**
+ * Bigpuntos
+ * PErsonas
+ * ESta pantalla sirve para mostrar el resultado del credito
+ * Rutas:
+ * `${environment.apiUrl}/corp/empresas/list/ifis`,
+ */
+
 @Component({
   selector: 'app-resultados-credito-aut',
   templateUrl: './resultados-credito.component.html',

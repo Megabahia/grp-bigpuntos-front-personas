@@ -10,6 +10,17 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute} from '@angular/router';
 import {Meta} from '@angular/platform-browser';
 
+/**
+ * Bigpuntos
+ * Portales
+ * Esta pantalla sirve para mostrar las publicaciones
+ * Rutas:
+ * `${environment.apiUrl}/central/param/list/listOne`,
+ * `${environment.apiUrl}/corp/empresas/listOne/filtros/`,
+ * `${environment.apiUrl}/central/publicaciones/list/`,
+ * `${environment.apiUrl}/central/publicaciones/compartir/`,
+ */
+
 @Component({
     selector: 'app-compartir-publicaciones',
     templateUrl: './compartir-publicaciones.component.html',

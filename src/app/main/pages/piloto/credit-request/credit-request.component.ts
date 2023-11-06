@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {CoreConfigService} from '../../../../../@core/services/config.service';
 
+/**
+ * Bigpuntos
+ * PErsonas
+ * Esta pantalla sirve para mostrar los pasos para realizar la solicitud del credito
+ * Rutas:
+ * no llama a ninguna ruta
+ */
+
 @Component({
   selector: 'app-credit-request',
   templateUrl: './credit-request.component.html',

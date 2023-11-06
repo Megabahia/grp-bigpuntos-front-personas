@@ -13,6 +13,17 @@ import {CompletarPerfil, SolicitarCredito} from '../../models/persona';
 import moment from 'moment';
 import {User} from '../../../../auth/models/user';
 
+/**
+ * Bigpuntos
+ * Personas
+ * ESta pantalla sirve para solicitar el credito
+ * Rutas:
+ * `${environment.apiUrl}/personas/personas/listOne/${id}`
+ * `${environment.apiUrl}/personas/personas/updateSinImagen/${datos.user_id}`,
+ * `${environment.apiUrl}/central/usuarios/update/${datos.id}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/create/`,
+ */
+
 @Component({
     selector: 'app-creditos-autonomos',
     templateUrl: './creditos-autonomos.component.html',

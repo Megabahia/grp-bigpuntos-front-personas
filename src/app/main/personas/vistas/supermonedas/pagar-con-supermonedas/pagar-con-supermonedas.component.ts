@@ -16,6 +16,17 @@ import html2canvas from 'html2canvas';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 
+/**
+ * Bigpuntos
+ * PErsonas
+ * Esta pantalla sirve para pagar con super monedas
+ * Rutas:
+ * `${environment.apiUrl}/core/monedas/usuario/${id}`
+ * `${environment.apiUrl}/central/param/list/listOne`,
+ * `${environment.apiUrl}/corp/pagos/create/`,
+ * `${environment.apiUrl}/corp/empresas/list/`,
+ */
+
 @Component({
     selector: 'app-pagar-con-supermonedas',
     templateUrl: './pagar-con-supermonedas.component.html',
@@ -244,7 +255,7 @@ export class PagarConSuperMonedasComponent implements OnInit {
         this.cerrarModal();
         //this.abrirModalLg(this.finalizacionMdl);
 
-            this._router.navigate(['personas/BigPuntos/mis-facturas']);
+        this._router.navigate(['personas/BigPuntos/mis-facturas']);
     }
 
     cerrarModalFinalizar() {

@@ -4,6 +4,15 @@ import {ParametrizacionesService} from '../../personas/servicios/parametrizacion
 import {CoreConfigService} from '../../../../@core/services/config.service';
 import {Router} from '@angular/router';
 
+/**
+ * Bigpuntos
+ * Personas
+ * ESta pantalla sirve para mostrar requisitos de la solicitud de credito
+ * Rutas:
+ * `${environment.apiUrl}/central/param/list/tipo/todos/free`,
+ * `${environment.apiUrl}/central/param/list/tipo/todos/free`,
+ */
+
 @Component({
     selector: 'app-credit-requirements',
     templateUrl: './credit-requirements.component.html',

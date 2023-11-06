@@ -2,6 +2,14 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {CoreConfigService} from '../../../../@core/services/config.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
+/**
+ * Bigpuntos
+ * Personas
+ * Esta pantalla sirve para mostrar el proceso de la solicitud de credito
+ * Rutas:
+ * No tiene llamado a rutas
+ */
+
 @Component({
     selector: 'app-procesando-credito',
     templateUrl: './procesando-credito.component.html',

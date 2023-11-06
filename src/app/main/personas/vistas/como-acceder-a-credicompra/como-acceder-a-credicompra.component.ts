@@ -3,6 +3,14 @@ import {Subject} from 'rxjs';
 import {ParametrizacionesService} from '../../servicios/parametrizaciones.service';
 import {DomSanitizer} from '@angular/platform-browser';
 
+/**
+ * Bigpuntos
+ * PErsonas
+ * Esta pantalla sirve para mostrar informacion de como acceder a credicompra
+ * Rutas:
+ * No tiene llamado de rutas
+ */
+
 @Component({
   selector: 'app-como-acceder-a-credicompra',
   templateUrl: './como-acceder-a-credicompra.component.html',

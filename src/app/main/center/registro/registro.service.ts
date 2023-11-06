@@ -2,6 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 
+/*
+* Bigpuntos
+* Personas
+* Este archivo contiene la ruta para registrar un usuario
+* */
+
 @Injectable({
   providedIn: 'root'
 })

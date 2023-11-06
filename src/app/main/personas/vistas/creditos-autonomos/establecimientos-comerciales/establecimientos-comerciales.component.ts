@@ -12,6 +12,15 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { CreditosAutonomosService } from '../creditos-autonomos.service';
 import { ParametrizacionesService } from '../../../servicios/parametrizaciones.service';
 
+/**
+ * Bigpuntos
+ * PErsonas
+ * Esta pantalla sirve para mostrar los establecimientos
+ * Rutas:
+ * `${environment.apiUrl}/corp/empresas/list/comercial`,
+ * `${environment.apiUrl}/central/param/list/tipo/todos/`,
+ */
+
 @Component({
   selector: 'app-establecimientos-comerciales-aut',
   templateUrl: './establecimientos-comerciales.component.html',

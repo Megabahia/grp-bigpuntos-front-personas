@@ -13,6 +13,17 @@ import { CoreMenuService } from '@core/components/core-menu/core-menu.service';
 import { RucPersona } from 'app/main/personas/models/persona';
 import { ParametrizacionesService } from '../../../servicios/parametrizaciones.service';
 
+/**
+ * Bigpuntos
+ * PErsonas
+ * ESta pantalla sirve para mostrar el ruc personas
+ * Rutas:
+ * `${environment.apiUrl}/personas/rucPersonas/listOne/${id}`
+ * `${environment.apiUrl}/central/param/list/tipo/todos/`,
+ * `${environment.apiUrl}/central/param/list/filtro/nombre`,
+ * `${environment.apiUrl}/personas/rucPersonas/update/${datos.user_id}`,
+ */
+
 @Component({
   selector: 'app-ruc-persona-aut',
   templateUrl: './ruc-persona.component.html',

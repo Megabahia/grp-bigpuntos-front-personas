@@ -7,9 +7,16 @@ import {takeUntil} from 'rxjs/operators';
 import {RegistroService} from './registro.service';
 import {Role} from '../../../auth/models/role';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {environment} from "../../../../environments/environment";
+import {environment} from '../../../../environments/environment';
 import {ToastrService} from 'ngx-toastr';
 
+/*
+* Bigpuntos
+* Personas
+* Este pantalla sirve para registar a un usuario
+* Rutas:
+* `${environment.apiUrl}/central/usuarios/create/`,
+* */
 
 @Component({
     selector: 'app-registro',

@@ -10,6 +10,16 @@ import {ParametrizacionesService} from '../../servicios/parametrizaciones.servic
 import {GanarSuperMoneda} from '../../models/supermonedas';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
+/**
+ * Bigpuntos
+ * PErsonas
+ * ESta pantalla sirve para felicitar al usuario por completar el perfil
+ * Rutas:
+ * `${environment.apiUrl}/central/param/list/listOne`,
+ * `${environment.apiUrl}/corp/empresas/listOne/filtros/`,
+ * `${environment.apiUrl}/central/usuarios/update/${datos.id}`,
+ */
+
 @Component({
     selector: 'app-felicidades-registro',
     templateUrl: './felicidades-registro.component.html',

@@ -4,6 +4,15 @@ import {ConfirmacionGaranteService} from './confirmacion-garante.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute, Router} from '@angular/router';
 
+/**
+ * Bigpuntos
+ * PErsonas
+ * Esta pantalla sirve para mostar la solicitud al garante para que decida si acepta o rechaza ser garante
+ * Rutas:
+ * `${environment.apiUrl}/corp/creditoPersonas/listOneSinAutenticar/${data._id}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/updateSinAutenticar/${data._id}`,
+ */
+
 @Component({
     selector: 'app-confirmacion-garante',
     templateUrl: './confirmacion-garante.component.html',
@@ -85,6 +94,7 @@ export class ConfirmacionGaranteComponent implements OnInit {
     abrirModal(modal) {
         this.modalService.open(modal);
     }
+
     cerrarModal() {
         this.modalService.dismissAll();
     }

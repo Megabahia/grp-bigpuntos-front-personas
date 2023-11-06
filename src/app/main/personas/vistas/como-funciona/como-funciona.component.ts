@@ -3,6 +3,14 @@ import {Subject} from 'rxjs';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ParametrizacionesService} from '../../servicios/parametrizaciones.service';
 
+/**
+ * Bigpuntos
+ * Personas
+ * Esta pantalla sirve para mostrar como funciona bigpuntos
+ * Rutas:
+ * No tiene llamado de rutas
+ */
+
 @Component({
     selector: 'app-como-funciona',
     templateUrl: './como-funciona.component.html',

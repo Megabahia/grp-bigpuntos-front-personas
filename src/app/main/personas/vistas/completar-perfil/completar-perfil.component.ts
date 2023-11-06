@@ -1,7 +1,7 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subject} from 'rxjs';
-import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {BienvenidoService} from '../bienvenido/bienvenido.service';
 import {takeUntil} from 'rxjs/operators';
@@ -14,15 +14,30 @@ import moment from 'moment';
 import {User} from '../../../../auth/models/user';
 import {GanarSuperMoneda} from '../../models/supermonedas';
 import {ParametrizacionesService} from '../../servicios/parametrizaciones.service';
-import {log} from 'util';
 import {ToastrService} from 'ngx-toastr';
+
+/**
+ * Bigpuntos
+ * PErsonas
+ * Esta pantalla sirve para mostrar el perfil del usuario
+ * Rutas:
+ * `${environment.apiUrl}/personas/personas/listOne/${id}`,
+ * `${environment.apiUrl}/central/param/list/listOne`,
+ * `${environment.apiUrl}/central/param/list/tipo/todos/`,
+ * `${environment.apiUrl}/corp/empresas/listOne/filtros/`,
+ * `${environment.apiUrl}/personas/personas/update/imagen/${id}`,
+ * `${environment.apiUrl}/personas/personas/update/${datos.user_id}`,
+ * `${environment.apiUrl}/central/usuarios/update/${datos.id}`,
+ * `${environment.apiUrl}/personas/personas/validarCodigo/`,
+ * `${environment.apiUrl}/core/monedas/create/`,
+ */
 
 @Component({
     selector: 'app-completar-perfil',
     templateUrl: './completar-perfil.component.html',
     styleUrls: ['./completar-perfil.component.scss']
 })
-export class CompletarPerfilComponent implements OnInit {
+export class CompletarPerfilComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild('startDatePicker') startDatePicker;
     @ViewChild('whatsapp') whatsapp;
     @ViewChild('mensajeModal') mensajeModal;
@@ -201,13 +216,13 @@ export class CompletarPerfilComponent implements OnInit {
 
     subirImagen(event: any) {
         if (event.target.files && event.target.files[0]) {
-            let nuevaImagen = event.target.files[0];
+            const nuevaImagen = event.target.files[0];
 
 
-            let imagen = new FormData();
+            const imagen = new FormData();
             imagen.append('imagen', nuevaImagen, nuevaImagen.name);
             this._completarPerfilService.subirImagenRegistro(this.usuario.id, imagen).subscribe((info) => {
-                    let reader = new FileReader();
+                    const reader = new FileReader();
 
                     reader.onload = (event: any) => {
                         this.imagen = event.target.result;
@@ -303,7 +318,7 @@ export class CompletarPerfilComponent implements OnInit {
     }
 
     omitirContinuar() {
-        let usuario = this._coreMenuService.grpPersonasUser;
+        const usuario = this._coreMenuService.grpPersonasUser;
         this._bienvenidoService.cambioDeEstado(
             {
                 estado: '6',
@@ -418,9 +433,6 @@ export class CompletarPerfilComponent implements OnInit {
         this.modalService.dismissAll();
     }
 
-    /**
-     * On destroy
-     */
     ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();

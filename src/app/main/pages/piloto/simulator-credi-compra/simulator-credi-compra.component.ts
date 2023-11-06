@@ -8,6 +8,14 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CoreConfigService} from '../../../../../@core/services/config.service';
 import {ParametrizacionesService} from '../../../personas/servicios/parametrizaciones.service';
 
+/**
+ * Bigpuntos
+ * Personas
+ * Esta pantalla sirve para simular la solicitud de credito
+ * Rutas:
+ * `${environment.apiUrl}/central/param/list/tipo/todos/free`,
+ */
+
 @Component({
     selector: 'app-simulator-credi-compra',
     templateUrl: './simulator-credi-compra.component.html',

@@ -16,6 +16,16 @@ import {Role} from 'app/auth/models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ToastrService} from 'ngx-toastr';
 
+/*
+* Bigpuntos
+* Personas
+* ESta pantalla sirve para iniciar sesion en la aplicacion
+* Rutas:
+* `${environment.apiUrl}/central/auth/login/`
+* `${environment.apiUrl}/central/usuarios/create/`,
+* `${environment.apiUrl}/central/auth/loginFacebook/`
+*/
+
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',

@@ -3,6 +3,14 @@ import {Subject} from 'rxjs';
 import {ParametrizacionesService} from '../../servicios/parametrizaciones.service';
 import {DomSanitizer} from '@angular/platform-browser';
 
+/**
+ * Big puntos
+ * Personas
+ * Esta pantalla sirve para mostrar que es credicompra
+ * Ruta:
+ * No tiene llamado a rutas
+ */
+
 @Component({
   selector: 'app-que-es-credicompra',
   templateUrl: './que-es-credicompra.component.html',

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from 'environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -29,12 +29,16 @@ export class ParametrizacionesService {
         );
     }
 
+    /**
+     * Este metodo sirve para listar el catalogo por tipo
+     */
     obtenerListaPadresSinToken(tipo) {
         return this._httpClient.post<any>(
             `${environment.apiUrl}/central/param/list/tipo/todos/free`,
             {tipo}
         );
     }
+
     obtenerListaTipos() {
         return this._httpClient.get<any>(
             `${environment.apiUrl}/central/param/list/tipo/`
@@ -54,7 +58,6 @@ export class ParametrizacionesService {
             {tipo, nombre}
         );
     }
-
 
 
     eliminarParametro(id) {
@@ -87,7 +90,7 @@ export class ParametrizacionesService {
     obtenerListaTipo(tipo) {
         return this._httpClient.post<any>(
             `${environment.apiUrl}/central/param/listar/tipo/todos`,
-            { tipo }
+            {tipo}
         );
     }
 }

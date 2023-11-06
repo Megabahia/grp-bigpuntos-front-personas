@@ -10,6 +10,14 @@ import { CoreConfigService } from '../../../../../../@core/services/config.servi
 import { DomSanitizer } from '@angular/platform-browser';
 import {ParametrizacionesService} from '../../../servicios/parametrizaciones.service';
 
+/**
+ * Bigpuntos
+ * Personas
+ * Esta pantalla sirve para mostrar los requerimientos
+ * Rutas:
+ * `${environment.apiUrl}/central/param/list/tipo/todos/free`,
+ */
+
 @Component({
     selector: 'app-video-explicativo-aut',
     templateUrl: './video-explicativo.component.html',

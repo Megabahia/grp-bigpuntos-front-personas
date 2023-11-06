@@ -11,6 +11,21 @@ import {ParametrizacionesService} from '../../../servicios/parametrizaciones.ser
 import {BienvenidoService} from '../../bienvenido/bienvenido.service';
 import {ToastrService} from 'ngx-toastr';
 
+/**
+ * Bigpuntos
+ * Personas
+ * Esta pantalla sirve para mostrar las calificaciones
+ * Rutas:
+ * `${environment.apiUrl}/central/param/list/listOne`,
+ * `${environment.apiUrl}/corp/empresas/listOne/filtros/`,
+ * `${environment.apiUrl}/central/param/list/tipo/todos/`,
+ * `${environment.apiUrl}/central/param/list/filtro/nombre`,
+ * `${environment.apiUrl}/central/facturas/listOne/${id}`,
+ * `${environment.apiUrl}/central/facturas/list/`,
+ * `${environment.apiUrl}/central/facturas/update/${datos._id}`,
+ * `${environment.apiUrl}/core/monedas/create/`,
+ */
+
 @Component({
     selector: 'app-mis-calificaciones',
     templateUrl: './mis-calificaciones.component.html',
