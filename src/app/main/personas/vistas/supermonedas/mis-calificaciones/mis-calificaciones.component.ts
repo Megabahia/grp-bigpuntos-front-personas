@@ -10,6 +10,7 @@ import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import {ParametrizacionesService} from '../../../servicios/parametrizaciones.service';
 import {BienvenidoService} from '../../bienvenido/bienvenido.service';
 import {ToastrService} from 'ngx-toastr';
+import {FlatpickrOptions} from 'ng2-flatpickr';
 
 /**
  * Bigpuntos
@@ -54,6 +55,15 @@ export class MisCalificacionesComponent implements OnInit {
     public ciudadOpciones;
     public imagen;
     public categoriaEmpresaOpciones;
+    public startDateOptions: FlatpickrOptions = {
+        altInput: true,
+        mode: 'single',
+        altFormat: 'Y-n-j',
+        altInputClass:
+            'form-control flat-picker flatpickr-input invoice-edit-input',
+    };
+    public fechaInicio = '';
+    public fechaFin = '';
 
     private _unsubscribeAll: Subject<any>;
 
@@ -189,7 +199,9 @@ export class MisCalificacionesComponent implements OnInit {
 
     obtenerListaFacturas() {
         this._misFacturasService.obtenerFacturas({
-            page: this.page - 1, page_size: this.page_size, user_id: this.usuario.id
+            page: this.page - 1, page_size: this.page_size, user_id: this.usuario.id,
+            inicio: this.transformarFecha(this.fechaInicio),
+            fin: this.transformarFecha(this.fechaFin),
         }).subscribe(info => {
             this.facturas = info.info;
             this.collectionSize = info.cont;

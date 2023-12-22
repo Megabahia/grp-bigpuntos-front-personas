@@ -64,13 +64,14 @@ export class MisFacturasComponent implements OnInit {
     public fecha;
     private _unsubscribeAll: Subject<any>;
     public startDateOptions: FlatpickrOptions = {
-        defaultDate: 'today',
         altInput: true,
         mode: 'single',
         altFormat: 'Y-n-j',
         altInputClass:
             'form-control flat-picker flatpickr-input invoice-edit-input',
     };
+    fechaInicio = '';
+    fechaFin = '';
 
     constructor(
         private _misFacturasService: MisFacturasService,
@@ -261,6 +262,8 @@ export class MisFacturasComponent implements OnInit {
                 page: this.page - 1,
                 page_size: this.page_size,
                 user_id: this.usuario.id,
+                inicio: this.transformarFecha(this.fechaInicio),
+                fin: this.transformarFecha(this.fechaFin),
             })
             .subscribe((info) => {
                 this.facturas = info.info;
