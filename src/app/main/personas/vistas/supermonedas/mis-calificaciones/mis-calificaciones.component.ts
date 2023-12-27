@@ -103,7 +103,7 @@ export class MisCalificacionesComponent implements OnInit {
             pais: ['', [Validators.required]],
             provincia: ['', [Validators.required]],
             ciudad: ['', [Validators.required]],
-            importeTotal: [0, [Validators.required]],
+            importeTotal: [0, [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]],
             categoria: ['', [Validators.required]],
             atencion: ['', [Validators.required]],
             calificacion: ['', [Validators.required]],
@@ -209,13 +209,7 @@ export class MisCalificacionesComponent implements OnInit {
     }
 
     visualizarNombreArchivo(nombre) {
-        let stringArchivos = 'https://globalredpymes.s3.amazonaws.com/CENTRAL/archivosFacturas/';
-        let stringImagenes = 'https://globalredpymes.s3.amazonaws.com/CENTRAL/imgFacturas/';
-        if (nombre.includes(stringArchivos)) {
-            return nombre.replace('https://globalredpymes.s3.amazonaws.com/CENTRAL/archivosFacturas/', '');
-        } else if (nombre.includes(stringImagenes)) {
-            return nombre.replace('https://globalredpymes.s3.amazonaws.com/CENTRAL/imgFacturas/', '');
-        }
+        return nombre.split('/').slice(5);
     }
 
     guardarFacturaFisica() {

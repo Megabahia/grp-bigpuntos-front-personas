@@ -294,6 +294,9 @@
                                                             <div *ngIf="PerfilSub && f.telefono.errors.required">Es
                                                                 requerido
                                                             </div>
+                                                            <div *ngIf="f.telefono.errors.pattern">Solo se aceptan
+                                                                números
+                                                            </div>
                                                             <div
                                                                     *ngIf="f.telefono.errors.minlength || f.telefono.errors.maxlength || f.telefono.errors.min">
                                                                 Ingrese un número de 10 dígitos

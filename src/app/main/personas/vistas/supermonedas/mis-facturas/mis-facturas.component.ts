@@ -298,21 +298,7 @@ export class MisFacturasComponent implements OnInit {
     }
 
     visualizarNombreArchivo(nombre) {
-        let stringArchivos =
-            'https://globalredpymes.s3.amazonaws.com/CENTRAL/archivosFacturas/';
-        let stringImagenes =
-            'https://globalredpymes.s3.amazonaws.com/CENTRAL/imgFacturas/';
-        if (nombre.includes(stringArchivos)) {
-            return nombre.replace(
-                'https://globalredpymes.s3.amazonaws.com/CENTRAL/archivosFacturas/',
-                ''
-            );
-        } else if (nombre.includes(stringImagenes)) {
-            return nombre.replace(
-                'https://globalredpymes.s3.amazonaws.com/CENTRAL/imgFacturas/',
-                ''
-            );
-        }
+        return nombre.split('/').slice(5);
     }
 
     subirFacturaElec() {

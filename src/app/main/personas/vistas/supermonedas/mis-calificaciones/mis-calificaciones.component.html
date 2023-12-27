@@ -256,6 +256,7 @@
                   <div *ngIf="submittedFactura && FFForm.importeTotal.errors" class="invalid-feedback"
                     style="display: block;">
                     <div *ngIf="FFForm.importeTotal.errors.required">Monto es requerido</div>
+                    <div *ngIf="FFForm.importeTotal.errors.pattern">Ingrese solo numeros separado por un punto</div>
                   </div>
                 </div>
                 <div class="col-md-6">

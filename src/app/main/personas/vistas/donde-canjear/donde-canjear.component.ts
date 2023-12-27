@@ -14,7 +14,7 @@ import {Component, OnInit} from '@angular/core';
         <div class="row align-items-center py-2">
             <div class="row">
                 <div class="text-center col-md-12 m-1">
-                    <h1 class="azul2 mt-5 text-bold">PUNTOS DE CANJE:
+                    <h1 class="azul2 text-bold">PUNTOS DE CANJE:
                     </h1>
                 </div>
                 <div class="card-group">

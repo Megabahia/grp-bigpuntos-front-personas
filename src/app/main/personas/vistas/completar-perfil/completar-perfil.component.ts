@@ -15,6 +15,7 @@ import {User} from '../../../../auth/models/user';
 import {GanarSuperMoneda} from '../../models/supermonedas';
 import {ParametrizacionesService} from '../../servicios/parametrizaciones.service';
 import {ToastrService} from 'ngx-toastr';
+import {ValidacionesPropias} from '../../../../../utils/customer.validators';
 
 /**
  * Bigpuntos
@@ -67,18 +68,6 @@ export class CompletarPerfilComponent implements OnInit, AfterViewInit, OnDestro
     // Private
     private _unsubscribeAll: Subject<any>;
 
-    /**
-     * Constructor
-     *
-     * @param {CoreConfigService} _coreConfigService
-     * @param _coreMenuService
-     * @param _completarPerfilService
-     * @param _bienvenidoService
-     * @param _router
-     * @param _formBuilder
-     * @param modalService
-     * @param paramService
-     */
     constructor(
         private _coreConfigService: CoreConfigService,
         private _coreMenuService: CoreMenuService,
@@ -177,10 +166,10 @@ export class CompletarPerfilComponent implements OnInit, AfterViewInit, OnDestro
                 nombres: info.nombres,
                 apellidos: info.apellidos,
                 genero: info.genero,
-                // fechaNacimiento: [info.fechaNacimiento],
+                fechaNacimiento: info.fechaNacimiento,
                 edad: info.edad,
-                whatsapp: info.whatsapp ? info.whatsapp : '',
-                celular: info.celular ? info.celular : info.telefono,
+                whatsapp: info.whatsapp ? info.whatsapp.replace('+593', '0') : '',
+                celular: info.celular ? info.celular.replace('+593', '0') : info.telefono.replace('+593', '0'),
             });
         });
         this.paramService.obtenerParametroNombreTipo('monedas_registro', 'GANAR_SUPERMONEDAS').subscribe((info) => {
@@ -209,7 +198,7 @@ export class CompletarPerfilComponent implements OnInit, AfterViewInit, OnDestro
     }
 
     ngAfterViewInit(): void {
-        if (this.usuario.estado == '3') {
+        if (this.usuario.estado === '3') {
             this.modalWhatsapp(this.whatsapp);
         }
     }
@@ -252,12 +241,7 @@ export class CompletarPerfilComponent implements OnInit, AfterViewInit, OnDestro
 
     guardarRegistro() {
         let wppAux = '';
-        if (this.registerForm.value.tipoIdentificacion === 'Cédula') {
-            this.validadorDeCedula(this.registerForm.value.documento);
-        }
-        if (this.registerForm.value.tipoIdentificacion === 'Pasaporte') {
-            this.validadorDePasaporte(this.registerForm.value.documento);
-        }
+        this.obtenerTipoIdentificacion();
 
         this.submitted = true;
         // stop here if form is invalid
@@ -437,5 +421,19 @@ export class CompletarPerfilComponent implements OnInit, AfterViewInit, OnDestro
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
+    }
+
+    obtenerTipoIdentificacion() {
+        if (this.registerForm.value.tipoIdentificacion === 'Ruc') {
+            this.registerForm.get('documento').setValidators(
+                [Validators.required, ValidacionesPropias.rucValido]
+            );
+            this.registerForm.get('documento').updateValueAndValidity();
+        } else {
+            this.registerForm.get('documento').setValidators(
+                [Validators.required, ValidacionesPropias.cedulaValido]
+            );
+            this.registerForm.get('documento').updateValueAndValidity();
+        }
     }
 }

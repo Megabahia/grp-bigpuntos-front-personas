@@ -1,5 +1,5 @@
 import {DatePipe} from '@angular/common';
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CoreMenuService} from '@core/components/core-menu/core-menu.service';
 import {NgbPagination, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {User} from 'app/auth/models';
@@ -33,7 +33,7 @@ import {ToastrService} from 'ngx-toastr';
     styleUrls: ['./pagar-con-supermonedas.component.scss'],
     providers: [DatePipe],
 })
-export class PagarConSuperMonedasComponent implements OnInit {
+export class PagarConSuperMonedasComponent implements OnInit, OnDestroy {
     @ViewChild(NgbPagination) paginator: NgbPagination;
     @ViewChild('comprobanteCompraSuperMonedasMdl')
     comprobanteCompraSuperMonedasMdl;
@@ -99,7 +99,7 @@ export class PagarConSuperMonedasComponent implements OnInit {
             });
 
         this.compraSuperMonedasForm = this._formBuilder.group({
-            monto: ['', [Validators.required]],
+            monto: ['', [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]],
         });
     }
 
@@ -236,7 +236,8 @@ export class PagarConSuperMonedasComponent implements OnInit {
     }
 
     exportHtmlToPDF() {
-        const data = document.getElementById('print-section');
+        const data = document.getElementById('print-section2');
+        data.style.display = 'block';
 
         html2canvas(data).then((canvas) => {
             const docWidth = 208;
@@ -248,12 +249,13 @@ export class PagarConSuperMonedasComponent implements OnInit {
             doc.addImage(contentDataURL, 'PNG', 0, position, docWidth, docHeight);
 
             doc.save('comprobante.pdf');
+            data.style.display = 'none';
         });
     }
 
     modalFinalizar() {
         this.cerrarModal();
-        //this.abrirModalLg(this.finalizacionMdl);
+        // this.abrirModalLg(this.finalizacionMdl);
 
         this._router.navigate(['personas/BigPuntos/mis-facturas']);
     }
