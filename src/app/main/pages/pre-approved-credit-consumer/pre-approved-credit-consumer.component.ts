@@ -8,6 +8,14 @@ import Decimal from 'decimal.js';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 
+/**
+ * Bigpuntos
+ * PErsonas
+ * ESta pantalla sirve para consultar el codigo del credito preaprobado
+ * Rutas:
+ * `${environment.apiUrl}/corp/creditoPersonas/creditoPreaprobado/codigo`,
+ */
+
 @Component({
     selector: 'app-pre-approved-credit-consumer',
     templateUrl: './pre-approved-credit-consumer.component.html',

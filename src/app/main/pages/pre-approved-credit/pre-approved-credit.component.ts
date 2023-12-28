@@ -9,6 +9,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
+/**
+ * Bigpuntos
+ * Personas
+ * Esta pantalla sirve para consultar el credito se le preaprueba
+ * Rutas:
+ * `${environment.apiUrl}/corp/creditoPersonas/creditoPreaprobado/codigo`,
+ */
+
 @Component({
     selector: 'app-pre-approved-credit',
     templateUrl: './pre-approved-credit.component.html',

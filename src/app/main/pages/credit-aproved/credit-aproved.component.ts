@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CoreConfigService } from '../../../../@core/services/config.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
+/**
+ * Bigpuntos
+ * PErsonas
+ * Esta pantalla sirve para mostrar la informacion de felicitaciones por el credito
+ * Rutas:
+ * No llama a ninguna ruta
+ */
+
 @Component({
     selector: 'app-credit-aproved',
     templateUrl: './credit-aproved.component.html',

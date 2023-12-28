@@ -10,6 +10,10 @@ export class clienteService {
   constructor(
       private _httpClient: HttpClient
   ) { }
+
+  /**
+   * Este metodo sirve para listar el catalogo por tipo
+   */
   obtenerListaPadresSinToken(tipo) {
     return this._httpClient.post<any>(
         `${environment.apiUrl}/central/param/list/tipo/todos/free`,

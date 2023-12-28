@@ -12,7 +12,8 @@
                     </div>
                 </div>
                 <br>
-                <div class="col-12">Para ingresar un Reclamo o Requerimiento, por favor <strong class="azul2">escoja una de las categorías:</strong> </div>
+                <div class="col-12">Para ingresar un Reclamo o Requerimiento, por favor <strong class="azul2">escoja una
+                    de las categorías:</strong></div>
             </div>
         </div>
     </div>
@@ -25,8 +26,8 @@
                         <div class="rounded-top text-center">
                             <h4 class="card-title">Atención empleados</h4>
                             <a href="https://wa.link/wnncik" target="_blank">
-                            <img src="https://www.pec-supermaxi.com/wp-content/uploads/2021/09/icono_empleados.png"
-                                 alt="Meeting Pic" height="170"/>
+                                <img src="https://www.pec-supermaxi.com/wp-content/uploads/2021/09/icono_empleados.png"
+                                     alt="Meeting Pic" height="170"/>
                             </a>
                         </div>
                     </div>
@@ -37,8 +38,8 @@
                         <div class="rounded-top text-center">
                             <h4 class="card-title">Accidentes, robos</h4>
                             <a href="https://wa.link/volswh" target="_blank">
-                            <img src="https://www.pec-supermaxi.com/wp-content/uploads/2021/09/icono_robos.png"
-                                 alt="Meeting Pic" height="170"/>
+                                <img src="https://www.pec-supermaxi.com/wp-content/uploads/2021/09/icono_robos.png"
+                                     alt="Meeting Pic" height="170"/>
                             </a>
                         </div>
                     </div>
@@ -49,8 +50,8 @@
                         <div class="rounded-top text-center">
                             <h4 class="card-title">Ambiente</h4>
                             <a href="https://wa.link/ony29y" target="_blank">
-                            <img src="https://www.pec-supermaxi.com/wp-content/uploads/2021/09/icono_cajas.png"
-                                 alt="Meeting Pic" height="170"/>
+                                <img src="https://www.pec-supermaxi.com/wp-content/uploads/2021/09/icono_cajas.png"
+                                     alt="Meeting Pic" height="170"/>
                             </a>
                         </div>
                     </div>
@@ -65,8 +66,8 @@
                         <div class="rounded-top text-center">
                             <h4 class="card-title">Precios promocionales</h4>
                             <a href="https://wa.link/0tbv53" target="_blank">
-                            <img src="https://www.pec-supermaxi.com/wp-content/uploads/2021/09/icono_precio.png"
-                                 alt="Meeting Pic" height="170"/>
+                                <img src="https://www.pec-supermaxi.com/wp-content/uploads/2021/09/icono_precio.png"
+                                     alt="Meeting Pic" height="170"/>
                             </a>
                         </div>
                     </div>
@@ -77,8 +78,8 @@
                         <div class="rounded-top text-center">
                             <h4 class="card-title">Devoluciones y reembolsos</h4>
                             <a href="https://wa.link/7gkiry" target="_blank">
-                            <img src="https://www.pec-supermaxi.com/wp-content/uploads/2021/09/icono_tiempo.png"
-                                 alt="Meeting Pic" height="170"/>
+                                <img src="https://www.pec-supermaxi.com/wp-content/uploads/2021/09/icono_tiempo.png"
+                                     alt="Meeting Pic" height="170"/>
                             </a>
                         </div>
                     </div>
@@ -91,75 +92,3 @@
 
 </div>
 
-<core-sidebar class="modal modal-slide-in sidebar-todo-modal fade" name="factura-electronica"
-              overlayClass="modal-backdrop">
-    <div class="slideout-content">
-        <!-- Modal to add new user starts-->
-        <div class="modalsd modal-slide-in sdfade new-user-modal" id="modals-slide-in">
-            <div class="modal-dialog">
-                <form class="add-new-user modal-content pt-0" (ngSubmit)="(newUserForm.form.valid)"
-                      #newUserForm="ngForm">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                            (click)="toggleSidebar('factura-electronica')">
-                        ×
-                    </button>
-                    <div class="modal-header mb-1">
-                        <h5 class="modal-title" id="exampleModalLabel">Sugerencia</h5>
-                    </div>
-                    <div class="modal-body flex-grow-1">
-                        <div class="form-group">
-                            <label>Seleccione un local:</label>
-                            <select class="form-control select2" formControlName="categoria">
-                                <option value="">- Seleccione -</option>
-                                <option>Accidente con productos</option>
-                                <option>La funda se rompió</option>
-                                <option>Accidente en el local</option>
-                                <option>Robo en el local</option>
-                                <!--                                <option *ngFor="let categoriaEmpresaOp of categoriaEmpresaOpciones"-->
-                                <!--                                        value="{{categoriaEmpresaOp.nombre}}">{{categoriaEmpresaOp.nombre}}</option>-->
-
-                            </select>
-                            <!--                            <div *ngIf="submittedFactura && FFForm.categoria.errors" class="invalid-feedback" style="display: block;">-->
-                            <!--                                <div *ngIf="FFForm.categoria.errors.required">Categoría es requerido</div>-->
-                            <!--                            </div>-->
-                        </div>
-                        <div class="form-group">
-                            <label>Elige un tema:</label>
-                            <select class="form-control select2" formControlName="categoria">
-                                <option value="">- Seleccione -</option>
-                                <option>Accidente con productos</option>
-                                <option>La funda se rompió</option>
-                                <option>Accidente en el local</option>
-                                <option>Robo en el local</option>
-                                <!--                                <option *ngFor="let categoriaEmpresaOp of categoriaEmpresaOpciones"-->
-                                <!--                                        value="{{categoriaEmpresaOp.nombre}}">{{categoriaEmpresaOp.nombre}}</option>-->
-
-                            </select>
-                            <!--                            <div *ngIf="submittedFactura && FFForm.categoria.errors" class="invalid-feedback" style="display: block;">-->
-                            <!--                                <div *ngIf="FFForm.categoria.errors.required">Categoría es requerido</div>-->
-                            <!--                            </div>-->
-                        </div>
-                        <div class="form-group">
-                            <label>En sus palabras, cuéntenos qué pasó:</label>
-                            <!--                                    <input class="form-control" type="text" formControlName="importeTotal"-->
-                            <!--                                           [(ngModel)]="facturaFisica.importeTotal">-->
-                            <textarea class="form-control" type="text" formControlName="importeTotal"></textarea>
-                            <!--                                    <div *ngIf="submittedFactura && FFForm.importeTotal.errors" class="invalid-feedback"-->
-                            <!--                                         style="display: block;">-->
-                            <!--                                        <div *ngIf="FFForm.importeTotal.errors.required">Monto es requerido</div>-->
-                            <!--                                    </div>-->
-                        </div>
-                        <button type="reset" class="btn btn-outline-primary mr-1" data-dismiss="modal"
-                                (click)="toggleSidebar('factura-electronica')"> Enviar
-                        </button>
-                        <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal"
-                                (click)="toggleSidebar('factura-electronica')"> Cancelar
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <!-- Modal to add new user Ends-->
-    </div>
-
-</core-sidebar>

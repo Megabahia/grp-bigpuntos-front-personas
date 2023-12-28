@@ -7,6 +7,15 @@ import {Subject} from 'rxjs';
 import {MisMonedasService} from './mis-monedas.service';
 import {DatatableComponent} from '@swimlane/ngx-datatable';
 
+/**
+ * Bigpuntos
+ * Personas
+ * Esta pantalla sirve para mostrar mis monedas
+ * Rutas:
+ * `${environment.apiUrl}/core/monedas/usuario/${id}`
+ * `${environment.apiUrl}/core/monedas/list/`,
+ */
+
 @Component({
     selector: 'app-mis-monedas',
     templateUrl: './mis-monedas.component.html',

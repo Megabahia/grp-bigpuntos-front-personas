@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, Output, EventEmitter, Input} from '@angular/core';
+import {Component, OnInit, ViewChild, Output, EventEmitter, Input, AfterViewInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -11,13 +11,22 @@ import {CreditosAutonomosService} from '../creditos-autonomos.service';
 import {EmpresaInformacion} from 'app/main/personas/models/empresa';
 import {ParametrizacionesService} from '../../../servicios/parametrizaciones.service';
 
+/**
+ * Bigpuntos
+ * PErsonas
+ * ESta pantalla sirve para seleccionar el establecimiento
+ * Rutas:
+ * `${environment.apiUrl}/corp/empresas/listOne/${id}`
+ * `${environment.apiUrl}/central/param/list/listOne`,
+ */
+
 
 @Component({
     selector: 'app-establecimiento-seleccionado-aut',
     templateUrl: './establecimiento-seleccionado.component.html',
     styleUrls: ['./establecimiento-seleccionado.component.scss']
 })
-export class EstablecimientoSeleccionadoAutComponent implements OnInit {
+export class EstablecimientoSeleccionadoAutComponent implements OnInit, AfterViewInit {
     @Output() estado = new EventEmitter<number>();
     @Output() valores = new EventEmitter<Object>();
     @Input() idEmpresa;

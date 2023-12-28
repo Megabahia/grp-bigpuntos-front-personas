@@ -2,6 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 
+/*
+* Bigpuntos
+* Personas
+* Este archivo contiene las las rutas para resetar la contraseña, actualizar un usuario por el email
+* */
+
 @Injectable({
   providedIn: 'root'
 })

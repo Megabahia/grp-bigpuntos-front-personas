@@ -10,6 +10,22 @@ import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import {ParametrizacionesService} from '../../../servicios/parametrizaciones.service';
 import {BienvenidoService} from '../../bienvenido/bienvenido.service';
 import {ToastrService} from 'ngx-toastr';
+import {FlatpickrOptions} from 'ng2-flatpickr';
+
+/**
+ * Bigpuntos
+ * Personas
+ * Esta pantalla sirve para mostrar las calificaciones
+ * Rutas:
+ * `${environment.apiUrl}/central/param/list/listOne`,
+ * `${environment.apiUrl}/corp/empresas/listOne/filtros/`,
+ * `${environment.apiUrl}/central/param/list/tipo/todos/`,
+ * `${environment.apiUrl}/central/param/list/filtro/nombre`,
+ * `${environment.apiUrl}/central/facturas/listOne/${id}`,
+ * `${environment.apiUrl}/central/facturas/list/`,
+ * `${environment.apiUrl}/central/facturas/update/${datos._id}`,
+ * `${environment.apiUrl}/core/monedas/create/`,
+ */
 
 @Component({
     selector: 'app-mis-calificaciones',
@@ -39,6 +55,15 @@ export class MisCalificacionesComponent implements OnInit {
     public ciudadOpciones;
     public imagen;
     public categoriaEmpresaOpciones;
+    public startDateOptions: FlatpickrOptions = {
+        altInput: true,
+        mode: 'single',
+        altFormat: 'Y-n-j',
+        altInputClass:
+            'form-control flat-picker flatpickr-input invoice-edit-input',
+    };
+    public fechaInicio = '';
+    public fechaFin = '';
 
     private _unsubscribeAll: Subject<any>;
 
@@ -78,7 +103,7 @@ export class MisCalificacionesComponent implements OnInit {
             pais: ['', [Validators.required]],
             provincia: ['', [Validators.required]],
             ciudad: ['', [Validators.required]],
-            importeTotal: [0, [Validators.required]],
+            importeTotal: [0, [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]],
             categoria: ['', [Validators.required]],
             atencion: ['', [Validators.required]],
             calificacion: ['', [Validators.required]],
@@ -174,7 +199,9 @@ export class MisCalificacionesComponent implements OnInit {
 
     obtenerListaFacturas() {
         this._misFacturasService.obtenerFacturas({
-            page: this.page - 1, page_size: this.page_size, user_id: this.usuario.id
+            page: this.page - 1, page_size: this.page_size, user_id: this.usuario.id,
+            inicio: this.transformarFecha(this.fechaInicio),
+            fin: this.transformarFecha(this.fechaFin),
         }).subscribe(info => {
             this.facturas = info.info;
             this.collectionSize = info.cont;
@@ -182,13 +209,7 @@ export class MisCalificacionesComponent implements OnInit {
     }
 
     visualizarNombreArchivo(nombre) {
-        let stringArchivos = 'https://globalredpymes.s3.amazonaws.com/CENTRAL/archivosFacturas/';
-        let stringImagenes = 'https://globalredpymes.s3.amazonaws.com/CENTRAL/imgFacturas/';
-        if (nombre.includes(stringArchivos)) {
-            return nombre.replace('https://globalredpymes.s3.amazonaws.com/CENTRAL/archivosFacturas/', '');
-        } else if (nombre.includes(stringImagenes)) {
-            return nombre.replace('https://globalredpymes.s3.amazonaws.com/CENTRAL/imgFacturas/', '');
-        }
+        return nombre.split('/').slice(5);
     }
 
     guardarFacturaFisica() {

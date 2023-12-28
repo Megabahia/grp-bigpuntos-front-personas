@@ -5,6 +5,15 @@ import {SociosEmpleadosService} from './socios-empleados.service';
 import {log} from 'util';
 import {Router} from '@angular/router';
 
+/**
+ * Bigpuntos
+ * Personas
+ * Esta pantalla sirve para mostrar los beneficios a los empleados al registrarse
+ * Rutas:
+ * `${environment.apiUrl}/central/empresas/url/${url}`
+ * `${environment.apiUrl}/central/empresas/urlClientes/${url}`
+ */
+
 @Component({
     selector: 'app-socios-empleados',
     templateUrl: './socios-empleados.component.html',

@@ -4,6 +4,14 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 
+/**
+ * Bigpuntos
+ * Personas
+ * Este metodo sirve para mostra una tabla de la simulacion
+ * Rutas:
+ * No tiene llamado a rutas
+ */
+
 @Component({
     selector: 'app-table-simulador',
     templateUrl: './table-simulador.component.html',

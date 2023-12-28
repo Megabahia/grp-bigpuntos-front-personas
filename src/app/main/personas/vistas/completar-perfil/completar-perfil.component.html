@@ -63,6 +63,7 @@
                         <label for="tipoIdentificacion">Tipo de identificación</label>
                         <select formControlName="tipoIdentificacion" class="form-control"
                                 id="tipoIdentificacion"
+                                (change)="obtenerTipoIdentificacion()"
                                 [ngClass]="{ 'is-invalid': submitted && f.tipoIdentificacion.errors }">
                             <option>- Seleccionar -</option>
                             <option *ngFor="let value of tipoIdentificacion">
@@ -87,7 +88,12 @@
                         </div>
                         <div *ngIf="!f.documento.errors?.validoCed" class="invalid-feedback">Documento no valido
                         </div>
-
+                        <div *ngIf="f.documento.errors?.cedulaInvalid" class="invalid-feedback">
+                            Cédula invalido
+                        </div>
+                        <div *ngIf="f.documento.errors?.rucInvalid" class="invalid-feedback">
+                            Ruc invalido
+                        </div>
                     </div>
                 </div>
 

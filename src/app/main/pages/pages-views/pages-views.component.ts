@@ -12,6 +12,17 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PagesViewsService} from './pages-views.service';
 import moment from 'moment';
 
+/**
+ * Bigpuntos
+ * Personas
+ * ESta pantalla sirve para los productos que puedes canjear en los locales afiliados
+ * Rutas:
+ * `${environment.apiUrl}/central/param/list/tipo/todos/free`,
+ * `${environment.apiUrl}/central/productos/list-free/`,
+ * `${environment.apiUrl}/central/correosLanding/create/`,
+ * `${environment.apiUrl}/central/correosLanding/update/${datos.id}`,
+ */
+
 @Component({
     selector: 'app-pages-views',
     templateUrl: './pages-views.component.html',
@@ -76,7 +87,7 @@ export class PagesViewsComponent implements OnInit {
     ngOnInit(): void {
         this._pages_viewsService.obtenerLista('VALORES_CALCULAR_CREDITO_CREDICOMPRA').subscribe((info) => {
 
-                });
+        });
         this.email_code_Form = this._formBuilder.group({
             email: ['', [Validators.required, Validators.email]],
         });
@@ -93,10 +104,10 @@ export class PagesViewsComponent implements OnInit {
 
         // Subscribe to config changes
         this._coreConfigService.config
-          .pipe(takeUntil(this._unsubscribeAll))
-          .subscribe((config) => {
-            this.coreConfig = config;
-          });
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((config) => {
+                this.coreConfig = config;
+            });
     }
 
     codeConfir(code, codeaux: string) {

@@ -61,18 +61,32 @@
         <h5 class="card-header">Filtros de búsqueda</h5>
         <div class="card-body">
           <div class="row">
-            <div class="col-md-4">
               <div class="form-group">
+                  <label>Fecha Inicio:</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i data-feather='calendar'></i></span>
+                    </div>
+                    <ng2-flatpickr [setDate]="fechaInicio"
+                                   [(ngModel)]="fechaInicio"
+                                   [config]="startDateOptions"
+                                   (change)="obtenerListaFacturas()"
+                                   ></ng2-flatpickr>
+                  </div>
+              </div>
+            <div class="form-group ml-sm-2 mt">
+                <label >Fecha Fin:</label>
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i data-feather='calendar'></i></span>
                   </div>
-                  <input type="text" class="form-control form-control-sm flatpickr-range flatpickr-input"
-                    placeholder="- Rango de fechas">
+                  <ng2-flatpickr [setDate]="fechaFin"
+                                 [(ngModel)]="fechaFin"
+                                 [config]="startDateOptions"
+                                 (change)="obtenerListaFacturas()"
+                  ></ng2-flatpickr>
                 </div>
-              </div>
             </div>
-
           </div>
         </div>
       </div>

@@ -111,6 +111,15 @@ export const menu: CoreMenu[] = [
                 icon: 'message-circle',
                 url: 'personas/reclamos-y-requerimientos',
             },
+            {
+                id: 'misComisiones',
+                title: 'Mis comisiones',
+                role: [Role.BigPuntos],
+                // translate: 'MENU.PAGES.SECTION',
+                type: 'item',
+                icon: 'message-circle',
+                url: 'personas/mis-comisiones',
+            },
         ],
     },
     {

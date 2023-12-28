@@ -1,10 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { CoreConfigService } from '../../../../@core/services/config.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ParametrizacionesService } from '../../personas/servicios/parametrizaciones.service';
+import {Component, OnInit} from '@angular/core';
+import {Subject} from 'rxjs';
+import {CoreConfigService} from '../../../../@core/services/config.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {ParametrizacionesService} from '../../personas/servicios/parametrizaciones.service';
 import Decimal from 'decimal.js';
+
+/**
+ * Bigpuntos
+ * Personas
+ * ESta pantalla sirve para simular el credito
+ * Rutas:
+ * `${environment.apiUrl}/central/param/list/tipo/todos/free`,
+ */
 
 @Component({
     selector: 'app-simulador',

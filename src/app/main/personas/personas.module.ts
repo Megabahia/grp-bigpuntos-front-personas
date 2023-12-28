@@ -76,6 +76,7 @@ import {
 import {
     ResumenRequisitosCreditoAutomotrizComponent
 } from './vistas/credito-automotriz/resumen-requisitos-credito-automotriz/resumen-requisitos-credito-automotriz.component';
+import { MisComisionesComponent } from './vistas/mis-comisiones/mis-comisiones.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -301,6 +302,11 @@ const routes = [
         // data: { animation: 'auth' }
     },
     {
+        path: 'mis-comisiones',
+        component: MisComisionesComponent,
+        canActivate: [AuthGuard],
+    },
+    {
         path: 'mis-premios',
         component: MisPremiosComponent,
         // data: {activacion: [4]},
@@ -369,6 +375,7 @@ const routes = [
         ExplicacionCreditoAutomotrizComponent,
         SolicitudCreditoAutomotrizComponent,
         ResumenRequisitosCreditoAutomotrizComponent,
+        MisComisionesComponent,
     ],
     imports: [
         CoreCommonModule,

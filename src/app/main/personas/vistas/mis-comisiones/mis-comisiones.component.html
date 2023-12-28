@@ -1,0 +1,66 @@
+<div class="content-wrapper">
+    <div class="content-header row">
+        <div class="col-12 mb-2">
+            <div class="row breadcrumbs-top">
+                <div class="col-12">
+                    <h2 class="text-center float-left mb-0">
+                        Mis comisiones
+                    </h2>
+                    <div class="breadcrumb-wrapper">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="text-primary" href="index.html">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-item"><a class="text-primary" href="mis-premios.html">
+                                Mis comisiones
+                            </a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <!-- users list start -->
+        <section class="user-list">
+            <div class="card card-company-table">
+                <div class="card-datatable table-responsive pt-0">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Identificación</th>
+                            <th>Tipo identificación</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Monto Comisión</th>
+                            <th>Saldo anterior</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let moneda of monedas">
+                            <td>{{moneda.fechaAsignacion | date: 'yyyy-MM-dd'}}</td>
+                            <td>{{moneda.identificacion}}</td>
+                            <td>{{moneda.tipoIdentificacion}}</td>
+                            <td>{{moneda.nombres}}</td>
+                            <td>{{moneda.apellidos}}</td>
+                            <td>
+                                <div class="iso-moneda"></div>
+                                {{moneda.monto}}
+                            </td>
+                            <td>
+                                <div class="iso-moneda"></div>
+                                {{moneda.saldoAnterior}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ngb-pagination #paginator [collectionSize]="collectionSize" [(page)]="page" [pageSize]="page_size"
+                                [maxSize]="5" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+            </div>
+            <!-- list section end -->
+        </section>
+        <!-- users list ends -->
+    </div>
+</div>

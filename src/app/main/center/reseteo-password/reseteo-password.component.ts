@@ -7,8 +7,17 @@ import {RecuperarPassService} from '../recuperar-pass/recuperar-pass.service';
 import {Subject} from 'rxjs';
 import {ReseteoPasswordService} from './reseteo-password.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {environment} from "../../../../environments/environment";
+import {environment} from '../../../../environments/environment';
 import {ToastrService} from 'ngx-toastr';
+
+/*
+* Bigpuntos
+* Personas
+* Esta pantalla sirve para restablecer la contraseña
+* Rutas:
+* `${environment.apiUrl}/central/auth/password_reset/confirm/`,
+* `${environment.apiUrl}/central/usuarios/update/by/email/`,
+* */
 
 @Component({
     selector: 'app-reseteo-password',

@@ -6,6 +6,15 @@ import {Subject} from 'rxjs';
 import {CoreConfigService} from '@core/services/config.service';
 import {PagesViewsService} from '../pages-views/pages-views.service';
 
+/**
+ * Bigpuntos
+ * Personas
+ * Esta pantalla sirve para mostrar los productos que puede canjear con bigpuntos
+ * Rutas:
+ * `${environment.apiUrl}/central/param/list/tipo/todos/free`,
+ * `${environment.apiUrl}/central/productos/list-free/`,
+ */
+
 @Component({
     selector: 'app-mensaje-productos-free',
     templateUrl: './mensaje-productos-free.component.html',

@@ -10,6 +10,14 @@ import { CoreConfigService } from '../../../../../../@core/services/config.servi
 import { DomSanitizer } from '@angular/platform-browser';
 import { CoreMenuService } from '../../../../../../@core/components/core-menu/core-menu.service';
 
+/**
+ * Bigpuntos
+ * PErsonas
+ * Esta pantalla sirve para mostrar el resultado de la solicitud
+ * Rutas:
+ * No tiene llamado de rutas
+ */
+
 @Component({
   selector: 'app-mensaje-resultado-aut',
   templateUrl: './mensaje-resultado.component.html',

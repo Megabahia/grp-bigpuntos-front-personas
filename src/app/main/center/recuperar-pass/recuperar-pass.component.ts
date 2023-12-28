@@ -6,8 +6,16 @@ import {takeUntil} from 'rxjs/operators';
 import {RecuperarPassService} from './recuperar-pass.service';
 import {Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {environment} from "../../../../environments/environment";
+import {environment} from '../../../../environments/environment';
 import {ToastrService} from 'ngx-toastr';
+
+/*
+* Bigpuntos
+* Personas
+* Esta pantalla sirve para ingresar la contraseña por primero vez cuando se creen el usuario
+* Rutas:
+* `${environment.apiUrl}/central/auth/password_reset/`,
+* */
 
 @Component({
     selector: 'app-recuperar-pass',

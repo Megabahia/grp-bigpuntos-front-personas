@@ -1,11 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import {first, takeUntil} from 'rxjs/operators';
 import {CoreConfigService} from '../../../../@core/services/config.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Observable, Subject, Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {AuthenticationService} from '../../../auth/service/authentication.service';
-import {ReCaptchaV3Service} from 'ngx-captcha';
 import {environment} from '../../../../environments/environment';
 import {
     FacebookLoginProvider,
@@ -17,12 +16,22 @@ import {Role} from 'app/auth/models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ToastrService} from 'ngx-toastr';
 
+/*
+* Bigpuntos
+* Personas
+* ESta pantalla sirve para iniciar sesion en la aplicacion
+* Rutas:
+* `${environment.apiUrl}/central/auth/login/`
+* `${environment.apiUrl}/central/usuarios/create/`,
+* `${environment.apiUrl}/central/auth/loginFacebook/`
+*/
+
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
     //  Public
     @ViewChild('captchaElem') captchaElem;
 
@@ -53,11 +62,6 @@ export class LoginComponent implements OnInit {
     // Private
     private _unsubscribeAll: Subject<any>;
 
-    /**
-     * Constructor
-     *
-     * @param {CoreConfigService} _coreConfigService
-     */
     constructor(
         private _coreConfigService: CoreConfigService,
         private _formBuilder: FormBuilder,
@@ -295,9 +299,6 @@ export class LoginComponent implements OnInit {
         this.captcha = true;
     }
 
-    /**
-     * On destroy
-     */
     ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         if (this.logginSubs) {

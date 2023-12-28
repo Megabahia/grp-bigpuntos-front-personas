@@ -3,6 +3,14 @@ import {CoreConfigService} from '../../../../../../@core/services/config.service
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 
+/**
+ * Bigpuntos
+ * PErsonas
+ * ESta pantalla sirve para mostrar la validacion de los datos del credito
+ * Rutas:
+ * No tiene llamado a rutas
+ */
+
 @Component({
   selector: 'app-validacion-datos',
   templateUrl: './validacion-datos.component.html',

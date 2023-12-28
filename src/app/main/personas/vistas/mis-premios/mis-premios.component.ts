@@ -12,6 +12,18 @@ import {jsPDF} from 'jspdf';
 import {ParametrizacionesService} from '../../servicios/parametrizaciones.service';
 import {PagarConSuperMonedasService} from '../supermonedas/pagar-con-supermonedas/pagar-con-supermonedas.service';
 
+/**
+ * Bigpuntos
+ * Personas
+ * Esta pantalla sirve para mostrar los premios
+ * Rutas:
+ * `${environment.apiUrl}/core/monedas/usuario/${id}`
+ * `${environment.apiUrl}/central/param/list/listOne`,
+ * `${environment.apiUrl}/central/productos/list/`,
+ * `${environment.apiUrl}/corp/empresas/list/comercial`,
+ * `${environment.apiUrl}/corp/pagos/create/`,
+ */
+
 @Component({
     selector: 'app-mis-premios',
     templateUrl: './mis-premios.component.html',

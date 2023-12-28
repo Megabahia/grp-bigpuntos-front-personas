@@ -14,6 +14,17 @@ import { DatePipe } from '@angular/common';
 import { InformacionCompleta } from 'app/main/personas/models/persona';
 import { ParametrizacionesService } from '../../../servicios/parametrizaciones.service';
 
+/**
+ * Bigpuntos
+ * PErsonas
+ * Esta pantalla sirve para mostrar el perfil de la persona
+ * Rutas:
+ * `${environment.apiUrl}/personas/personas/listOne/${id}`
+ * `${environment.apiUrl}/central/param/list/tipo/todos/`,
+ * `${environment.apiUrl}/central/param/list/filtro/nombre`,
+ * `${environment.apiUrl}/personas/personas/updateSinImagen/${datos.user_id}`,
+ */
+
 @Component({
   selector: 'app-perfil-persona-aut',
   templateUrl: './perfil-persona.component.html',

@@ -12,6 +12,20 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FlatpickrOptions} from 'ng2-flatpickr';
 import moment from 'moment';
 
+/**
+ * Bigpuntos
+ * Personas
+ * Esta pantalla sirve para mostrar las facturas
+ * Rutas:
+ * `${environment.apiUrl}/central/param/listar/tipo/`,
+ * `${environment.apiUrl}/central/param/list/tipo/todos/`,
+ * `${environment.apiUrl}/central/param/list/filtro/nombre`,
+ * `${environment.apiUrl}/central/param/list/listOne`,
+ * `${environment.apiUrl}/corp/empresas/listOne/filtros/`,
+ * `${environment.apiUrl}/core/monedas/create/`
+ * `${environment.apiUrl}/central/facturas/list/`,
+ */
+
 @Component({
     selector: 'app-mis-facturas',
     templateUrl: './mis-facturas.component.html',
@@ -50,13 +64,14 @@ export class MisFacturasComponent implements OnInit {
     public fecha;
     private _unsubscribeAll: Subject<any>;
     public startDateOptions: FlatpickrOptions = {
-        defaultDate: 'today',
         altInput: true,
         mode: 'single',
         altFormat: 'Y-n-j',
         altInputClass:
             'form-control flat-picker flatpickr-input invoice-edit-input',
     };
+    fechaInicio = '';
+    fechaFin = '';
 
     constructor(
         private _misFacturasService: MisFacturasService,
@@ -247,6 +262,8 @@ export class MisFacturasComponent implements OnInit {
                 page: this.page - 1,
                 page_size: this.page_size,
                 user_id: this.usuario.id,
+                inicio: this.transformarFecha(this.fechaInicio),
+                fin: this.transformarFecha(this.fechaFin),
             })
             .subscribe((info) => {
                 this.facturas = info.info;
@@ -281,21 +298,7 @@ export class MisFacturasComponent implements OnInit {
     }
 
     visualizarNombreArchivo(nombre) {
-        let stringArchivos =
-            'https://globalredpymes.s3.amazonaws.com/CENTRAL/archivosFacturas/';
-        let stringImagenes =
-            'https://globalredpymes.s3.amazonaws.com/CENTRAL/imgFacturas/';
-        if (nombre.includes(stringArchivos)) {
-            return nombre.replace(
-                'https://globalredpymes.s3.amazonaws.com/CENTRAL/archivosFacturas/',
-                ''
-            );
-        } else if (nombre.includes(stringImagenes)) {
-            return nombre.replace(
-                'https://globalredpymes.s3.amazonaws.com/CENTRAL/imgFacturas/',
-                ''
-            );
-        }
+        return nombre.split('/').slice(5);
     }
 
     subirFacturaElec() {

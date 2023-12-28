@@ -12,6 +12,18 @@ import {CreditosAutonomosService} from '../../creditos-autonomos/creditos-autono
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
+/**
+ * Bigpuntos
+ * PErsonas
+ * ESta pantalla sirve para mostrar los requisitos para la solicitos de creditos
+ * Rutas:
+ * `${environment.apiUrl}/central/param/list/tipo/todos/free`,
+ * `${environment.apiUrl}/central/param/list/listOne`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos._id}`,
+ * `${environment.apiUrl}/corp/creditoPersonas/create/`,
+ * `${environment.apiUrl}/corp/creditoPersonas/update/${datos.get('_id')}`,
+ */
+
 @Component({
     selector: 'app-resumen-requisitos-credito-automotriz',
     templateUrl: './resumen-requisitos-credito-automotriz.component.html',
@@ -137,17 +149,17 @@ export class ResumenRequisitosCreditoAutomotrizComponent implements OnInit {
             this.requisitos = info[0];
             this.checks = this.requisitos.config.map(item => {
                 if (!this.soltero) {
-                    return {'label': item, 'valor': false };
+                    return {'label': item, 'valor': false};
                 }
             });
             this.checks.push({'label': 'Autorización y validación de información', 'valor': true});
         });
         this.paramService.obtenerListaPadresSinToken('CREDITO_AUTOMOTRIZ_TITULO_REQUISITOS_CREDICOMPRA_ULTIMA_PANTALLA')
             .subscribe((info) => {
-            this.descripcion = info[0];
-            this.descripcion.valor = this.descripcion.valor.replace('${{montoCreditoFinal}}', this.montoCreditoFinal);
-            this.descripcion.valor = this.descripcion.valor.replace('${{coutaMensual}}', this.coutaMensual);
-        });
+                this.descripcion = info[0];
+                this.descripcion.valor = this.descripcion.valor.replace('${{montoCreditoFinal}}', this.montoCreditoFinal);
+                this.descripcion.valor = this.descripcion.valor.replace('${{coutaMensual}}', this.coutaMensual);
+            });
         this.paramService.obtenerListaPadresSinToken('VALOR_MINIMO_SOLICITAR_CREDITO_AUTOMOTRIZ').subscribe((info) => {
             this.valorMinimo = info[0].valor;
             this.formulario.get('monto').setValidators([
