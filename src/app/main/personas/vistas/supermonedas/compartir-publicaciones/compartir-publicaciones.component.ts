@@ -60,13 +60,15 @@ export class CompartirPublicacionesComponent implements OnInit {
     }
 
     actualizarMetaEtiquetas(image, title, description): string {
-        // const encodedUrl = encodeURIComponent('https://credicompra.com/wp-content/uploads/2013/06/sombrilla-parasol-extra-grande-v3.webp');
-        // const encodedUrl = encodeURIComponent(image);
-        // console.log('encodedUrl', encodedUrl);
-        // image = 'https%3A%2F%2Fglobalredpymes-test.s3.amazonaws.com%2FCENTRAL%2FimgPublicaciones%2FNone_1674855390686_Screenshot_6.jpg';
         // Cambiar la descripción
         // Puedes actualizar otras metaetiquetas de la misma manera
         return `https://ganarpremios.bigpuntos.com/?title=${this.usuario.persona.codigoUsuario}&description=${description}&image=${image}`;
+    }
+
+    actualizarMetaEtiquetasWhatsapp(image, title, description): string {
+        // Cambiar la descripción
+        // Puedes actualizar otras metaetiquetas de la misma manera
+        return encodeURI(`https://ganarpremios.bigpuntos.com/?title=${this.usuario.persona.codigoUsuario}&description=${description}&image=${image}`);
     }
 
     inicializarSuperMoneda(): GanarSuperMoneda {
