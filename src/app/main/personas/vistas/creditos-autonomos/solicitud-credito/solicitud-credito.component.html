@@ -97,14 +97,14 @@
 
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label>Número de identificación del solicitante</label>
+                                                        <label>Número de identificación de la Madrina o Padrino</label>
                                                         <input formControlName="identificacion" type="text" class="form-control"
                                                                (change)="validarRucGarante()"
                                                                [ngClass]="{ 'is-invalid': submittedPersona && garanteForm.identificacion.errors }">
 
                                                         <div *ngIf="submittedPersona && garanteForm.identificacion.errors"
                                                              class="invalid-feedback">
-                                                            <div *ngIf="garanteForm.identificacion.errors.required">Número de identificación del solicitante es
+                                                            <div *ngIf="garanteForm.identificacion.errors.required">Número de identificación de la Madrina o Padrino es
                                                                 requerida
                                                             </div>
                                                             <div *ngIf="garanteForm.identificacion.errors?.cedulaInvalid">
@@ -114,7 +114,7 @@
                                                                 Ruc invalido
                                                             </div>
                                                             <div *ngIf="garanteForm.identificacion.errors?.repetidoGarante">
-                                                                Número de identificación del solicitante repetido
+                                                                Número de identificación de la Madrina o Padrino repetido
                                                             </div>
                                                         </div>
                                                     </div>
@@ -162,7 +162,7 @@
 
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label>Correo Madrina/Padrino</label>
+                                                        <label>Correo de la Madrina o Padrino</label>
                                                         <input formControlName="correoGarante" type="text" class="form-control"
                                                                (change)="validarCorreoGarante($event)"
                                                                [ngClass]="{ 'is-invalid': submittedPersona && garanteForm.correoGarante.errors }">
@@ -1424,6 +1424,9 @@
                                                          class="invalid-feedback" style="display: block;">
                                                         <div *ngIf="gasSolicitanteForm.descripcion.errors.required">
                                                             Especifique otros gastos es requerido
+                                                        </div>
+                                                        <div *ngIf="gasSolicitanteForm.descripcion.errors.pattern">
+                                                            Ingrese solo letras
                                                         </div>
                                                     </div>
                                                 </div>
