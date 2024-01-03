@@ -576,7 +576,10 @@ export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
         if (this.personaForm.get('estadoCivil').value === 'Casado' || this.personaForm.get('estadoCivil').value === 'Unión libre') {
             this.casado = true;
             this.personaForm.get('nombreApellidosConyuge').setValidators(Validators.required);
-            this.personaForm.get('cedulaConyuge').setValidators(Validators.required);
+            this.personaForm.get('cedulaConyuge').setValidators([
+                Validators.required, Validators.minLength(10), Validators.maxLength(10),
+                ValidacionesPropias.cedulaValido, Validators.pattern('^([0-9])+$')
+            ]);
             this.personaForm.get('nombreApellidosConyuge').updateValueAndValidity(); // Actualizando la validez del campo
             this.personaForm.get('cedulaConyuge').updateValueAndValidity(); // Actualizando la validez del campo
         } else {
@@ -760,5 +763,15 @@ export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
             garanteControl.setErrors({...errors, repetidoGarante: true});
         }
         console.log('garanteControl', garanteControl);
+    }
+
+    cambioTipoPersona() {
+        this.personaForm.get('documento').clearValidators();
+        if (this.personaForm.get('tipoIdentificacion').value === 'Ruc') {
+            this.personaForm.get('documento').setValidators([Validators.required, ValidacionesPropias.rucValido, Validators.pattern('^[0-9]*$') ]);
+        } else {
+            this.personaForm.get('documento').setValidators([Validators.required, ValidacionesPropias.cedulaValido, Validators.pattern('^[0-9]*$')]);
+        }
+        this.personaForm.get('documento').updateValueAndValidity(); // Actualizando la validez del campo
     }
 }

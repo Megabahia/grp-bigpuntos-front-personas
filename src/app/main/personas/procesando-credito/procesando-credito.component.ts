@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {CoreConfigService} from '../../../../@core/services/config.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Router} from '@angular/router';
 
 /**
  * Bigpuntos
@@ -22,6 +23,7 @@ export class ProcesandoCreditoComponent implements OnInit {
     constructor(
         private _coreConfigService: CoreConfigService,
         private modalService: NgbModal,
+        private _router: Router,
     ) {
         this._coreConfigService.config = {
             layout: {
@@ -54,6 +56,12 @@ export class ProcesandoCreditoComponent implements OnInit {
 
     ngOnInit(): void {
 
+    }
+
+    redirigir() {
+        localStorage.removeItem('simulador');
+        this._router.navigate(['/personas/inicio']);
+        this.modalService.dismissAll();
     }
 
 }

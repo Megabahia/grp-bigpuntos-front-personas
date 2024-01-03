@@ -50,4 +50,7 @@ export class CreditosAutonomosService {
     return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoPersonas/update/${datos.get('_id')}`, datos);
   }
 
+  listarCreditoPersonas(datos) {
+    return this._httpClient.post<any>(`${environment.apiUrl}/corp/creditoPersonas/list/`, datos);
+  }
 }
