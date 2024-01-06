@@ -323,7 +323,7 @@ const routes = [
     {
         path: 'creditos-automotriz/solicitar-credito',
         component: CreditoAutomotrizComponent,
-        // data: {activacion: [4]},
+        data: {roles: [Role.BigPuntos]},
         canActivate: [AuthGuard]
         // data: { animation: 'auth' }
     },

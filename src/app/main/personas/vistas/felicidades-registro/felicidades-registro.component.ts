@@ -114,10 +114,10 @@ export class FelicidadesRegistroComponent implements OnInit {
                 const simulador = localStorage.getItem('simulador');
                 console.log(simulador);
                 if (simulador === 'ok') {
-                    console.log('if');
                     this._router.navigate(['/personas/creditos-autonomos/solicitar-credito']);
+                } else if (simulador === 'credito-automotriz') {
+                    this._router.navigate(['/personas/creditos-automotriz/solicitar-credito']);
                 } else {
-                    console.log('else');
                     this._router.navigate(['/']);
                 }
             }, 100);

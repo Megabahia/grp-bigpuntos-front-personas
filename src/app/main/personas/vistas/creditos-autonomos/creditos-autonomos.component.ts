@@ -54,11 +54,6 @@ export class CreditosAutonomosComponent implements OnInit, AfterViewInit {
     // Private
     private _unsubscribeAll: Subject<any>;
 
-    /**
-     * Constructor
-     *
-     * @param {CoreConfigService} _coreConfigService
-     */
     constructor(
         private _coreConfigService: CoreConfigService,
         private _coreMenuService: CoreMenuService,
@@ -80,7 +75,17 @@ export class CreditosAutonomosComponent implements OnInit, AfterViewInit {
         };
         this.solicitarCredito = this.inicialidarSolicitudCredito();
         this._unsubscribeAll = new Subject();
-
+        this.usuario = this._coreMenuService.grpPersonasUser;
+        this._creditosAutonomosService.listarCreditoPersonas({
+            user_id: this.usuario.id,
+            page: 0,
+            page_size: 10,
+            estado: ['Nuevo']
+        }).subscribe(({cont}) => {
+            if (cont > 0) {
+                this._router.navigate(['/personas/procesandoCredito']);
+            }
+        });
     }
 
     inicialidarSolicitudCredito(): SolicitarCredito {
@@ -113,9 +118,6 @@ export class CreditosAutonomosComponent implements OnInit, AfterViewInit {
      * On init
      */
     ngOnInit(): void {
-
-        this.usuario = this._coreMenuService.grpPersonasUser;
-
         this.registerForm = this._formBuilder.group({
             identificacion: ['', [Validators.required]],
             nombres: ['', Validators.required],

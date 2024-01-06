@@ -81,6 +81,9 @@ export class CompletarPerfilComponent implements OnInit, AfterViewInit, OnDestro
     ) {
 
         this.usuario = this._coreMenuService.grpPersonasUser;
+        if (this.usuario.estado === '5') {
+            this._router.navigate(['/personas/inicio']);
+        }
         this.superMonedas = this.inicializarSuperMoneda();
 
         this.informacion = {

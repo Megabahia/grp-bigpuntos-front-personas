@@ -80,7 +80,7 @@
                                                         <select formControlName="tipoIdentificacion" class="form-control"
                                                                 (change)="obtenerTipoIdentificacion()"
                                                                 [ngClass]="{ 'is-invalid': submittedPersona && garanteForm.tipoIdentificacion.errors }">
-                                                            <option>- Seleccionar -</option>
+                                                            <option value="">- Seleccionar -</option>
                                                             <option value="{{value.nombre}}"
                                                                     *ngFor="let value of tipoIdentificacion">
                                                                 {{value.nombre}}
@@ -97,14 +97,14 @@
 
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label>Número de identificación del solicitante</label>
+                                                        <label>Número de identificación de la Madrina o Padrino</label>
                                                         <input formControlName="identificacion" type="text" class="form-control"
                                                                (change)="validarRucGarante()"
                                                                [ngClass]="{ 'is-invalid': submittedPersona && garanteForm.identificacion.errors }">
 
                                                         <div *ngIf="submittedPersona && garanteForm.identificacion.errors"
                                                              class="invalid-feedback">
-                                                            <div *ngIf="garanteForm.identificacion.errors.required">Número de identificación del solicitante es
+                                                            <div *ngIf="garanteForm.identificacion.errors.required">Número de identificación de la Madrina o Padrino es
                                                                 requerida
                                                             </div>
                                                             <div *ngIf="garanteForm.identificacion.errors?.cedulaInvalid">
@@ -114,7 +114,7 @@
                                                                 Ruc invalido
                                                             </div>
                                                             <div *ngIf="garanteForm.identificacion.errors?.repetidoGarante">
-                                                                Número de identificación del solicitante repetido
+                                                                Número de identificación de la Madrina o Padrino repetido
                                                             </div>
                                                         </div>
                                                     </div>
@@ -162,7 +162,7 @@
 
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label>Correo Madrina/Padrino</label>
+                                                        <label>Correo de la Madrina o Padrino</label>
                                                         <input formControlName="correoGarante" type="text" class="form-control"
                                                                (change)="validarCorreoGarante($event)"
                                                                [ngClass]="{ 'is-invalid': submittedPersona && garanteForm.correoGarante.errors }">
@@ -423,6 +423,7 @@
                                                 <label for="tipoIdentificacion">Tipo de identificación</label>
                                                 <select formControlName="tipoIdentificacion" class="form-control"
                                                         id="tipoIdentificacion"
+                                                        (change)="cambioTipoPersona()"
                                                         [ngClass]="{ 'is-invalid': submittedPersona && persForm.tipoIdentificacion.errors }">
                                                     <option>- Seleccionar -</option>
                                                     <option value="{{value.nombre}}"
@@ -451,15 +452,15 @@
                                                     <div *ngIf="persForm.documento.errors.required">Identificación es
                                                         requerida
                                                     </div>
-                                                    <div *ngIf="persForm.documento.errors.pattern">Identificación es
-                                                        requerida
+                                                    <div *ngIf="persForm.documento.errors.pattern">Ingrese solo numeros
                                                     </div>
-
+                                                    <div *ngIf="persForm.documento.errors?.cedulaInvalid"
+                                                         >Cédula no valida
+                                                    </div>
+                                                    <div *ngIf="persForm.documento.errors?.rucInvalid"
+                                                         >Ruc no valido
+                                                    </div>
                                                 </div>
-                                                <div *ngIf="!persForm.documento.errors?.validoCed"
-                                                     class="invalid-feedback">Documento no valido
-                                                </div>
-
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -634,7 +635,7 @@
 
                                                 <div *ngIf="submittedPersona && persForm.nombreApellidosConyuge.errors"
                                                      class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="!persForm.nombreApellidosConyuge.errors?.valido">Nombre y Apellido del conyuge es requerido
+                                                    <div *ngIf="persForm.nombreApellidosConyuge.errors?.required">Nombre y Apellido del conyuge es requerido
                                                     </div>
 
                                                 </div>
@@ -649,9 +650,16 @@
 
                                                 <div *ngIf="submittedPersona && persForm.cedulaConyuge.errors"
                                                      class="invalid-feedback" style="display: block;">
-                                                    <div *ngIf="!persForm.cedulaConyuge.errors?.valido">Cédula del conyuge es requerido
+                                                    <div *ngIf="persForm.cedulaConyuge.errors?.required">Cédula del conyuge es requerido
                                                     </div>
-
+                                                    <div *ngIf="persForm.cedulaConyuge.errors?.minlength">Ingrese minimo 10 digitos
+                                                    </div>
+                                                    <div *ngIf="persForm.cedulaConyuge.errors?.maxlength">Ingrese maximo 10 digitos
+                                                    </div>
+                                                    <div *ngIf="persForm.cedulaConyuge.errors?.pattern">Ingrese solo digitos
+                                                    </div>
+                                                    <div *ngIf="persForm.cedulaConyuge.errors?.cedulaInvalid">Cédula invalida
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1416,6 +1424,9 @@
                                                          class="invalid-feedback" style="display: block;">
                                                         <div *ngIf="gasSolicitanteForm.descripcion.errors.required">
                                                             Especifique otros gastos es requerido
+                                                        </div>
+                                                        <div *ngIf="gasSolicitanteForm.descripcion.errors.pattern">
+                                                            Ingrese solo letras
                                                         </div>
                                                     </div>
                                                 </div>
