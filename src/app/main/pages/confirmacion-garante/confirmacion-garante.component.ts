@@ -65,7 +65,7 @@ export class ConfirmacionGaranteComponent implements OnInit {
             return;
         }
         this._confirmacionService.updateCreditoPersona({
-            _id: this.creditoId, tipoCredito: 'Alfa', concepto: 'Alfa', canal: 'Alfa'
+            _id: this.creditoId, tipoCredito: this.credito.canal, concepto: this.credito.concepto, canal: this.credito.canal
         }).subscribe((data) => {
             if (data) {
                 this.credito = data;

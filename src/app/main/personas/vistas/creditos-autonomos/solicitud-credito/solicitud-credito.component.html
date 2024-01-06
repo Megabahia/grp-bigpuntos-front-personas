@@ -80,7 +80,7 @@
                                                         <select formControlName="tipoIdentificacion" class="form-control"
                                                                 (change)="obtenerTipoIdentificacion()"
                                                                 [ngClass]="{ 'is-invalid': submittedPersona && garanteForm.tipoIdentificacion.errors }">
-                                                            <option>- Seleccionar -</option>
+                                                            <option value="">- Seleccionar -</option>
                                                             <option value="{{value.nombre}}"
                                                                     *ngFor="let value of tipoIdentificacion">
                                                                 {{value.nombre}}

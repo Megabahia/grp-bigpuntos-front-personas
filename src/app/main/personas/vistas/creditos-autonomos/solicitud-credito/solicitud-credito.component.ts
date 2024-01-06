@@ -380,6 +380,7 @@ export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
             this.personaForm.get('garante')['controls']['nombreNegocioGarante'].setValidators(
                 [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+')]
             );
+            this.personaForm.get('garante')['controls']['rucGarante'].value = '';
             this.personaForm.get('garante')['controls']['rucGarante'].updateValueAndValidity();
             this.personaForm.get('garante')['controls']['nombreNegocioGarante'].updateValueAndValidity();
         } else {
@@ -547,6 +548,7 @@ export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
                 ValidacionesPropias.cedulaValido, Validators.pattern('^([0-9])+$')
             ]);
             this.personaForm.get('nombreApellidosConyuge').updateValueAndValidity(); // Actualizando la validez del campo
+            this.personaForm.get('cedulaConyuge').setValue('');
             this.personaForm.get('cedulaConyuge').updateValueAndValidity(); // Actualizando la validez del campo
         } else {
             this.personaForm.get('nombreApellidosConyuge').clearValidators();
@@ -744,8 +746,8 @@ export class SolicitudCreditoComponent implements OnInit, AfterViewInit {
     iniciarFormularioGarante(validar) {
         if (validar) {
             (this.personaForm as FormGroup).setControl('garante', this._formBuilder.group({
-                tipoIdentificacion: [this.usuario.garante?.tipoIdentificacion, [Validators.required]],
-                identificacion: [this.usuario.garante?.identificacion, [Validators.required, ValidacionesPropias]],
+                tipoIdentificacion: [this.usuario.garante?.tipoIdentificacion ?? '', [Validators.required]],
+                identificacion: [this.usuario.garante?.identificacion ?? '', [Validators.required, ValidacionesPropias.cedulaValido]],
                 nombres: [this.usuario.garante?.nombres, [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                 apellidos: [this.usuario.garante?.apellidos, [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+')]],
                 pais: [this.usuario.garante?.pais, [Validators.required]],

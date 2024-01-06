@@ -54,12 +54,12 @@ export class ResumenRequisitosCreditoAutomotrizComponent implements OnInit {
     public checks;
     public soltero = false;
     public tiposNormales = {
-        'Credito Automotriz Empleado': 'Credito Automotriz Empleado',
-        'Credito Automotriz Alfa': 'null'
+        'Empleado': 'Credito Automotriz Empleado',
+        'Alfa': 'null'
     };
     public tiposPreaprobados = {
-        'Credito Automotriz Empleado': 'Credito Automotriz Empleado-PreAprobado',
-        'Credito Automotriz Alfa': 'null'
+        'Empleado': 'Credito Automotriz Empleado-PreAprobado',
+        'Alfa': 'null'
     };
     public valorMinimo;
     public loading = false;
@@ -133,9 +133,9 @@ export class ResumenRequisitosCreditoAutomotrizComponent implements OnInit {
             cuota: this.coutaMensual,
             plazo: 12,
             user_id: this.usuario.id,
-            canal: this.tiposNormales[localStorage.getItem('tipoPersona')] || 'Credito Automotriz Negocio propio',
-            tipoCredito: this.tiposNormales[localStorage.getItem('tipoPersona')] || 'Credito Automotriz Negocio propio',
-            concepto: this.tiposNormales[localStorage.getItem('tipoPersona')] || 'Credito Automotriz Negocio propio',
+            canal: this.tiposNormales[localStorage.getItem('tipoPersona')] === 'null' ? 'Credito Automotriz Alfa' : this.tiposNormales[localStorage.getItem('tipoPersona')] || 'Credito Automotriz Negocio propio',
+            tipoCredito: this.tiposNormales[localStorage.getItem('tipoPersona')] === 'null' ? 'null' : this.tiposNormales[localStorage.getItem('tipoPersona')] || 'Credito Automotriz Negocio propio',
+            concepto: this.tiposNormales[localStorage.getItem('tipoPersona')] === 'null' ? 'Credito Automotriz Alfa' : this.tiposNormales[localStorage.getItem('tipoPersona')] || 'Credito Automotriz Negocio propio',
             cargarOrigen: 'BIGPUNTOS',
             nombres: '',
             apellidos: '',
