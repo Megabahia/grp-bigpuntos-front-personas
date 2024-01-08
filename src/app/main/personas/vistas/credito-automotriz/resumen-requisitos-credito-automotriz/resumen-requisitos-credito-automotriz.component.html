@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="checks; else loading">
     <section class="head-LP text-LP">
         <div class="container pb-5">
             <div class="row justify-content-center align-items-center py-5">
@@ -79,6 +79,10 @@
     </section>
 </div>
 
+<ng-template #loading>
+    <!-- Muestra un indicador de carga -->
+    <p>Cargando...</p>
+</ng-template>
 
 <!-- Buynow Button-->
 <app-need-help [href]="'https://walink.co/9e8a9d'"> </app-need-help>
