@@ -111,8 +111,8 @@ export class ResumenRequisitosCreditoAutomotrizComponent implements OnInit {
         this.getInfo();
         if (localStorage.getItem('credito') !== null) {
             this.solicitarCredito = JSON.parse(localStorage.getItem('credito'));
-            this.solicitarCredito.canal = this.tiposPreaprobados[localStorage.getItem('tipoPersona')] || 'Credito Automotriz Negocio-PreAprobado';
-            this.solicitarCredito.tipoCredito = this.tiposPreaprobados[localStorage.getItem('tipoPersona')] || 'Credito Automotriz Negocio-PreAprobado';
+            this.solicitarCredito.canal = this.tiposPreaprobados[localStorage.getItem('tipoPersona')] === 'null' ? 'Alfa' : this.tiposPreaprobados[localStorage.getItem('tipoPersona')] || 'Credito Automotriz Negocio-PreAprobado';
+            this.solicitarCredito.tipoCredito = this.tiposPreaprobados[localStorage.getItem('tipoPersona')] === 'null' ? 'null' : this.tiposPreaprobados[localStorage.getItem('tipoPersona')] || 'Credito Automotriz Negocio-PreAprobado';
         } else {
             this.solicitarCredito = this.inicialidarSolicitudCredito();
         }
