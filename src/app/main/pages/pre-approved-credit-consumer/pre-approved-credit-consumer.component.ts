@@ -90,7 +90,7 @@ export class PreApprovedCreditConsumerComponent implements OnInit {
             .subscribe((data: any) => {
                 localStorage.setItem('coutaMensual', new Decimal(data.monto).div(12).toNumber().toString());
                 localStorage.setItem('montoCreditoFinal', data.monto);
-                localStorage.setItem('tipoPersona', data.canal.split('-')[0]);
+                localStorage.setItem('tipoPersona', data.tipoPersona.split('-')[0]);
                 localStorage.setItem('estadoCivil', data.estadoCivil);
                 localStorage.setItem('simulador', 'ok');
                 localStorage.setItem('credito', JSON.stringify(data));
